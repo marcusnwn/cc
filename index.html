@@ -67,14 +67,54 @@
                 overflow: hidden; /* Still prevent body scroll */
             }
 
+            #nav-toggle { /* Style the button */
+                display: block; /* Show toggle button on mobile */
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: #eee;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 3px 8px;
+                cursor: pointer;
+                font-size: 1.5em;
+                line-height: 1;
+                z-index: 10;
+            }
+            #nav-toggle::before {
+                 content: '☰'; /* Hamburger icon */
+            }
+            #left-nav.nav-open #nav-toggle::before {
+                 content: '✕'; /* Close icon */
+            }
+
+            #left-nav h2 { /* Adjust heading for button space */
+                 margin: 0 0 10px 0;
+                 padding-right: 40px; /* Space for button */
+            }
+
             #left-nav {
                 width: 100%; /* Full width on small screens */
                 height: auto; /* Adjust height based on content */
-                max-height: 35vh; /* Limit height (e.g., 35% of viewport) */
-                overflow-y: auto; /* Enable vertical scroll if needed */
+                /* Start collapsed: height just enough for padding + h2 + button */
+                max-height: 65px; /* Adjust this value based on your h2 size and padding */
+                overflow: hidden; /* Hide the ul initially */
                 border-right: none; /* Remove side border */
                 border-bottom: 1px solid #ccc; /* Add bottom border */
                 flex-shrink: 0; /* Ensure it doesn't shrink */
+                transition: max-height 0.3s ease-out; /* Smooth transition */
+            }
+
+            /* Style for when nav is open on mobile */
+            #left-nav.nav-open {
+                 max-height: 45vh; /* Expanded height limit */
+                 overflow-y: auto; /* Allow scroll when open */
+            }
+
+             #left-nav ul {
+                 /* Styles for the list itself when visible on mobile */
+                 margin-top: 15px; /* Ensure space below toggle/h2 */
+                 padding-bottom: 10px; /* Add padding at the bottom when open */
             }
 
             #content-area {
@@ -87,7 +127,8 @@
 </head>
 <body>
     <nav id="left-nav">
-        <h2>Chapters</h2>
+        <button id="nav-toggle" aria-label="Toggle Navigation"></button> <!-- Re-added Button -->
+        <h2>CCSP</h2>
         <ul>
             <li><a href="Ch1.html" data-chapter="Ch1.html">Chapter 1</a></li>
             <li><a href="Ch2.html" data-chapter="Ch2.html">Chapter 2</a></li>
@@ -109,19 +150,33 @@
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('#left-nav a[data-chapter]');
             const contentFrame = document.getElementById('content-frame');
+            const leftNav = document.getElementById('left-nav'); // Get nav element
+            const navToggle = document.getElementById('nav-toggle'); // Get button element
 
-            // Optional: Load Chapter 1 by default
+            // --- Navigation Toggle --- (Re-added)
+            if (navToggle && leftNav) {
+                navToggle.addEventListener('click', () => {
+                    leftNav.classList.toggle('nav-open');
+                });
+            }
+
+            // --- Load Default Chapter ---
             if (navLinks.length > 0) {
                  contentFrame.src = navLinks[0].getAttribute('data-chapter');
             }
 
-
+            // --- Handle Chapter Link Clicks ---
             navLinks.forEach(link => {
                 link.addEventListener('click', (event) => {
                     event.preventDefault(); // Prevent default link navigation
                     const chapterFile = link.getAttribute('data-chapter');
                     if (chapterFile) {
                         contentFrame.src = chapterFile;
+
+                        // Close nav on mobile after selection (Re-added)
+                        if (window.innerWidth <= 768 && leftNav.classList.contains('nav-open')) {
+                            leftNav.classList.remove('nav-open');
+                        }
                     }
                 });
             });
