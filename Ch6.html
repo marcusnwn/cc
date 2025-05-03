@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第六章：雲端應用程式安全</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第六章：雲端應用程式安全 <span class="english">(Cloud Application Security)</span></h1>
+
+<p>在本章中，您將探討雲端的應用程式設計與架構，以及應用程式測試和驗證，以確保您的雲端應用程式安全。除了應用程式設計與架構外，您還將審查驗證、威脅建模、軟體採購、測試和軟體供應鏈。在此過程中，您將了解軟體開發生命週期及其當今使用的各種模型，以及用於建立、部署和保護成功的雲端應用程式（如雲端應用程式安全代理商）的工具。</p>
+<p>僅靠軟體不足以保護應用程式安全，身份與存取管理（包括身份驗證和授權）是建立安全應用程式環境的關鍵部分。您還將了解單一登入、多重要素驗證和聯合，以及它們如何與身份提供者互動。</p>
+
+<h2>為雲端開發軟體 <span class="english">(Developing Software for the Cloud)</span></h2>
+
+<p>為雲端開發軟體與傳統軟體開發模型有許多相似之處。事實上，主要差異通常在於底層基礎架構和能力，特別是在涉及可擴展性和效能的領域。由於雲端基礎架構通常按使用量計費且可以根據需要輕鬆擴展，因此雲端應用程式設計通常側重於能夠跨廉價實例水平擴展以及能夠處理會話和其他交易資料的能力，無論最初處理連接或查詢的實例或基礎架構元件如何。</p>
+<p>許多現代軟體開發實踐通常用於雲端應用程式，範圍從<span class="key-term">持續整合/持續交付</span> (<span class="key-term">continuous integration/continuous delivery, CI/CD</span>) 實踐、<span class="key-term">DevOps</span>（開發/營運）和 <span class="key-term">DevSecOps</span>（開發、安全和營運）人員配置和責任模型。</p>
+
+<div class="note">
+    <p>如果您不熟悉 CI/CD，IBM 在這裡清楚地解釋了它：www.ibm.com/cloud/blog/ci-cd-pipeline。Atlassian 在 www.atlassian.com/devops 上很好地解釋了 DevOps 和 DevOps 生命週期。</p>
+</div>
+
+<p>無論您的組織是使用 CI/CD 實踐、DevOps 團隊還是傳統的軟體開發生命週期，針對雲端應用程式的安全開發實踐和安全影響及要求意識的培訓都是確保您組織保持安全的關鍵。</p>
+
+<h3>常見的雲端應用程式部署陷阱 <span class="english">(Common Cloud Application Deployment Pitfalls)</span></h3>
+<p>任何培訓和意識計畫都需要確保在組織雲端環境中工作的開發人員和其他員工了解雲端應用程式中最常出現問題的地方。雖然潛在問題很多，範圍從雲端鎖定到缺乏跨區域的雲端供應商支援，但以下各節描述了一些最常見的問題。</p>
+
+<h4>效能 <span class="english">(Performance)</span></h4>
+<p>雲端軟體開發通常依賴於<span class="key-term">鬆散耦合</span> <span class="english">(loosely coupled)</span> 的服務。這意味著為效能設計並確保達到效能目標可能很複雜，因為即使在相對簡單的設計中，多個元件也可能以意想不到的方式互動。</p>
+<p>同時，如果解決方案架構良好，雲端設計可以提供巨大的可擴展性。同樣導致效能問題的複雜性也可以讓開發人員在幾乎任何規模下營運，而無需為最高使用案例維護基礎架構，即使解決方案並未被大量使用。</p>
+
+<h4>可擴展性 <span class="english">(Scalability)</span></h4>
+<p>雲端環境的關鍵特性之一是<span class="key-term">擴展</span> <span class="english">(scale)</span> 的能力，允許應用程式和服務根據需要和需求的波動而增長和縮減。擴展能力也要求開發人員以不同的方式思考其應用程式應如何工作。它需要能夠同時跨多個實例運行，無論哪個實例或伺服器正在處理請求都能夠保留狀態，並能乾淨地處理單個伺服器的故障。同時，開發人員需要確保資料在擴展環境中傳輸和靜態時保持安全。</p>
+
+<div class="note">
+    <p>雲端實例是在雲端環境中運行的虛擬伺服器。我們將在整本書中引用實例，但在許多情況下，相同的陳述也適用於第三方資料中心或私有雲中的託管伺服器或虛擬機。</p>
+</div>
+
+<h4>互操作性 <span class="english">(Interoperability)</span></h4>
+<p><span class="key-term">互操作性</span> <span class="english">(Interoperability)</span>，或跨平台、服務或系統工作的能力，對於雲端環境可能非常重要。如果您提供服務，能夠與客戶依賴的系統互操作可能是一個業務優勢。如果您運行自己的服務，能夠在多個平台或不同的雲端供應商環境中工作可以幫助控制成本並增加您對託管和服務供應商選擇的選項。</p>
+
+<h4>可移植性 <span class="english">(Portability)</span></h4>
+<p>設計可以在本地和雲端環境之間，或在雲端供應商之間移動的軟體，要求該軟體具有<span class="key-term">可移植性</span> <span class="english">(portable)</span>。雲端軟體開發中的可移植性考量通常集中在避免特定於某些雲端供應商的元件，例如 API 或內部工具。同時，避免使用這些 API 和工具可能需要額外的工作，或者可能更難利用雲端環境可以為利用其原生工具的應用程式和服務提供的優勢。</p>
+
+<div class="note">
+    <p>如果您不熟悉<span class="key-term">應用程式設計介面</span> (<span class="key-term">Application Programming Interfaces, APIs</span>)，本章稍後的「雲端應用程式架構」部分將對它們進行更詳細的描述。</p>
+</div>
+
+<h4>可用性與可靠性 <span class="english">(Availability and Reliability)</span></h4>
+<p>在大多數情況下，您可能會假定雲端託管的服務和軟體比自託管的服務更可靠。這通常是正確的，雲端供應商為其服務提供多個九的正常運行時間。</p>
+
+<div class="note">
+    <p>我們在第七章「營運元素」中更多地討論了正常運行時間。如果您不熟悉像資料中心層級這樣的正常運行時間概念，您可以翻到後面學習更多內容。</p>
+</div>
+
+<p>同時，雲端供應商確實會經歷中斷，而這些中斷可能會產生廣泛影響。即使是影響與您不同的雲端服務供應商的中斷，或者是集中在不同區域或可用區的中斷，也可能為您的基礎架構或應用程式帶來問題。如果 GitHub 宕機，而您的工具依賴於在應用程式構建、部署或運行時從 GitHub 拉取的元件，那麼即使您的整個基礎架構在其他方面都在線，您也可能經歷中斷。雲端服務相互交織且複雜的性質意味著理解依賴關係以及它們可能如何影響您自身服務的可靠性和可用性可能具有挑戰性。事實上，在許多組織中，它們可能幾乎不可能完全記錄下來。</p>
+
+<h4>API 安全 <span class="english">(API Security)</span></h4>
+<p>應用程式設計介面 (APIs) 在整個雲端應用程式設計中都被依賴。當然，這意味著 API 安全和設計能夠良好地與雲端架構協作的 API 對於開發人員和架構師來說都是常見的挑戰。</p>
+
+<div class="note">
+    <p>API 安全也是設計過程的一部分，因此我們將在雲端應用程式架構的討論中，在「應用程式設計介面」部分討論如何設計安全的 API。</p>
+</div>
+
+<h2>雲端應用程式架構 <span class="english">(Cloud Application Architecture)</span></h2>
+
+<p>雲端應用程式架構可以從一個解決方案到另一個解決方案差異很大，但在許多雲端應用程式設計中都可以找到一些常見的元件。CCSP 考試目標指出了您需要為考試了解的一些常見元素，包括密碼學、沙盒、應用程式虛擬化和協同運作，以及用於增加額外安全層的補充安全元件。</p>
+
+<h3>密碼學 <span class="english">(Cryptography)</span></h3>
+<p><span class="key-term">密碼學</span> <span class="english">(Cryptography)</span> 是雲端中資料安全的關鍵元素，應用程式設計和架構需要考慮密碼學將在整個資料生命週期中的何處使用。</p>
+
+<h4>靜態資料加密 <span class="english">(Encryption of Data at Rest)</span></h4>
+<p>靜態資料，無論是短期還是長期儲存，都應受到保護，以防止因在雲端環境中使用共享基礎架構（多租戶）而產生的潛在問題。<span class="key-term">靜態資料加密</span> <span class="english">(Encrypting data at rest)</span> 是防止未經授權存取資料以及在發生意外存取或共享基礎架構的未來使用者可以存取殘留資料時防止資料外洩的好方法。</p>
+<p>客戶或使用者還可以透過加密特定檔案或資料夾來增加另一層保護。這樣，如果磁碟或卷以某種方式被洩露，客戶仍然持有解密資料的金鑰。</p>
+<p>請記住，保護任何加密方案的主要要求是安全儲存和管理用於加密和解密的金鑰。</p>
+
+<h4>全實例加密與全磁碟加密 <span class="english">(Whole-Instance Encryption and Full Disk Encryption)</span></h4>
+<p>也稱為<span class="key-term">全磁碟加密</span> (<span class="key-term">full-disk encryption, FDE</span>)，<span class="key-term">全實例加密</span> <span class="english">(whole-instance encryption)</span> 涉及加密完整系統的磁碟或儲存。全磁碟加密可以在設備本身遺失或被盜的情況下保護設備上的資料，包括如果關閉的實例或快照被盜或洩露。</p>
+
+<h4>卷加密 <span class="english">(Volume Encryption)</span></h4>
+<p>與加密整個設備非常相似，<span class="key-term">卷加密</span> <span class="english">(volume encryption)</span> 指的是僅加密硬碟上的一個分割區或呈現為卷的雲端儲存，而不是整個磁碟。當整個磁碟不需要加密時，這很有用，因為只有受保護的部分包含任何有價值的資料，例如不包含敏感資料的底層作業系統檔案。</p>
+
+<h4>傳輸中資料加密 <span class="english">(Encryption of Data in Transit)</span></h4>
+<p><span class="key-term">傳輸中資料加密</span> <span class="english">(Encryption of data in transit)</span> 有助於防止對系統或使用者之間網路路徑的攻擊。保護傳輸中資料最常用的方法是透過<span class="key-term">傳輸層安全性</span> (<span class="key-term">Transport Layer Security, TLS</span>)，這是一種旨在確保應用程式之間通訊時隱私的協定。</p>
+
+<div class="note">
+    <p>您可能聽過 TLS 被稱為 SSL（安全通訊端層），這是 TLS 之前使用的協定。在幾乎所有現代情況下，對 SSL 的引用實際上是指 TLS，但作為安全從業人員，您需要確保檢查。SSL 已經過時，不應在實際中使用！</p>
+</div>
+
+<div class="note">
+    <p>那些不支援加密或未加密的協定呢？這就是機會性加密方案發揮作用的地方。術語<span class="key-term">未加密協定</span> <span class="english">(unencrypted protocols)</span> 描述了那些嘗試在任何可能的情況下加密流量，僅在不成功時才回退到未加密的系統。這通常意味著使用 TLS 包裹通訊。</p>
+</div>
+
+<h3>沙盒 <span class="english">(Sandboxing)</span></h3>
+<p><span class="key-term">沙盒</span> <span class="english">(Sandboxing)</span> 將系統或程式碼放置在一個隔離、安全的環境中進行測試。雲端沙盒架構通常利用能夠快速創建獨立、短生命週期環境的能力，這些環境具有內建的儀器和基於程式碼的基礎架構，以允許進行沙盒測試。像 Zscaler 這樣的雲端服務供應商也提供專門的沙盒能力，旨在包含和分析惡意軟體，而其他供應商則提供沙盒用於執行應用程式開發或其他隔離有助於防止安全問題的任務。</p>
+
+<h3>應用程式虛擬化與協同運作 <span class="english">(Application Virtualization and Orchestration)</span></h3>
+<p><span class="key-term">應用程式虛擬化</span> <span class="english">(Application virtualization)</span> 允許應用程式運行而無需直接連結到底層作業系統。與用於系統虛擬化的 hypervisor 不同，應用程式虛擬化不會虛擬化整個系統。相反，應用程式虛擬化工具將自身插入應用程式和作業系統之間，並虛擬化該介面。這允許更大的可移植性和分段，同時消耗比完整虛擬機更少的資源。應用程式虛擬化的常見範例包括 Amazon 的 AppStream、Citrix 的 XenApp、Microsoft 的 App-V 和 VMware 的 ThinApp。</p>
+<p>CCSP 考試目標列表並未具體提及容器化，包括像 Kubernetes 和 Docker 這樣的技術，但您很可能在許多雲端環境中遇到它們。<span class="key-term">容器</span> <span class="english">(Containers)</span> 將應用程式與其需要運行的作業系統元件（如函式庫和其他依賴項）捆綁在一起。然後，應用程式和作業系統元件被捆綁到一個容器中，該容器高度可移植且消耗比虛擬機更少的資源。容器化是軟體開發環境中常見的一部分，這些環境使用持續整合和持續部署流程，因為容器可以使用自動化流程輕鬆部署。</p>
+
+<div class="box">
+    <p><strong>容器與容器協同運作 (Containers and Container Orchestration)</strong></p>
+    <p>許多組織已將容器化作為其策略的一部分來實施，特別是雲端原生組織。這意味著了解像 Docker 這樣的容器化工具（打包容器化應用程式並在單個節點上運行它們）與 Kubernetes（用於控制容器集群）之間的區別很有幫助。</p>
+    <p>如果您不熟悉 Kubernetes 和 Docker，您可以透過 Kubernetes 官方網站學到很多：https://kubernetes.io/docs/tutorials/kubernetes-basics。</p>
+</div>
+
+<h3>應用程式設計介面 <span class="english">(Application Programming Interfaces)</span></h3>
+<p>考試目標側重於保護應用程式設計介面 (APIs)，但要正確保護 API，您需要了解什麼是 API 以及它們通常如何使用。</p>
+<p>有兩種常見的 API 類型用於基於雲端的應用程式。第一種是 <span class="key-term">RESTful API</span>。REST 代表表述性狀態轉移 (Representational State Transfer)。它是一種軟體方法，旨在擴展基於 Web 的應用程式的能力，並基於創建可擴展 Web 應用程式的指南和最佳實踐。REST 方法的其他特性包括以下內容：</p>
+<ul>
+    <li>低處理/流量開銷（「輕量級」）</li>
+    <li>使用簡單的 URL/URI</li>
+    <li>不依賴任何單一程式語言</li>
+    <li>可擴展</li>
+    <li>提供多種格式的輸出（XML、JSON 等）</li>
+    <li>使用 HTTP 動詞，例如 POST 創建物件、GET 讀取資料、PUT 更新或替換資料、PATCH 更新或修改物件以及 DELETE 刪除物件</li>
+    <li>高效，這意味著它使用比替代方法（例如 SOAP）更小的訊息</li>
+</ul>
+<p>以下情況是 REST 運作良好的情況之一：</p>
+<ul>
+    <li>當頻寬有限時</li>
+    <li>當使用無狀態操作時</li>
+    <li>當需要快取時</li>
+</ul>
+<p><span class="key-term">SOAP</span> 是您應該熟悉的另一種常見 API 方法。簡單物件存取協定 (Simple Object Access Protocol, SOAP) 是一種協定規範，用於在 Web 服務中交換結構化資訊或資料。它也適用於其他協定，例如 SMTP、FTP 和 HTTP。</p>
+<p>SOAP 還具有以下特性：</p>
+<ul>
+    <li>基於標準</li>
+    <li>依賴 XML</li>
+    <li>對錯誤高度不容忍</li>
+    <li>較慢</li>
+    <li>內建錯誤處理</li>
+</ul>
+<p>SOAP 非常適合非同步處理、格式合約和有狀態操作。</p>
+<p>沒有哪種 API 格式本身就更好或更安全。重要的是要理解，無論您使用哪種類型的 API 來提供 Web 服务，您都在授予另一個應用程式對主要應用程式及其可能存取的任何資料的存取權限。這可能給無法評估任何特定 API 安全性，甚至無法評估他們正在使用哪個 API（或哪些 API）的最終使用者帶來許多安全挑戰。如果相關 API 未經充分審查和驗證以確保它們提供足夠的安全性，這可能導致資料洩露或其他問題。</p>
+
+<div class="note">
+    <p>API 安全性在 CCSP 考試大綱（候選人資訊公告）中作為 4.5「使用經過驗證的安全軟體」的一部分單獨列出，但理解 API 是應用程式架構和設計的關鍵部分，因此我們將其包含在此處。當您審查本節時，請記住考試大綱也強調了驗證 API 安全性的必要性。</p>
+</div>
+
+<p>API 傾向於以幾種模型之一提供：</p>
+<ul>
+    <li><span class="key-term">公共 API</span> <span class="english">(Public APIs)</span>，提供給組織外部人員，允許第三方整合。這些通常是授權的或具有按使用量付費的模型，需要保護以防止濫用和過度使用。</li>
+    <li><span class="key-term">合作夥伴 API</span> <span class="english">(Partner APIs)</span> 提供給您的組織已建立關係的業務合作夥伴或其他組織。它們通常用作共享業務流程的一部分。由於它們暴露在組織外部，因此通常需要額外的安全性和監控。</li>
+    <li><span class="key-term">私有或內部 API</span> <span class="english">(Private, or Internal, APIs)</span>，用於內部用途，不對第三方開放。私有 API 通常透過內部 API 目錄公開，並且可以比公共或合作夥伴 API 更容易地利用內部身份驗證和授權能力。</li>
+</ul>
+
+<h4>API 威脅與 API 安全最佳實踐 <span class="english">(Threats to APIs and API Security Best Practices)</span></h4>
+<p>雖然威脅可能因使用的 API 模型而略有不同，但在創建或使用任何 API 時，都應考慮針對 API 的最常見攻擊。以下 API 威脅很常見：</p>
+<ul>
+    <li>注入攻擊 (Injection attacks)</li>
+    <li>拒絕服務攻擊 (Denial-of-service attacks)</li>
+    <li>安全性差的 API 伺服器或服務 (Poorly secured API servers or services)</li>
+    <li>路徑上攻擊 (On-path attacks)</li>
+    <li>憑證攻擊，包括被盜憑證、意外的 API 金鑰暴露和暴力破解攻擊 (Credential attacks, including stolen credentials, accidental API key exposures, and brute force attacks)</li>
+    <li>差的 API 金鑰生成技術 (Poor API key generation techniques)</li>
+</ul>
+
+<div class="note">
+    <p><span class="key-term">API 金鑰</span> <span class="english">(API keys)</span> 是用於對 API 進行身份驗證和授權的唯一標識符。API 金鑰可能與權限或資源限制相關聯，API 金鑰洩露可能允許第三方未經授權存取 API，因此保護 API 金鑰安全是一項關鍵的安全任務。常見做法包括避免在程式碼或程式碼儲存庫中包含 API 金鑰、限制其使用、刪除不需要的 API 金鑰以及重新生成金鑰，以便長期存在的金鑰對獲取它們的惡意行為者無用。如果您不熟悉它們，可以在 https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html 找到有關如何保護 RESTful API 的詳細資訊，這是一個很好的起點。</p>
+</div>
+
+<p>無論組織中使用哪種 API 模型，一些 API 安全最佳實踐是常見的。它們包括實施身份驗證和授權（通常使用 API 金鑰）、驗證所有請求、加密請求和回應、使用記錄和節流來記錄使用情況並防止過度使用或濫用、進行定期安全測試、維護 API 庫存或目錄，當然，只發送 API 請求中所需的資訊。</p>
+<p>組織通常也會利用第三方 API。這意味著他們依賴提供這些 API 的第三方來維護這些 API，如果 API 更改或停用，或者底層服務降級或失敗，他們可能會受到影響。由於組織無法像確保自己的 API 安全那樣確保第三方 API 的安全，因此稽核軌跡和對 API 金鑰的妥善處理都是有助於第三方 API 安全的常見做法。</p>
+
+<h3>多租戶 <span class="english">(Multitenancy)</span></h3>
+<p><span class="key-term">多租戶</span> <span class="english">(Multitenancy)</span> 指的是多個雲端客戶可能共享相同的服務、系統、網路和其他底層資源的概念。重要的是要以確保各個租戶的邏輯隔離的方式進行配置，否則可能發生資料洩露和損壞。組織應在設計時理解因底層基礎架構可能發生的資料外洩、中斷和暴露。</p>
+
+<div class="note">
+    <p>CCSP 考試目標沒有特別提到多租戶，但它是雲端供應商的一個關鍵概念——事實上，它是雲端成為有效解決方案的關鍵原因之一。當您考慮雲端應用程式架構的其他元素時，重要的是要記住您是使用相同底層平台、系統和服務的眾多個人和組織之一，雖然供應商會嘗試限制其他人對您的影響，但它仍然很可能在許多人之間共享。</p>
+</div>
+
+<h3>補充安全元件 <span class="english">(Supplemental Security Components)</span></h3>
+<p>CCSP 考試目標列出了許多補充安全元件。這些包括經常用於應用程式安全架構的安全設備、裝置和工具。在準備考試時，您應考慮如何使用它們中的每一個、它們具有哪些能力和限制，以及它們可能如何適應您熟悉的各種架構。</p>
+
+<h4>Web 應用程式防火牆 <span class="english">(Web Application Firewalls)</span></h4>
+<p><span class="key-term">Web 應用程式防火牆</span> (<span class="key-term">Web application firewalls, WAFs</span>) 用於透過監控 HTTP 和 HTTPS 流量來保護 Web 應用程式免受攻擊。與其他防火牆設備非常相似，WAF 依賴策略來分析流量。它們通常還充當<span class="key-term">反向代理</span> <span class="english">(reverse proxy)</span>，保護應用程式伺服器免受發送請求的系統的影響。WAF 通常能夠根據使用者、會話資訊和資料以及特定於應用程式的上下文和內容進行過濾，從而允許它們提供對 Web 流量的細微控制。大多數 WAF 都提供了一組預設規則，旨在阻止像 SQL 注入、拒絕服務嘗試和其他類似的惡意活動這樣的常見攻擊。</p>
+<p>雲端服務供應商通常具有某種形式的 WAF 能力，第三方 WAF 虛擬設備也可在每個主要 IaaS 供應商的市場中獲得。然而，WAF 不僅僅可從 IaaS 供應商處獲得，它們在 SaaS 和 PaaS 環境中也可用。</p>
+
+<h4>資料庫活動監控 <span class="english">(Database Activity Monitoring)</span></h4>
+<p><span class="key-term">資料庫活動監控</span> (<span class="key-term">Database activity monitoring, DAM</span>) 工具結合了網路資料和資料庫稽核資訊，以即時分析資料庫活動，查找不需要的、異常的或意外的行為。它用於監控應用程式活動和特權使用，並使用行為分析技術檢測攻擊。與此處描述的其他服務非常相似，雲端資料庫服務通常具有某種形式的 DAM 工具或服務可用於支援它們。</p>
+
+<h4>XML 防火牆 <span class="english">(XML Firewalls)</span></h4>
+<p><span class="key-term">可擴展標記語言 (XML) 防火牆</span> <span class="english">(Extensible Markup Language (XML) firewalls)</span> 用於保護依賴基於 XML 介面的服務，包括許多形式的 Web 應用程式。它們提供驗證和過濾能力，並增加了速率限制和管理流向它們保護的服務的流量流的能力。</p>
+
+<h4>API 閘道 <span class="english">(API Gateways)</span></h4>
+<p><span class="key-term">應用程式設計介面 (API) 閘道</span> <span class="english">(Application programming interface (API) gateways)</span> 用於管理、監控和聚合 API 以為請求系統產生結果。API 閘道可用於授權和存取控制、流量流控制和節流，並且它們通常還提供過濾能力，為 API 創建額外的安全層。您可以在 https://aws.amazon.com/api-gateway 閱讀更多關於雲端 IaaS API 閘道範例的資訊。</p>
+
+<h4>雲端應用程式安全代理商 <span class="english">(Cloud Application Security Brokers)</span></h4>
+<p><span class="key-term">雲端應用程式安全代理商</span> (<span class="key-term">Cloud application security brokers, CASBs</span>) 被用作消費者和服務供應商之間的執行點，以確保雲端服務的使用符合組織意圖和政策。它們結合了控制服務使用的能力與資料保護能力以及威脅管理和監控功能。CASB 可以在本地、混合或雲端託管模型中部署，並且在需要對雲端使用情況進行高水準控制和保證的組織中更常使用。</p>
+
+<!-- SDLC Sections -->
+<!-- ... 內容省略以保持簡潔 ... -->
+
+<h2>身份與存取管理 <span class="english">(Identity and Access Management)</span></h2>
+<p>IAM 涉及用於處理身份完整生命週期的人員、流程和程序。IAM 系統通常由幾個元件組成，包括身份創建機制；身份驗證和授權方法；權限和特權管理；監控、記錄和警報工具；以及生命週期管理能力。</p>
+<div class="note">
+    <p>雖然身份和存取管理 (IAM) 是一個廣泛的主題，但 CCSP 考試大綱（候選人資訊公告）將其歸入雲端應用程式安全。當您審查本章的這些部分時，請記住 IAM 概念和技術也用於應用程式安全之外的許多領域。</p>
+</div>
+<p><span class="key-term">身份管理</span> <span class="english">(Identity Management)</span> 身份管理是透過將使用者權限與給定身份相關聯來授予個人對系統資源存取權限的過程。<span class="key-term">資源配置</span> <span class="english">(Provisioning)</span> 是身份管理的第一階段，其中為每個主體頒發唯一的身份斷言（用作身份識別的東西，例如使用者 ID）。在此過程中，通常還會向使用者頒發一個密碼，用於驗證身份斷言。頒發密碼和身份斷言的實體將保留每個記錄，以便稍後識別使用者（當使用者使用該使用者 ID/密碼組合登入資源時）。</p>
+<p><span class="key-term">存取管理</span> <span class="english">(Access Management)</span> 存取管理是處理授予資源存取權限後控制對資源存取權限的過程部分。存取管理在使用者每次嘗試存取資源時識別使用者是誰以及他們被允許存取什麼。這是透過以下方式的組合來完成的：</p>
+<p><span class="key-term">身份驗證</span> <span class="english">(Authentication)</span> 透過詢問您是誰並確定您是否是合法使用者來建立身份（通常透過結合使用身份斷言和身份驗證因素；例如，使用者 ID 和密碼）。</p>
+<p><span class="key-term">授權</span> <span class="english">(Authorization)</span> 在身份驗證後評估您可以存取什麼。在許多情況下，這意味著將身份斷言與存取控制列表 (ACL) 進行比較。</p>
+<p><span class="key-term">策略管理</span> <span class="english">(Policy Management)</span> 作為身份驗證和授權的執行部門，並基於業務需求和高階主管決策而建立。</p>
+<p><span class="key-term">聯合</span> <span class="english">(Federation)</span> 促進組織之間關於使用者和資源存取權限資訊交換的組織協會，允許它們使用其家庭組織支援的身份和身份驗證而不是要求聯合其他部分提供的每個服務都具有唯一的憑證集來跨多個組織共享資源。</p>
+<p><span class="key-term">身份儲存庫</span> <span class="english">(Identity Repositories)</span> 用於管理使用者帳戶及其關聯屬性的目錄服務。</p>
+
+<h3>雲端身份與存取控制 <span class="english">(Cloud Identity and Access Control)</span></h3>
+<p>雲端中的身份和存取管理是大多數雲端環境的關鍵特性。雖然您可能會根據所使用的雲端服務類型遇到許多不同的 IAM 功能和能力，但 CCSP 考試目標中詳細說明了一些核心概念。您應確保理解以下身份和存取控制概念，不僅它們如何應用於基礎架構即服務環境，還包括它們在平台即服務和軟體即服務設置中可能如何不同。</p>
+<p><span class="key-term">使用者存取</span> <span class="english">(User Access)</span> 雲端環境中的使用者存取可能依賴雲端供應商自身的身份驗證和授權能力，也可能利用客戶自身的基礎架構和系統。無論選擇哪種方式，通常至少會維護一個屬於雲端供應商原生的頂級帳戶，允許對環境進行配置和維護。</p>
+<p>許多雲端環境的一個關鍵特性是<span class="key-term">細粒度存取控制</span> <span class="english">(fine-grained access controls)</span>，它允許詳細配置和控制哪些帳戶和實體可以存取雲端環境的服務、系統或其他元件。</p>
+<p>同樣重要的是要記住，許多雲端環境嚴重依賴密鑰（金鑰和憑證）以及傳統的使用者名稱和密碼。這意味著關注密鑰如何使用、儲存和保護對於保護使用者對雲端的存取至關重要。</p>
+<p><span class="key-term">特權存取</span> <span class="english">(Privilege Access)</span> 您可能已經熟悉保護在資料中心或整個組織的桌上型電腦和移動設備中發現的系統的特權存取所需的概念。雲端也同樣需要保護特權存取以確保您的雲端環境的安全。透過雲端供應商提供的細粒度存取控制是朝這個方向邁出的第一步，但還需要額外的控制，例如要求對所有特權存取進行多重要素驗證、記錄和警報，以及使用基於行為的偵測系統，當然還有對特權存取進行稽核和評估。</p>
+<div class="note">
+    <p>CCSP 考試目標使用術語<span class="key-term">特權存取</span> <span class="english">(privilege access)</span>，但您更常遇到術語<span class="key-term">特權存取</span> <span class="english">(privileged access)</span>，指的是超級使用者、根使用者、管理員或其他具有比典型使用者更高存取級別的帳戶。</p>
+</div>
+<p><span class="key-term">服務存取</span> <span class="english">(Service Access)</span> 許多雲端服務是基於<span class="key-term">微服務</span> <span class="english">(microservice)</span> 構建的，這是一種面向服務的架構，它將應用程式拆分為使用輕量級協定鬆散耦合的服務集合。其他則依賴更傳統的服務作為其架構中的關鍵元件。這意味著使用 IAM 控制服務存取既是安全所必需的，也通常是大型環境或具有多個使用案例的環境中相當複雜的問題。</p>
+<p>在雲端環境中考慮服務存取時的關鍵概念包括需要實施適當的存取控制、需要以安全方式維護身份或服務憑證，以及監控和管理存取的重要性，以便個別服務帳戶或使用服務的實體不會造成干擾。</p>
+
+<h3>單一登入 <span class="english">(Single Sign-On)</span></h3>
+<p>當一個組織擁有各種各樣需要身份驗證的資源時，使用和利用對使用者來說可能變得繁瑣。<span class="key-term">單一登入</span> (<span class="key-term">Single sign-on, SSO</span>) 是一種解決此問題並簡化使用者操作體驗的方法。</p>
+<p>雖然實施 SSO 有多種方法，但該術語通常指的是使用者登入一次（通常是登入到身份驗證伺服器），然後當使用者想要存取組織的資源時，每個資源都會查詢身份驗證伺服器以確定使用者是否已登入並經過適當身份驗證；身份驗證伺服器隨後批准請求，資源伺服器授予使用者存取權限。所有這一切對使用者來說都應該是透明的，從而簡化他們對網路上資源的使用。</p>
+<p>SSO 在現代組織中非常普遍，但也伴隨著風險。移除重新驗證的要求以及在整個環境中使用相同的憑證意味著單個被洩露的憑證集或被洩露的 SSO 伺服器或服務可能導致比僅在一個地方有用的憑證或伺服器更廣泛的存取權限。儘管存在這種風險，大多數組織還是選擇允許 SSO，因為它在可用性和使用者接受度方面帶來了顯著的改進。</p>
+
+<h3>身份提供者 <span class="english">(Identity Providers)</span></h3>
+<p><span class="key-term">身份提供者</span> (<span class="key-term">Identity providers, IdPs</span>) 是儲存和管理身份的服務或系統。IdP 接收身份驗證請求，驗證請求和提供的資訊，然後向服務提供資訊，讓它們知道身份有效以及如果使用者獲得授權，則可以存取該服務。</p>
+<p>您可能已經熟悉使用像 Google 和 Facebook 這樣的常見 IdP，儘管組織也可以使用自己的 IdP 或利用另一個組織的能力。</p>
+
+<h3>聯合身份管理 <span class="english">(Federated Identity Management)</span></h3>
+<p><span class="key-term">聯合身份</span> <span class="english">(Federated identity)</span>（或簡稱<span class="key-term">聯合</span> <span class="english">(federation)</span>）與普通身份管理非常相似，只是它用於跨不同組織管理身份。您可以將其視為跨多個組織的系統或服務工作的單一登入 (SSO)。</p>
+<p>讓我們看一個例子。一群研究型大學希望共享他們的​​研究數據。他們可以創建一個聯合，這樣一位在自己大學、自己系統上登入的科學家就可以存取聯合中其他大學的所有研究資源，而無需提供其他新的身份和身份驗證憑證。</p>
+<p>在<span class="key-term">信任網</span> <span class="english">(web of trust)</span> 中，聯合的每個成員（即，每個想要共享資源和使用者的組織）都必須審查並批准每個其他成員加入聯合。雖然這是確保聯合中其他所有人都達到您特定信任水準的好方法，但一旦聯合達到相當數量的成員組織，這可能會變得成本高昂且難以管理——它 просто не масштабируется。</p>
+<p>另一方面，透過使用<span class="key-term">第三方識別碼</span> <span class="english">(third-party identifier)</span>，成員組織將其相互審查和批准的責任外包給某個將代表所有成員承擔此責任的外部方。這在雲端環境中是一種流行的模型，許多組織使用 Google、Facebook、LinkedIn 或其他身份提供者來處理自己的服務。</p>
+<p>在討論聯合時，我們應用術語<span class="key-term">身份提供者 (IdP)</span> 和<span class="key-term">依賴方</span> <span class="english">(relying parties)</span>。身份提供者是配置和驗證身份斷言的實體，包括驗證使用者和配置使用者 ID 和密碼，以及身份生命週期的所有其他元件。依賴方是聯合中基於已驗證身份共享資源的任何成員。依賴方隨後根據自己的政策處理授權。這允許依賴方確定他們對第三方 IdP 的信任級別，並自行映射權限，而不是依賴 IdP 提供身份驗證和授權。</p>
+<p>在信任網模型中，身份提供者是聯合的每個成員，這意味著他們為其每個使用者配置身份，並且他們通常也是提供服務的依賴方。</p>
+<p>在受信任的第三方模型中，身份提供者是受信任的第三方，而依賴方是聯合中的每個成員組織。</p>
+
+<h3>多重要素驗證 <span class="english">(Multifactor Authentication)</span></h3>
+<p><span class="key-term">多重要素驗證</span> (<span class="key-term">Multifactor authentication, MFA</span>) 最少由以下三個方面中的兩個組成：您知道什麼、您擁有什麼以及您是什麼。您知道什麼可以是密碼、密碼短語等等。您擁有什麼可以是像生成數字的金鑰扣、能夠接收簡訊或使用應用程式的智慧手機，甚至是一個可以接收號碼或金鑰的電話和個人獨有的電話號碼。您是什麼是您作為生物的生物特徵。這可以像您的 DNA 指紋一樣獨特和具體，也可以像照片一樣粗略和籠統。</p>
+<p>具有「知道」和「擁有」方面的身份驗證解決方案對於遠端存取安全尤其有用，因為它們有助於防止未經授權的使用者在沒有這兩個身份驗證機制片段的情況下存取帳戶或資料。竊取或猜測帳戶密碼是一回事，但要讓某人同時獲得密碼和只有使用者才能存取的設備生成的金鑰要困難得多。</p>
+<p>越來越多的網路安全保險要求多重要素驗證，設計您的應用程式以支援多重要素驗證，或依賴執行此操作的身份提供者或身份驗證服務，幾乎是任何現代應用程式的最佳實踐。</p>
+
+<h3>密鑰管理 <span class="english">(Secrets Management)</span></h3>
+<p><span class="key-term">密鑰</span> <span class="english">(Secrets)</span> 是數位憑證，如金鑰、API 權杖、密碼和憑證，用於提供對雲端中服務和系統的存取權限，以及用於加密或身份驗證的其他目的。<span class="key-term">密鑰管理</span> <span class="english">(Secrets management)</span> 是使用工具和技術來創建和儲存密鑰以及管理其生命週期。</p>
+<p>幸運的是，雲端供應商提供密鑰管理服務。Google 的 Secret Manager、Azure 的 Key Vault 和 Amazon 的 Secrets Manager 都常用於密鑰管理，其他供應商通常也提供處理密鑰管理以及檢測其環境中潛在密鑰暴露的方法。</p>
+<p>這並不是管理密鑰的唯一方法；事實上，密鑰管理通常內建於開發過程中，無論應用程式是為雲端構建還是在本地運行。OWASP 在 https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_CheatSheet.html 提供了一份深入的密鑰管理備忘單。它包括確保可用性的方法、關於集中化和標準化重要性的評論、密鑰管理自動化的最佳實踐以及為什麼存取控制很重要、稽核指南以及密鑰典型生命週期（創建、輪換、撤銷和過期）的概述。它還涉及政策、中繼資料以及如何在 CI/CD 管道中使用密鑰。</p>
+
+<div class="note">
+    <p>如果您不熟悉來自 IaaS 供應商的密鑰管理服務，您可以在以下站點找到三大供應商各自服務的概述：</p>
+    <p>https://cloud.google.com/secret-manager/docs/overview</p>
+    <p>https://azure.microsoft.com/en-us/services/key-vault/#product-overview</p>
+    <p>https://aws.amazon.com/secrets-manager</p>
+</div>
+
+<h4>雲端中身份與存取管理的常見威脅 <span class="english">(Common Threats to Identity and Access Management in the Cloud)</span></h4>
+<p>對雲端身份的威脅正在增長，因為攻擊者已經了解到獲取對身份的存取權限是獲取對雲端環境存取權限的最佳方法之一。以下是雲端中 IAM 的常見威脅：</p>
+<ul>
+    <li>遺失或無意暴露的憑證和密鑰</li>
+    <li>配置不當或鬆散的權限</li>
+    <li>過多的權限</li>
+    <li>缺乏適當的監控和警報</li>
+    <li>雲端環境的錯誤配置，包括安全政策</li>
+    <li>IAM 錯誤配置</li>
+</ul>
+<p>當您考慮 IAM 在應用程式開發和應用程式架構中的作用時，您應將這些常見威脅牢記在心，以指導您的設計方法。</p>
+
+<h4>零信任 <span class="english">(Zero Trust)</span></h4>
+<p>越來越多的組織正在轉向<span class="key-term">零信任</span> <span class="english">(zero trust)</span> 架構。零信任設計強調需要驗證每個使用者、設備或服務每次想要執行操作時。驗證是持續的、進行中的和相互的，這意味著交易中的雙方都需要信任對方身份和完整性才能允許操作發生。</p>
+<p>完整的零信任設計可能很複雜，如果不是幾乎不可能在傳統環境中實施，但在雲端中的乾淨實施以及基於風險模型的部分實施正變得越來越普遍。當您考慮 IAM 架構時，您需要考慮零信任是否是您設計的一部分，以及它可能對您的 IAM 設計提出什麼要求。如果您想閱讀更多關於零信任的資訊，NIST 在 https://csrc.nist.gov/publications/detail/sp/800-207/final 提供了詳細資訊。</p>
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+<p>為雲端開發軟體和應用程式需要在整個開發過程中注意安全性。這通常從意識和培訓開始，然後貫穿軟體開發生命週期的其餘部分。開發人員和安全專業人員需要意識到常見的陷阱以及最常見的雲端漏洞，例如 OWASP Top 10 和 SANS Top 25 列表中描述的那些。您還需要了解 SDLC、常見模型以及 SDLC 的每個階段涉及什麼。</p>
+<p>在此過程中，您將應用像密碼學、沙盒和應用程式容器化這樣的技術，以及像 Web 應用程式防火牆和 API 閘道這樣的安全元件。使用像 STRIDE 和 ATASM 這樣的模型進行威脅建模，以及安全編碼，是規劃、設計和編碼過程的一部分。測試也發揮著作用；分析師需要熟悉功能和非功能測試、靜態和動態測試以及測試和 QA 過程的各種其他部分。</p>
+<p>最後，除了軟體開發概念之外，身份和存取管理是應用程式架構和實施的重要組成部分。雖然它在雲端中扮演著廣泛的角色，但 CCSP 考試目標將其與應用程式開發配對，側重於聯合身份、身份提供者、SSO 和 MFA 以及密鑰管理。由於這些都是安全設計的一部分，因此熟悉對 IAM 的威脅對於此領域也很重要。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>解釋雲端開發基礎知識，包括常見陷阱和需要避免的漏洞 (Explain cloud development basics, including common pitfalls and vulnerabilities to avoid)。</strong> 理解應用程式開發中的常見陷阱，例如確保效能、可擴展性、可移植性和互操作性。熟悉 OWASP Top 10 和 SANS Top 25，包括兩個列表中的漏洞範例。</p>
+<p><strong>描述軟體開發生命週期及其應用方式 (Describe the software development lifecycle and how it can be applied)。</strong> 解釋像 Agile 和 Waterfall 這樣的常見軟體開發模型。描述包括 DREAD、STRIDE、PASTA 和 ATASM 在內的威脅模型。熟悉像 OWASP、ASVS 和 SAFECode 這樣的安全編碼實踐和標準。</p>
+<p><strong>將測試方法應用於應用程式軟體 (Apply testing methodologies to application software)。</strong> 描述功能和非功能測試。解釋像全知識、零知識、靜態和動態測試以及互動式應用程式安全測試這樣的方法。理解 QA 流程以及 QA 在 SDLC 中的作用。</p>
+<p><strong>管理軟體供應鏈並使用經過驗證的安全軟體 (Manage the software supply chain and use verified secure software)。</strong> 解釋 API 安全最佳實踐和安全考量。描述供應鏈安全實踐以及為什麼供應鏈安全很重要。理解評估供應商的重要性，特別是對於開源和第三方軟體元件。</p>
+<p><strong>解釋常見的應用程式安全技術和補充安全控制 (Explain common application security technologies and supplemental security controls)。</strong> 熟悉設計元素，例如何時何地使用密碼學來保護傳輸中和靜態資料。解釋沙盒、應用程式虛擬化、微服務和容器的用途和區別。描述協同運作在應用程式環境中的作用。熟悉 Web 應用程式防火牆、資料庫活動監控、XML 防火牆、API 閘道和雲端應用程式安全代理商的用途和角色。</p>
+<p><strong>理解 IAM 解決方案以及對身份和存取管理的常見威脅 (Understand IAM solutions as well as common threats to identity and access management)。</strong> 解釋聯合身份以及身份提供者在聯合環境中的作用。描述 SSO 和 MFA 之間的區別。理解密鑰管理的基礎知識以及為什麼密鑰需要在應用程式環境中受到保護。解釋使用者、特權和服務存取之間的區別。準備好解釋像遺失或暴露的憑證、不當配置、過多權限以及在應用程式身份和存取管理背景下缺乏監控和警報這樣的威脅。</p>
+
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>下列何者不是 STRIDE 模型的組成部分？</p>
+        <ol type="A">
+            <li>欺騙 (Spoofing)</li>
+            <li>否認 (Repudiation)</li>
+            <li>資訊揭露 (Information disclosure)</li>
+            <li>利用 (Exploitation)</li>
+        </ol>
+    </li>
+    <li>
+        <p>在聯合身份安排中，哪個組織授權使用者對系統或服務執行操作？</p>
+        <ol type="A">
+            <li>身份提供者 (The identity provider)</li>
+            <li>服務提供者 (The service provider)</li>
+            <li>權杖提供者 (The token provider)</li>
+            <li>以上皆是 (All of the above)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Henry 知道多重要素驗證至少包含兩個項目，並且它們必須屬於不同類型。下列何者是有效的多重要素驗證選項？</p>
+        <ol type="A">
+            <li>一個複雜密碼和一個密碼 (A complex password and a secret code)</li>
+            <li>複雜密碼和一個 HSM (Complex passwords and an HSM)</li>
+            <li>一個硬體權杖和一張磁條卡 (A hardware token and a magnetic strip card)</li>
+            <li>一個密碼和一個在智慧手機上生成的應用程式 PIN (A password and an application generated PIN on a smartphone)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Amanda 被告知她加入的組織使用沙盒作為其 CI/CD 管道的一部分。沙盒最有可能與哪個 SDLC 階段相關聯？</p>
+        <ol type="A">
+            <li>設計階段 (The design phase)</li>
+            <li>編碼階段 (The coding phase)</li>
+            <li>測試階段 (The testing phase)</li>
+            <li>營運階段 (The operations phase)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Yarif 的組織使用密鑰管理工具來處理其密鑰生命週期。Yarif 想向他的一位員工解釋一個典型的密鑰生命週期。一個密鑰的典型順序是什麼？</p>
+        <ol type="A">
+            <li>創建、撤銷、輪換、過期 (Creation, revocation, rotation, expiration)</li>
+            <li>過期、創建、輪換、撤銷 (Expiration, creation, rotation, revocation)</li>
+            <li>創建、輪換、撤銷、過期 (Creation, rotation, revocation, expiration)</li>
+            <li>創建、輪換、過期、撤銷 (Creation, rotation, expiration, revocation)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Heikka 已部署 Web 應用程式防火牆，並準備編寫策略來分析流量。下列何者不是 WAF 的典型過濾能力？</p>
+        <ol type="A">
+            <li>使用者 (Users)</li>
+            <li>特權資料庫使用 (Privileged database use)</li>
+            <li>會話資訊 (Session information)</li>
+            <li>特定於應用程式的上下文 (Application-specific context)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Lin 想對她組織的新應用程式進行非功能性測試。下列哪個項目不是由非功能性測試測試的？</p>
+        <ol type="A">
+            <li>使用者接受度 (User acceptance)</li>
+            <li>穩定性 (Stability)</li>
+            <li>效能 (Performance)</li>
+            <li>品質 (Quality)</li>
+        </ol>
+    </li>
+    <li>
+        <p>軟體組成分析工具用於幫助防禦下列哪個 OWASP Top-10 雲端原生應用程式安全問題？</p>
+        <ol type="A">
+            <li>CI/CD 管道和軟體供應鏈缺陷 (CI/CD pipeline and software supply chain flaws)</li>
+            <li>注入缺陷 (Injection flaws)</li>
+            <li>不當的資產管理 (Improper asset management)</li>
+            <li>不安全的協同運作配置 (Insecure orchestration configurations)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Joanna 的開發團隊正在審查原始碼以識別潛在問題。Joanna 的團隊正在進行哪種類型的測試？</p>
+        <ol type="A">
+            <li>動態 (Dynamic)</li>
+            <li>互動式 (Interactive)</li>
+            <li>黑盒 (Black box)</li>
+            <li>靜態 (Static)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Geoff 的組織已將其應用程式設計為依賴 Docker。Geoff 的組織採用了哪種類型的應用程式虛擬化模型？</p>
+        <ol type="A">
+            <li>沙盒 (Sandboxing)</li>
+            <li>容器 (Containers)</li>
+            <li>微服務 (Microservices)</li>
+            <li>多租戶 (Multitenancy)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Jim 的組織使用 Waterfall SDLC 模型。在 Waterfall 模型中完成測試和除錯後會發生什麼？</p>
+        <ol type="A">
+            <li>品質保證測試 (Quality assurance testing)</li>
+            <li>互動式軟體測試 (Interactive software testing)</li>
+            <li>營運活動 (Operational activities)</li>
+            <li>業務規則驗證 (Business rule validation)</li>
+        </ol>
+    </li>
+     <li>
+        <p>OWASP 識別了雲端原生應用程式安全風險。下列哪項應被 Jean 確定為解決其組織 SSH 金鑰安全性的最關鍵問題？</p>
+        <ol type="A">
+            <li>注入缺陷 (Injection flaws)</li>
+            <li>不安全的密鑰儲存 (Insecure secrets storage)</li>
+            <li>使用已知漏洞的元件 (Using components with known vulnerabilities)</li>
+            <li>無效的記錄和監控 (Ineffective logging and monitoring)</li>
+        </ol>
+    </li>
+    <li>
+        <p>廣泛使用許多小型實例以允許應用程式根據需要增加或減少效能是哪個雲端應用程式開發陷阱的一部分？</p>
+        <ol type="A">
+            <li>可擴展性 (Scalability)</li>
+            <li>互操作性 (Interoperability)</li>
+            <li>可移植性 (Portability)</li>
+            <li>API 安全 (API security)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列何者不是在威脅建模期間應考慮的對雲端應用程式的常見威脅？</p>
+        <ol type="A">
+            <li>韌體漏洞 (Firmware vulnerabilities)</li>
+            <li>身份驗證損壞 (Broken authentication)</li>
+            <li>敏感資料暴露 (Sensitive data exposure)</li>
+            <li>使用已知漏洞的元件 (Using components with known vulnerabilities)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Murali 正在使用攻擊模擬與威脅分析流程 (PASTA) 框架作為其組織安全流程的一部分。他剛剛完成了第 3 階段，分析應用程式並識別應用程式控制。他在第 4 階段接下來會做什麼？</p>
+        <ol type="A">
+            <li>他將分析和建模攻擊 (He will analyze and model attacks)。</li>
+            <li>他將定義業務目標 (He will define business objectives)。</li>
+            <li>他將基於威脅情報執行威脅分析 (He will perform threat analysis based on threat intelligence)。</li>
+            <li>他將運行漏洞掃描 (He will run vulnerability scans)。</li>
+        </ol>
+    </li>
+    <li>
+        <p>Selah 想使用應用程式安全驗證標準來評估她組織的應用程式安全性，並希望執行滲透測試作為安全的驗證方法。她想使用哪個 ASVS 級別？</p>
+        <ol type="A">
+            <li>Level 0</li>
+            <li>Level 1</li>
+            <li>Level 2</li>
+            <li>Level 3</li>
+        </ol>
+    </li>
+     <li>
+        <p>與 Ian 公司合作的稽核員詢問他的組織是否使用軟體組成分析工具作為其風險管理工作的一部分。稽核員在詢問 Ian 關於什麼能力？</p>
+        <ol type="A">
+            <li>識別原始碼所用語言的能力 (The ability to identify the language in which source code is written)</li>
+            <li>識別程式碼庫中軟體版本號的能力 (The ability to identify software version numbers in a codebase)</li>
+            <li>識別編譯後程式碼所用語言的能力 (The ability to identify the language in which compiled code is written)</li>
+            <li>識別程式碼庫中開源軟體的能力 (The ability to identify open-source software in a codebase)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Mike 的組織已確定希望使用互動式應用程式安全測試 (IAST) 作為其 SDLC 的一部分。在典型的 SDLC 中，IAST 通常在哪個階段執行？</p>
+        <ol type="A">
+            <li>設計 (Design)</li>
+            <li>編碼 (Code)</li>
+            <li>測試 (Test)</li>
+            <li>維護 (Maintain)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Susan 希望監控她資料庫系統中的特權使用，作為使用行為分析檢測攻擊的一部分。她應該向她的資料庫團隊推薦什麼工具？</p>
+        <ol type="A">
+            <li>CASB</li>
+            <li>WAF</li>
+            <li>DAM</li>
+            <li>SDLC</li>
+        </ol>
+    </li>
+    <li>
+        <p>Jason 想為他組織的 API 添加流量流控制和存取控制。他可以使用哪個安全工具最有效地添加這個額外的安全層？</p>
+        <ol type="A">
+            <li>API 閘道 (An API gateway)</li>
+            <li>IPS</li>
+            <li>API 防火牆 (An API firewall)</li>
+            <li>IDS</li>
+        </ol>
+    </li>
+</ol>
+<ol start="1">
+    <li>D. STRIDE 代表欺騙 (<span class="english">spoofing</span>)、篡改 (<span class="english">tampering</span>)、否認 (<span class="english">repudiation</span>)、資訊揭露 (<span class="english">information disclosure</span>)、拒絕服務 (<span class="english">denial of service</span>) 和權限提升 (<span class="english">elevation of privileges</span>)，不包括利用 (<span class="english">exploitation</span>)。</li>
+    <li>B. 服務提供者 (<span class="english">Service providers</span>) 管理其服務的授權，並依賴身份提供者 (<span class="english">identity provider</span>) 來驗證使用者。權杖提供者 (<span class="english">Token provider</span>) 不是聯合身份安排中的典型角色。</li>
+    <li>D. 多重要素驗證 (<span class="english">Multifactor authentication</span>) 需要由不同類型的因素組成：您知道什麼、您擁有什麼或您是什麼，例如生物特徵因素。密碼 (<span class="english">password</span>) 是您知道的東西，而來自令牌 (<span class="english">fob</span>) 或智慧手機 (<span class="english">smartphone</span>) 的應用程式生成的 PIN 是您擁有的東西。HSM 不是一個因素，它是一種儲存方法。硬體權杖 (<span class="english">Hardware tokens</span>) 和磁條卡 (<span class="english">magstripe cards</span>) 都是您擁有的東西，而密碼和密碼 (<span class="english">passwords and secret codes</span>) 都是您知道的東西。</li>
+    <li>C. 沙盒 (<span class="english">Sandboxes</span>) 用於隔離運行中的程式碼以允許對其進行測試。Amanda 最有可能在組織希望在其進行 QA 和功能測試時隔離其程式碼的測試階段 (<span class="english">testing phase</span>) 遇到沙盒。</li>
+    <li>C. 一個典型的密鑰生命週期 (<span class="english">secrets lifecycle</span>) 從創建 (<span class="english">creation</span>) 開始，接著進行輪換 (<span class="english">rotation</span>)，如果需要可能包括撤銷 (<span class="english">revocation</span>)，並在其生命週期結束時以過期 (<span class="english">expiration</span>) 結束。</li>
+    <li>B. Web 應用程式防火牆 (<span class="english">Web application firewalls</span>) 通常提供基於使用者、會話、發送和接收的資料以及特定於應用程式的上下文進行過濾的能力。資料庫活動監控 (DAM) 工具用於監控特權資料庫使用等有用的資料點，以確保資料庫安全。</li>
+    <li>A. 使用者接受度 (<span class="english">User acceptance</span>) 是功能測試 (<span class="english">functional testing</span>) 的一部分，而不是非功能測試 (<span class="english">nonfunctional testing</span>)。軟體品質，包括其穩定性 (<span class="english">stability</span>) 和效能 (<span class="english">performance</span>)，是透過非功能測試來測試的。</li>
+    <li>A. CI/CD 管道和軟體供應鏈缺陷 (<span class="english">CI/CD pipeline and software supply chain flaws</span>) 涵蓋了略有不同的領域，但 SCA 工具用於解決軟體供應鏈缺陷。軟體組成分析檢查哪些開源元件是軟體套件的一部分，並允許安全專業人員和開發人員透過了解他們正在使用和依賴的元件來防禦軟體供應鏈中的問題。</li>
+    <li>D. 靜態 (<span class="english">Static</span>) 程式碼審查涉及審查原始碼以識別問題。動態 (<span class="english">Dynamic</span>) 測試是使用運行中的程式碼完成的。互動式 (<span class="english">Interactive</span>) 測試是透過像使用者一樣與程式碼或應用程式互動來完成的，而黑盒 (<span class="english">black-box</span>) 或零知識 (<span class="english">zero-knowledge</span>) 測試則涉及像攻擊者一樣進行測試，而對環境或應用程式沒有任何詳細知識。</li>
+    <li>B. Docker 是一個容器 (<span class="english">container</span>) 引擎。沙盒 (<span class="english">Sandboxing</span>) 用於提供安全、可靠的環境進行測試或隔離。微服務 (<span class="english">Microservices</span>) 是用於構成更大服務環境的小型獨立服務。多租戶 (<span class="english">Multitenancy</span>) 是多個使用者或組織使用相同基礎架構的概念，通常透過虛擬化管理平台。</li>
+    <li>C. Waterfall 模型的最後階段是營運階段 (<span class="english">operational phase</span>)，其中包括支援和維護。測試發生在第 5 階段，業務規則分析在第 2 階段。</li>
+    <li>B. SSH 金鑰是一種密鑰 (<span class="english">secrets</span>) 形式，Jean 知道保護 SSH 金鑰安全是安全密鑰儲存 (<span class="english">secure secrets storage</span>) 的重要組成部分。注入缺陷 (<span class="english">Injection flaws</span>) 可能包括 XSS、SQL 注入和 CSRF 等，但不包括 SSH 金鑰。沒有提到易受攻擊的元件，也沒有提到記錄或監控問題，但 Jean 可能希望確保為與管理帳戶相關的特權使用啟用記錄。</li>
+    <li>A. 雲端應用程式的可擴展性 (<span class="english">Scalability</span>) 通常依賴於能夠輕鬆添加或移除小型實例以根據需要提供更多資源。互操作性 (<span class="english">Interoperability</span>) 是跨平台、服務或系統工作的能力，並不使用許多小型實例來運作。同樣，可移植性 (<span class="english">portability</span>) 允許軟體在不需要特定 API 或工具的情況下在環境之間移動，並且再次不依賴大量小型實例。API 安全 (<span class="english">API security</span>) 試圖防止濫用 API，並可能利用 API 閘道而不是小型實例。</li>
+    <li>A. 由於雲端應用程式在大多數情況下運行在虛擬化基礎架構上，因此韌體漏洞 (<span class="english">Firmware vulnerabilities</span>) 不被視為對雲端應用程式的常見威脅。身份驗證損壞 (<span class="english">Broken authentication</span>)、敏感資料暴露 (<span class="english">sensitive data exposure</span>) 問題以及具有已知漏洞的元件 (<span class="english">components with known vulnerabilities</span>) 都是對應用程式的常見威脅。</li>
+    <li>C. PASTA 的第 4 階段 (<span class="english">Stage 4</span>) 涉及在第 3 階段分析應用程式和識別應用程式控制後，基於威脅情報執行威脅分析 (<span class="english">performing threat analysis based on threat intelligence</span>)。</li>
+    <li>B. ASVS 由三個級別組成，Level 1 是依賴滲透測試進行安全驗證的基本級別，並透過 Levels 2 和 3 增加驗證要求。Selah 的需求符合 Level 1 (<span class="english">Level 1</span>)。</li>
+    <li>D. SCA 用於確定程式碼庫中包含哪些開源軟體 (<span class="english">open-source software</span>)。這有助於透過讓組織了解可能需要更新哪些元件以及哪些可能不安全（因為它們可能隱藏在套件或安裝程式中）來控制風險。</li>
+    <li>C. IAST 通常發生在大多數軟體開發生命週期的測試 (<span class="english">test</span>) 或 QA 階段。它有助於確保測試更早進行，錯誤更早被發現和修復。由於需要存在程式碼才能進行測試，因此它不能發生在設計階段，而程式碼階段通常涉及像單元測試這樣的內容，而不是需要更完整應用程式來驗證的互動式測試。最後，SDLC 的維護階段更可能使用漏洞掃描工具而不是持續進行的互動式測試。</li>
+    <li>C. DAM 或資料庫活動監控 (<span class="english">database activity monitoring</span>) 工具是一種結合網路資料和資料庫稽核資訊以幫助識別不需要或非法活動的工具。Susan 的最佳選擇是 DAM。雲端應用程式安全代理商用於對雲端服務的使用者強制執行政策，WAF 是 Web 應用程式防火牆，SDLC 是軟體開發生命週期。</li>
+    <li>A. API 閘道 (<span class="english">API gateways</span>) 是用於管理、監控和聚合 API 的工具，通常具有控制身份驗證和授權、提供流量流控制功能的能力，並且可以基於 API 安全最佳實踐或規則進行過濾。IPS 可以內聯使用以過濾流量並防止攻擊，但它們通常並非設計為 API 感知的，因此不具備滿足 Jason 需求的全部能力。IDS 不是內聯的，因此無法管理流量，而 API 防火牆不是常見的安全工具。</li>
+</ol>
+
+</body>
+</html>

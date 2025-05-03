@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第三章：雲端資料安全</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .warning { border-left: 5px solid #d9534f; padding: 10px; margin: 15px 0; background-color: #fdf7f7; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第三章：雲端資料安全 <span class="english">(Cloud Data Security)</span></h1>
+
+<p>在雲端保護資料依賴於許多您可能用於保護本地資料的相同概念。它也要求您考慮特定於雲端的考量，包括威脅、能力，以及雲端基礎架構設計與本地配置和選項的差異。</p>
+
+<h2>雲端資料生命週期 <span class="english">(Cloud Data Lifecycle)</span></h2>
+
+<p>雲端中的資料與傳統或本地環境中的資料有許多相同的安全要求和威脅。資料仍然遵循一個資料生命週期，但實施細節會有所改變。資料生命週期的常見階段如下圖所示。</p>
+
+<p>資料仍然會在<span class="key-term">創建</span> <span class="english">(Create)</span> 階段被創建——無論是在雲端本身還是在遠端使用者端。它將被儲存在雲端中，無論是在<span class="key-term">儲存</span> <span class="english">(Store)</span> 階段的短期儲存，還是在<span class="key-term">封存</span> <span class="english">(Archive)</span> 階段的長期儲存。它將在<span class="key-term">使用</span> <span class="english">(Use)</span> 階段作為組織業務的一部分被操作和修改。它可能會被傳輸給其他使用者和/或在雲端內的<span class="key-term">共享</span> <span class="english">(Share)</span> 階段供協作使用。此外，我們仍然需要在<span class="key-term">銷毀</span> <span class="english">(Destroy)</span> 階段從生產環境中移除資料並在此後清理媒體。</p>
+<p>正如您所期望的，執行這些活動的細節以及以安全方式進行這些活動，將隨著任何新的環境挑戰而演變以匹配。</p>
+
+<p>在雲端中，資料生命週期的每個階段都需要特定的保護。讓我們依次審查每個階段，並檢查一些我們可能想要應用的特定控制機制。</p>
+
+<h3>創建 <span class="english">(Create)</span></h3>
+<p>資料創建可能發生在多個位置。資料可以在雲端環境中創建，可以在本地或遠端位置創建，也可以在另一個雲端中創建。創建階段資料面臨的威脅因其創建位置以及如何傳輸到雲端進行儲存而異。</p>
+<p><span class="key-term">遠端創建的資料</span> <span class="english">(Data Created Remotely)</span> 使用者創建的資料在上傳到雲端之前應進行加密，以防止像封包擷取和路徑上攻擊這樣的攻擊，以及雲端資料中心的內部威脅。這意味著選擇強大的加密方法並實施良好的金鑰管理實踐，我們將在本章後面介紹。當然，確保網路流量本身的安全也是可取的——最常用的是透過 HTTPS 連接使用傳輸層安全性 (Transport Layer Security, TLS)。</p>
+<div class="note">
+    <p>TLS 取代了已棄用的安全通訊端層 (Secure Sockets Layer, SSL) 標準，但 SSL 術語仍在許多 IT 環境中使用，從業人員可能會看到 SSL 和 TLS 這兩個術語。</p>
+</div>
+<p><span class="key-term">在雲端內創建的資料</span> <span class="english">(Data Created within the Cloud)</span> 在雲端內創建的資料也應在創建時進行加密。這有助於防禦可能獲得環境存取權限的攻擊者以及為雲端服務供應商工作的員工本身以未加密形式獲得對其的存取權限。與遠端創建的資料一樣，金鑰管理仍然是保護資料的關鍵部分——如果金鑰可以被惡意行為者獲取，加密就不是有用的保護措施！</p>
+<div class="note">
+    <p>無論資料在哪裡創建或駐留，創建階段都應包括您在第二章「資料分類」中審查的活動，包括分類和分級、標籤化、標記、標記和分配中繼資料。</p>
+</div>
+
+<h3>儲存 <span class="english">(Store)</span></h3>
+<p>當您審查資料生命週期圖時，您可能想知道為什麼會有一個儲存階段和一個封存階段——它們聽起來可能很相似。儲存階段是緊隨創建之後發生的事情，描述了資料創建時發生的情況。在這裡，關鍵的安全控制包括為儲存位置配置存取權限，確保儲存位置得到適當保護，並在需要或必需時繼續透過靜態加密來保護資料。</p>
+
+<h3>使用 <span class="english">(Use)</span></h3>
+<p>對於儲存在雲端中的資料，使用階段變得更加複雜。一些雲端環境僅透過 Web 應用程式提供介面，而另一些則透過應用程式設計介面 (Application Programming Interfaces, APIs) 或服務提供程式化存取。混合雲環境可能在其使用過程中透過多種方式傳輸資料。</p>
+<p>這意味著保護使用階段需要了解您組織中發生的特定用途和資料流。每次資料傳輸都需要得到保護，並且資料需要在其儲存的每個位置、傳輸過程中以及它可能暫時或永久駐留的任何地方得到保護。</p>
+<p>使用階段的資料安全還需要考慮其他營運方面。使用者連接到雲端的平台也必須得到保護。這可能是企業安全政策和實施的問題，也可能是在具有不同技術和配置的自攜設備 (Bring Your Own Device, BYOD) 環境中的複雜任務。除了許多組織使用的技術控制之外，使用者教育和意識變得重要，因為使用者可能能夠操作或提取使用中的資料。他們需要接受培訓以了解伴隨雲端運算的新風險，以及他們將被期望如何使用技術及其包含的資料。</p>
+<p>權限和角色管理在這裡仍然很重要。<span class="key-term">資料擁有者</span> <span class="english">(Data owners)</span>，即負責對組織中的資料進行分類、保護和監督的個人，也應注意限制修改和處理其資料的權限；使用者應僅限於他們執行其分配任務絕對需要的那些功能。而且，正如在雲端和傳統環境中的許多情況下一樣，當資料以任何方式被操作時，記錄和稽核軌跡非常重要。</p>
+<div class="note">
+    <p>雲端供應商需要確保他們為資料使用提供安全的環境。這意味著在虛擬化或共享服務的實施中提供強大的保護。供應商必須確保虛擬化主機上的資料不能被同一設備上的其他虛擬主機讀取或檢測到。他們還必須實施人員和管理控制，以便資料中心人員無法存取任何原始客戶資料，並且他們的行為受到監控以防惡意活動。這些控制最常透過合約語言和與雲端供應商合作時的第三方稽核來確保。</p>
+</div>
+
+<h3>共享 <span class="english">(Share)</span></h3>
+<p>儘管全球協作和向許多地點的大規模擴展都是雲端提供的強大能力，但它們也伴隨著風險。如果使用者、系統和資料可以位於地球上的任何地方，那麼威脅也可以。</p>
+<p>許多在先前階段實施的相同安全控制在防禦儲存階段時將很有用：加密檔案和通訊、使用資訊版權管理 (Information Rights Management, IRM) 解決方案以及使用標記和權限模型仍然是關鍵控制。我們還必須根據司法管轄區和法律要求制定共享限制。組織可能需要根據監管要求或合約義務限制或阻止將資料發送到某些地點。這些限制可以採取出口管制或進口管制的形式，因此安全專業人員必須熟悉組織資料可能共享的所有地區的這兩種管制。</p>
+<div class="note">
+    <p>資訊版權管理 (IRM) 工具包括許多不同的解決方案，例如專用的 IRM 解決方案、資料外洩防護 (DLP) 工具以及用於處理分類、身份驗證和授權、標記和類似資料管理功能的各種其他方法，僅舉幾例。</p>
+</div>
+<p>雲端客戶還應考慮在共享階段實施某種形式的出口監控；這將在本章後面的「資料外洩防護」部分討論。</p>
+
+<div class="box">
+    <p><strong>出口與進口限制 (Export and Import Restrictions)</strong></p>
+    <p>以下是您應該熟悉的出口限制：</p>
+    <ul>
+        <li><span class="key-term">國際武器貿易條例 (International Traffic in Arms Regulations, ITAR)</span> (美國)：國務院禁止出口國防相關物品；可能包括密碼系統。</li>
+        <li><span class="key-term">出口管理條例 (Export Administration Regulations, EAR)</span> (美國)：商務部禁止出口軍民兩用物品（可用於商業和軍事目的的技術）。</li>
+    </ul>
+    <p>以下是您應該熟悉的進口限制：</p>
+    <ul>
+        <li><span class="key-term">密碼學 (Cryptography)</span> (各國)：許多國家對進口密碼系統或已加密的資料有限制。在與有密碼限制的國家/地區進行業務往來時，安全專業人員有責任了解並遵守這些當地法規。</li>
+        <li><span class="key-term">瓦聖那協議 (The Wassenaar Arrangement)</span>：41 個成員國組成的團體已同意相互通報向非成員國運送常規軍事裝備的情況。這不是條約，因此不具有法律約束力，但可能要求您的組織通知您的政府以保持合規。</li>
+    </ul>
+</div>
+
+<h3>封存 <span class="english">(Archive)</span></h3>
+<p>這是長期儲存的階段，因此在規劃資料的安全控制時，您將必須考慮更長時間範圍內的資料安全。</p>
+<p>密碼學仍然是一個重要的考量，但密碼系統的強度及其對長期攻擊和未來攻擊的抵抗力都是考量因素。金鑰管理仍然極其重要，因為管理不善的金鑰可能導致資料暴露或完全丟失，無論您的加密有多強大。如果金鑰儲存不當（特別是如果它們與資料一起儲存），則損失風險會增加，現代攻擊者會意識到並將金鑰作為其攻擊的一部分來尋找。</p>
+<div class="note">
+    <p>需要注意的一個密碼學方面是<span class="key-term">橢圓曲線密碼學</span> (<span class="key-term">Elliptical Curve Cryptography, ECC)</span>。ECC 使用代數橢圓曲線，產生比傳統金鑰密碼學中使用的大得多的金鑰小得多的金鑰，同時提供相同級別的安全性。</p>
+</div>
+<p>基於雲端的長期儲存中資料的物理安全也很重要。在選擇儲存位置時，您需要仔細評估每個領域的風險和收益：</p>
+<p><span class="key-term">位置</span> <span class="english">(Location)</span> 在選擇雲端環境中的長期儲存解決方案時，您應考慮以下常見問題：</p>
+<ul>
+    <li>資料由雲端供應商儲存在哪裡？是否涉及多個雲端供應商？</li>
+    <li>該地點會面臨哪些環境因素風險（自然災害、氣候等）？</li>
+    <li>可能需要考慮哪些司法管轄區方面（地方法律和國家法律）？</li>
+    <li>在應急操作期間（例如，在自然災害期間）存取資料是否可行？</li>
+    <li>它是否足夠遠離生產環境以避免影響生產環境的事件？</li>
+    <li>它是否在多個地點或多個雲端中複製？該複製是否會產生任何額外考量，例如無法確保刪除？</li>
+</ul>
+<p><span class="key-term">格式</span> <span class="english">(Format)</span> 無論資料是在本地還是在雲端，有關格式和長期存取的問題基本上是相同的：</p>
+<ul>
+    <li>資料是儲存在某種物理介質上（例如磁帶備份或磁性儲存）並處於離線模式，還是線上且被複製？</li>
+    <li>該媒體是否高度便攜且需要額外的安全控制以防盜竊？</li>
+    <li>該媒體會受到環境因素的影響嗎？</li>
+    <li>您期望保留這些資料多長時間？</li>
+    <li>當您需要它時，它是否仍然是生產硬體可以存取的格式？</li>
+</ul>
+<p>考慮資料的媒體格式可能看起來很奇怪，但了解您的雲端供應商使用的底層技術可能會影響您的安全控制規劃以及您選擇的服務。當然，並非所有雲端供應商都會揭露他們如何建構他們銷售的服務，因此您可能沒有所有這些細節，並且必須根據您擁有的知識以及合約和其持續表現來評估您的風險。</p>
+<p><span class="key-term">人員</span> <span class="english">(Staff)</span> 雲端服務供應商的人員配置可能直接影響您可以在其雲端中儲存和處理的資料。某些合約、政府或其他要求可能要求外國國民員工不得存取某些類型的資料，這在您使用雲端供應商之前會產生一個需要克服的障礙。同時，重要的是要確保供應商正在執行適當的人員安全檢查，例如背景調查和持續監控。</p>
+<p><span class="key-term">程序</span> <span class="english">(Procedure)</span> 需要時如何恢復資料？如何定期將其移植到封存中？您多久進行一次完整備份（以及增量或差異備份）？</p>
+<p>雲端中的封存階段活動將在很大程度上取決於您是否在雲端中進行備份，以及您是使用同一個雲端供應商進行備份和生產環境，還是為每個使用不同的雲端供應商。您將需要考慮許多與傳統環境中相同的因素，但隨後還需要確定這些決策在雲端環境中是否是一個考量，雲端供應商是否引入了新的考量，或者您是否可以透過合約方式處理它們，以及您將如何監控解決方案並強制執行要求。</p>
+
+<h3>銷毀 <span class="english">(Destroy)</span></h3>
+<p>我們在第二章中討論了雲端環境的銷毀選項。加密擦除（加密銷毀）是目前在雲端環境中實現此目的唯一可行且徹底的方法。在考慮資料生命週期結束時，銷毀加密金鑰也很重要，因為沒有金鑰的強加密使得資料即使在延長的時間範圍內也很難存取，並且可以提供有用的額外控制——特別是如果由於他們架構底層儲存或服務的方式而難以確保您的供應商真正刪除了資料。</p>
+<p>在某些情況下，雲端供應商會管理您資料的整個生命週期及其在系統和儲存級別的處理方式，特別是在 SaaS 和 PaaS 環境中。這意味著您需要將資料生命週期要求視為您組織合約的一部分。您可能還想考慮如果您更換供應商或您的供應商被收購或倒閉，您將如何恢復您的資料。</p>
+
+<h2>雲端儲存架構 <span class="english">(Cloud Storage Architectures)</span></h2>
+
+<p>在雲端中儲存資料有各種方式，每種方式都有相應的好處和成本。這些方式既適用於較大的組織需求，也適用於單個使用者的個人雲端儲存。</p>
+
+<h3>儲存類型 <span class="english">(Storage Types)</span></h3>
+<p>CCSP 考試考慮了三種特定的儲存類型：<span class="key-term">長期</span> <span class="english">(long-term)</span>、<span class="key-term">暫時性</span> <span class="english">(ephemeral)</span> 和<span class="key-term">原始儲存</span> <span class="english">(raw storage)</span>。</p>
+<p><span class="key-term">長期儲存</span> <span class="english">(Long-term storage)</span> 是專門設計用於長時間使用的儲存。Amazon 的 Glacier、Azure 的 Archive Storage 以及 Google 的 Coldline 和 Archive 層都是長期儲存解決方案的範例。事實上，每個主要的雲端供應商都有多個儲存層，範圍從頻繁使用的儲存到近線儲存（通常用於像日誌和媒體內容這樣的短期儲存），以及為備份和滿足監管要求而提供的長期儲存。</p>
+<p>圖 3.2 顯示了 Amazon 的 S3 儲存類別以及區分這些層級的一些資料。請注意，長期儲存的檢索成本更高，而 S3 標準則不然，這是它們使用和定價模型的關鍵區別。此圖表並未顯示 Amazon 的所有 S3 層級，而是側重於範例以描述儲存類型的差異。</p>
+<p><span class="key-term">暫時性儲存</span> <span class="english">(Ephemeral storage)</span> 在雲端中用於通常僅在實例存在期間存在的資料。考慮 AWS Lambda 提供的 /tmp 目錄。創建和使用的資料可以儲存在那裡，但它旨在作為暫時性的暫存資源，不應用於持久儲存，因為當創建新的執行環境時它將被刪除。</p>
+<p><span class="key-term">原始儲存</span> <span class="english">(Raw storage)</span> 是您可以直接存取的儲存。您可以將其視為對硬碟、SSD 或儲存卷的存取，您可以直接存取底層儲存而不是儲存服務。</p>
+
+<h3>卷儲存：基於檔案的儲存與區塊儲存 <span class="english">(Volume Storage: File-Based Storage and Block Storage)</span></h3>
+<p>除了 CCSP 考試考慮的高階儲存類型外，您還需要了解雲端中使用的常見儲存呈現模型。對於<span class="key-term">卷儲存</span> <span class="english">(volume storage)</span>，客戶在雲端內被分配一個儲存空間；該儲存空間表示為附加到使用者虛擬機的磁碟機。從客戶的角度來看，虛擬磁碟機的執行方式與附加到有形設備的物理磁碟機非常相似；實際位置和記憶體位址對使用者是透明的。</p>
+<p>卷儲存架構可以採用不同的形式，並且可以呈現為檔案儲存或區塊儲存。</p>
+<p><span class="key-term">檔案儲存</span> <span class="english">(File Storage)</span>（也稱為<span class="key-term">檔案級儲存</span> <span class="english">(File-Level Storage)</span> 或<span class="key-term">基於檔案的儲存</span> <span class="english">(File-Based Storage)</span>）資料的儲存和顯示方式與傳統環境中的檔案結構完全相同，即檔案和資料夾，具有所有相同的層次結構和命名功能。檔案儲存架構已在大型資料分析工具和流程中變得流行。</p>
+<p><span class="key-term">區塊儲存</span> <span class="english">(Block Storage)</span> 區塊儲存是客戶或使用者可以在其中放置任何內容的空白卷。區塊儲存可能允許更大的靈活性和更高的效能，但它需要更多的管理，並且可能需要安裝作業系統或其他應用程式來儲存、排序和檢索資料。區塊儲存可能更適合包含多種類型和種類資料的卷和用途，例如企業備份服務或線上交易處理 (OLTP) 資料庫的活動卷。</p>
+<p>卷的儲存架構可以包括複製資料以防止丟失的底層資料保護解決方案。卷儲存可以在任何雲端服務模型中提供，但通常與基礎架構即服務 (IaaS) 相關聯。</p>
+
+<h3>基於物件的儲存 <span class="english">(Object-Based Storage)</span></h3>
+<p><span class="key-term">物件儲存</span> <span class="english">(Object storage)</span> 正如其名：資料以物件形式儲存，而不是檔案或區塊。物件不僅包括實際的生產內容，還包括描述內容和物件的中繼資料以及用於在整個儲存空間中定位該特定物件的唯一位址標識符。</p>
+<p>物件儲存架構允許顯著級別的描述，包括標記、標籤、分類和分級。這也增強了索引能力、資料政策執行（例如第二章中描述的 IRM 和稍後在本章「資料外洩防護」部分討論的 DLP）以及某些資料管理功能的集中化。</p>
+<p>任何雲端服務模型都可以包括物件儲存架構，但物件儲存通常與 IaaS 相關聯。</p>
+
+<h3>資料庫 <span class="english">(Databases)</span></h3>
+<p>與它們的傳統對應物一樣，雲端中的<span class="key-term">資料庫</span> <span class="english">(databases)</span> 為儲存的資料提供某種結構。資料將根據資料本身的特徵和元素進行排列，包括需要歸檔資料的稱為<span class="key-term">主鍵</span> <span class="english">(primary key)</span> 的特定特徵。在雲端中，資料庫通常是資料中心的後端儲存，使用者透過瀏覽器利用線上應用程式或 API 進行存取。</p>
+<p>雲端供應商可以提供多種不同類型的資料庫——常見的範例包括傳統的關聯式資料庫、非關聯式 (NoSQL) 資料庫（包括鍵值資料庫）和文件導向資料庫，僅舉幾例。資料庫可以在任何雲端服務模型中實施，但它們最常被配置為與 PaaS 和 SaaS 一起工作。無論您選擇或使用哪種資料庫類型，您都可能需要考慮安全實踐，例如最小化您的資料集以及匿名化或假名化，以確保資料外洩不會讓攻擊者能夠使用這些資料。</p>
+<div class="note">
+    <p>什麼是<span class="key-term">假名化</span> <span class="english">(pseudo-anonymization)</span>？這是一種匿名化，仍然可能允許使用資料庫中也可能存在的其他資訊來識別個人。移除個人的姓名但保留其年齡和地址並不能完全匿名化記錄，但它確實為可能想要識別記錄中人物身份的攻擊者製造了額外的工作。</p>
+</div>
+
+<h3>雲端儲存威脅 <span class="english">(Threats to Cloud Storage)</span></h3>
+<p>由於 CCSP 著眼於三種主要的雲端儲存類型，因此有助於考慮這些類別中的威脅。</p>
+<p>對於像 Amazon Glacier 這樣的<span class="key-term">長期儲存</span> <span class="english">(long-term storage)</span>，威脅包括因憑證盜竊或洩露或權限提升而導致的暴露和惡意存取、因底層服務問題而導致的資料完整性風險，以及因針對保護它的加密的攻擊而導致的資料暴露。它們還可能包括拒絕服務和服務中斷以及拒絕存取資料的攻擊，例如加密惡意軟體式攻擊。</p>
+<p><span class="key-term">暫時性資料</span> <span class="english">(Ephemeral data)</span> 面臨相同的風險，並且還對事件應變和鑑識過程構成風險，因為當這些系統終止時，暫時性系統和儲存設備可能會自動銷毀或移除。由於許多環境根據需要自動擴展，這意味著除非刻意保存，否則鑑識產物可能會丟失。</p>
+<p>最後，<span class="key-term">原始儲存</span> <span class="english">(raw storage)</span> 可以直接在設備上分配。在某些雲端系統中，原始儲存的重新分配已使該區塊儲存的下一個使用者可以獲得資料片段。雖然這在主要雲端供應商的基礎架構中已得到補救，但這種類型的風險是始終在整個雲端基礎架構中加密資料的另一個原因，這樣您的儲存意外暴露就不會導致資料外洩。</p>
+<p>最後，由於雲端服務通常在共享基礎架構上運行，您還需要考慮在您的環境之外運作的<span class="key-term">旁路攻擊</span> <span class="english">(side channel attacks)</span>。攻擊者或內部人員可能可以執行網路流量擷取甚至物理盜竊底層伺服器或媒體，從而獲得資訊。</p>
+
+<div class="note">
+    <p>NIST 特別出版物 (SP) 800-209 提供了關於儲存安全的具體指南，如果您想深入了解在雲端或本地保護儲存，這是一個極好的起點。您可以在 https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-209.pdf 找到它。第 17-23 頁列出了一系列您可能需要考慮的威脅，包括一些我們在此未列出的威脅。</p>
+</div>
+
+<h2>設計與應用儲存安全策略 <span class="english">(Designing and Applying Security Strategies for Storage)</span></h2>
+
+<p>架構和解決方案設計是提供雲端資料安全的重要組成部分。CCSP 考試大綱（候選人資訊公告）特別考慮了與資料安全相關的一些技術和概念：加密和金鑰管理；雜湊；資料模糊化；權杖化；資料外洩防護；以及金鑰、密鑰和憑證管理。</p>
+
+<h3>加密 <span class="english">(Encryption)</span></h3>
+<p>毫不奇怪，雲端運算對加密有著巨大的依賴性以提供資料安全。加密用於保護<span class="key-term">靜態資料</span> <span class="english">(data at rest)</span>、<span class="key-term">傳輸中資料</span> <span class="english">(in transit)</span> 和<span class="key-term">使用中資料</span> <span class="english">(in use)</span>。加密用於在遠端使用者端點和伺服器或服務之間創建安全的通訊連接。它用於雲端客戶的企業環境中以保護他們自己的資料，並由雲端供應商在資料中心內使用，以確保不同的雲端客戶不會意外存取彼此的資料。</p>
+<p>CCSP 考試大綱提到了密碼學的廣泛概念，並特別提到了<span class="key-term">金鑰管理</span> <span class="english">(key management)</span> 作為與雲端密碼學相關的重要主題。</p>
+
+<h4>金鑰與密鑰管理 <span class="english">(Key and Secrets Management)</span></h4>
+<p>加密金鑰和其他密鑰的儲存方式和位置會顯著影響資料的整體風險。以下是一些關於雲端運算金鑰管理的需要記住和考慮的事項：</p>
+<p><span class="key-term">保護級別</span> <span class="english">(Level of Protection)</span> 加密金鑰，即允許進行加密和解密的位元串，必須以與其保護的資料相同或更高的控制級別進行保護。資料的敏感度決定了此保護級別，根據組織的資料安全政策。重要的是要記住，密碼系統的強度僅在金鑰未被洩露（除了作為非對稱加密一部分的公鑰）且使用當前安全的密碼系統時才有效。</p>
+<div class="note">
+    <p>有時資料庫使用<span class="key-term">透明加密</span> <span class="english">(transparent encryption)</span>，其中資料庫的加密金鑰儲存在資料庫本身中。您可以閱讀一個真實世界的範例，說明這如何運作並透過儲存在資料庫中的金鑰保持安全，網址為 https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver16。如果您的威脅模型包括對靜態資料的攻擊（意味著伺服器或備份的洩露），透明加密可以提供保護。</p>
+</div>
+<p><span class="key-term">金鑰恢復</span> <span class="english">(Key Recovery)</span> 對於特定使用者以外的任何人，存取該使用者的金鑰應該是困難的；然而，在某些情況下，組織需要在使用者不合作的情況下獲取使用者的金鑰。這可能是因為使用者被解雇、死亡、忘記密碼或丟失金鑰。您需要有技術和流程來獲取該金鑰以存取該資料。通常，這需要一個涉及多個人的程序，每個人只能存取金鑰的一部分，以及一個底層的金鑰託管系統。金鑰恢復更常用於由系統或服務使用並因此由多人管理的金鑰。</p>
+<p><span class="key-term">金鑰分發</span> <span class="english">(Key Distribution)</span> 為密碼系統頒發金鑰可能很困難且充滿風險。如果金鑰管理過程需要安全連接來啟動金鑰創建程序，您如何在沒有金鑰的情況下建立該安全會話？通常，帶外傳遞金鑰（透過與將要使用金鑰的方式不同的方式，例如在紙上或透過電話而不是透過電子郵件或其他電子方式）是更可取但又麻煩且昂貴的解決方案。此外，金鑰永遠不應以明文形式傳遞。</p>
+<div class="note">
+    <p><span class="key-term">硬體安全模組</span> (<span class="key-term">Hardware Security Module, HSM</span>) 是一種可以安全地創建、儲存和管理加密金鑰的設備，用於伺服器、資料傳輸和日誌檔案。如果實施得當，它比在軟體中保存和儲存金鑰要安全得多。雲端供應商經常提供雲端 HSM 服務，您可以用它來安全地儲存金鑰；但是，您需要像對其雲端實施中的其他服務一樣對 HSM 進行威脅建模。</p>
+</div>
+<p>雲端服務的金鑰分發通常依賴其原生功能。您可能需要在本地創建金鑰並上傳它們，使用 Web 服務並將私鑰保存到安全位置，或使用雲端金鑰管理服務。雲端中安全密碼解決方案的關鍵組成部分是了解所提供的服務並設計一套適當的實踐和政策以確保金鑰得到安全管理。</p>
+<p><span class="key-term">金鑰撤銷</span> <span class="english">(Key Revocation)</span> 在使用者不應再有權存取敏感資料，或金鑰被無意/非法洩露的情況下，組織需要一個流程來暫停該金鑰或該使用者使用它的能力。金鑰撤銷的實施方式各不相同，但概念保持不變：金鑰被標記為已撤銷且不再有效。一些實施是集中式的，而另一些則可能需要更多手動操作，具體取決於金鑰的使用、分發和管理方式。</p>
+<p><span class="key-term">金鑰託管</span> <span class="english">(Key Escrow)</span> 金鑰託管用於以安全方式持有金鑰，以便授權方可以恢復它們。在許多情況下，讓可信第三方在安全環境中持有金鑰副本是非常可取的；這有助於本節中列出的許多其他金鑰管理工作。在本地實施中，Windows 工作站的 BitLocker 金鑰通常被託管，以便組織在需要時可以解密磁碟機。在雲端環境中，類似的託管用途很常見，特別是當事件應變或法律保留可能需要存取系統或資料時。</p>
+<p><span class="key-term">金鑰生命週期</span> <span class="english">(Key Lifetime)</span> 金鑰不應永久有效。事實上，確定金鑰在被替換之前應使用多長時間是安全設計過程的重要組成部分。您可以在 NIST 的金鑰管理指南中閱讀更多關於金鑰生命週期最佳實踐的內容，網址為 https://csrc.nist.gov/projects/key-management/key-management-guidelines。</p>
+<p><span class="key-term">外包金鑰管理</span> <span class="english">(Outsourcing Key Management)</span> 金鑰不應與它們保護的資料一起儲存，我們也不應讓任何沒有授權和知情需要的人輕易地物理存取金鑰；因此，在雲端運算中，最好將金鑰儲存在雲端供應商資料中心以外的地方。一種解決方案是讓雲端客戶保留金鑰，但這需要昂貴且複雜的基礎架構和熟練的人員。這會減少我們從將企業卸載到雲端供應商那裡獲得的部分成本降低好處。另一種選擇是使用雲端存取安全代理商 (CASB)。CASB 是為雲端客戶處理 IAM 和金鑰管理服務的第三方供應商；使用 CASB 的成本應遠低於嘗試在組織內部維護金鑰，並且 CASB 將擁有大多數雲端客戶所不具備的核心競爭力。常用的 CASB 包括 Zscaler、Netskope 和 McAfee 的企業 CASB 工具，但隨著公司的進入和被收購，市場不斷變化。</p>
+
+<div class="box">
+    <p><strong>糟糕，我丟失了雲端的金鑰 (Whoops, I Lost the Keys to the Cloud)</strong></p>
+    <p>雲端中金鑰的一個常見問題是私鑰在公共儲存庫中的無意暴露。惡意行為者和其他人通常會掃描 GitHub 和其他程式碼儲存庫，尋找可能在提交編碼專案時與其他資料一起上傳的私鑰。有了這些金鑰，攻擊者就會嘗試使用它們來存取與之關聯的帳戶或服務。這可能導致數千或數萬美元的服務使用費用，為擁有金鑰的組織造成財務和安全問題。雖然雲端服務供應商可能會在這種情況發生時提供一些選項，並且他們通常自己使用類似的掃描工具來監控這種情況，但從資料外洩中清理可能既耗時又複雜。</p>
+    <p>如果您確實最終陷入這種情況，請記住檢查您通常不使用的位置、服務和其他服務選項。攻擊者通常會在隱蔽的位置啟動服務和系統，希望保留一個立足點並繼續盡可能長時間地使用您的帳戶！</p>
+</div>
+
+<h4>憑證管理 <span class="english">(Certificate Management)</span></h4>
+<p><span class="key-term">憑證</span> <span class="english">(Certificates)</span> 用於識別個人和系統，與金鑰管理非常相似，憑證管理對於雲端解決方案的安全性至關重要。憑證依賴公鑰和私鑰，並且可以自行生成或由<span class="key-term">憑證授權中心</span> (<span class="key-term">Certificate Authority, CA</span>) 生成。</p>
+<p>憑證授權中心通常會提供一個<span class="key-term">憑證儲存庫</span> <span class="english">(certificate repository)</span>，允許儲存和分發憑證，並支援<span class="key-term">憑證撤銷列表</span> (<span class="key-term">Certificate Revocation List, CRL</span>)，允許驗證 CA 頒發的憑證狀態。如果憑證被洩露或過期，它可以被列在 CRL 上，以防止可能依賴它的人信任它。憑證，與資料非常相似，有其生命週期。它們被創建、管理、發現，並可能被撤銷或過期。</p>
+<p>當您考慮您的雲端環境時，您將需要設計您的憑證管理和安全實踐及政策，就像您為加密金鑰規劃一樣。憑證的私鑰必須安全儲存，並且需要了解憑證撤銷流程，以防因資料外洩或其他問題而需要撤銷它們。此外，還必須規劃生命週期、創建和分發流程以及所有權或責任。</p>
+
+<h3>雜湊 <span class="english">(Hashing)</span></h3>
+<p><span class="key-term">雜湊</span> <span class="english">(Hashing)</span> 使用演算法將給定的字元串轉換為另一個值。雜湊函數旨在為任何給定的輸入返回唯一值，並且快速執行，其輸出通常遠小於提供的輸入。這意味著雜湊用於各種目的，包括檢查檔案是否已更改、快速儲存和檢索資料以及各種其他目的。重要的是要注意雜湊不是加密，儘管兩者經常被混淆。雜湊是<span class="key-term">單向函數</span> <span class="english">(one-way functions)</span>，不像常規加密那樣有金鑰。這意味著您無法解密雜湊值。</p>
+
+<div class="note">
+    <p>您可能已經熟悉像彩虹表這樣的工具，它允許您確定給定雜湊的輸入是什麼。這並不是逆轉雜湊演算法。相反，它是對給定雜湊在資料庫中的快速查找，該資料庫與創建它的輸入相匹配。這之所以可能，只是因為作為輸入可能的密碼集相對較小。任何合理大小檔案的雜湊幾乎不可能生成彩虹表，因為可能的不同輸入數量太多。</p>
+</div>
+
+<h3>遮罩、模糊化、匿名化與權杖化 <span class="english">(Masking, Obfuscation, Anonymization, and Tokenization)</span></h3>
+<p>在許多情況下，使用實際資料而不是替代的模糊化版本可能會產生安全風險。術語<span class="key-term">模糊化</span> <span class="english">(obfuscation)</span> 指的是應用這些技術中的任何一種，以使資料意義不大、細節較少或可讀性較差，從而保護資料或資料主體。這就是像<span class="key-term">遮罩</span> <span class="english">(masking)</span>、<span class="key-term">匿名化</span> <span class="english">(anonymization)</span> 和<span class="key-term">權杖化</span> <span class="english">(tokenization)</span> 這樣的模糊化實踐可能有用的地方，以及其他實踐。</p>
+<p><span class="key-term">隨機化</span> <span class="english">(Randomization)</span> 用隨機資訊替換資料或部分資料。當您想要移除真實資料但保持其屬性（例如字串長度、其字元集（無論是字母還是數字、是否有特殊字元、是否有大小寫等））時，隨機化很有用，以便測試將使用等效資料進行，確保問題仍然會被發現。</p>
+<p><span class="key-term">匿名化</span> <span class="english">(Anonymization)</span> 匿名化需要移除可識別的資料，例如姓名、地址、電話號碼以及其他可以識別個人的元素。在某些情況下，您可以使用像假名化這樣的技術，它會移除一些資料，但留下可能用於去匿名化資料的元素，例如地址或郵遞區號和年齡。</p>
+<p><span class="key-term">雜湊</span> <span class="english">(Hashing)</span> 雜湊涉及使用單向密碼函數來創建原始資料的摘要。使用雜湊演算法來模糊資料的好處是確保其不可恢復，同時保留唯一引用資料的能力。這意味著雜湊有時用於遮罩或匿名化資料，當資料內容本身對於某個欄位不重要時。</p>
+<p><span class="key-term">洗牌</span> <span class="english">(Shuffling)</span> 使用來自同一資料集中的不同條目來表示資料。這顯然有使用實際生產資料的缺點，但有助於創建更逼真的測試資料。洗牌的使用者欄位可能具有來自現有資料集的隨機名字、姓氏、地址和其他資料。</p>
+<p><span class="key-term">遮罩</span> <span class="english">(Masking)</span> 用無用字元隱藏資料；例如，僅顯示社會安全號碼的後四位數字：XXX-XX-1234。這可以用於客戶服務代表或客戶獲得對帳戶的授權存取權限，但您希望模糊部分資料以提供額外安全性。</p>
+<p><span class="key-term">空值</span> <span class="english">(Nulls)</span> 在顯示之前從顯示中刪除原始資料，或顯示空集。顯然，使用此方法，資料集的部分功能將顯著降低。</p>
+<p><span class="key-term">權杖化</span> <span class="english">(Tokenization)</span> 權杖化涉及用稱為權杖的替換值替換敏感資料。雜湊有時用於創建權杖，儘管它們很少是資料的直接雜湊，以避免針對使用生成資料集的雜湊的攻擊。</p>
+<p>模糊化可以在靜態或動態配置中完成。使用靜態技術，會從原始資料創建一個新的（代表性的）資料集副本，並且只使用模糊化的副本。在動態方法中，資料在被存取時被模糊化。</p>
+<p>重要的是要記住，即使使用了這些技術之一，也可能從其他看似普通的元素中獲取敏感資訊。例如，即使您在給定的資料集中模糊了某人的姓名，如果您允許其他資訊，例如年齡、地點和雇主，則可能無需直接存取該欄位即可確定姓名。</p>
+<p>移除這些洩漏性的非特定標識符稱為<span class="key-term">匿名化</span> <span class="english">(anonymization)</span> 或有時稱為<span class="key-term">去識別化</span> <span class="english">(de-identification)</span>。匿名化可能很困難，因為敏感資料必須在創建時被識別並標記為敏感；如果使用者將資料輸入開放欄位（自由輸入），確定敏感度可能不簡單。此外，指示敏感度的標記會創建可能對攻擊者有價值的中繼資料。</p>
+<p>權杖化是擁有兩個不同資料庫的做法：一個包含實時、實際的敏感資料，另一個包含映射到該資料每個片段的非代表性權杖。在此方法中，調用資料的使用者或程式由權杖伺服器進行身份驗證，權杖伺服器從權杖資料庫中提取適當的權杖，然後調用映射到該權杖的生產資料的實際資料庫中的實際資料，最後將其呈現給使用者或程式。權杖化為流程增加了顯著的開銷，但創建了額外的安全層級，並且可能減輕組織對加密的要求或依賴（例如，PCI DSS 允許使用權杖化代替對敏感持卡人資料的加密）。為了使權杖化正常運作，權杖伺服器必須具有強大的身份驗證協定。要更清楚地了解這是如何運作的，請查看以下步驟：</p>
+<ol>
+    <li>使用者 A 創建一條資料。</li>
+    <li>資料透過 DLP/探索工具運行，以幫助確定該資料是否根據組織的規則是敏感的（在此範例中，資料是 PII）。如果資料被視為敏感，則將其推送到權杖化資料庫。</li>
+    <li>資料被權杖化；原始資料被發送到 PII 伺服器，而代表該資料的權杖則儲存在權杖化資料庫中。該權杖代表原始資料作為一種邏輯位址。</li>
+    <li>使用者 B 請求該資料。該使用者必須經過嚴格的身份驗證，以便系統可以確定是否應授予該使用者存取權限。</li>
+    <li>如果使用者 B 正確通過身份驗證，則請求將被發送到權杖化資料庫。</li>
+    <li>權杖化資料庫查找請求資料的權杖，然後將該權杖呈現給 PII 資料庫。原始資料未儲存在權杖化資料庫中。</li>
+    <li>PII 資料庫根據權杖返回原始資料。</li>
+    <li>原始資料被傳遞給使用者 B。</li>
+</ol>
+<p>包括以下內容的情況是使用這些能力的常見原因：</p>
+<p><span class="key-term">測試環境</span> <span class="english">(Test Environments)</span> 新軟體在部署到生產環境之前應在沙盒環境中進行測試。執行此類測試時，切勿在沙盒內使用實際的生產資料。然而，為了確定系統的實際功能和效能，有必要使用與生產資料的特徵和屬性非常接近的資料。</p>
+<p><span class="key-term">強制執行最低權限</span> <span class="english">(Enforcing Least Privilege)</span> 我們知道最低權限的概念需要限制使用者執行其職責所必需的權限和存取權限。在某些情況下，這可能意味著允許使用者存取資料集的元素而不揭示其全部內容，或在有限的時間內。例如，客戶服務代表可能需要存取客戶的帳戶資訊並顯示包含該資訊的螢幕，但該資料可能是客戶總帳戶詳細資訊的刪節版本（例如不顯示客戶的完整信用卡號）。</p>
+<p><span class="key-term">安全遠端存取</span> <span class="english">(Secure Remote Access)</span> 當客戶登入 Web 服務時，客戶的帳戶可能有一些資料被刪節，就像在最低權限範例中一樣。螢幕可能顯示客戶的一些偏好，但您可能不希望顯示客戶帳戶資料的某些元素，例如付款或個人資訊，以避免像會話劫持、憑證被盜或肩窺這樣的風險。</p>
+
+<h3>資料外洩防護 <span class="english">(Data Loss Prevention)</span></h3>
+<p><span class="key-term">資料外洩防護</span> (<span class="key-term">Data Loss Prevention, DLP</span>) 工具，有時稱為出口監控工具，用於防止資料離開組織控制，特別是在資料生命週期的共享階段。它們可以用於本地、移動設備和雲端環境中，使其成為靈活的資料保護工具。DLP 解決方案通常有幾個主要目標：</p>
+<p><span class="key-term">安全控制</span> <span class="english">(Security Control)</span> DLP 可以用作分層防禦策略中的另一個控制，旨在減輕無意釋放或惡意揭露的可能性。</p>
+<p><span class="key-term">政策執行</span> <span class="english">(Policy Enforcement)</span> 當使用者試圖執行違反組織政策的操作（無論是意外還是故意）時，DLP 可以向使用者發出警報。加密離開時的資料並要求解密和身份驗證才能存取是政策執行的常見範例。</p>
+<p><span class="key-term">增強監控</span> <span class="english">(Enhanced Monitoring)</span> DLP 工具可以設置為向組織的監控套件提供另一個日誌流。</p>
+<p><span class="key-term">法規遵循</span> <span class="english">(Regulatory Compliance)</span> DLP 解決方案可以識別特定類型和種類的資料，並相應地控制該資料的傳播，以便更好地遵守監管要求。</p>
+<div class="note">
+    <p>DLP 解決方案通常可以連結到 IRM 工具，從而為智慧財產權控制提供額外的功能。</p>
+</div>
+<p>DLP 工具通常使用標記、模式匹配和類似功能來識別受控資料。然後，它們監控涉及與其規則匹配的資料或檔案的活動，並執行組織設定的政策。</p>
+<p>識別任務可以是自動的、手動的或兩者的組合。該工具可能會搜索組織的所有儲存卷及其生產環境，以根據已知模板匹配資料；例如，DLP 可能會搜索長度為九個字元的數字字串，這些字串使用基於規則的正確數字系列來檢測社會安全號碼。DLP 也可能使用資料擁有者在資料生命週期的創建階段分配的分類和分級標記、標籤和中繼資料。或者，DLP 可能使用關鍵字搜索來查找組織已知對其目的敏感的特定資訊。</p>
+<p>監控任務可以在網路出口點（在傳統系統中是<span class="key-term">非軍事區</span> (<span class="key-term">demilitarized zone, DMZ</span>)，但在雲端中這將是在所有面向公眾的設備上）或在生產環境中處理資料的所有主機上實施。在後一種情況下，DLP 解決方案通常包括安裝在使用者工作站/端點設備上的本地代理。</p>
+<p>執行機制可以採取多種形式。DLP 可能設置為在使用者執行違反政策的活動（例如，發送包含組織認為敏感資料的電子郵件附件）時向管理層或安全人員發出警報。如果我們試圖防止的是更意外的洩露（而不是惡意活動），DLP 可能只是警告使用者他們正在發送的電子郵件包含敏感資料，並要求他們確認他們確實打算發送。或者，DLP 可能更嚴厲一些，阻止使用者發送附件，將使用者鎖定在帳戶之外，並通知管理層和安全部門。組織可以根據自己的需求調整 DLP 操作。</p>
+<p>在雲端中實施 DLP 會帶來相關的困難和成本。一方面，雲端供應商可能不允許雲端客戶充分存取資料中心環境（無論是在管理權限方面還是在安裝所需系統以供實施方面），從而使成功的配置和使用變得複雜。DLP 使用還會產生顯著的處理開銷；所有這些監控和功能都伴隨著處理成本。</p>
+
+<h3>日誌擷取與分析 <span class="english">(Log Capture and Analysis)</span></h3>
+<p>安全營運嚴重依賴於擷取日誌和分析它們的能力。基礎架構、應用程式和服務，無論是在雲端還是在本地，都會在事件發生時以及作為其持續功能的一部分生成日誌資料。這些日誌可以為日常監控以及事件應變和與安全相關的監控活動提供關鍵資料。</p>
+<p>許多雲端服務提供日誌創建、監控和分析工具，但組織也可能希望使用自己的服務作為擷取或分析過程的一部分。當您考慮日誌擷取和分析時，您將需要花時間了解特定供應商或您組織正在使用的服務所提供的能力、成本和限制。</p>
+<div class="note">
+    <p>Amazon 的監控服務稱為 CloudWatch，它為 Elastic Compute Cloud (EC2) 實例和其他服務提供廣泛的監控。您可以在 https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html 閱讀更多關於其功能的資訊。</p>
+    <p>Azure 的等效服務稱為 Azure Monitor，與 CloudWatch 非常相似，它提供分析、警報和視覺化能力。您可以在 https://docs.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs 閱讀更多關於 Monitor 的資訊。</p>
+    <p>Google 的監控服務是 GCP operations suite，詳細資訊可在 https://cloud.google.com/products/operations 找到。</p>
+</div>
+
+<h4>事件來源與屬性 <span class="english">(Event Sources and Attributes)</span></h4>
+<p>了解您的日誌條目來自何處以及日誌中的資訊意味著什麼，對於確保您的日誌有用至關重要。CCSP 考試大綱（候選人資訊公告）特別提到了<span class="key-term">身份</span> <span class="english">(identity)</span>（系統、使用者或服務的身份）、<span class="key-term">網際網路協定 (IP) 位址</span> <span class="english">(Internet Protocol (IP) address)</span>（如果與日誌相關，應包括來源和目的地）以及事件和 IP 位址的<span class="key-term">地理位置</span> <span class="english">(geolocation)</span>，但您也應將<span class="key-term">時間戳</span> <span class="english">(time stamps)</span> 視為您擷取的任何日誌的基本元素之一。</p>
+<p>事件通常還包含有關發生了什麼的資訊，無論是服務日誌條目、事件 ID，還是僅僅是已處理的查詢或請求。安全分析師和系統管理員需要知道這些是什麼，哪些需要被主動監控，以及如何根據該資訊識別意外或惡意事件。</p>
+<p>雲端資料儲存特定事件有其特定的日誌條目、事件 ID 以及像權限使用和安全群組這樣的相關詳細資訊。當您設計雲端資料安全模型和架構時，您將需要識別您要記錄的內容、哪些事件最重要、哪些應該被警報、日誌將在哪裡儲存和分析、您將保留日誌多長時間以及您將如何保護它們。這可能看起來很困難，但雲端運算日誌和事件應使用與您現有記錄和分析基礎架構相似（如果不是相同）的設計。</p>
+
+<div class="note">
+    <p>雲端供應商通常擁有記錄和分析的最佳實踐。Amazon 在 https://aws.amazon.com/well-architected-tool 提供了其 Well-Architected Tool，這可以幫助您進行設計工作。Azure 的等效工具稱為 Well-Architected Framework，可以在 https://docs.microsoft.com/en-us/azure/architecture/framework 找到。Google 的 Cloud Architecture Framework 可以在 https://cloud.google.com/architecture/framework 找到。</p>
+</div>
+
+<h4>日誌管理 <span class="english">(Log Management)</span></h4>
+<p>組織在正常營運期間往往會生成大量日誌事件，從大量附帶資料中篩選出重要的日誌可能是一個真正的挑戰。日誌的龐大體量還會佔用大量儲存空間並可能消耗其他資源。所有這些都伴隨著成本，特別是在按使用量計費的雲端環境中。</p>
+<p>這使得日誌管理成為您設計和營運的關鍵部分。確定您將保留哪些日誌、保留多長時間以及您將如何保護它們以使攻擊者無法存取或修改它們，必須是您初始配置和持續架構維護的一部分。</p>
+<p>幸運的是，像安全資訊和事件管理 (SIEM) 系統這樣的工具可以提供幫助。</p>
+
+<h4>安全資訊與事件管理 <span class="english">(Security Information and Event Management)</span></h4>
+<p>為了更好地收集、管理、分析和顯示日誌資料，一組專門為此目的創建的工具已經變得流行起來。它們有各種術語，因為沒有公認的標準。命名法包括安全資訊管理、安全事件管理、安全資訊和事件管理，以及這些的排列組合（包括縮寫，如 SIM、SEM 和 SIEM，發音方式各不相同）。CCSP 考試特別提到了 SIEM，所以我們將使用這個術語。</p>
+<p>SIEM 實施包括以下目標：</p>
+<p><span class="key-term">集中收集日誌資料</span> <span class="english">(Centralize Collection of Log Data)</span> 因為日誌可以來自如此多的來源（工作站、作業系統、伺服器、網路設備、物聯網設備和服務，僅舉幾例），所以將它們全部聚合到一個地方進行額外處理可能很有用。至少，這簡化了將負責監控環境的管理員和分析師的活動。然而，這確實會產生額外的風險：將所有日誌資料集中在一個位置使得該位置成為攻擊者的有吸引力的目標，因此任何 SIEM 實施都需要額外的安全控制層。</p>
+<p><span class="key-term">增強分析能力</span> <span class="english">(Enhanced Analysis Capabilities)</span> 日誌分析通常是一項重複性的任務，需要特殊的技能組合和經驗，並且不適合全職任務（一個整天盯著相同資料集和資料饋送的分析師，日復一日，不太可能注意到事件和問題，而一個不經常看到環境資料的分析師則不太熟悉基線，因此無法識別異常行為）。您可以透過自動化部分流程來彌補日誌分析的部分問題。SIEM 工具提供了這種能力，此外還有其他功能，例如基於大型資料集的進階趨勢檢測。然而，需要記住的一件事是，大多數自動化工具可能無法識別特定類型的攻擊——「低慢型」持續性威脅，這種威脅可能發展數週或數月，並且沒有顯著的指標，因此可能與背景攻擊噪音混淆而被自動化分析忽略。</p>
+<p><span class="key-term">儀表板</span> <span class="english">(Dashboarding)</span> SIEM 通常提供更直觀、更簡單的圖形化輸出顯示，讓員工能夠快速掌握環境中的情況。透過儀表板進行視覺化可以很容易地看到何時出現問題。</p>
+<p><span class="key-term">自動化回應</span> <span class="english">(Automated Response)</span> 一些 SIEM 包括自動化警報和回應能力，可以根據您的政策和環境進行程式設計。</p>
+
+<div class="warning">
+    <p>就像記錄本身一樣，SIEM 只有在有人實際查看其產出時才有用；僅僅擁有執行安全功能的花哨盒子是不錯的，但除非它提供的資訊被知道自己在看什麼的人所利用，否則 SIEM 可能只是受損環境中的另一個創可貼，並不會真正為組織帶來任何好處。</p>
+</div>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>理解與雲端資料生命週期每個階段相關的風險與安全控制 (Understand the risks and security controls associated with each phase of the cloud data lifecycle)。</strong> 解釋每個階段資料面臨的風險以及您將選擇哪些控制措施來應對這些風險。</p>
+<p><strong>理解各種雲端資料儲存架構 (Understand the various cloud data storage architectures)。</strong> 能夠區分長期、暫時性和原始儲存，以及基於檔案的儲存、區塊儲存和資料庫。</p>
+<p><strong>理解加密如何在雲端中實施及其原因 (Understand how and why encryption is implemented in the cloud)。</strong> 理解密碼學和加密在保護雲端資料中的作用。了解金鑰管理的要素、為什麼必須安全保存金鑰，以及金鑰洩露或暴露的風險。應用像硬體安全模組、金鑰託管和憑證撤銷列表這樣的金鑰管理和憑證管理技術。</p>
+<p><strong>熟悉模糊化資料的實踐 (Be familiar with the practice of obscuring data)。</strong> 了解資料遮罩、隱藏、匿名化和權杖化的不同技術。解釋雜湊及其在資料模糊化中的作用。</p>
+<p><strong>熟悉記錄、儲存和分析資料事件以及 SIEM 技術的使用 (Be familiar with logging, storage, and analysis of data events and the use of SIEM technology)。</strong> 理解 SIEM 實施的目的以及使用這些解決方案所帶來的挑戰。解釋在雲端環境中記錄的挑戰和重要性。描述像身份、IP 位址和事件地理位置這樣的關鍵資料元素。</p>
+<p><strong>理解出口監控的重要性 (Understand the importance of egress monitoring)。</strong> 熟悉資料外洩防護解決方案的目標；它們如何實施；如何使用標籤、模式匹配和標籤來識別資料；以及雲端客戶在嘗試在雲端內部實施 DLP 時可能面臨的挑戰。</p>
+
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+      <p>Naomi 正在為她的組織制定一份包含資料模糊化選項的清單。下列何者不是資料模糊化技術的一種類型？</p>
+      <ol type="A">
+        <li>權杖化 (Tokenization)</li>
+        <li>資料隱藏 (Data hiding)</li>
+        <li>匿名化 (Anonymization)</li>
+        <li>遮罩 (Masking)</li>
+      </ol>
+      <p><strong>答案：B. 資料隱藏 (Data hiding) 不是資料模糊化 (data obfuscation) 技術；權杖化、遮罩和匿名化都是常見的模糊化方法。</strong></p>
+    </li>
+    <li>
+      <p>SIEM 解決方案實施的目標包括下列所有內容，除了 _______________。</p>
+      <ol type="A">
+        <li>集中化日誌流 (Centralization of log streams)</li>
+        <li>趨勢分析 (Trend analysis)</li>
+        <li>儀表板 (Dashboarding)</li>
+        <li>效能提升 (Performance enhancement)</li>
+      </ol>
+      <p><strong>答案：D. SIEM 並不旨在提供效能提升 (performance enhancement)；相反，它可能因額外日誌處理而增加系統負載。</strong></p>
+    </li>
+    <li>
+      <p>Wei 的組織使用 Lambda 函數作為其 Amazon 託管環境內部無伺服器應用程式的一部分。Wei 應該將與實例相關聯的儲存視為哪種類型？</p>
+      <ol type="A">
+        <li>長期 (Long-term)</li>
+        <li>中期 (Medium term)</li>
+        <li>暫時性 (Ephemeral)</li>
+        <li>即時 (Instantaneous)</li>
+      </ol>
+      <p><strong>答案：C. 暫時性 (Ephemeral) 儲存會隨 Lambda 執行個體終止而消失，是無伺服器環境中常見的儲存類型。</strong></p>
+    </li>
+    <li>
+      <p>Selah 想要安全地儲存她組織的加密金鑰。她應該向她的雲端服務供應商詢問哪種解決方案？</p>
+      <ol type="A">
+        <li>PKI</li>
+        <li>DLP</li>
+        <li>雲端 HSM (A cloud HSM)</li>
+        <li>CRL</li>
+      </ol>
+      <p><strong>答案：C. 雲端 HSM (cloud HSM) 用於在硬體隔離環境中創建、儲存和管理加密金鑰，提供最高安全性。</strong></p>
+    </li>
+    <li>
+      <p>Jim 的組織希望確保在其 Web 伺服器遭受攻擊時擁有正確的可用資訊。下列哪個資料元素不常用，因此不應期望被記錄？</p>
+      <ol type="A">
+        <li>執行的可執行檔版本 (The version of the executable run)</li>
+        <li>服務名稱 (The service name)</li>
+        <li>流量的來源 IP 位址 (The source IP address of the traffic)</li>
+        <li>流量的目的地 IP 位址 (The destination IP address of the traffic)</li>
+      </ol>
+      <p><strong>答案：A. 執行的可執行檔版本 (The version of the executable) 通常不會記錄；其他選項則是標準的日誌資料。</strong></p>
+    </li>
+    <li>
+      <p>Susan 希望確保包含信用卡號的檔案不會儲存在她組織的基於雲端的檔案儲存中。如果她部署 DLP 系統，她應該使用哪種方法來識別包含信用卡號的檔案，以獲得找到它們的最佳機會，即使她可能會遇到一些誤報？</p>
+      <ol type="A">
+        <li>在創建時手動標記包含信用卡號的檔案。</li>
+        <li>要求使用者使用特定的檔案命名約定來保存包含信用卡號的檔案。</li>
+        <li>基於模式匹配或演算法掃描信用卡號。</li>
+        <li>在銷毀時標記包含信用卡號的檔案。</li>
+      </ol>
+      <p><strong>答案：C. 基於模式匹配或演算法掃描能高效、自動地識別信用卡號，儘管可能產生誤報，但能最大程度檢出。</strong></p>
+    </li>
+    <li>
+      <p>Rhonda 正在概述她的雲端儲存環境面臨的威脅。下列何者不是對雲端儲存的常見威脅？</p>
+      <ol type="A">
+        <li>憑證盜竊或洩露 (Credential theft or compromise)</li>
+        <li>感染惡意軟體或勒索軟體 (Infection with malware or ransomware)</li>
+        <li>權限重用 (Privilege reuse)</li>
+        <li>人為錯誤 (Human error)</li>
+      </ol>
+      <p><strong>答案：C. 權限重用 (Privilege reuse) 不是典型威脅；憑證盜用、惡意軟體和人為錯誤都是公認的雲存威脅。</strong></p>
+    </li>
+    <li>
+      <p>Ben 想為他組織的資料實施權杖化。他需要什麼才能實施它？</p>
+      <ol type="A">
+        <li>身份驗證因素 (Authentication factors)</li>
+        <li>資料庫 (Databases)</li>
+        <li>加密金鑰 (Encryption keys)</li>
+        <li>人員 (Personnel)</li>
+      </ol>
+      <p><strong>答案：B. 權杖化需要一個或多個資料庫：一個儲存原始資料，另一個儲存令牌與原始資料的映射。</strong></p>
+    </li>
+    <li>
+      <p>Yasmine 的組織已將資料遮罩確定為關鍵的安全控制。它將提供下列哪些功能？</p>
+      <ol type="A">
+        <li>安全遠端存取 (Secure remote access)</li>
+        <li>強制執行最低權限 (Enforcing least privilege)</li>
+        <li>在沙盒環境中測試資料 (Testing data in sandboxed environments)</li>
+        <li>特權使用者的身份驗證 (Authentication of privileged users)</li>
+      </ol>
+      <p><strong>答案：C. 遮罩 (Masking) 允許在測試或開發的沙盒環境中使用真實結構但屏蔽敏感值的資料。</strong></p>
+    </li>
+    <li>
+      <p>Megan 希望改進她組織的資料外洩防護 (DLP) 工具提供的控制。哪種額外的工具可以與她的 DLP 結合使用以最有效地增強資料控制？</p>
+      <ol type="A">
+        <li>IRM</li>
+        <li>SIEM</li>
+        <li>Kerberos</li>
+        <li>Hypervisors</li>
+      </ol>
+      <p><strong>答案：A. IRM (Information Rights Management) 可與 DLP 結合，對文件施加持續控制，即使外洩也能保護。</strong></p>
+    </li>
+    <li>
+      <p>雲端資料生命週期的哪個階段涉及資料標籤化？</p>
+      <ol type="A">
+        <li>創建 (Create)</li>
+        <li>儲存 (Store)</li>
+        <li>使用 (Use)</li>
+        <li>封存 (Archive)</li>
+      </ol>
+      <p><strong>答案：A. 在資料創建 (Create) 階段即進行標籤化，以便後續階段遵循標籤規則管理。</strong></p>
+    </li>
+    <li>
+      <p>Charles 希望確保他的雲端檔案系統中的檔案未被更改。他可以使用哪種技術來比較檔案以確定是否已進行更改？</p>
+      <ol type="A">
+        <li>模糊化 (Obfuscation)</li>
+        <li>遮罩 (Masking)</li>
+        <li>權杖化 (Tokenization)</li>
+        <li>雜湊 (Hashing)</li>
+      </ol>
+      <p><strong>答案：D. 雜湊 (Hashing) 可產生文件摘要，比較前後摘要以驗證完整性。</strong></p>
+    </li>
+    <li>
+      <p>Liam 想要儲存用於為其組織生成憑證的私鑰。他應該對這些金鑰應用什麼安全級別？</p>
+      <ol type="A">
+        <li>可能的最高安全級別 (The highest level of security possible)</li>
+        <li>與憑證保護的資料相同或更低 (The same or lower than the data the certificates protect)</li>
+        <li>與憑證保護的資料相同或更高 (The same or greater than the data that the certificates protect)</li>
+        <li>私鑰可以無問題地共享 (Private keys can be shared without issues)</li>
+      </ol>
+      <p><strong>答案：C. 私鑰應具有與其所保護資料相同或更高的安全級別，以防止未授權存取。</strong></p>
+    </li>
+    <li>
+      <p>金鑰管理的最佳實踐包括下列所有內容，除了 _______________。</p>
+      <ol type="A">
+        <li>擁有金鑰恢復流程 (Having key recovery processes)</li>
+        <li>維護金鑰安全 (Maintaining key security)</li>
+        <li>帶外傳遞金鑰 (Passing keys out of band)</li>
+        <li>確保多重要素驗證 (Ensuring multifactor authentication)</li>
+      </ol>
+      <p><strong>答案：D. 多重要素驗證 (MFA) 雖然是良好控制，但並非金鑰管理的核心實踐；其他三項是公認最佳做法。</strong></p>
+    </li>
+    <li>
+      <p>Valerie 希望能夠在不使用實際值的情況下引用資料庫中包含的資料。她應該選擇哪種模糊化技術？</p>
+      <ol type="A">
+        <li>遮罩 (Masking)</li>
+        <li>權杖化 (Tokenization)</li>
+        <li>匿名化 (Anonymization)</li>
+        <li>隨機化 (Randomization)</li>
+      </ol>
+      <p><strong>答案：B. 權杖化 (Tokenization) 允許引用令牌以維持關聯，而不暴露原始敏感值。</strong></p>
+    </li>
+    <li>
+      <p>Samuel 想檢查檔案是從哪個國家/地區存取的。鑑於日誌條目中通常可用的資訊，他可以使用哪些資訊來盡可能準確地進行猜測？</p>
+      <ol type="A">
+        <li>使用者名稱 (The username)</li>
+        <li>請求的來源 IP 位址 (The source IP address of the request)</li>
+        <li>請求的目的地 IP 位址 (The destination IP address of the request)</li>
+        <li>主機名稱 (The hostname)</li>
+      </ol>
+      <p><strong>答案：B. 請求的來源 IP 位址 (source IP) 結合 GeoIP 服務可提供最佳地理位置猜測。</strong></p>
+    </li>
+    <li>
+      <p>資料生命週期階段的正確順序是什麼？</p>
+      <ol type="A">
+        <li>創建、儲存、使用、封存、共享、銷毀 (Create, Store, Use, Archive, Share, Destroy)</li>
+        <li>創建、儲存、使用、共享、封存、銷毀 (Create, Store, Use, Share, Archive, Destroy)</li>
+        <li>創建、使用、儲存、共享、封存、銷毀 (Create, Use, Store, Share, Archive, Destroy)</li>
+        <li>創建、封存、儲存、共享、使用、銷毀 (Create, Archive, Store, Share, Use, Destroy)</li>
+      </ol>
+      <p><strong>答案：B. 正確順序為創建、儲存、使用、共享、封存、銷毀。</strong></p>
+    </li>
+    <li>
+      <p>Stanislaw 想使用日誌資訊來建立資料事件的可究責性。下列哪個資料元素對他的目的最有用？</p>
+      <ol type="A">
+        <li>時間戳 (Time stamps)</li>
+        <li>主機 IP 位址 (Host IP addresses)</li>
+        <li>使用者 ID (User IDs)</li>
+        <li>憑證 ID (Certificate IDs)</li>
+      </ol>
+      <p><strong>答案：C. 使用者 ID (User IDs) 能直接將行為歸屬到具體帳戶，可提供最強的可究責性。</strong></p>
+    </li>
+    <li>
+      <p>Nina 用星號替換了儲存在資料庫中的信用卡號（除了後四位數字）。她使用了哪種資料模糊化技術？</p>
+      <ol type="A">
+        <li>遮罩 (Masking)</li>
+        <li>隨機化 (Randomization)</li>
+        <li>權杖化 (Tokenization)</li>
+        <li>匿名化 (Anonymization)</li>
+      </ol>
+      <p><strong>答案：A. 遮罩 (Masking) 用固定字元（如星號）替換敏感數據中的部分值，只保留後幾位。</strong></p>
+    </li>
+    <li>
+      <p>Greg 已為其公司在 Azure 中運行的全球 Web 服務實施了記錄。當他啟用所有 Web 請求的記錄時，Greg 應該解決什麼問題？</p>
+      <ol type="A">
+        <li>資料生命週期規劃 (Data lifecycle planning)</li>
+        <li>密鑰管理 (Secrets management)</li>
+        <li>日誌量 (Log volume)</li>
+        <li>日誌事件的地理位置 (Geolocation of log events)</li>
+      </ol>
+      <p><strong>答案：C. 啟用全量請求日誌會產生大量資料，因此首先應考量日誌量 (log volume) 及其儲存、分析和管理策略。</strong></p>
+    </li>
+  </ol>
+  
+
+</body>
+</html>

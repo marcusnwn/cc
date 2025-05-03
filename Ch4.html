@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第四章：雲端安全</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .exam-tip { border-left: 5px solid #f0ad4e; padding: 10px; margin: 15px 0; background-color: #fefbed; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第四章：雲端安全 <span class="english">(Security in the Cloud)</span></h1>
+
+<p>在本章中，我們將討論雲端運算中涉及的各種權利和責任，這些權利和責任應如何在雲端供應商和客戶之間分配，每個雲端平台和服務所帶來的特定風險，以及在雲端中使用的業務連續性/災難復原 (BC/DR) 策略。</p>
+
+<h2>共享雲端平台風險與責任 <span class="english">(Shared Cloud Platform Risks and Responsibilities)</span></h2>
+
+<p>因為雲端客戶和供應商都將處理至少部分屬於客戶的資料，他們將分擔與該資料相關的責任和風險。簡而言之，這些風險和責任將在雙方簽訂的服務合約中明文規定。然而，該合約將是複雜的審議和談判過程的結果。</p>
+<p>儘管風險和責任將在雲端供應商和客戶之間共享，但對於未經授權和非法資料揭露的最終法律責任仍然在於作為<span class="key-term">資料擁有者</span> <span class="english">(data owner)</span> 的客戶。根據合約條款，雲端供應商可能全部或部分承擔財務責任，但法律責任是客戶的。這個概念在本書中重複出現，因為它在 CCSP 通用知識體系 (Common Body of Knowledge, CBK) 中也重複出現。</p>
+<p>舉例說明這意味著什麼以及它可能如何影響客戶，假設由於雲端供應商方面的某些失敗而導致屬於客戶的<span class="key-term">個人可識別資訊</span> (<span class="key-term">Personally Identifiable Information, PII</span>) 發生未經授權的揭露。為了便於討論，我們還假設合約規定供應商對由此失敗造成的損害負有財務責任。</p>
+<p>根據資料外洩發生的司法管轄區以及 PII 主體的國籍或居住地，法規可能規定雲端客戶應向政府或主體或兩者支付特定的金錢賠償。客戶最終可能能夠從供應商那裡追回這些損害賠償，但政府不會向供應商尋求賠償；政府將向客戶尋求損害賠償。政府將向客戶而不是供應商發出禁令和命令。此外，根據司法管轄區和資料外洩本身的情況，可能面臨監禁的是客戶的高階主管，而不是供應商。</p>
+<p>此外，即使客戶受到供應商承擔財務責任的保護，法律後果也不是客戶面臨的唯一負面影響。客戶很可能會受到負面宣傳、客戶群失去信心、可能導致市值下降和公司價值下跌以及保險費增加的不利影響。因此，客戶必須認識到，損害賠償和責任分配中的現金僅是風險的一個方面。</p>
+<p>至關重要的是要理解，客戶對其擁有的資料的最終法律責任始終存在，即使供應商的失敗是由於疏忽或惡意造成的。這是一個非常重大的風險負擔，特別是因為它遠高於我們通常在安全專業領域面臨的標準。</p>
+<p>也就是說，供應商和客戶仍然必須就合約中的具體責任和義務達成一致。在某種程度上，這將取決於所討論服務的性質以及客戶購買的服務和模型。</p>
+
+<div class="box">
+    <p><strong>雲端客戶、供應商與類似術語 (Cloud Customers, Providers, and Similar Terms)</strong></p>
+    <p>在本章中，我們特別討論<span class="key-term">雲端客戶</span> <span class="english">(cloud customer)</span>（雇用雲端供應商處理其資料的公司、個人或其他實體）和<span class="key-term">雲端供應商</span> <span class="english">(cloud provider)</span>（被雇用提供有助於管理雲端客戶資料的服務、平台和/或應用程式的公司）。在現實世界中，您可能還會看到諸如<span class="key-term">資料客戶</span> <span class="english">(data customer)</span>、<span class="key-term">資料擁有者</span> <span class="english">(data owner)</span>、<span class="key-term">資料控管者</span> <span class="english">(data controller)</span>、<span class="key-term">資料提供者</span> <span class="english">(data provider)</span>、<span class="key-term">資料保管人</span> <span class="english">(data custodian)</span> 和<span class="key-term">資料處理者</span> <span class="english">(data processor)</span> 等術語。這些術語都是試圖描述誰擁有資料以及誰處理資料，這通常可以篩選為雲端客戶和雲端供應商，這也是我們在討論中將相當一致使用的術語。</p>
+</div>
+
+<p>因此，客戶將尋求對其資料的最大控制權，以及其可以獲得的所有管理權力和對資料中心營運的洞察力。客戶會希望強制執行政策、獲取記錄資料，並稽核資料中心的效能和安全性。</p>
+<p>供應商將試圖盡可能地限制對資訊的存取。供應商希望避免揭露任何可能被用於惡意目的的資訊，包括用於保護資料中心的<span class="key-term">安全控制</span> <span class="english">(security controls)</span> 列表、程序以及即時監控設備和資料。在某些情況下，供應商甚至可能不希望揭露資料中心的物理位置，以保護其免受物理攻擊和保護其專有智慧財產權。</p>
+<p>這在談判中產生了一種對抗性的動態。雙方都必須清楚地意識到他們尋求的結果以及獲得這些結果的最佳方式。在許多情況下，供應商在這方面具有優勢，因為供應商了解資料中心的功能和設計，因此比大多數客戶更了解營運的已知和預期結果。對託管服務總體上以及雲端運算具體而言不熟悉的組織可能不知道在談判中究竟應該要求什麼。因此，建議沒有核心技術能力和不熟悉雲端營運的組織在初次考慮雲端遷移和與供應商進行談判時尋求外部諮詢。</p>
+
+<h2>按部署模型劃分的雲端運算風險 <span class="english">(Cloud Computing Risks by Deployment Model)</span></h2>
+
+<p>為了準備雲端遷移和必要的合約談判（以及熟悉 CCSP CBK 內容），回顧每種雲端部署模型特有的風險是很有用的。這些包括<span class="key-term">私有雲</span> <span class="english">(private)</span>、<span class="key-term">社群雲</span> <span class="english">(community)</span>、<span class="key-term">公有雲</span> <span class="english">(public)</span> 和<span class="key-term">混合雲</span> <span class="english">(hybrid)</span> 模型。</p>
+
+<h3>私有雲 <span class="english">(Private Cloud)</span></h3>
+<p><span class="key-term">私有雲</span> <span class="english">(private cloud)</span> 是一個僅有一個客戶的分散式運算環境。私有雲可以由組織運行自己的資料中心並向自身提供雲端服務來實施，也可以由供應商託管。</p>
+<p>在某些情況下，供應商擁有包含私有雲的硬體，託管在供應商的資料中心。客戶被授予對該特定硬體組的獨佔存取權限，沒有其他客戶會在這些相同的設備上託管其雲端。在某些情況下，客戶擁有硬體，該硬體物理託管在供應商的資料中心內（通常稱為 <span class="key-term">co-lo</span> 或<span class="key-term">主機代管中心</span> <span class="english">(colocation center)</span>）。</p>
+<p>對於存在於高度管制行業或處理大量/高度敏感資訊的客戶組織來說，私有雲可能是一個更合適的雲端選項；私有雲允許客戶規定和指定更詳細的安全控制和整體治理水準。當然，這比公有雲模型更昂貴（就支付給供應商的金額而言），並且阻礙了雲端的<span class="key-term">彈性</span>/<span class="key-term">擴展性</span> <span class="english">(elasticity/scaling)</span>（私有雲容量將達到專用於客戶環境的任何元件的自然最大值，而不是具有理論上無限的容量）。</p>
+<p>所有私有雲營運商都面臨以下風險：</p>
+<p><span class="key-term">人員威脅</span> <span class="english">(Personnel Threats)</span> 這包括無意和惡意的威脅。如果使用託管供應商/資料中心，供應商的管理員仍然在客戶的控制之外。</p>
+<p><span class="key-term">自然災害</span> <span class="english">(Natural Disasters)</span> 所有的部署和服務模型仍然容易受到自然災害的影響。</p>
+<p><span class="key-term">外部攻擊</span> <span class="english">(External Attacks)</span> 這些攻擊可以採取多種形式，例如未經授權的存取、竊聽、拒絕服務 (DoS)/分散式拒絕服務 (DDoS) 等等。</p>
+<p><span class="key-term">法規不合規</span> <span class="english">(Regulatory Noncompliance)</span> 雖然客戶在私有雲模型中對配置和控制擁有更多控制權（與公有雲相比），但監管機構仍將強制執行要求。</p>
+<p><span class="key-term">惡意軟體</span> <span class="english">(Malware)</span> 這可以被視為外部或內部威脅，取決於感染的來源。</p>
+<p>這些風險都不是私有雲獨有的，但擁有更大程度的控制和特定性可以讓客戶更有把握地應對它們。</p>
+
+<h3>社群雲 <span class="english">(Community Cloud)</span></h3>
+<p>在<span class="key-term">社群雲</span> <span class="english">(community cloud)</span> 配置中，資源在一個同好群體中共享和分散。基礎架構可以由社群聯合、個別、集中擁有和/或營運，或以任何這些選項的組合和混合方式進行。</p>
+<p>此部署模型的益處各自伴隨著相應的風險：</p>
+<p><span class="key-term">透過共享所有權實現的彈性</span> <span class="english">(Resiliency through Shared Ownership)</span> 由於網路所有權和營運分散在使用者之間，環境更有可能在不影響其他節點的情況下承受重要節點的損失。然而，這會引入額外的風險，因為每個節點都是其自身的入口點，任何一個節點中的漏洞都可能導致對其他節點的入侵。當然，這意味著配置管理和基準的一致性幾乎不可能（並且很難強制執行）。隨著分散式所有權而來的是在政策和管理方面的分散式決策。</p>
+<p><span class="key-term">共享成本</span> <span class="english">(Shared Costs)</span> 基礎架構的開銷和成本在社群成員之間共享，但存取和控制也是如此。</p>
+<p><span class="key-term">無需集中管理效能和監控</span> <span class="english">(No Need for Centralized Administration for Performance and Monitoring)</span> 雖然這消除了集中管理的許多負擔，但它也消除了集中化和同質化效能和安全監控標準的可靠性。</p>
+
+<div class="box">
+    <p><strong>線上遊戲作為社群雲 (Online Gaming as a Community Cloud)</strong></p>
+    <p>線上遊戲是社群雲模型的一個極好範例。每個獨立的玩家都擁有自己的設備（主機或電腦）。獨立玩家負責設備的購買價格、維護設備以及建立/維護到網際網路的連接。每個獨立玩家也可以隨時自願斷開自己的設備（如果他們願意，甚至可以銷毀自己的設備，因為他們完全擁有該設備）。</p>
+    <p>然後，遊戲設置中通常有一個集中的身份和存取管理 (IAM) 節點。某個實體（例如 Microsoft 或 Sony）充當每個獨立玩家身份/權限的驗證者；該實體完全控制/擁有 IAM 功能，並且必須付費來創建/維護該節點。獨立玩家登入到集中的 IAM 節點以獲取對共享遊戲環境的存取權限。</p>
+    <p>最後，通常還有另一個不同的實體是遊戲主機；他們運行處理經過驗證的玩家之間線上互動的伺服器。這些後端遊戲機器完全由遊戲主機（通常是遊戲製造商或分銷商）擁有和維護。</p>
+    <p>每個實體都對其自身的元件和在社群中的參與負責；每個實體都是自願參與，可以隨時離開。所有權、處理和儲存根據參與者在互動中的角色在參與者之間共享。</p>
+</div>
+
+<h3>公有雲 <span class="english">(Public Cloud)</span></h3>
+<p>這是 CCSP CBK 中最受關注的部署模型，並且最有可能為最大數量的雲端客戶提供最大的好處。在<span class="key-term">公有雲</span> <span class="english">(public cloud)</span> 中，公司向任何想要成為雲端客戶的實體提供雲端服務，無論是個人、公司、政府機構還是其他組織。</p>
+<p>許多與私有雲相同的風險也存在於公有雲中：人員威脅（無意和惡意）、外部威脅、自然災害等等。其中一些風險因公有雲與社群雲的相似性而被消除，例如分散式基礎架構、共享成本以及減少對管理能力的需求。然而，正是這些相同的益處帶來了公有雲的額外風險。組織將失去控制、監督、稽核和執行能力——基本上，所有維護組織內部私有雲的保證。</p>
+<p>公有雲還存在一些獨特的額外風險，也必須加以考慮。我們將在以下部分詳細討論這些風險。</p>
+
+<h4>供應商鎖定 <span class="english">(Vendor Lock-In)</span></h4>
+<p>將生產環境和資料的控制權交給外部方，組織就對該供應商產生了依賴。將資料移出供應商資料中心的費用和麻煩可能對客戶造成 crippling 影響，特別是如果客戶選擇在合約期結束前這樣做。在某種意義上，這會使客戶成為供應商的人質，並允許供應商隨意降低服務水準和/或提高價格。需要強調的是，這並非普遍現象。我們並不是說雲端供應商會惡意地誘使客戶陷入不利的安排。然而，這種依賴的可能性確實存在，而依賴本身就是一種風險。</p>
+<p><span class="key-term">供應商鎖定</span> <span class="english">(Vendor lock-in)</span>（也稱為<span class="key-term">供應商鎖定</span> <span class="english">(provider lock-in)</span>）也可能由其他情況引起。例如，如果供應商使用專有資料格式或媒介來儲存資訊，客戶可能無法將其資料移動到另一個供應商。如果合約本身具有懲罰性，並且在客戶選擇轉向另一家供應商時給客戶帶來不應有的負擔，那麼合約本身也可以被視為一種鎖定形式。或者，供應商鎖定可能是由於某種法規限制造成的，找到另一家能夠滿足組織特定法規需求的供應商可能很困難。</p>
+<p>為了避免鎖定，組織在考慮遷移時必須考慮<span class="key-term">可移植性</span> <span class="english">(portability)</span>。我們使用術語可移植性來描述將資料移出供應商資料中心（無論是移動到另一個供應商還是私有雲）的總體難易程度。</p>
+<p>組織可以做幾件事來增強其資料的可移植性：</p>
+<p><span class="key-term">確保有利的合約條款以實現可移植性 (Ensure favorable contract terms for portability)。</span> 確保組織考慮退出策略，即使是在雲端服務採購開始時與供應商建立初步協議時。供應商環境中是否有降價試用期？提前轉移（終止合約）的罰款是多少？在合約期結束時，將資料移動到另一個供應商是否存在任何困難，無論是在合約上還是在效能方面？</p>
+<p><span class="key-term">避免專有格式 (Avoid proprietary formats)。</span> 不要與供應商簽約，除非原始資料可以以可用於另一個供應商站點的格式恢復。這可能需要在移動資料之前進行某種形式的轉換，如果客戶選擇移動，該轉換應該是簡單且廉價的。一些抽象技術使得在雲端供應商之間移動工作負載更容易。例如，Terraform 是一個開源的基礎架構即程式碼 (IaC) 工具，可以用來代替供應商專有格式。</p>
+<p><span class="key-term">確保沒有移動的物理或技術限制 (Ensure there are no physical or technical limitations to moving)。</span> 確保離開舊供應商的頻寬足以移動您組織的整個資料集，並且新供應商可以處理該大小的導入。還要確保雲端供應商提供資料匯出功能，使得在技術上可以提取資料。</p>
+<p><span class="key-term">檢查法規限制 (Check for regulatory constraints)。</span> 應該有不止一家雲端供應商能夠滿足您組織的特定合規需求。如果您的需求非常獨特和嚴格（例如，如果您的組織是一所醫學院，接收信用卡付款，因此需要同時遵守 FERPA、PCI DSS 和 HIPAA），那麼供應商的數量可能極其有限。</p>
+
+<h4>供應商鎖定 <span class="english">(Vendor Lock-Out)</span></h4>
+<p>與將組織的資料和生產環境控制權交出相關的另一個問題被稱為<span class="key-term">供應商鎖定</span> <span class="english">(vendor lock-out)</span>（也稱為<span class="key-term">供應商鎖定</span> <span class="english">(provider lock-out)</span>）。當雲端供應商倒閉、被另一家公司收購或因任何原因停止營運時，就會發生供應商鎖定。在這些情況下，令人擔憂的是客戶是否仍然能夠輕鬆存取和恢復其資料。</p>
+<p>我們無法真正為所有可能導致供應商鎖定的原因制定計劃。然而，我們可以意識到這種可能性存在並相應地做出決策。在選擇雲端供應商時，我們可能需要考慮以下因素：</p>
+<p><span class="key-term">供應商的營運歷史</span> <span class="english">(Provider Longevity)</span> 該供應商經營了多長時間？它看起來像是市場領導者嗎？這方面可能比其他方面更難評估，因為 IT 是一個極其不穩定的領域，新的供應商不斷進入，而老牌企業常常在幾乎沒有預警的情況下退出。特別是雲端技術和大規模服務是一個相當新的發展，可能更容易出現重大和意外的動盪。</p>
+<p><span class="key-term">核心競爭力</span> <span class="english">(Core Competency)</span> 這家供應商能否提供您的組織所需的東西？它是否有能力滿足您所有的服務要求？它是否有足夠的員工、資源和基礎架構來處理您的組織以及其其他客戶的需求？衡量給定供應商可能的力量和適用性的一個標準是，雲端服務是其產品的核心，還是其公司的附加功能。</p>
+<p><span class="key-term">司法管轄區的適用性</span> <span class="english">(Jurisdictional Suitability)</span> 供應商位於哪個國家，哪個州？這個問題必須從其註冊地和營運地兩方面來提問。資料中心在哪裡？其長期儲存和備份能力在哪裡？您組織的資料是否會跨越邊界和國界？您的組織能否使用此供應商並保持符合所有適用法規？</p>
+<p><span class="key-term">供應鏈依賴</span> <span class="english">(Supply Chain Dependencies)</span> 供應商是否依賴任何其他實體來執行其關鍵功能，無論是上游還是下游？是否有基本的供應商、供應商和公用事業公司，沒有它們供應商就無法營運？如果供應商方面沒有相當大的揭露，這方面將非常難以調查。</p>
+<p><span class="key-term">立法環境</span> <span class="english">(Legislative Environment)</span> 哪些懸而未決的法規可能影響您組織使用該供應商的能力？這方面可能對雲端客戶具有最大的潛在影響，也是最難預測的。例如，幾乎沒有人預見到英國會在 2016 年離開歐盟，而脫歐公投對在兩個司法管轄區營運的公司產生了重大的政治和監管調整。</p>
+
+<div class="box">
+    <p><strong>不是如果，而是何時 (Not If, But When)</strong></p>
+    <p>有些人可能認為，在考慮供應商鎖定時，應將供應商的事件記錄作為區分因素，如果某個供應商過去曾易受攻擊、攻擊或故障，這應被視為其未來生存能力的明顯預兆。這可能不是衡量供應商適用性的最有用方法。相反，知道供應商經歷過事件可能表明這是一個您應該強烈考慮與之合作的供應商。簡而言之：每個人在某個時候都可能並且將會被入侵，每個系統都會失敗，每個組織都會遇到安全問題。我們不應期望一個零故障的環境。我們應該尋找一個容錯的環境。供應商如何回應事件？它做了什麼？它沒做什麼？市場（及其客戶）對供應商處理此事的方式有何反應？我們可以從處理過往安全問題（以及如何處理）的供應商那裡學到比聲稱從未有過任何問題的供應商更多的東西。</p>
+</div>
+
+<h4>多租戶環境 <span class="english">(Multitenant Environments)</span></h4>
+<p>進入公有雲意味著進入<span class="key-term">多租戶</span> <span class="english">(multitenant)</span> 環境。不會有供應商會將您的組織作為其唯一客戶來託管。事實上，您應該警惕任何願意處於該位置的供應商。它無法擴展，也不會盈利。因此，公有雲配置中存在其他模型中不存在的特定風險，包括這些：</p>
+<p><span class="key-term">利益衝突</span> <span class="english">(Conflict of Interest)</span> 管理您的資料和系統的供應商人員不應同時參與任何可能也是該供應商客戶的競爭對手。供應商應小心不要製造這些情況，甚至不要造成可能存在這些情況的印象。</p>
+<p><span class="key-term">權限提升</span> <span class="english">(Escalation of Privilege)</span> 授權使用者可能試圖獲取未經授權的權限。這可能包括來自您自己組織以外的使用者。獲得非法管理存取權限的使用者可能能夠控制處理其他客戶資料的設備。</p>
+<p><span class="key-term">資訊洩露</span> <span class="english">(Information Bleed)</span> 由於多個客戶在同一基礎架構上處理和儲存資料，因此存在一個客戶的資料被另一個客戶讀取或接收的可能性。此外，即使這沒有發生在原始資料上，一個客戶也可能檢測到關於另一個客戶活動的洩漏資訊，例如客戶何時處理資料、處理過程持續多長時間等等。</p>
+<p><span class="key-term">法律活動</span> <span class="english">(Legal Activity)</span> 資料中心內的資料和設備可能因刑事調查或訴訟的證據開示而被傳喚或扣押。這對任何雲端客戶都是一個考量，因為特定資產可能不僅包含作為調查/訴訟特定目標的資料，還包含屬於其他客戶的資料。（換句話說，您的資料可能因為與執法或原告目標的客戶位於同一台機器上而被扣押。）</p>
+
+<div class="box">
+    <p><strong>Brewer 與 Nash 模型 (The Brewer and Nash Model)</strong></p>
+    <p>雖然 Brewer 與 Nash 模型不是官方資料的一部分，您也不需要為考試了解它，但理解它很有用。它也以其提出的論文標題而聞名，「中國牆安全政策」(The Chinese Wall Security Policy) (www.cs.purdue.edu/homes/ninghui/readings/AccessControl/brewer_nash_89.pdf)，它是將職責分離和最低權限與資料流相結合以防止利益衝突的概念。</p>
+    <p>Brewer 與 Nash 模型也許是與雲端運算最相關的模型，因為雲端管理員的性質——在雲端資料中心內部，為雲端供應商工作的管理員可以物理（或許還有邏輯）存取該設施服務的每個雲端客戶。這可能包括同一行業的直接競爭對手。這為雲端管理員創造了利益衝突以及潛在的腐敗途徑。</p>
+    <p>正確使用 Brewer 與 Nash 模型可以透過降低這些問題的可能性並創建支持和強制執行該模型的政策來解決這些問題。</p>
+</div>
+
+<h3>混合雲 <span class="english">(Hybrid Cloud)</span></h3>
+<p><span class="key-term">混合雲</span> <span class="english">(hybrid cloud)</span> 僅僅是其他兩種或多種模型的組合。當然，混合雲配置包括它們所結合的各種模型的所有風險。考慮使用混合雲設置的組織應該意識到先前各節中討論的適用於其特定混合選擇的所有風險。</p>
+
+<h2>按服務模型劃分的雲端運算風險 <span class="english">(Cloud Computing Risks by Service Model)</span></h2>
+
+<p>雲端遷移和合約談判中的另一個考量是每種雲端服務模型固有的風險。最常見的雲端服務模型包括<span class="key-term">基礎架構即服務</span> (<span class="key-term">Infrastructure as a Service, IaaS</span>)、<span class="key-term">平台即服務</span> (<span class="key-term">Platform as a Service, PaaS</span>) 和<span class="key-term">軟體即服務</span> (<span class="key-term">Software as a Service, SaaS</span>)。除了特定於每個服務模型的考量外，服務模型還繼承了它們所使用的任何部署模型的風險。此涵蓋範圍絕非詳盡無遺或具有規定性，僅應作為告知讀者並激發對可能安全活動的思考的一種方式。</p>
+
+<h3>基礎架構即服務 (IaaS) <span class="english">(Infrastructure as a Service (IaaS))</span></h3>
+<p>在<span class="key-term">基礎架構即服務</span> (<span class="key-term">Infrastructure as a Service, IaaS</span>) 模型中，客戶將對其資源擁有最大的控制權，這可能會減輕一些關於信任供應商或缺乏對環境洞察力的考量。然而，IaaS 模式中仍然存在風險，儘管它們通常並非該配置所獨有：</p>
+<p><span class="key-term">人員威脅</span> <span class="english">(Personnel Threats)</span> 同樣，惡意或疏忽的內部人員（為供應商工作）可能對客戶造成重大的負面影響，很大程度上是因為他們可以物理存取客戶資料所在的資料中心內的資源。</p>
+<p><span class="key-term">外部威脅</span> <span class="english">(External Threats)</span> 這些包括惡意軟體、駭客攻擊、DoS/DDoS、路徑上（也稱為中間人）攻擊等等。</p>
+<p><span class="key-term">缺乏特定技能</span> <span class="english">(Lack of Specific Skillsets)</span> 由於大部分環境將由客戶管理，並且所有存取都將透過遠端連接進行，因此客戶的管理員和員工在 IaaS 中提供營運和安全功能方面將承擔重大負擔。沒有足夠具備在雲端環境中執行這些任務所需培訓和經驗的人員的組織正在為其營運引入相當大的風險。</p>
+
+<h3>平台即服務 (PaaS) <span class="english">(Platform as a Service (PaaS))</span></h3>
+<p><span class="key-term">平台即服務</span> (<span class="key-term">Platform as a Service, PaaS</span>) 模型將具有除 IaaS 模型中包含的風險之外的其他風險。這些包括以下內容：</p>
+<p><span class="key-term">互操作性問題</span> <span class="english">(Interoperability Issues)</span> 由於作業系統將由供應商管理和更新，因此客戶的軟體可能無法在每次環境調整後正常運行。</p>
+<p><span class="key-term">持久性後門</span> <span class="english">(Persistent Backdoors)</span> PaaS 通常用於軟體開發和開發營運 (DevOps) 工作，因為客戶可以在雲端環境內的基礎架構（硬體和作業系統）之上安裝任何軟體（生產或測試平台）。此模型非常適合用作新應用程式的測試平台。它可以模擬具有來自即時企業所有系統結構化抽樣的生產環境，並且它還可以透過遠端存取能力和在多個作業系統上擴展測試的機會來測試與各種平台的介面。儘管 DevOps 有這些好處，但重要的是要記住隨之而來的一個重大風險：開發人員在最終產品發布後留下的後門。這些用於高效編輯和測試案例，以便開發人員不必從頭開始運行程式來找到需要處理的特定功能。然而，如果後門被惡意方發現和利用，它們也會成為攻擊向量。昨天的開發工具就是明天的零日漏洞。</p>
+<p><span class="key-term">虛擬化</span> <span class="english">(Virtualization)</span> 由於大多數 PaaS 產品利用虛擬化作業系統，因此必須考慮與虛擬化相關的威脅和風險。有關此內容的更多資訊，請參閱本章後面的「虛擬化」部分。</p>
+<p><span class="key-term">資源共享</span> <span class="english">(Resource Sharing)</span> 客戶運行的程式和實例將在其他客戶使用的相同設備上運行，有時是同時運行。存在資訊洩露和旁路攻擊的可能性，必須加以考慮。</p>
+
+<h3>軟體即服務 (SaaS) <span class="english">(Software as a Service (SaaS))</span></h3>
+<p>PaaS 和 IaaS 模型固有的所有風險在<span class="key-term">軟體即服務</span> (<span class="key-term">Software as a Service, SaaS</span>) 環境中仍然存在，此外還有這些額外的風險：</p>
+<p><span class="key-term">專有格式</span> <span class="english">(Proprietary Formats)</span> 供應商可能以該供應商擁有且獨有的格式收集、儲存和顯示資料。這可能導致供應商鎖定並降低可移植性。</p>
+<p><span class="key-term">虛擬化</span> <span class="english">(Virtualization)</span> 虛擬化的風險在 SaaS 環境中會加劇，因為將會發生更多的資源共享和同時的多租戶。有關更多資訊，請參閱下一節「虛擬化」。</p>
+<p><span class="key-term">Web 應用程式安全</span> <span class="english">(Web Application Security)</span> 大多數 SaaS 產品依賴透過瀏覽器和某種應用程式設計介面 (API) 進行存取。Web 應用程式內的潛在弱點帶來了各種各樣的風險和威脅。</p>
+
+<h2>虛擬化 <span class="english">(Virtualization)</span></h2>
+
+<p>我們在整本書中都討論了虛擬化的重要性。現在我們將討論與在雲端中使用虛擬化相關的風險。許多這些可能性需要透過使用只能由雲端供應商實施的控制措施來減輕，因此雲端客戶必須依賴合約條款進行實施和執行。</p>
+<p><span class="key-term">對 Hypervisor 的攻擊</span> <span class="english">(Attacks on the Hypervisor)</span> 惡意行為者可能試圖滲透 hypervisor，而不是攻擊僅可能成功入侵一個（虛擬化）工作站內容的虛擬化實例。Hypervisor 是充當虛擬化實例與其所在給定主機設備資源之間的介面和控制器的系統。</p>
+<p>有兩種類型的 hypervisor，稱為 Type 1 和 Type 2。<span class="key-term">Type 1 hypervisor</span> 也稱為裸機或硬體 hypervisor。它們直接駐留在主機機器上，通常作為可啟動軟體。<span class="key-term">Type 2 hypervisor</span> 是軟體 hypervisor，它們在主機設備上運行的作業系統之上運行。</p>
+<p>攻擊者更喜歡 Type 2 hypervisor，因為攻擊面更大。他們可以直接攻擊 hypervisor 本身、底層作業系統和機器，而 Type 1 攻擊僅限於 hypervisor 和機器。作業系統也比 hypervisor 更複雜，從而增加了包含漏洞的可能性。</p>
+<p><span class="key-term">訪客逃逸</span> <span class="english">(Guest Escape)</span> 設計不當或配置不佳的虛擬化機器或 hypervisor 可能允許使用者離開其自身虛擬化實例的範圍。這被稱為<span class="key-term">訪客逃逸</span> <span class="english">(guest escape)</span> 或<span class="key-term">虛擬機 (VM) 逃逸</span> <span class="english">(virtual machine (VM) escape)</span>。成功執行訪客逃逸的使用者可能能夠存取同一主機上的其他虛擬化實例，並查看、複製或修改儲存在那裡的資料。更糟糕的是，使用者可能能夠存取主機本身，因此能夠影響機器上的所有實例。而最壞的潛在情況被稱為<span class="key-term">主機逃逸</span> <span class="english">(host escape)</span>，即使用者不僅可以離開自己的虛擬化實例，甚至可以離開主機機器，存取網路上的其他設備。這不太可能發生，因為它只會由硬體、軟體、政策和人員績效方面的一些相當嚴重的失敗（或這些的重大組合）導致，但這是一種風險，必須加以考慮。</p>
+<p><span class="key-term">資訊洩露</span> <span class="english">(Information Bleed)</span> 這是源於故障或失敗的另一種風險。存在這樣一種可能性，即在一個虛擬化實例上執行的處理可能被同一主機上的其他實例全部或部分檢測到。為了使這種風險具有破壞性，損失甚至不必涉及原始資料本身。它可能僅僅是指示受影響實例上正在發生的處理。例如，可能檢測到某個操作正在受影響的實例上發生，並且該操作持續特定時間。這種特定於流程的資訊可以告訴惡意行為者有關實例上安全控制的類型或正在進行的操作類型。這可以為攻擊者提供優勢，因為他們可能能夠將可能的攻擊向量縮小到僅在該情況下有效的向量，或者他們可能深入了解成功攻擊可能獲取哪些類型的資料。這種策略通常被稱為<span class="key-term">旁路攻擊</span> <span class="english">(side channel attack)</span> 或<span class="key-term">隱蔽通道攻擊</span> <span class="english">(covert channel attack)</span>。</p>
+<p><span class="key-term">資料扣押</span> <span class="english">(Data Seizure)</span> 法律活動可能導致主機機器被執法部門或原告律師沒收或檢查，而主機機器可能包含屬於您組織的虛擬化實例，即使您的組織不是目標。</p>
+<p>雲端資料中心可以被視為類似於傳統企業中的<span class="key-term">非軍事區</span> <span class="english">(demilitarized zones, DMZs)</span>。由於雲端中的所有內容都可以遠端存取，因此可以認為它在不同程度上暴露於網際網路。與私有網路的離散邊界不同，雲端配置可能更加多孔，或者可能被認為根本沒有特定的邊界。</p>
+<p>在以下部分中，我們將討論特定雲端平台的威脅以及可能有助於建立雲端使用信任的對策。</p>
+
+<h3>威脅 <span class="english">(Threats)</span></h3>
+<p>儘管許多對雲端運算的威脅與我們在傳統 IT 營運中面臨的威脅相同，但它們可能以新的方式表現出來或構成更大的風險。在本節中，我們將檢查私有雲、社群雲、公有雲和混合雲模型的威脅。此涵蓋範圍絕非詳盡無遺或具有規定性，僅應作為告知讀者並激發對可能安全活動的思考的一種方式。</p>
+<p><span class="key-term">惡意軟體</span> <span class="english">(Malware)</span> 從網際網路下載或上傳到內部網路的惡意軟體可能導致各種問題，包括資料丟失、設備控制權喪失、營運中斷等等。這在 SaaS 環境中不太可能發生，因為客戶通常不安裝軟體，但客戶有時可能使用補充 SaaS 產品的瀏覽器擴展和附加元件，並可能成為惡意程式碼的途徑。例如，FriarFox 惡意 Firefox 擴展允許攻擊者接管使用者 Gmail 帳戶。</p>
+<p><span class="key-term">內部威脅</span> <span class="english">(Internal Threats)</span> 這些可能是員工或其他已獲得存取權限的人（例如承包商和維護人員）惡意或意外活動的結果。例如，流氓員工可能為了個人使用而從雲端供應商處配置服務。</p>
+<p><span class="key-term">外部攻擊者</span> <span class="english">(External Attackers)</span> 組織外部的實體可能出於多種原因想要攻擊網路，包括經濟利益、駭客行動主義、政治目標、感知的委屈等等。這些攻擊可以採取多種形式並表現出多種影響，包括 DoS/DDoS、資料外洩、法律後果、SYN 洪水攻擊、暴力破解等等。</p>
+<p><span class="key-term">中間人攻擊</span> <span class="english">(Man-in-the-Middle Attacks)</span> 中間人攻擊，也稱為<span class="key-term">路徑上攻擊</span> <span class="english">(on-path attacks)</span>，發生在攻擊者將自己插入發送方和接收方之間時。這可以採取簡單竊聽以獲取資料的形式，也可以是更高級的攻擊，例如攻擊者冒充參與者之一以獲得進一步的控制/存取權限或修改資料流量以將虛假或破壞性資訊引入通訊中。私有雲的遠端存取能力增強了對這種類型威脅的暴露，與所有網路存取僅限於內部使用者的傳統配置相比。</p>
+<p><span class="key-term">設備盜竊/遺失</span> <span class="english">(Theft/Loss of Devices)</span> 同樣，遠端存取的便利性和增強的操作能力也伴隨著額外的威脅。特別是在 BYOD 環境中，使用者設備的遺失或盜竊可能導致對組織雲端網路的未經授權存取和利用。</p>
+<p><span class="key-term">法規違規</span> <span class="english">(Regulatory Violations)</span> 法規幾乎影響所有 IT 營運，但私有雲增加了組織無法保持合規的更大風險。傳播資訊的機會和效率增加也增加了違反適用法規的可能性。例如，不符合 HIPAA 規定的健康診所可能會發現自己受到巨額罰款。</p>
+<p><span class="key-term">自然災害</span> <span class="english">(Natural Disasters)</span> 所有營運都容易受到自然災害的干擾，沒有哪個地理區域能免受這種威脅的風險。它們只是在地點上有所不同。（地點和氣候決定了災害的類型和頻率，例如颶風、洪水、野火、龍捲風、地震、火山、泥石流等等。）</p>
+<p><span class="key-term">失去政策控制</span> <span class="english">(Loss of Policy Control)</span> 由於所有權分散在雲端中，集中的政策頒布和執行通常不是一個選項。這通常會促使組織採用<span class="key-term">雲端存取安全代理商</span> (<span class="key-term">cloud access security broker, CASB</span>) 解決方案，以提供集中的雲端政策執行。</p>
+<p><span class="key-term">失去物理控制</span> <span class="english">(Loss of Physical Control)</span> 缺乏物理控制等同於物理安全的相對降低。如果在社群雲中所有權分散在許多參與者之間，這種威脅可能會加劇。</p>
+<p><span class="key-term">缺乏稽核存取</span> <span class="english">(Lack of Audit Access)</span> 與失去物理控制相關，在分散式環境中進行稽核可能不切實際或不可能。</p>
+<p><span class="key-term">流氓管理員</span> <span class="english">(Rogue Administrator)</span> 這是內部威脅的一種增強形式。公有雲帶來了這樣一種可能性，即擁有不僅僅是基本存取權限的內部人員可能以惡意或不負責任的方式行事。由於公有雲供應商將管理您的系統和資料，因此不良行為者或粗心的員工可能以網路/系統架構師、工程師或管理員的形式出現，可能造成比傳統環境中使用者所能造成的損害大得多的損害。</p>
+<p><span class="key-term">權限提升</span> <span class="english">(Escalation of Privilege)</span> 這是內部威脅類別的另一個延伸。當授權使用者試圖出於惡意或營運原因增加其存取/權限級別時，就會發生此類威脅。（並非所有提升權限的嘗試本質上都是惡意的。一些使用者願意違反政策以提高自己執行任務的能力或避免煩人或繁瑣的控制。）在雲端中，此類威脅的可能性增加，因為使用者面臨的不是一套而是至少兩套治理——他們自己組織的和供應商的。這可能導致修改或授予額外存取/權限的請求延遲，進而可能導致使用者試圖規避政策。</p>
+<p><span class="key-term">合約失敗</span> <span class="english">(Contractual Failure)</span> 一份草擬不當的合約可能導致供應商鎖定、不利條款、缺乏必要服務以及其他風險，應將其視為一種威脅。</p>
+
+<h3>風險緩解策略 <span class="english">(Risk Mitigation Strategies)</span></h3>
+
+<p>以下是針對先前各節中討論的每種雲端模型威脅可以採用的某些對策的討論。此涵蓋範圍絕非詳盡無遺或具有規定性，僅應作為告知讀者並激發對可能安全活動的思考的一種方式。</p>
+<p><span class="key-term">惡意軟體</span> <span class="english">(Malware)</span> 可以在實際主機設備和虛擬化實例中部署基於主機和基於網路的反惡意軟體應用程式和代理。可以為所有使用者提供關於將惡意軟體引入雲端環境的方法以及如何防禦它們的特定培訓。可以利用對網路流量和基線配置的持續監控來檢測可能表明感染的異常活動和效能下降。應實施定期更新和補丁，或許包括在每次啟動時對虛擬機進行自動檢查。</p>
+<p><span class="key-term">內部威脅</span> <span class="english">(Internal Threats)</span> 在雇用新人員之前，組織應進行積極的背景調查、履歷/推薦信確認以及技能和知識測試。為了應對與現有員工相關的風險，組織應制定適當的人事政策，其中可能包括全面且定期的培訓、強制休假和工作輪換，以及在財務和營運上合理的雙人完整性。紮實的工作流程政策應包括職責分離和最低權限。可以使用主動的監控計畫，包括物理和電子監控。應遮罩資料，以減少所有不需要直接處理原始資料的人員的視圖。還應實施出口監控（使用 DLP 解決方案）。</p>
+<p><span class="key-term">外部攻擊者</span> <span class="english">(External Attackers)</span> 對策包括加固的物理設備、hypervisor 和虛擬機，具有紮實的安全基線以及徹底的配置和變更管理協定，以及強大的存取控制，甚至可能外包給第三方，例如雲端存取安全代理商 (CASB)。了解組織如何被對手看待也很重要；這類資料可用於威脅評估和識別以及提供一些預測能力，這可以提供比處理威脅的被動方式更及時的回應。威脅情報服務提供了這種功能。</p>
+<p><span class="key-term">中間人 (MITM)/路徑上攻擊</span> <span class="english">(Man-in-the-Middle (MITM)/On-Path Attacks)</span> 緩解這些攻擊的一種方法是加密傳輸中的資料，包括身份驗證活動。您還可以使用安全會話技術和強制執行。</p>
+<p><span class="key-term">社交工程</span> <span class="english">(Social Engineering)</span> 培訓、培訓、再培訓。使用激勵計畫（可能包括現場獎金和表揚）來識別抵制社交工程嘗試並向安全辦公室發出警報的人員。</p>
+<p><span class="key-term">資料因設備盜竊/遺失而洩露</span> <span class="english">(Data Loss from Theft/Loss of Devices)</span> 對策包括對儲存資料進行加密以減輕盜竊的效力、嚴格的物理存取控制、有限或無 USB 功能（直至物理銷毀 USB 埠）、詳細而全面的庫存控制和監控，以及可攜式設備的遠端擦除或遠端銷毀開關能力。</p>
+<p><span class="key-term">法規違規</span> <span class="english">(Regulatory Violations)</span> 雇用具備適用技能的知識淵博、訓練有素的人員。在規劃和管理您的系統時，請諮詢總法律顧問。實施 IRM 解決方案。根據需要使用加密、模糊化和遮罩。</p>
+<p><span class="key-term">自然災害</span> <span class="english">(Natural Disasters)</span> 雲端供應商應確保資料中心的所有系統和服務具有多重冗餘，包括 ISP 和公用事業。雲端客戶可以與同一雲端供應商、另一家雲端供應商或離線安排災難備份。有關此主題的進一步討論，請參閱本章後面的「災難復原 (DR) 與業務連續性 (BC)」部分。</p>
+<p><span class="key-term">失去政策控制</span> <span class="english">(Loss of Policy Control)</span> 應採用強有力的合約條款，以確保供應商遵守的安全計畫至少與客戶在客戶擁有和控制的企業中所建立的計畫一樣有效和徹底。應由客戶或可信的第三方進行詳細而廣泛的稽核。</p>
+<p><span class="key-term">失去物理控制</span> <span class="english">(Loss of Physical Control)</span> 您可以使用此列表中內部威脅、設備盜竊/遺失和失去政策控制條目中列出的所有保護措施。</p>
+<p><span class="key-term">缺乏稽核存取</span> <span class="english">(Lack of Audit Access)</span> 如果供應商拒絕允許客戶直接稽核設施，客戶必須依賴可信的第三方。如果供應商限制對完整第三方報告的存取，客戶必須堅持合約保護，以盡可能將安全失敗的財務責任轉移給供應商，包括額外的懲罰性損害賠償。</p>
+<p><span class="key-term">流氓管理員</span> <span class="english">(Rogue Administrator)</span> 對策包括此列表中內部威脅條目中列出的所有控制措施，以及針對所有特權帳戶和人員的額外物理、邏輯和管理控制，包括對所有管理活動的徹底和安全記錄、鎖定的機架、對設備物理存取的即時監控、實施視訊監控以及對特權人員的財務監控（在法律允許的情況下）。</p>
+<p><span class="key-term">權限提升</span> <span class="english">(Escalation of Privilege)</span> 應實施廣泛的存取控制和身份驗證工具及技術。對策還包括由訓練有素、技術熟練的人員定期對所有日誌資料進行分析和審查，並結合使用諸如 SIEM/SIM/SEM 解決方案之類的自動化工具。</p>
+<p><span class="key-term">合約失敗</span> <span class="english">(Contractual Failure)</span> 為防止供應商鎖定/鎖定，客戶可以考慮完整的異地備份，由客戶或可信的第三方供應商保護和保存，以便在出現嚴重合約分歧時與另一家雲端供應商重新組建。</p>
+
+<div class="note">
+    <p>雖然自然災害仍然會影響公有雲架構，但公有雲實際上可以提供一些來自自然災害的保護和隔離。事實上，遷移到公有雲配置的優點之一是由於雲端供應商提供的快速複製、定期備份以及分散式遠端處理和資料儲存所提供的安全性（假設供應商已適當分配資源且客戶正在利用這些資源）。</p>
+</div>
+
+<h2>災難復原 (DR) 與業務連續性 (BC) <span class="english">(Disaster Recovery (DR) and Business Continuity (BC))</span></h2>
+
+<p>在以下部分中，我們將重點關注那些與雲端運算最直接相關的災難復原 (DR) 和業務連續性 (BC) 領域，特別是針對 CCSP CBK 和考試。我們將回顧特定於雲端平台的 BIA 考量，以及雲端供應商和客戶之間共享 BC/DR 規劃和責任的建立。</p>
+
+<h3>特定於雲端的 BIA 考量 <span class="english">(Cloud-Specific BIA Concerns)</span></h3>
+<p>在遷移到雲端服務架構時，您的組織需要審查其現有的業務衝擊分析 (BIA) 並考慮新的 BIA，或者至少進行部分評估，以應對特定於雲端的考量以及雲端提供的新風險和機會。一些潛在影響是您應該已包含在原始 BIA 中的事項，但這些在雲端中可能更為重要並呈現新的形式。例如，網際網路服務供應商 (ISP) 的損失可能影響了您組織以前的（非雲端）配置，但在遷移後失去連接性可能產生更不利的影響。與傳統 IT 環境不同，在雲端中進行營運的組織將無法在沒有與供應商連接的情況下進行縮減規模的本地運算。</p>
+<p>潛在的新興 BIA 考量包括但不限於以下內容：</p>
+<p><span class="key-term">新的依賴關係</span> <span class="english">(New Dependencies)</span> 您的資料和營運將在遷移後以全新的方式依賴外部方。您不僅必須依賴雲端供應商來滿足您組織的需求，還必須依賴與供應商相關的所有下游和上游依賴關係，包括供應商的供應商、供應商、公用事業、人員等等。BIA 應考慮涉及供應商無法滿足服務要求以及供應商任何必要實體類似失敗的可能性。</p>
+<p><span class="key-term">法規失敗</span> <span class="english">(Regulatory Failure)</span> 雲端中資料分發的效率和易用性增加了違反法規的可能性，因為使用者和管理員同樣以新的方式傳播和分發資料。雲端供應商也為法規合規性帶來了另一個潛在的失敗點。即使您的組織內部完全合規，供應商也可能無法或不願遵守您的政策。法規失敗可能包括對 PII/ePHI 資料的保護不足以遵守 GDPR、GLBA、HIPAA、FERPA 或 SOX 等法規要求，也可能採取合約不足的形式，例如版權授權違規。BIA 需要包括對這種情況可能產生的影響的討論。</p>
+<p><span class="key-term">資料外洩/無意揭露</span> <span class="english">(Data Breach/Inadvertent Disclosure)</span> 雲端運算放大了兩個現有風險的可能性和影響：內部人員和遠端存取。此外，由於 PII 洩露的全部法律責任無法轉移給供應商，雲端客戶必須重新評估未經授權揭露的潛在影響和後果，特別是在因資料外洩通知立法強制規定而產生的成本方面。修訂後的 BIA 中應處理的其他因資料外洩可能產生的不利後果包括但不限於：公開揭露有害的內部通訊和報告；失去競爭優勢；對客戶、供應商和供應商商譽產生負面影響；以及合約違規。</p>
+<p><span class="key-term">供應商鎖定/鎖定</span> <span class="english">(Vendor Lock-In/Lock-Out)</span> BIA 應考慮遷移到雲端的任何營運的這些風險。此部分報告的大部分資料應隨手可得，無需為 BIA 重新創建，因為在組織首次考慮遷移時應已作為成本效益分析的一部分執行。</p>
+
+<h3>客戶/供應商共享 BC/DR 責任 <span class="english">(Customer/Provider Shared BC/DR Responsibilities)</span></h3>
+<p>客戶和供應商之間的談判將是廣泛的，涉及服務需求、政策執行、稽核能力等等。此討論中絕對應包含的要素之一是關於 BC/DR 的條款，如何以及在何處完成，誰負責流程的每個部分等等。在以下部分中，我們將描述應在這些談判中考慮的雲端 BC/DR 方面。</p>
+
+<h4>備份資料/系統的邏輯位置 <span class="english">(Logical Location of Backup Data/Systems)</span></h4>
+<p>使用雲端備份進行 BC/DR 有三種一般方式。為了本節的討論目的，我們將複製的資料和系統都稱為「備份」。使用雲端備份進行 BC/DR 的基本方式包括以下內容：</p>
+<p><span class="key-term">私有架構，雲端服務作為備份</span> <span class="english">(Private Architecture, Cloud Service as Backup)</span> 如果組織維護其自己的傳統 IT 資料中心作為主要生產環境，BC/DR 計劃可以包括使用雲端供應商作為備份。與供應商的談判將必須包括定期上傳頻寬成本（通常包括作為限制因素的每月上限）；備份頻率；組織是否將使用完整、增量或差異備份排程；備份資料中心中資料和系統的安全性；以及 ISP 成本。在此方法中，客戶應確定何時發生<span class="key-term">故障轉移</span> <span class="english">(failover)</span>——即，客戶可以決定什麼構成緊急情況以及何時停止正常（內部）營運並利用備份作為營運網路。這可能涉及正式聲明以通知供應商，並且幾乎肯定會在危機事件期間產生額外成本。故障轉移可能採取使用雲端服務作為遠端網路（在 IaaS、PaaS 或 SaaS 安排中）的形式，或者可能需要從雲端下載備份資料到另一個物理生產站點以進行應急營運。客戶和供應商之間的談判應確定該下載何時以及如何發生、需要多長時間，以及在危機事件結束時資料何時以及如何恢復到正常營運地點。</p>
+<p><span class="key-term">雲端營運，雲端供應商作為備份</span> <span class="english">(Cloud Operations, Cloud Provider as Backup)</span> 雲端營運的一個吸引人的好處是雲端資料中心（尤其是市場領導者）提供的彈性和冗餘。雲端供應商可能提供備份解決方案作為其服務的一個功能——一個位於供應商擁有的另一個資料中心的備份，以防發生災難級事件。最好將這些備份儲存在與主要系統不同的地理區域，以便在發生重大故障時提供彈性。</p>
+<p>在此模式中，供應商將承擔確定備份位置和配置的所有責任，以及評估和宣布災難事件的大部分責任。客戶可能在故障轉移過程中有最低限度的參與，但這是例外而不是常態。在這種情況下，BC/DR 活動（包括故障轉移）通常對客戶是透明的。此外，如果此功能作為正常雲端營運的一部分提供，通常不會產生額外費用或費用很少。</p>
+<p><span class="key-term">雲端營運，第三方雲端備份供應商</span> <span class="english">(Cloud Operations, Third-Party Cloud Backup Provider)</span> 在這種情況下，常規營運由一個雲端供應商託管，但應急營運需要故障轉移到另一個雲端供應商。客戶可能選擇此選項以分散風險、增強冗餘或預先減輕供應商鎖定/鎖定的可能性。這可能是最複雜的 BC/DR 安排，需要談判，因為它將涉及所有三方之間的準備和協調，並且角色和責任必須明確且徹底地劃分。在此安排下，主要雲端供應商和雲端客戶都將參與緊急評估和宣布，故障轉移可能需要共同努力。這可能會阻礙流程，尤其是在危機期間，合作和清晰溝通最為困難的時候。雲端客戶還必須與主要和備份雲端供應商談判此列表中的第一個模型（私有架構，雲端服務作為備份）中的所有條款。通常，這也將是一種相對昂貴的方法——備份供應商不會是主要供應商提供的其他功能的捆綁成本，故障轉移和應急營運都將產生額外費用。（然而，如果由於危機事件而未滿足 SLA 的條件，部分增加的成本可能會被主要供應商的付款所抵消。）此外，資料格式/系統互操作性可能是一個重要的考量；客戶在將資料從一個雲端供應商移植到另一個供應商以便資料在目的地正確使用時，可能需要執行額外的活動。</p>
+
+<h4>宣布 <span class="english">(Declaration)</span></h4>
+<p>宣布災難事件是 BC/DR 流程中的關鍵步驟。雲端客戶和供應商必須在應急情況發生前決定誰將具體被授權做出此決定，以及做出決定後進行溝通的明確流程。</p>
+<p>在客戶組織內部，此權力應正式分配給特定的辦公室或人員，並且應指定一名代理人或備用人員，以防主要人員無法聯繫。主要人員和備用人員都應接受詳細的緊急營運培訓，其中應包括對組織特定 BC/DR 計劃的廣泛而透徹的理解。被選定擔任此權力的人員應得到高階主管的授權，擁有宣布緊急情況和啟動故障轉移程序的全部能力。</p>
+<p>組織應建立預警系統以評估即將發生的災難情況。這對於某些類型的應急情況並非總是可能的，但有些情況可能至少可以稍加預告。組織應準備在實際危機事件發生前進行故障轉移，以維持營運的連續性。客戶和供應商必須就什麼構成正式通知達成一致，以便進行故障轉移，但他們可以在正式宣布最終確定和公布之前設定初步的準備性溝通排程。</p>
+<p>如果雲端供應商必須執行某些故障轉移活動，合約應規定在收到通知後必須在多長時間內完成（例如，在正式宣布後 10 分鐘內）。如果故障轉移是自動化的且完全由客戶控制，那麼也應在合約中明確詳細說明。</p>
+<p>應急事件後恢復正常活動同樣需要正式通知。過早恢復營運可能導致災難擴大或導致資料或資產損失。與緊急宣布一樣，恢復正常營運應委託給客戶組織內的特定實體，做出該決定的人員應充分了解其中固有的風險和影響。這樣做的過程也應在合約中列舉。</p>
+
+<div class="note">
+    <p>與所有安全實踐一樣，但在災難情況下尤其如此，健康和人類安全是任何計劃或流程的首要考量。</p>
+</div>
+
+<h4>測試 <span class="english">(Testing)</span></h4>
+<p>擁有備份是一項值得稱讚的做法，滿足了法規要求，並履行了一些法律上的應盡注意義務。然而，僅僅創建備份是不夠的。如果您從不嘗試使用您的備份，直到實際的危機事件發生，您就無法保證它們會按計劃運作。</p>
+<p>必須執行<span class="key-term">故障轉移測試</span> <span class="english">(Failover testing)</span>，以證明計劃和程序的有效性以及恢復正常營運的能力。這種測試還可以磨練相關人員的技能，並提供額外的培訓機會。當然，測試本身會對正常服務造成中斷，不應掉以輕心。執行測試涉及風險和成本。</p>
+<p>大多數行業指南規定此類測試至少每年進行一次。根據組織及其營運的性質，此頻率可能會增加。</p>
+<p>BC/DR 測試將需要與雲端供應商協調。這種協調應在預定測試之前很久就進行。應注意確定並分配具體的職責給參與者，並且在故障轉移期間或恢復正常營運期間發生的問題的所有責任應在合約中詳細說明。</p>
+
+<h2>雲端設計模式 <span class="english">(Cloud Design Patterns)</span></h2>
+
+<p>隨著您在雲端運算和雲端安全領域的旅程繼續，您會發現新的服務和技術幾乎不斷出現，要掌握為每個這些新發展設計安全的最佳方法非常困難。</p>
+<p>幸運的是，您並不孤單。您是一群供應商和安全專業人員社群的一部分，他們共同努力幫助您在雲端中創建安全可靠的運算環境。<span class="key-term">設計模式</span> <span class="english">(Design patterns)</span> 是實現這一目標的極好方式。設計模式為您提供了以安全方式配置和使用雲端服務的藍圖，借鑒了創建這些服務的工程師以及每天與之打交道的同行的智慧。在準備 CCSP 考試時，您應該熟悉一些常用的行業資源。</p>
+<p>CCSP 考試目標特別提到了接受 SANS Institute 發布的安全原則。您可以在 www.sans.org 找到有關這些原則的更多資訊。</p>
+<p>CCSP 考試目標引用的另一個極好的資訊來源是 Cloud Security Alliance 發布的企業架構參考指南。您可以在 https://cloudsecurityalliance.org/artifacts/enterprise-architecture-reference-guide-v2 找到該參考指南。</p>
+<p>您還應該熟悉特定於供應商的設計模式。這些是極其有用的資訊來源，因為它們為您提供了使用特定供應商提供的資源的實際實施細節。以下是一些主要範例：</p>
+<ul>
+    <li>AWS Well-Architected Framework (https://aws.amazon.com/architecture/well-architected)</li>
+    <li>Microsoft Azure Well-Architected Framework (https://docs.microsoft.com/en-us/azure/architecture/framework)</li>
+    <li>Google Cloud Architecture Framework (https://cloud.google.com/architecture/framework)</li>
+</ul>
+<p>這些文件中的每一個都提供了使用這些供應商提供的服務的實用、動手建議。</p>
+
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+
+<p>在本章中，我們討論了雲端客戶和供應商在風險管理以及 BC/DR 活動方面的共享和不同職責。我們還探討了與每種雲端運算平台（私有雲、社群雲、公有雲、混合雲、IaaS、PaaS 和 SaaS）相關的特定風險，並詳細說明了應對這些風險的對策。最後，我們討論了一些構成雲端攻擊面的潛在威脅和漏洞。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>了解雲端安全責任如何在客戶和供應商之間共享 (Know how cloud security responsibilities are shared between the customer and provider)。</strong> 共享責任模型指出，安全性是雲端供應商和客戶雙方的責任。這種責任的劃分取決於服務類型和合約細節。通常，在 SaaS 模型下供應商承擔更多責任，而在 IaaS 模型下客戶承擔更多責任。</p>
+<p><strong>了解可用於協助您開發安全雲端架構的設計模式 (Know the design patterns available to assist you in developing secure cloud architectures)。</strong> 您可以利用許多資源來幫助您設計安全的雲端環境。這些包括主要雲端供應商（包括 AWS、Microsoft 和 Google）提供的精心設計的框架，以及來自 SANS Institute 和 Cloud Security Alliance 的供應商中立設計原則。</p>
+<p><strong>了解與每種類型的雲端平台相關的風險 (Know the risks associated with each type of cloud platform)。</strong> 理解供應商提供的服務越多，該供應商關係引入的風險程度就越大。風險也因共享雲端環境的性質而異，私有雲提供的風險暴露低於公有雲和社群雲。</p>
+<p><strong>理解雲端中的 BC/DR (Understand BC/DR in the cloud)。</strong> 注意與傳統環境中 BC/DR 計劃和活動的相似之處，但要特別注意雲端客戶和供應商之間必要安排增加的複雜性以及合約在這方面的重要性。</p>
+
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>我們用哪個術語來描述將資料從一個雲端供應商移動到另一個雲端供應商或從雲端下載的總體難易程度？</p>
+        <ol type="A">
+            <li>移動性 (Mobility)</li>
+            <li>彈性 (Elasticity)</li>
+            <li>模糊化 (Obfuscation)</li>
+            <li>可移植性 (Portability)</li>
+        </ol>
+    </li>
+    <li>
+        <p>通常可用於雲端 BC/DR 活動的各種模型包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>私有架構，雲端備份 (Private architecture, cloud backup)</li>
+            <li>雲端供應商，來自同一供應商的備份 (Cloud provider, backup from same provider)</li>
+            <li>雲端供應商，來自另一個雲端供應商的備份 (Cloud provider, backup from another cloud provider)</li>
+            <li>雲端供應商，來自私有供應商的備份 (Cloud provider, backup from private provider)</li>
+        </ol>
+    </li>
+    <li>
+        <p>保護雲端營運免受外部攻擊者攻擊的對策包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>持續監控異常活動 (Continual monitoring for anomalous activity)</li>
+            <li>詳細而廣泛的背景調查 (Detailed and extensive background checks)</li>
+            <li>加固的設備和系統，包括伺服器、主機、hypervisor 和虛擬機 (Hardened devices and systems, including servers, hosts, hypervisors, and virtual machines)</li>
+            <li>定期且詳細的配置/變更管理活動 (Regular and detailed configuration/change management activities)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列所有技術都是為了增強雲端資料的可移植性以最小化供應商鎖定的可能性，除了 _______________。</p>
+        <ol type="A">
+            <li>避免專有資料格式 (Avoiding proprietary data formats)</li>
+            <li>在整個雲端營運中廣泛使用 IRM 和 DLP 解決方案 (Using IRM and DLP solutions widely throughout the cloud operation)</li>
+            <li>確保沒有物理移動限制 (Ensuring there are no physical limitations to moving)</li>
+            <li>確保有利的合約條款以支持可移植性 (Ensuring favorable contract terms to support portability)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列哪種技術用於減輕因用於遠端存取的設備遺失或盜竊而對雲端環境構成的風險？</p>
+        <ol type="A">
+            <li>遠端銷毀開關 (Remote kill switch)</li>
+            <li>雙重控制 (Dual control)</li>
+            <li>混淆 (Muddling)</li>
+            <li>安全港 (Safe harbor)</li>
+        </ol>
+    </li>
+     <li>
+        <p>下列各項都是在雲端遷移後審查 BIA 時必須考慮的依賴關係，除了 _______________。</p>
+        <ol type="A">
+            <li>雲端供應商的供應商 (The cloud provider’s suppliers)</li>
+            <li>雲端供應商的供應商 (The cloud provider’s vendors)</li>
+            <li>雲端供應商的公用事業 (The cloud provider’s utilities)</li>
+            <li>雲端供應商的轉銷商 (The cloud provider’s resellers)</li>
+        </ol>
+    </li>
+    <li>
+        <p>在雲端遷移後審查 BIA 時，組織應考慮與資料外洩影響相關的新因素。這些新因素之一是 _______________。</p>
+        <ol type="A">
+            <li>法律責任無法轉移給雲端供應商 (Legal liability can’t be transferred to the cloud provider)。</li>
+            <li>許多州有資料外洩通知法 (Many states have data breach notification laws)。</li>
+            <li>資料外洩可能導致專有資料的損失 (Breaches can cause the loss of proprietary data)。</li>
+            <li>資料外洩可能導致智慧財產權的損失 (Breaches can cause the loss of intellectual property)。</li>
+        </ol>
+    </li>
+    <li>
+        <p>在下列哪種雲端運算安排中，雲端客戶將對其資料和系統擁有最大的控制權，而雲端供應商將承擔最少的責任？</p>
+        <ol type="A">
+            <li>IaaS</li>
+            <li>PaaS</li>
+            <li>SaaS</li>
+            <li>社群雲 (Community cloud)</li>
+        </ol>
+    </li>
+    <li>
+        <p>在雲端遷移後，應更新 BIA 以包括對與雲端營運相關的新風險和影響的審查；此審查應包括對供應商鎖定/鎖定可能性的分析。對此風險的分析可能不必作為一項新的工作來執行，因為許多將包含的資料已可從下列哪項中獲得？</p>
+        <ol type="A">
+            <li>NIST</li>
+            <li>雲端供應商 (The cloud provider)</li>
+            <li>組織在決定雲端遷移時進行的成本效益分析 (The cost-benefit analysis the organization conducted when deciding on cloud migration)</li>
+            <li>開源供應商 (Open-source providers)</li>
+        </ol>
+    </li>
+    <li>
+        <p>一份談判不善的雲端服務合約可能導致下列所有不利影響，除了 _______________。</p>
+        <ol type="A">
+            <li>供應商鎖定 (Vendor lock-in)</li>
+            <li>惡意軟體 (Malware)</li>
+            <li>不利條款 (Unfavorable terms)</li>
+            <li>缺乏必要服務 (Lack of necessary services)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列所有都是多租戶環境中的雲端運算風險，除了 _______________。</p>
+        <ol type="A">
+            <li>因法律扣押而導致的損失/揭露風險 (Risk of loss/disclosure due to legal seizures)</li>
+            <li>資訊洩露 (Information bleed)</li>
+            <li>DDoS</li>
+            <li>權限提升 (Escalation of privilege)</li>
+        </ol>
+    </li>
+     <li>
+        <p>保護雲端營運免受內部威脅的對策包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>積極的背景調查 (Aggressive background checks)</li>
+            <li>加固的邊界設備 (Hardened perimeter devices)</li>
+            <li>技能和知識測試 (Skills and knowledge testing)</li>
+            <li>廣泛而全面的培訓計畫，包括初始、定期和複習課程 (Extensive and comprehensive training programs, including initial, recurring, and refresher sessions)</li>
+        </ol>
+    </li>
+    <li>
+        <p>保護雲端營運免受內部威脅的對策包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>主動物理監控和監視 (Active physical surveillance and monitoring)</li>
+            <li>主動電子監控和監視 (Active electronic surveillance and monitoring)</li>
+            <li>冗餘 ISP (Redundant ISPs)</li>
+            <li>對所有不需要了解原始資料的人員進行資料遮罩和模糊化 (Masking and obfuscation of data for all personnel without need to know for raw data)</li>
+        </ol>
+    </li>
+    <li>
+        <p>保護雲端營運免受供應商資料中心內部威脅的對策包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>廣泛的合約保護，以確保供應商對其自身人員確保極高水準的信任 (Broad contractual protections to make sure the provider is ensuring an extreme level of trust in its own personnel)</li>
+            <li>如果供應商自身人員存在疏忽或惡意行為，對雲端供應商處以罰款 (Financial penalties for the cloud provider in the event of negligence or malice on the part of its own personnel)</li>
+            <li>DLP 解決方案 (DLP solutions)</li>
+            <li>可擴展性 (Scalability)</li>
+        </ol>
+    </li>
+    <li>
+        <p>保護雲端營運免受供應商資料中心內部威脅的對策包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>職責分離 (Separation of duties)</li>
+            <li>最低權限 (Least privilege)</li>
+            <li>利益衝突 (Conflict of interest)</li>
+            <li>強制休假 (Mandatory vacation)</li>
+        </ol>
+    </li>
+    <li>
+        <p>雲端營運提供的用於處理 BC/DR 的好處包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>一次性密碼本 (One-time pads)</li>
+            <li>分散式遠端處理和資料儲存 (Distributed, remote processing and storage of data)</li>
+            <li>快速複製 (Fast replication)</li>
+            <li>雲端供應商提供的定期備份 (Regular backups offered by cloud providers)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列所有方法都可用於減輕因權限提升造成的損害，除了 _______________。</p>
+        <ol type="A">
+            <li>廣泛的存取控制和身份驗證工具及技術 (Extensive access control and authentication tools and techniques)</li>
+            <li>由訓練有素、技術熟練的人員定期對所有日誌資料進行分析和審查 (Analysis and review of all log data by trained, skilled personnel on a frequent basis)</li>
+            <li>定期且有效地使用密碼清理工具 (Periodic and effective use of cryptographic sanitization tools)</li>
+            <li>使用諸如 SIM、SIEM 和 SEM 解決方案之類的自動化分析工具 (The use of automated analysis tools such as SIM, SIEM, and SEM solutions)</li>
+        </ol>
+    </li>
+     <li>
+        <p>惡意攻擊者會偏好攻擊哪種類型的 hypervisor？</p>
+        <ol type="A">
+            <li>Type 1</li>
+            <li>Type 2</li>
+            <li>Type 3</li>
+            <li>Type 4</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個術語用於描述由於雲端供應商已停止營運而導致無法存取資料？</p>
+        <ol type="A">
+            <li>關閉 (Closing)</li>
+            <li>供應商鎖定 (Vendor lock-out)</li>
+            <li>供應商鎖定 (Vendor lock-in)</li>
+            <li>遮罩 (Masking)</li>
+        </ol>
+    </li>
+    <li>
+        <p>由於 PaaS 實施通常用於軟體開發，因此應始終牢記的漏洞之一是什麼？</p>
+        <ol type="A">
+            <li>惡意軟體 (Malware)</li>
+            <li>可攜式設備的遺失/盜竊 (Loss/theft of portable devices)</li>
+            <li>後門 (Backdoors)</li>
+            <li>DoS/DDoS</li>
+        </ol>
+    </li>
+</ol>
+<ol>
+    <li>D. 彈性 (<span class="english">Elasticity</span>) 是雲端運算好處的名稱，即資源可以根據需要分配以滿足客戶需求。模糊化 (<span class="english">Obfuscation</span>) 是一種隱藏完整原始資料集的技術，無論是對不需要知道的人員還是用於測試。移動性 (<span class="english">Mobility</span>) 不是 CBK 中的相關術語。</li>
+    <li>D. 這不是正常的配置，不太可能提供真正的好處。</li>
+    <li>B. 背景調查 (<span class="english">Background checks</span>) 是用於減輕來自內部行為者潛在威脅的控制；外部威脅不太可能提交背景調查。</li>
+    <li>B. IRM 和 DLP 分別用於增強的身份驗證/存取控制和出口監控，實際上會降低可移植性 (<span class="english">portability</span>) 而不是增強它。</li>
+    <li>A. 雙重控制 (<span class="english">Dual control</span>) 對於遠端存取設備沒有用，因為我們需要為每個設備分配兩個人，這會降低效率和生產力。混淆 (<span class="english">Muddling</span>) 是一種雞尾酒製備技術。安全港 (<span class="english">Safe harbor</span>) 是一種政策規定，允許透過替代方法而不是主要指令來實現合規。</li>
+    <li>D. 雲端供應商的轉銷商 (<span class="english">resellers</span>) 是行銷和銷售機制，不是可能影響雲端客戶安全的營運依賴關係。</li>
+    <li>A. 州通知法和專有資料/智慧財產權的損失在雲端之前就已存在；只有無法轉移責任 (<span class="english">transfer liability</span>) 才是新的。</li>
+    <li>A. IaaS 要求雲端客戶安裝和維護作業系統、程式和資料；PaaS 讓客戶安裝程式和資料；在 SaaS 中，客戶只上傳資料。在社群雲中，資料和設備所有者是分散的。</li>
+    <li>C. NIST 提供許多資訊豐富的指南和標準，但沒有針對任何特定組織的內容。雲端供應商不會準備鎖定/鎖定潛力的分析。開源供應商可以提供許多有用的資料，但同樣，沒有針對該組織的具體內容。</li>
+    <li>B. 惡意軟體 (<span class="english">Malware</span>) 風險和威脅不受雲端合約條款的影響。</li>
+    <li>C. DoS/DDoS 威脅和風險並非多租戶架構所獨有。</li>
+    <li>B. 加固的邊界設備 (<span class="english">Hardened perimeter devices</span>) 在減輕外部攻擊風險方面更有用。</li>
+    <li>C. ISP 冗餘 (<span class="english">ISP redundancy</span>) 是用於控制外部風險的手段，而不是內部威脅。</li>
+    <li>D. 可擴展性 (<span class="english">Scalability</span>) 是雲端運算的一個特性，允許使用者根據需要規定服務的增加或減少，而不是對抗內部威脅的手段。</li>
+    <li>C. 利益衝突 (<span class="english">Conflict of interest</span>) 是一種威脅，而不是一種控制。</li>
+    <li>A. 一次性密碼本 (<span class="english">One-time pads</span>) 是一種密碼工具/方法；這與 BC/DR 無關。所有其他選項都是使用雲端運算進行 BC/DR 的好處。</li>
+    <li>C. 密碼清理 (<span class="english">Cryptographic sanitization</span>) 是減少資料殘留風險的手段，而不是最小化權限提升的方式。</li>
+    <li>B. 攻擊者更喜歡 Type 2 hypervisor，因為作業系統提供了更大的攻擊面和潛在漏洞。不存在 Type 3 或 4 hypervisor。</li>
+    <li>B. 供應商鎖定 (<span class="english">Vendor lock-in</span>) 是由於缺乏可移植性造成的，原因多種多樣。遮罩 (<span class="english">Masking</span>) 是向不需要知道的使用者隱藏原始資料集的方法。在此背景下，關閉 (<span class="english">Closing</span>) 是一個無意義的術語。</li>
+    <li>C. 軟體開發人員通常安裝後門 (<span class="english">backdoors</span>) 作為避免在調整他們正在處理的程式時執行整個工作流程的方法；他們通常在生產軟體中無意或有意地留下後門。</li>
+</ol>
+
+</body>
+</html>

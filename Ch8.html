@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第八章：營運管理</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .warning { border-left: 5px solid #d9534f; padding: 10px; margin: 15px 0; background-color: #fdf7f7; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第八章：營運管理 <span class="english">(Operations Management)</span></h1>
+
+<p>本章涵蓋了營運監控、容量、維護、變更與配置管理以及雲端資料中心的業務連續性/災難復原 (BC/DR) 的基本方面。</p>
+<p>在其他章節中，我們經常將雲端客戶稱為「您的組織」或做出其他相關聯想（使用<span class="key-term">您的</span>或<span class="key-term">我們</span>來表示雲端客戶在許多事項上的觀點）。在本章中，焦點幾乎完全放在雲端供應商身上，特別是供應商的資料中心。我們可能會使用先前用於客戶的相同代名詞（您、您的或我們）來指代與供應商相關的行動；希望上下文能防止任何誤解。</p>
+<p>在本章中，我們將討論雲端資料中心營運商應使用的各種實踐，以優化效能並增強其基礎架構和系統的耐用性。這將包括系統監控、配置和變更管理計畫以及來自供應商角度的 BC/DR 的涵蓋範圍。</p>
+
+<h2>監控、容量與維護 <span class="english">(Monitoring, Capacity, and Maintenance)</span></h2>
+
+<p>資料中心營運商了解其硬體、軟體和網路的使用情況以及所有相關資源承受的壓力非常重要。這些資訊有助於資料中心營運商了解如何更好地分配和配置所有這些項目以滿足客戶需求（並遵守服務水準協議，或 SLA）。這實現了三個重要的 IT 服務管理功能：</p>
+<ul>
+    <li><span class="key-term">服務水準管理</span> <span class="english">(Service-level management)</span> 確保 IT 組織履行其對內部和外部客戶的義務。</li>
+    <li><span class="key-term">可用性管理</span> <span class="english">(Availability management)</span> 提高 IT 服務的彈性，以確保其滿足客戶需求的能力。</li>
+    <li><span class="key-term">容量管理</span> <span class="english">(Capacity management)</span> 確保 IT 資源足以滿足當前和未來的業務需求。</li>
+</ul>
+
+<h3>監控 <span class="english">(Monitoring)</span></h3>
+<p>需要即時評估軟體、硬體和網路元件，以了解哪些系統可能接近容量，以便組織在問題出現時能夠盡快回應。這可以而且應該透過營運商可用的幾種工具來完成：</p>
+<p><span class="key-term">作業系統記錄</span> <span class="english">(OS Logging)</span> 大多數作業系統都具有用於監控效能和事件的整合工具集。除了本書其他地方提到的安全用途外，雲端供應商可以設置作業系統日誌，以便在用量接近可能影響 SLA 參數的容量利用率或效能下降水準時向管理員發出警報。這些可以包括 CPU 使用率、記憶體使用率、磁碟空間（虛擬或有形）以及磁碟 I/O 時間（寫入和讀取磁碟速度慢的指標）。</p>
+<p><span class="key-term">雲端應用程式遙測</span> <span class="english">(Cloud Application Telemetry)</span> 隨著組織將新的雲端服務整合到其營運環境中，將這些服務生成的日誌整合到監控工作中非常重要。雲端應用程式遙測是一個術語，統稱某些雲端服務提供的豐富資訊來源，組織可以將其納入其安全監控工作。使用雲端應用程式遙測也帶來了新的挑戰，因為從雲端導入或匯出日誌來源可能很困難，並且這些日誌條目可能與即時存在延遲。</p>
+<p><span class="key-term">硬體監控</span> <span class="english">(Hardware Monitoring)</span> 與作業系統一樣，許多供應商在常見的設備構建中包含效能監控工具。這些可用於測量諸如 CPU 溫度、風扇速度、電壓（消耗和吞吐量）、CPU 負載和時脈速度以及磁碟機溫度等效能指標。也有商業產品可以收集和提供這些資料，並在設備本身未整合此功能時提供警報。</p>
+<p><span class="key-term">網路監控</span> <span class="english">(Network Monitoring)</span> 除了作業系統和設備本身之外，還需要監控各種網路元素。這些不僅包括硬體和軟體，還包括像佈線和軟體定義網路 (SDN) 控制平面這樣的分發方面。供應商應確保當前容量滿足客戶需求，並增加客戶需求以確保仍然提供雲端運算的靈活性和可擴展性特徵。供應商還應確保網路沒有過載或承受不可接受的延遲。</p>
+
+<div class="note">
+    <p>與所有日誌資料一樣，效能監控資訊可以饋送到集中式系統，例如安全資訊和事件管理 (SIEM) 平台，以進行集中分析和審查。營運團隊應使用這些工具來監控網路、運算和儲存資源的效能和容量以及業務關鍵服務的回應時間。</p>
+</div>
+
+<h2>物理與環境保護 <span class="english">(Physical and Environmental Protection)</span></h2>
+
+<p>除了硬體和軟體之外，監控資料中心內的環境條件也很重要。特別是，<span class="key-term">溫度</span> <span class="english">(temperature)</span> 和<span class="key-term">濕度</span> <span class="english">(humidity)</span> 是優化營運和效能的基本資料點。捕捉資料中心內溫度的真實情況很重要，或許可以透過在整個氣流過程中放置的多個測溫設備的測量值取平均值。為了效能監控的目的，我們的目標指標將是由美國供暖、製冷和空調工程師學會 (ASHRAE) 技術委員會 9.9 制定的標準。</p>
+<p>ASHRAE 在 2016 年發布了對資料中心各方面的極其詳細的建議，包括 IT 設備、電源供應和電池備份，所有這些對於資料中心營運商或安全從業人員來說都可能非常有用。這些可以從 ASHRAE 網站免費獲得：https://tpc.ashrae.org/FileDownload?idx=c81e88e4-998d-426d-ad24-bdedfb746178。這通常也是一份很好的讀物，值得您花一些時間來審閱。</p>
+<p>雖然有許多具體而詳細的建議，但資料中心的一般 ASHRAE 建議範圍如下：</p>
+<ul>
+    <li>溫度：64° 至 81° F（18° 至 27° C）</li>
+    <li>濕度：露點 15° 至 59° F（-9° 至 15° C），相對濕度 60%</li>
+</ul>
+<p>雖然這些範圍給出了資料中心內環境條件的一般概念，但 ASHRAE 指南在基於設備的類型、年齡和位置的特定範圍方面要詳細得多。營運商應確定哪個指南最適用於其設施。此外，ASHRAE 僅從平台無關的角度提供此建議。資料中心營運商還必須考慮設備製造商關於影響其特定產品效能參數的環境範圍的任何指南和建議。</p>
+
+<div class="box">
+    <p><strong>環境溫度和環境濕度的影響 (Effects of Ambient Temperature and Ambient Humidity)</strong></p>
+    <p>溫度和濕度在影響設備效能方面扮演什麼角色？</p>
+    <p>過高的環境溫度可能導致設備過熱。我們在智慧手機或筆記型電腦變熱時都經常看到這種情況。高容量電氣元件會產生大量廢熱，設備對超出其運行參數的條件可能很敏感。過低的環境溫度可能對健康和人類安全構成風險；在冰點接觸裸露的金屬會灼傷或撕掉皮膚；此外，在這種條件下工作的人們只會感到不舒服和不快樂，這種情況會導致不滿，進而導致安全風險。</p>
+    <p>過高的環境濕度會促進金屬元件的腐蝕以及黴菌和其他有機體的生長。過低的環境濕度會增加靜電放電的可能性，這可能影響人員和設備，並增加火災的可能性。</p>
+</div>
+
+<h2>維護 <span class="english">(Maintenance)</span></h2>
+<p>持續的正常運行時間需要持續維護整體環境。這還包括根據需要，在預定基礎上和非預定時間維護個別元件。在以下部分中，我們將討論一般維護事項、更新、升級和補丁管理。</p>
+
+<h3>一般維護概念 <span class="english">(General Maintenance Concepts)</span></h3>
+<p>資料中心中的設備可以描述為處於正常生產模式或<span class="key-term">維護模式</span> <span class="english">(maintenance mode)</span>。當系統或設備置於維護模式時，資料中心營運商必須確保以下任務成功完成：</p>
+<p><span class="key-term">在進入維護模式之前，所有營運實例都從系統/設備中移除 (All operational instances are removed from the system/device before it enters maintenance mode)。</span> 我們不希望影響客戶生產環境中的任何交易。因此，在我們開始維護活動之前，我們必須將任何虛擬化實例遷移出它們所在的特定系統和設備。</p>
+<p><span class="key-term">阻止所有新登入 (Prevent all new logins)。</span> 出於與前一項任務相同的原因，我們不希望客戶登入受影響的系統和設備。</p>
+<p><span class="key-term">確保持續記錄，並開始增強記錄 (Ensure logging is continued, and begin enhanced logging)。</span> 管理員活動比普通使用者的活動更強大，因此充滿風險。因此，建議您以比記錄使用者更高的速率和詳細程度記錄管理員操作。維護模式是一種管理功能，因此需要增加記錄。</p>
+
+<div class="note">
+    <p>在將系統或設備從維護模式移回正常操作之前，重要的是測試它是否具有客戶用途所需的所有原始功能，維護是否成功，以及所有活動的適當文件是否完整。</p>
+</div>
+
+<h3>更新 <span class="english">(Updates)</span></h3>
+<p>行業最佳實踐包括確保我們遵守有關特定產品的所有供應商指南。事實上，未能遵守供應商規範可能表明營運商未能提供必要的謹慎，而有文件證明的遵守供應商說明可以證明盡職調查。</p>
+<p>除了部署前的配置（在本章後面的「變更與配置管理」部分討論）之外，供應商還會發布持續的維護說明，通常是以<span class="key-term">更新</span> <span class="english">(updates)</span> 的形式。這些可以是軟體的應用程式套件和硬體的韌體安裝的形式。前者也可以是<span class="key-term">補丁</span> <span class="english">(patches)</span> 的形式，我們將在稍後的部分專門討論。</p>
+<p>更新過程應在營運商的治理中正式化（如同所有流程一樣，它們都應源自政策）。它應至少包括以下元素：</p>
+<p><span class="key-term">記錄更新發起的方式、時間和原因 (Document how, when, and why the update was initiated)。</span> 如果由供應商頒布，請註明通訊的詳細資訊，包括日期、更新代碼或編號、解釋和理由；其中一些可以透過引用來包含，例如提供指向供應商宣布更新說明的頁面的 URL。</p>
+<p><span class="key-term">透過變更管理 (CM) 流程移動更新 (Move the update through the change management (CM) process)。</span> 對設施的所有修改都應透過 CM 方法論進行並如此記錄。CM 流程的詳細資訊包含在本章後面，但在更新應用之前，應強調將沙盒測試納入 CM 的一部分。</p>
+<ol>
+    <li>將系統和設備置於維護模式。遵守本章前面部分的建議。</li>
+    <li>將更新應用於必要的系統和設備。註解資產庫存以反映更改。</li>
+    <li>驗證更新。在生產環境中運行測試，以確保所有必要的系統和設備都已收到更新。如果有任何遺漏，請重複安裝直到完成。</li>
+    <li>驗證修改。確保更新的預期結果已生效，並且更新後的系統和設備與生產環境的其餘部分適當互動。</li>
+    <li>恢復正常營運。恢復常規業務。</li>
+</ol>
+
+<h3>升級 <span class="english">(Upgrades)</span></h3>
+<p>在此背景下，我們將<span class="key-term">更新</span> <span class="english">(updates)</span> 與<span class="key-term">升級</span> <span class="english">(upgrades)</span> 區分開來，目的如下：更新應用於現有系統和元件，而升級是用較新的元素替換較舊的元素。<span class="key-term">升級</span> <span class="english">(upgrade)</span> 過程應大致映射到更新的過程，包括在治理中正式化、CM 方法論、測試等等。在升級中需要特別注意記錄資產庫存的更改，不僅要添加新元素，還要註解舊元素的移除和安全處置。當然，這意味著安全處置是升級過程中包含的一個元素，而不是更新中包含的元素。</p>
+
+<h3>補丁管理 <span class="english">(Patch Management)</span></h3>
+<p><span class="key-term">補丁</span> <span class="english">(Patches)</span> 是最常與軟體相關的各種更新。我們在此將它們區分開來是因為它們的頻率：軟體供應商通常會發布補丁，既用於對給定需求的即時回應（例如新發現的漏洞），也用於常規目的（修復、添加或增強功能）並定期進行。</p>
+<p>補丁管理過程必須以與更新和升級大致相同的方式正式化，包括納入政策等等。然而，補丁會帶來額外的風險和挑戰，因此本討論將專門處理這些問題。以下部分涉及在管理雲端資料中心的補丁時應考慮的建議和考量。</p>
+<h4>時間安排 <span class="english">(Timing)</span></h4>
+<p>當供應商發布補丁時，所有受影響的人都面臨著二元風險：如果他們未能應用補丁，他們可能被視為未能為使用未修補產品的客戶提供應有的謹慎；如果倉促應用補丁，可能會對生產環境產生不利影響，損害客戶的營運能力。後一種情況尤其如此，當補丁是為回應新發現的漏洞而發布，並且供應商急於識別缺陷、找到並創建解決方案、發布修復程式並發布補丁時。在急於處理問題（尤其是在漏洞被廣泛宣傳並引起公眾關注時）的情況下，補丁可能會導致其他漏洞或透過降低某些互操作性或介面能力來影響其他系統。</p>
+<p>因此，很難確切知道補丁發布後多久應該應用。這取決於營運商在權衡不同選擇的利弊後做出此決定。</p>
+<p>在某些環境中（以及與某些供應商合作），可能希望安排一個固定的修補日期/時間（例如，每週或每月），以便它成為一個常規的、預期的事件。透過這種方式，各個參與者可以協調活動，變更控制過程可以容納所需的修改，並且可以按定義的方式優先處理和應用特定類型的補丁。</p>
+<p>當然，有時客戶幾乎無法控制何時可能應用某些補丁，特別是對於某些平台或供應商更新。如果客戶知道這可能是特定供應商或軟體的問題，他們可以嘗試提前計劃如何處理這種情況。</p>
+<div class="warning">
+    <p>資料中心營運商可能很想讓該領域的其他人首先應用補丁，以便根據競爭對手的經驗來確定其效果和結果。該選項的風險在於，在此期間，補丁旨在修復的漏洞可能導致損失或損害。這可能在訴訟中為追回損害賠償提供有力支持，因為那些因損失而受損的客戶可以理直氣壯地聲稱供應商知道風險，沒有採取該領域其他人所做的盡職調查步驟，並因疏忽而允許損害發生。這甚至可能支持額外或懲罰性損害賠償的索賠。同樣，雖然策略可能聽起來合理，但它帶來了這種額外的風險。</p>
+</div>
+
+<h4>實施：自動化或手動 <span class="english">(Implementation: Automated or Manual)</span></h4>
+<p>補丁可以使用自動化工具或由人員應用。兩種方法都有明顯的好處和風險。營運商將必須決定在一般基礎上（按政策）以及在發布補丁時的每種情況下（如果情況需要）使用哪種方法。每種方法都包括以下風險和收益：</p>
+<p><span class="key-term">自動化</span> <span class="english">(Automated)</span> 機械化方法將允許比手動方法更快地交付到更多目標。補丁工具還可能包括報告功能，用於註解哪些目標已收到補丁，與資產庫存進行交叉引用，並具有警報功能以通知管理員哪些目標已被遺漏。然而，如果沒有能幹的人類觀察者，該工具可能無法正常或徹底地運行，補丁可能被錯誤應用，或者報告可能不準確或描繪出不準確的完整性畫面。</p>
+<p><span class="key-term">手動</span> <span class="english">(Manual)</span> 訓練有素且經驗豐富的人員可能比機械化工具更值得信賴，並且可能了解何時發生異常活動。然而，由於雲端資料中心中需要修補的元素數量龐大，補丁過程的重複性和枯燥性甚至可能導致經驗豐富的管理員錯過許多目標。此外，該過程將比自動化選項慢得多，並且可能不夠徹底。</p>
+
+<h4>日期 <span class="english">(Dates)</span></h4>
+<p>當補丁在整個環境中推送時，實際的日期/時間戳在獲取和確認收據方面可能成為一個重要——且具有誤導性——的問題。例如，假設自動化工具需要安裝在每個目標上的本地代理。如果在補丁發生時某些目標未運行，並且要到下一個日曆日（根據目標上的內部時鐘）才會運行，則本地代理可能無法接收到補丁，因為它可能會根據中央控制器檢查當天的補丁。</p>
+<p>當補丁代理設置為根據內部時鐘指定的時間檢查補丁，並且不同的目標具有設置為不同時區的內部時鐘（例如，在地理上分散的客戶的情況下）時，這個問題可能會加劇。</p>
+<p>這個問題也不僅限於自動化工具。如果使用手動方法，管理員可能在並非所有客戶和使用者都運行其目標的給定時間/日期應用補丁，因此這些目標可能無法接收到補丁，並且管理員可能沒有意識到目前未出現在掃描中的目標可能需要在稍後的某個時間/日期進行修補。此外，如果手動應用補丁，該過程必然會延長，以便管理員可以確保在它們上線時接觸到所有潛在目標。</p>
+<p>所有這些可能性在雲端安排中都會升級，因為廣泛使用虛擬化。所有保存為映像且在補丁交付期間未當前實例化的虛擬化實例只有在下次啟動時才會接收補丁。這意味著該過程將持續到所有虛擬機都已啟用為止，這可能代表自決定實施補丁以來相當長的時間。結果是營運商決定實施補丁的時間與 100% 完成時間之間存在相對較長的延遲。這對流程和營運商來說反映不佳，尤其是在監管機構和法院眼中。</p>
+<p>也許最佳的技術是結合每種方法的優點，同時使用手動和自動化方法。手動監督在確定補丁的適用性以及測試補丁在環境中的適用性方面很有價值，而自動化工具可用於傳播補丁並確保應用統一。</p>
+<p>無論採用何種方法，修補（像所有形式的維護一樣）都應在 SLA 中提及，並且商定的補丁排程和閾值是一個重要的合約考量。</p>
+
+<h2>變更與配置管理 <span class="english">(Change and Configuration Management)</span></h2>
+
+<p>資料中心營運商，就像任何擁有 IT 網路的人一樣，需要對他們控制的資產、這些資產的狀態以及關於每個資產的明確資訊建立並維護一個現實的概念。這超出了（但包括）資產庫存——他們擁有的硬體、軟體和媒體。它還包括所有這些元素的配置記錄，包括版本控制、偏差、例外情況以及每個元素的理由，以及確定需要如何、何時以及為何進行修改的正式流程。</p>
+<p>有兩個基礎性且相互關聯的流程用於完成這項工作：<span class="key-term">變更管理</span> <span class="english">(change management)</span> 和<span class="key-term">配置管理</span> <span class="english">(configuration management)</span>。變更管理是用於審查、批准和記錄對環境的任何修改的流程。配置管理需要記錄系統和軟體的批准設置，這有助於在組織內建立基線。</p>
+<p>實際上，在許多組織中，這兩套功能都由單個流程和機構完成。為了我們討論營運功能的目的，我們將把它們聚合起來，並將它們放在一個標籤下：變更和配置管理 (CM)。我們這樣做是為了簡化資訊，儘管雲端供應商可能應該有足夠的實力以及功能和人員專業化來將兩者作為獨立活動提供。兩者的目的在意圖和程序上都非常相似，可以理解為一個概念。</p>
+
+<h3>基線 <span class="english">(Baselines)</span></h3>
+<p>CM，無論風格如何，都始於<span class="key-term">基線設定</span> <span class="english">(baselining)</span>，這是一種準確記錄所需標準狀態的方法。對於變更管理，這是基於全面、詳細的資產庫存對網路和系統的描述。對於配置管理，這是所有系統的標準構建，從作業系統中的設置到每個應用程式的設置。</p>
+<p>基線是基於所需功能以及安全性的網路和系統的通用藍圖。安全控制應納入基線，並附有對每個控制的目的、依賴關係和支持理由的透徹描述（即，說明我們希望透過每個控制實現什麼的陳述）。包含控制絕對至關重要，以便我們在透過 CM 流程考慮對環境進行修改時充分了解風險管理。如果我們以任何方式更改控制集或向環境添加新系統和功能，我們需要知道是否會產生任何增加的風險，因此，是否需要添加任何補償性控制來管理新的風險級別。</p>
+<p>在創建基線時，從所有利益相關者那裡獲取意見很有幫助：IT 部門、安全辦公室、管理層甚至使用者。基線應極好地反映組織的風險偏好，並提供安全性和營運功能之間的最佳平衡。</p>
+<p>最好，基線應適合組織中最大數量的系統。如果它將被用作範本（特別是在配置管理中），那麼如果它適用於最大數量的涵蓋系統，我們將從中獲得最大價值。然而，根據每個部門、辦公室或專案的需求建立多個基線可能有用或務實，但仍然必須確保每個不同的基線都支持必要的強制規定和要求。如果整個部門因其基線失去了一類安全覆蓋範圍而未能通過法規合規性稽核，那將是不合時宜的。</p>
+
+<h4>基線的偏差與例外 <span class="english">(Deviations and Exceptions from Baselines)</span></h4>
+<p>持續測試基線以確定所有資產都被考慮在內並檢測與基線不同的任何內容非常重要。任何此類偏差，無論是有意還是無意、授權還是未經授權，都必須記錄和審查，因為偏差會給組織帶來額外的風險/漏洞。這些偏差可能是由於錯誤的補丁管理流程、特定辦公室或使用者設置的流氓設備、外部攻擊者的入侵或糟糕的版本控制和管理實踐造成的。確定原因和任何必要的後續活動是分配了 CM 角色的人員的職責。（CM 角色將在下一節討論。）</p>
+<p>雖然基線作為比較和驗證組織中所有系統的標準，但最好不要將其視為絕對標準。對於需要通用基線未提供的功能的特定使用者、辦公室和專案，將會有大量例外請求。</p>
+<p>確保基線靈活實用，並且例外請求流程及時響應組織及其使用者的需求。繁瑣、緩慢的例外流程會導致使用者和管理人員感到沮喪，進而可能導致未經 CM 授權而實施的未經授權的變通方法。</p>
+
+<div class="warning">
+    <p>敵對的、反應遲鈍的例外流程會破壞組織的安全努力。每個人都會找到執行其工作職能的方法，無論他們的變通方法是否得到批准，或者是否是執行這些職能的最安全方式。與訓練有素、技術熟練的專業人員（他們的工作是保護環境）相比，出於絕望而行動的不知情人員更有可能進行缺乏適當安全對策的流氓修改。與強制規定不允許任何例外或使流程對使用者和辦公室來說繁重和複雜相比，透過充分合作來妥協基線的神聖性要好得多。請記住：安全從業人員的工作是支持營運，而不是阻礙那些從事生產力的人。</p>
+</div>
+
+<p>追蹤例外和偏差對於除了確保法規合規性和安全控制覆蓋範圍之外的另一個基本目的很有用：如果足夠多的例外請求要求偏離基線的相同或相似功能，請更改基線。如果基線不斷需要為重複的、等效的請求進行例行修改，那麼它就沒有達到其目的。</p>
+
+<h3>角色與流程 <span class="english">(Roles and Process)</span></h3>
+<p>CM 流程（像所有流程一樣）應在組織的治理中正式化。此政策應包括創建提供以下內容的流程和程序的規定：</p>
+<ul>
+    <li>CM 委員會 (CMB) 的組成，有時也稱為變更控制委員會 (CCB)</li>
+    <li>詳細流程</li>
+    <li>文件要求</li>
+    <li>請求例外的說明</li>
+    <li>CM 任務的分配，例如驗證掃描、分析和偏差通知</li>
+    <li>檢測到偏差後的處理程序</li>
+    <li>執行措施和責任</li>
+</ul>
+<p>CMB 應由組織內所有利益相關者的代表組成。推薦的代表包括來自 IT、安全、法律、管理、財務和採購以及人力資源部門/辦公室的人員，此外還有一般使用者。組織認為有用的任何其他參與者當然也可以包含在 CMB 中。</p>
+<p>CMB 將負責審查變更和例外請求。委員會將確定變更是否會增強功能和生產力、變更是否有資金支持、變更可能帶來哪些潛在的安全影響，以及可能需要哪些額外措施（在資金、培訓、安全控制或人員配置方面）才能使變更成功和合理。</p>
+<p>CMB 開會的頻率應足以使變更和例外請求不會被過度延遲，從而不會讓使用者和部門感到沮喪。然而，它開會的頻率也不應使為 CMB 預留的時間成為工作；參與 CMB 的人員都有其他主要職責，參與 CMB 將影響他們的生產力。在某些情況下，根據組織的不同，CMB 可能會根據具體情況開會，僅在變更和例外請求達到某個閾值時才做出回應。然而，這可能帶來一些風險，因為 CMB 成員在此期間可能會失去對流程的一些熟悉度，並且與如此多不同的辦公室安排 CMB 會議可能很尷尬，如果 CMB 會議不是常規的、優先的事項。</p>
+<p>該流程有兩種形式：一種是一次性的，另一種是重複性的。前者是初始基線設定工作；後者是正常的營運模式。將為環境中的每種類型的系統創建一個基線。</p>
+<p>初始流程應大致如下（根據每個組織的具體情況進行必要的修改）：</p>
+<ol>
+    <li><span class="key-term">完整的資產盤點清單</span> <span class="english">(Full asset inventory)</span>：為了知道正在管理什麼，了解您擁有什麼至關重要。這項工作不必獨立於所有其他類似工作，事實上可能受到從其他來源（例如業務衝擊分析 (BIA)）提取的資訊的幫助。需要確定每個基線影響的系統。</li>
+    <li><span class="key-term">基線的編纂</span> <span class="english">(Codification of the baseline)</span>：這應該是一個正式的行動，包括 CMB 的所有成員（或許還有更多人，對於初始工作；每個部門和專案可能都想貢獻和參與，因為基線將影響他們所有未來的工作）。應根據成本效益和風險分析來協商基線。同樣，使用現有來源來為此協商提供資訊是相當合理的，包括組織的風險管理框架、企業和安全架構等等。</li>
+    <li><span class="key-term">安全基線構建</span> <span class="english">(Secure baseline build)</span>：創建一個由 CMB 編纂的基線版本，並儲存以備後用。</li>
+    <li><span class="key-term">新資產的部署</span> <span class="english">(Deployment of new assets)</span>：當獲得新資產時（例如，為新員工購買的新主機），需要根據 CM 政策和程序以及 CMB 指南在該資產上安裝相關的基線配置。</li>
+</ol>
+<p>在組織的正常營運模式中，CM 流程略有不同：</p>
+<ol>
+    <li><span class="key-term">CMB 會議</span> <span class="english">(CMB meetings)</span>：CMB 開會審查和分析變更和例外請求。CMB 可以授權或否決請求，並且可以在授權之前要求額外的工作。例如，CMB 可以委託安全辦公室對如果請求獲得授權可能產生的潛在影響進行額外詳細的安全分析，或者如果 CMB 確定請求與請求者最初預期的相比需要補充培訓、管理和安全控制，CMB 可能會要求請求者為請求編列額外資金。</li>
+    <li><span class="key-term">CM 測試</span> <span class="english">(CM testing)</span>：如果 CMB 授權請求，則必須在部署之前測試新的修改。通常，此類測試應在一個隔離的沙盒網路中進行，該網路模擬生產網路的所有系統、元件、基礎架構、流量和處理，而無需接觸生產網路。測試應確定是否預期會因修改而對安全性、互操作性或功能產生任何不當影響。</li>
+    <li><span class="key-term">部署</span> <span class="english">(Deployment)</span>：根據適當的指南進行修改，並在完成後向 CMB 報告。</li>
+    <li><span class="key-term">文件記錄</span> <span class="english">(Documentation)</span>：對環境的所有修改都記錄在案並反映在資產庫存中（以及必要時在基線中）。</li>
+</ol>
+
+<div class="note">
+    <p>安全處置資產也是對 IT 環境的修改，因此需要在資產庫存中反映並向 CMB 報告。</p>
+</div>
+
+<h2>發布與部署管理 <span class="english">(Release and Deployment Management)</span></h2>
+<p>作為變更管理的支援流程，<span class="key-term">發布管理</span> (<span class="key-term">release management, RM</span>) 是一個軟體工程流程，涉及安排所有必需的元素以成功、可重複且可驗證地部署新的軟體版本。RM 的範圍包括規劃、排程和部署新軟體，它涵蓋了程式碼可能通過的所有環境，包括開發、QA/測試和預備環境——一直到生產環境，此時軟體進入活動維護階段。程式碼和相關活動從需求（通常稱為使用者故事）到編碼、測試，然後到生產的進展過程被稱為<span class="key-term">管道</span> <span class="english">(pipeline)</span>。</p>
+<div class="note">
+    <p>每次將變更發布到生產環境時，團隊都應準備好回滾流程，以便在出現問題時可以撤銷變更的影響。這些回滾程序是變更管理流程的關鍵部分。</p>
+</div>
+<p>RM 隨著敏捷軟體開發實踐的普及而發展壯大，這些實踐旨在透過使用較短的開發週期來更快地交付功能性軟體。Waterfall 是一種較舊的軟體開發方法，側重於一次性收集所有需求並全部交付，而敏捷則側重於可以在短時間內完成的小工作單元，然後進行迭代以交付額外的功能。</p>
+
+<h3>DevOps 安全 <span class="english">(DevOps Security)</span></h3>
+<p>隨著組織採用敏捷，DevOps 也隨之發展壯大。DevOps 旨在透過鼓勵更緊密的協作和更多回饋來創建跨職能團隊，以確保更順暢、更可預測的軟體交付。DevOps 要求開發和營運團隊共同努力，以簡化軟體開發和發布流程，從而實現更頻繁的軟體發布。這些更頻繁的軟體發布推動了開發軟體的工程師、負責維護軟體的營運人員以及驅動軟體需求的用戶之間需要更緊密的協調。</p>
+<p>雖然敏捷軟體開發的加速使使用者感到高興（不再需要等待一年才能讓新的系統模組上線），但它給安全從業人員帶來了一些麻煩。當新軟體每天甚至每小時上線時，根本沒有時間進行許多傳統活動，例如滲透測試。為了彌補這一點，安全從業人員必須利用自動化來減少執行安全功能所需的時間。</p>
+<p><span class="key-term">持續整合/持續交付</span> (<span class="key-term">Continuous integration/continuous delivery, CI/CD</span>) 廣泛使用自動化來顯著縮短軟體交付管道。最終目標是在工程師完成工作後盡快將新開發的軟體投入使用並運行，有時甚至在程式碼編寫後的幾分鐘內。為實現這一目標，廣泛使用自動化測試來確保新編寫的程式碼不會將錯誤引入生產環境。需要重新評估安全測試，以確定如何將所需的安全檢查整合到 CI/CD 管道中。</p>
+<p>CI/CD 中的安全自動化必須包括管理和技術控制。管理控制的範例包括檢查新軟體是否具有可驗證的需求集和批准（即，開發人員正在交付滿足定義使用者需求的程式碼，而不是不需要的功能）以及所有流程都已遵循（例如，必須進行同行評審）。自動化技術控制可以包括諸如通過靜態程式碼分析或針對即時版本的新程式碼運行的漏洞掃描成功完成之類的檢查。</p>
+<div class="note">
+    <p>DevOps 方法不僅限於軟體開發。許多組織現在尋求將這些敏捷方法應用於其技術基礎架構的創建、部署和管理，方法是採用基礎架構即程式碼 (IaC) 策略。</p>
+</div>
+
+<h2>問題與事件管理 <span class="english">(Problem and Incident Management)</span></h2>
+<p>不幸的是，資訊技術世界中會發生中斷，成熟的 IT 組織擁有處理這些中斷的流程。<span class="key-term">IT 服務管理</span> <span class="english">(IT service management)</span> 程式通常將<span class="key-term">事件</span> <span class="english">(incident)</span> 定義為導致服務中斷的意外事件，將<span class="key-term">問題</span> <span class="english">(problem)</span> 定義為事件的潛在原因。每個事件都是問題的結果，但並非每個問題都會導致事件。</p>
+<p>IT 服務管理團隊使用兩個流程來處理這些潛在和實際的中斷。<span class="key-term">問題管理</span> <span class="english">(Problem management)</span> 為組織提供了減少事件可能性或影響所需的技術、流程和程序。<span class="key-term">事件管理</span> <span class="english">(Incident management)</span> 為處理實際中斷提供了框架。</p>
+
+<h2>IT 服務管理與持續服務改進 <span class="english">(IT Service Management and Continual Service Improvement)</span></h2>
+
+<p><span class="key-term">ITIL</span>（以前稱為資訊技術基礎架構庫）包含一套企業可用於設計、維護和改進其 IT 服務的實踐。這被稱為 <span class="key-term">IT 服務管理</span> (<span class="key-term">IT service management, ITSM</span>)，這些實踐可以為任何 IT 功能實施，例如向員工提供電子郵件協作能力、設計新的面向客戶的應用程式，甚至從本地遷移到雲端基礎架構的過程。</p>
+<p><span class="key-term">ISO/IEC 20000-1, 資訊技術 — 服務管理</span>也定義了一套組織可用於管理 IT 服務的操作控制和標準。ISO 標準定義了一個旨在支援 ITSM 實踐的服務管理系統，以及建議的流程、程序和所需的組織能力。</p>
+<p>請注意，這與 ISO 27001 的方法非常相似，後者描述了資訊安全管理系統 (ISMS) 和啟用安全所需的支援。ISO 20000-1 可以用於使用各種方法管理 ITSM，包括 ITIL 和 ISACA COBIT 框架。</p>
+<p>ITSM 的目標是識別使用者需求、設計滿足這些需求的 IT 服務、成功部署它，然後進入持續改進的循環。<span class="key-term">持續服務改進管理</span> <span class="english">(Continual service improvement management)</span> 旨在確保 IT 服務提供持續的業務價值，並且服務根據需要進行更新以響應不斷變化的業務需求。顯然，向雲端運算的轉變是業務需求驅動 IT 服務變革的一個主要範例。</p>
+<p>儘管 ITIL 設計的時代大多數基礎架構都在本地維護和專用使用，但在選擇新的或評估現有的雲端服務時，一般原則非常有用。ITIL 和 ISO 20000-1 都非常強調確保 IT 服務始終提供業務價值，因此在雲端環境中進行持續服務改進時需要考慮以下一些關鍵領域/問題：</p>
+<ul>
+    <li>哪種類型的雲端服務模型最能滿足您組織的需求？是否有供應商開發了可以減少您組織必須花費以保持系統正常運行的資源的 SaaS 平台？</li>
+    <li>您的使用者是否在移動中？更具移動性的勞動力使得安全的網路設計更具挑戰性。您可能需要為世界任何地方的使用者提供安全的雲端存取，而不是從您的主要辦公室到雲端環境的 VPN。</li>
+    <li>所選服務是否滿足您組織的合規需求？擴展到新市場可能會帶來新的隱私或安全要求，這將推動您組織使用的雲端服務的變革。</li>
+    <li>您的 SLA 目標是否得到滿足？SLA 指標應與系統要求掛鉤，雲端供應商無法滿足這些要求可能需要更換供應商。</li>
+    <li>新的雲端服務是否提供成本、時間或資源節省？例如，許多雲端 PaaS 資料庫產品包括自動資料複製和高可用性，從而無需單獨的備份/恢復程序和設備。您的組織可能依賴供應商的 SOC 2 Type 2 稽核報告來保證彈性，而不是自己進行 BC/DR 演習。</li>
+</ul>
+<p>持續服務改進嚴重依賴指標來識別所需的改進並衡量任何已實施變更的有效性。例如，Web 應用程式的頁面加載時間可能是一個關鍵指標。選擇一個顯著減少頁面加載時間的新分散式雲端 Web 託管服務可為該 Web 應用程式的使用者體驗帶來改進。</p>
+
+<!-- BC/DR sections omitted for brevity, as requested -->
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+<p>在本章中，我們回顧了雲端資料中心營運管理的幾個基本要素。我們討論了監控系統和元件效能以及執行例行維護（包括修補）的重要性，以及與每項相關的某些風險和收益。還包括了與溫度、濕度和備用電源供應等環境條件相關的問題。我們還詳細介紹了 BC/DR 規劃和測試的具體方法和方法。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+<p><strong>理解業務連續性和災難復原計畫在雲端中的作用 (Understand the role of business continuity and disaster recovery programs in the cloud)。</strong> 業務連續性工作涉及在任何服務中斷期間維持關鍵營運，而災難復原工作側重於災難導致中斷後恢復營運。兩者相互關聯，在許多組織中被整合為一個工作，通常稱為連續性管理。</p>
+<p><strong>解釋關鍵的業務連續性術語，包括 RTO、RPO 和 RSL (Explain key business continuity terms, including RTO, RPO, and RSL)。</strong> 恢復時間目標 (Recovery time objective, RTO) 是在服務中斷後恢復營運能力的目標，以時間衡量。恢復點目標 (Recovery point objective, RPO) 是限制意外事件導致資料損失的目標，也以時間衡量。恢復服務水準 (Recovery service level, RSL) 是服務的一個比例，以百分比表示，是在災難期間持續營運所必需的。</p>
+<p><strong>解釋安全衛生實踐的重要性，包括修補和基線設定 (Explain the importance of security hygiene practices, including patching and baselining)。</strong> 手動或自動應用安全補丁可以保護組織免受新興安全漏洞的侵害。基線設定提供了一個標準的、安全的配置，可以從中構建系統。組織應監控系統和應用程式是否存在偏離安全基線的情況，並應對其進行調查和記錄。</p>
+<p><strong>解釋組織中用於 IT 服務管理的標準流程 (Explain the standard processes used for IT service management in an organization)。</strong> 組織通常採用 IT 服務管理的標準，包括 ITIL 和 ISO/IEC 20000-1。服務管理計畫涵蓋的流程包括變更管理、連續性管理、資訊安全管理、持續服務改進管理、事件管理、問題管理、發布管理、部署管理、配置管理、服務水準管理、可用性管理和連續性管理。</p>
+<p><strong>理解變更和配置管理的角色 (Understand the role of change and configuration management)。</strong> 變更管理是用於審查、批准和記錄對環境的任何修改的流程。配置管理需要記錄系統和軟體的批准設置，這有助於在組織內建立基線。</p>
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 B 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>哪種形式的 BC/DR 測試對營運影響最大？</p>
+        <ol type="A">
+            <li>桌面演練 (Tabletop)</li>
+            <li>模擬演練 (Dry run)</li>
+            <li>全面測試 (Full test)</li>
+            <li>結構化演練 (Structured walk-through)</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪種形式的 BC/DR 測試對營運影響最小？</p>
+        <ol type="A">
+            <li>桌面演練 (Tabletop)</li>
+            <li>模擬演練 (Dry run)</li>
+            <li>全面測試 (Full test)</li>
+            <li>結構化測試 (Structured test)</li>
+        </ol>
+    </li>
+    <li>
+        <p>液態丙烷的哪個特性增加了其作為備用發電機燃料的吸引力？</p>
+        <ol type="A">
+            <li>燃燒率 (Burn rate)</li>
+            <li>價格 (Price)</li>
+            <li>不會變質 (Does not spoil)</li>
+            <li>味道 (Flavor)</li>
+        </ol>
+    </li>
+    <li>
+        <p>CMB 應該多久開會一次？</p>
+        <ol type="A">
+            <li>每當法規規定時 (Whenever regulations dictate)</li>
+            <li>頻繁到足以滿足組織需求並減少因延遲而產生的挫敗感 (Often enough to address organizational needs and reduce frustration with delay)</li>
+            <li>每週 (Every week)</li>
+            <li>每年 (Annually)</li>
+        </ol>
+    </li>
+    <li>
+        <p>遵守 ASHRAE 的濕度標準可以降低 _______ 的可能性。</p>
+        <ol type="A">
+            <li>資料外洩 (Breach)</li>
+            <li>靜電放電 (Static discharge)</li>
+            <li>盜竊 (Theft)</li>
+            <li>反轉 (Inversion)</li>
+        </ol>
+    </li>
+     <li>
+        <p>UPS 應具有足夠的電力持續多長時間？</p>
+        <ol type="A">
+            <li>12 小時 (12 hours)</li>
+            <li>10 分鐘 (10 minutes)</li>
+            <li>一天 (One day)</li>
+            <li>足夠長的時間進行優雅關機 (Long enough for graceful shutdown)</li>
+        </ol>
+    </li>
+    <li>
+        <p>發電機轉換開關應在多長時間內使備用電源上線？</p>
+        <ol type="A">
+            <li>10 秒 (10 seconds)</li>
+            <li>在達到恢復點目標之前 (Before the recovery point objective is reached)</li>
+            <li>在 UPS 持續時間結束之前 (Before the UPS duration is exceeded)</li>
+            <li>三天 (Three days)</li>
+        </ol>
+    </li>
+    <li>
+        <p>自動化修補的哪個特性使其具有吸引力？</p>
+        <ol type="A">
+            <li>成本 (Cost)</li>
+            <li>速度 (Speed)</li>
+            <li>噪音降低 (Noise reduction)</li>
+            <li>快速識別問題的能力 (Capability to recognize problems quickly)</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個工具可以在 BC/DR 回應期間減少混淆和誤解？</p>
+        <ol type="A">
+            <li>手電筒 (Flashlight)</li>
+            <li>控制矩陣 (Controls matrix)</li>
+            <li>檢查清單 (Checklist)</li>
+            <li>呼叫樹 (Call tree)</li>
+        </ol>
+    </li>
+    <li>
+        <p>在決定是否應用特定更新時，最好遵循 ______ 以證明盡職調查。</p>
+        <ol type="A">
+            <li>法規 (Regulations)</li>
+            <li>供應商指南 (Vendor guidance)</li>
+            <li>內部政策 (Internal policy)</li>
+            <li>競爭對手的行動 (Competitors’ actions)</li>
+        </ol>
+    </li>
+    <li>
+        <p>CMB 應包括來自下列所有辦公室的代表，除了 _______________。</p>
+        <ol type="A">
+            <li>監管者 (Regulators)</li>
+            <li>IT 部門 (IT department)</li>
+            <li>安全辦公室 (Security office)</li>
+            <li>管理層 (Management)</li>
+        </ol>
+    </li>
+     <li>
+        <p>出於效能目的，作業系統監控應包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>磁碟空間 (Disk space)</li>
+            <li>磁碟 I/O 使用率 (Disk I/O usage)</li>
+            <li>CPU 使用率 (CPU usage)</li>
+            <li>列印佇列 (Print spooling)</li>
+        </ol>
+    </li>
+    <li>
+        <p>維護模式需要下列所有操作，除了 _______________。</p>
+        <ol type="A">
+            <li>移除所有活動的生產實例 (Remove all active production instances)</li>
+            <li>啟動增強的安全控制 (Initiate enhanced security controls)</li>
+            <li>阻止新登入 (Prevent new logins)</li>
+            <li>確保持續記錄 (Ensure logging continues)</li>
+        </ol>
+    </li>
+    <li>
+        <p>基線可能被更改的原因之一是什麼？</p>
+        <ol type="A">
+            <li>大量的變更請求 (Numerous change requests)</li>
+            <li>電力波動 (Power fluctuation)</li>
+            <li>減少冗餘 (To reduce redundancy)</li>
+            <li>自然災害 (Natural disaster)</li>
+        </ol>
+    </li>
+    <li>
+        <p>除了電池備份之外，UPS 還可以提供哪種能力？</p>
+        <ol type="A">
+            <li>通訊冗餘 (Communication redundancy)</li>
+            <li>線路調節 (Line conditioning)</li>
+            <li>資料外洩警報 (Breach alert)</li>
+            <li>機密性 (Confidentiality)</li>
+        </ol>
+    </li>
+    <li>
+        <p>應調查偏離安全基線的情況並 ______。</p>
+        <ol type="A">
+            <li>記錄在案 (Documented)</li>
+            <li>強制執行 (Enforced)</li>
+            <li>揭露 (Revealed)</li>
+            <li>鼓勵 (Encouraged)</li>
+        </ol>
+    </li>
+    <li>
+        <p>基線應涵蓋下列哪項？</p>
+        <ol type="A">
+            <li>盡可能多地涵蓋整個組織的系統 (As many systems throughout the organization as possible)</li>
+            <li>資料外洩警報和報告 (Data breach alerting and reporting)</li>
+            <li>版本控制流程 (A process for version control)</li>
+            <li>所有法規合規性要求 (All regulatory compliance requirements)</li>
+        </ol>
+    </li>
+    <li>
+        <p>可以使用下列哪項以符合成本效益的方式處理本地化的事件或災難？</p>
+        <ol type="A">
+            <li>UPS</li>
+            <li>發電機 (Generators)</li>
+            <li>聯合營運協議 (Joint operating agreements)</li>
+            <li>嚴格遵守適用法規 (Strict adherence to applicable regulations)</li>
+        </ol>
+    </li>
+    <li>
+        <p>雲端資料中心的發電機燃料儲存應至少持續多長時間？</p>
+        <ol type="A">
+            <li>10 分鐘 (10 minutes)</li>
+            <li>三天 (Three days)</li>
+            <li>無限期 (Indefinitely)</li>
+            <li>12 小時 (12 hours)</li>
+        </ol>
+    </li>
+    <li>
+        <p>BC/DR 工具包應包括下列所有內容，除了 _______________。</p>
+        <ol type="A">
+            <li>手電筒 (Flashlight)</li>
+            <li>文件設備 (Documentation equipment)</li>
+            <li>備用發電機的燃料 (Fuel for the backup generators)</li>
+            <li>註解的資產庫存 (Annotated asset inventory)</li>
+        </ol>
+    </li>
+</ol>
+<ol start="1">
+    <li>C. 全面測試 (<span class="english">full test</span>) 將涉及組織中的所有資產，包括所有人員。其他測試對組織的影響較小，因為它們不涉及實際啟動計劃。</li>
+    <li>A. 桌面演練 (<span class="english">tabletop</span>) 僅涉及基本人員，不涉及生產資產。其他測試影響更大。</li>
+    <li>C. 液態丙烷不會變質 (<span class="english">does not spoil</span>)，這消除了需要不斷刷新和補充庫存的需求，並可能使其更具成本效益。燃燒率與其適用性無關，除非它對資料中心所有者選擇的特定發電機有直接影響。各種燃料的相對價格會波動。味道 (<span class="english">Flavor</span>) 在此問題中是一個干擾項，沒有任何意義。</li>
+    <li>B. 沮喪的員工和管理人員會透過實施他們自己的、未經批准的修改來增加組織的風險。CMB 會議的具體間隔因組織而異。</li>
+    <li>B. 濕度低於最佳值的資料中心可能會有更高的靜電放電 (<span class="english">static electricity discharge</span>) 率。濕度與資料外洩或盜竊無關，反轉 (<span class="english">inversion</span>) 是一個無意義的術語。</li>
+    <li>D. UPS 旨在持續足夠長的時間以保存當前正在處理的生產資料。確切的時間量將取決於許多變數，並且會因資料中心而異。</li>
+    <li>C. 發電機 (<span class="english">Generator</span>) 電力應在電池備份失效之前上線。具體時間量會因資料中心而異。</li>
+    <li>B. 自動化修補 (<span class="english">Automated patching</span>) 比手動修補快得多且效率更高。然而，它不一定比手動修補便宜。手動修補由管理員監督，他們會比自動化工具更快地識別問題。噪音降低 (<span class="english">Noise reduction</span>) 在補丁管理中根本不是一個因素。</li>
+    <li>C. 檢查清單 (<span class="english">Checklists</span>) 可作為 BC/DR 活動的可靠指南，並且應足夠直接，以便非 BC/DR 回應專家或未受過訓練的人也能完成必要的任務。手電筒 (<span class="english">Flashlights</span>) 和呼叫樹 (<span class="english">call trees</span>) 在 BC/DR 行動中當然有用，但其目的不是減少混淆和誤解。控制矩陣 (<span class="english">Control matrices</span>) 在 BC/DR 行動中沒有用處。</li>
+    <li>B. 不遵循供應商指南 (<span class="english">vendor guidance</span>) 的資料中心可能被視為未能提供應有的謹慎。法規、內部政策和競爭對手的行動都可能告知執行更新和補丁的決定，但這些與應有的謹慎沒有直接關係。這是一個困難、細微的問題，所有答案都很好，但選項 B 是最好的。</li>
+    <li>A. 監管者 (<span class="english">Regulators</span>) 不參與組織的 CMB。IT 部門、安全辦公室和管理層都應在 CMB 流程中發揮作用。</li>
+    <li>D. 磁碟空間、磁碟 I/O 使用率和 CPU 使用率都是標準的效能監控指標。列印佇列 (<span class="english">Print spooling</span>) 通常不納入效能監控計劃。</li>
+    <li>B. 在維護模式期間，團隊應移除所有活動的生產實例、阻止新登入並確保持續記錄。通常不需要啟動增強的安全控制 (<span class="english">enhanced security controls</span>)。</li>
+    <li>A. 如果 CMB 收到大量變更請求 (<span class="english">Numerous change requests</span>)，以至於修改基線會減少請求數量，那麼這就是更改基線的好理由。基線不應因電力波動、減少冗餘或自然災害而更改。</li>
+    <li>B. UPS 可以提供線路調節 (<span class="english">line conditioning</span>)，調整電力以使其最適合其服務的設備，並平滑任何電力波動。它不提供機密性、資料外洩警報或通訊冗餘。</li>
+    <li>A. 所有偏離基線的情況都應記錄在案 (<span class="english">Documented</span>)，包括調查和結果的詳細資訊。我們不強制執行或鼓勵偏差。想必，我們已經意識到偏差，所以「揭露」(<span class="english">revealed</span>) 不是一個合理的答案。</li>
+    <li>A. 基線中包含的系統越多，基線就越具成本效益和可擴展性。基線不處理資料外洩或版本控制；這些分別是安全辦公室和 CMB 的範疇。法規合規性可能（通常會）超出基線範圍，並涉及不受基線約束的系統、流程和人員。</li>
+    <li>C. 聯合營運協議 (<span class="english">Joint operating agreements</span>) 可以提供附近的中繼站點，以便可以在不同的設施和校園解決僅限於組織自身設施和校園的中斷。UPS 系統和發電機不限於服務於本地化原因的需求。法規不促進成本節省，並且在 BC/DR 活動期間通常不是最直接的考量。</li>
+    <li>D. Uptime Institute 規定所有雲端資料中心層級的發電機燃料 (<span class="english">generator fuel</span>) 為 12 小時。</li>
+    <li>C. BC/DR 工具包旨在緊湊，發電機燃料 (<span class="english">Fuel for the backup generators</span>) 太笨重，無法包含在工具包中。所有其他項目都應包含在內。</li>
+</ol>
+
+</body>
+</html>

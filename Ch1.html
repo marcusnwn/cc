@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第一章：架構概念</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .box { border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9; }
+        .exam-tip { border-left: 5px solid #f0ad4e; padding: 10px; margin: 15px 0; background-color: #fefbed; }
+        code { background-color: #eee; padding: 2px 4px; border-radius: 3px; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第一章：架構概念 <span class="english">(Architectural Concepts)</span></h1>
+
+<p>雲端運算 (Cloud computing) 無處不在。現代企業依賴託管在雲端的各種軟體、平台和基礎架構，而安全專業人員必須了解如何保護其組織使用的資訊和資源，無論這些資產位於何處。</p>
+<p>在本章中，我們將介紹雲端運算的基本概念，並幫助您理解開始邁向認證雲端安全專家 (Certified Cloud Security Professional, CCSP) 認證之旅所需的基礎知識。</p>
+
+<h2>雲端特性 <span class="english">(Cloud Characteristics)</span></h2>
+
+<p>雲端運算 (Cloud computing) 是過去十年資訊科技領域最具變革性的發展。世界各地的組織正在調整其整個 IT 策略以擁抱雲端，而這種變革正在對所有技術領域造成顛覆性的影響。</p>
+<p>但什麼是雲端？讓我們從一個簡單的定義開始：雲端運算是指供應商透過網路在遠端位置向客戶提供運算能力的任何情況。這個定義很廣泛，涵蓋了許多不同類型的活動。</p>
+<p>我們用來定義雲端運算的一些共同特性：</p>
+<ul>
+    <li><span class="key-term">廣泛網路存取</span> <span class="english">(Broad network access)</span></li>
+    <li><span class="key-term">隨需自服務</span> <span class="english">(On-demand self-service)</span></li>
+    <li><span class="key-term">資源池</span> <span class="english">(Resource pooling)</span></li>
+    <li><span class="key-term">快速彈性與可擴展性</span> <span class="english">(Rapid elasticity and scalability)</span></li>
+    <li><span class="key-term">可量測</span> 或「計量式」<span class="key-term">服務</span> <span class="english">(Measured, or “metered,” service)</span></li>
+</ul>
+<p>這些特性在 NIST 的雲端運算定義中有簡潔的表述。</p>
+
+<div class="box">
+    <p><span class="key-term">NIST 800-145 雲端運算定義</span> <span class="english">(NIST 800-145 Cloud Computing Definition)</span></p>
+    <p>NIST 的官方雲端運算定義指出：「雲端運算是一種模型，能夠實現無所不在、便利、隨需的網路存取，進入一個共享的可配置運算資源池（例如，網路、伺服器、儲存、應用程式和服務），這些資源可以快速配置和釋放，只需最少的管理工作或服務供應商互動。」</p>
+</div>
+
+<p>這些特性也與 ISO 17788 中定義雲端運算的方式相似 (www.iso.org/iso/catalogue_detail?csnumber=60544)。</p>
+<p>讓我們更詳細地探討這些特性。</p>
+<ul>
+    <li><span class="key-term">廣泛網路存取</span> <span class="english">(Broad network access)</span> 指的是服務可以透過網路持續存取。我們可能使用網頁瀏覽器或安全殼層 (Secure Shell, SSH) 連線來存取它們，但總體概念是，無論我們或我們的使用者實際位於何處，我們都可以存取雲端中的資源。</li>
+    <li><span class="key-term">隨需自服務</span> <span class="english">(On-demand self-service)</span> 指的是允許客戶在很少或沒有供應商干預或事先溝通的情況下，擴展其運算和/或儲存需求的模型。這意味著技術人員幾乎可以在需要時立即存取雲端資源來完成工作。對於個人貢獻者以及延伸到整個組織來說，這是敏捷性 (agility) 的驚人提升。在隨選運算時代之前，想要嘗試新想法的技術人員可能需要規格化所需的伺服器、獲得資金批准、訂購硬體、等待硬體送達、實際安裝，並配置作業系統，然後才能開始工作。這可能需要數週時間，而今天，同樣的任務可以在幾秒鐘內在雲端完成。隨選自服務運算是真正的遊戲規則改變者。</li>
+    <li><span class="key-term">資源池</span> <span class="english">(Resource pooling)</span> 是允許雲端供應商在保持財務可行性的同時滿足客戶各種需求的特性。雲端供應商可以進行遠超任何單一客戶所能提供的資本投資，並根據需要分配這些資源，以使資源不會未充分利用（這意味著浪費投資）或過度使用（這意味著服務水準下降）。</li>
+    <li><span class="key-term">快速彈性與可擴展性</span> <span class="english">(Rapid elasticity and scalability)</span> 允許客戶根據需要擴展或縮減 IT 足跡（使用者數量、機器數量、儲存大小等），以滿足營運需求而無需過剩容量。在雲端中，這可以在瞬間完成，而不是在傳統環境中，獲取和部署資源（或處理舊資源）可能需要數週或數月。在許多情況下，這種擴展可以自動發生，使用程式碼根據需求變化添加和刪除資源。</li>
+    <li><span class="key-term">可量測服務</span> <span class="english">(Measured service)</span> 或計量式服務 (metered service) 意味著您在雲端中做的幾乎所有事情都是計量的。雲端供應商會測量您使用虛擬伺服器的秒數、您消耗的磁碟空間量、您進行的函數呼叫次數以及許多其他指標。這使他們能夠精確地向您收取您使用的服務費用——不多也不少。這與提供電力和水等商品服務的公用事業公司通常使用的模型相同。當您第一次遇到可量測服務模型時，可能會有點令人生畏，但它為雲端客戶提供了有效管理其使用率並實現雲端經濟效益的能力。</li>
+</ul>
+
+<div class="box">
+    <p><span class="key-term">彈性 vs. 可擴展性</span> <span class="english">(Elasticity vs. Scalability)</span></p>
+    <p>許多人交替使用彈性 (elasticity) 和可擴展性 (scalability) 這兩個詞，但它們實際上是略有不同的概念。</p>
+    <p>嚴格來說，<span class="key-term">可擴展性</span> <span class="english">(scalability)</span> 指的是系統隨著需求增加而增長的能力。這種增長不需要是自動化的，但需要是可能的。可擴展性可能來自使用雲端供應商的自動擴展功能，也可能來自向系統添加實體硬體。</p>
+    <p><span class="key-term">彈性</span> <span class="english">(Elasticity)</span> 指的是系統根據當前需求水準動態增長和縮減的能力。管理員可以設定系統在需求增加時自動添加儲存、處理能力或網路容量，然後在需求降低時釋放這些資源。這透過僅在實際需要時購買昂貴的運算資源，提供了巨大的成本效益。</p>
+</div>
+
+<h2>業務需求 <span class="english">(Business Requirements)</span></h2>
+
+<p>在大多數企業中，IT 部門不是利潤中心；它提供支援功能，讓其他業務單位能夠創造利潤。網路安全團隊絕對屬於這一類——他們通常不做任何能為企業創造收入的事情，而且從業務領導者的角度來看，它們代表著降低效率的沉沒成本。</p>
+<p>事實上，安全活動通常會阻礙業務效率（因為一般來說，某物越安全，無論是設備還是流程，效率就越低）。這就是為什麼組織的業務需求驅動安全決策，而不是反過來。</p>
+<p>一個成功的組織會盡可能多地收集有關營運業務需求的資訊；這些資訊可以用於許多目的，包括安全領域的幾個功能。（我們將在本書中隨處提及，但幾個例子包括業務連續性和災難復原工作、風險管理計劃和資料分類。）同樣，精明的安全專業人員需要盡可能多地了解組織的運作。組織的營運方面可以幫助安全人員更好地執行他們的任務，無論他們被分配到哪個級別或角色。考慮以下範例：</p>
+<ul>
+    <li>網路安全管理員必須根據組織的業務了解預期流量的類型。</li>
+    <li>入侵偵測分析師必須了解組織正在做什麼、業務活動如何發生以及業務在哪裡（地理上）運作，以便更好地了解潛在外部攻擊的性質和強度，以及如何調整基準。</li>
+    <li>安全架構師必須了解各個組織部門的各種需求，以在不損害其安全配置的情況下增強其運作。</li>
+    <li>安全領導者不僅必須了解組織使用的技術，還必須了解相關風險以及如何適當管理這些風險。</li>
+</ul>
+
+<div class="box">
+    <p><span class="key-term">功能性需求</span> <span class="english">(Functional requirements)</span>：設備、流程或員工為完成業務任務所必需的效能方面。範例：現場銷售人員必須能夠遠端連接到組織的網路。</p>
+    <p><span class="key-term">非功能性需求</span> <span class="english">(Nonfunctional requirements)</span>：設備、流程或員工的那些對於完成業務任務不是必需但卻是期望或預期的方面。範例：銷售人員的遠端連接必須是安全的。</p>
+</div>
+
+<p>當組織考慮在雲端和本地運算環境之間分配資源時，他們必須選擇適合其需求的組合。這不是一個輕率的決定，業務需求必須得到這種轉變的支援。雲端運算還有不同的雲端服務和交付模型，組織必須決定哪種模型將優化成功。</p>
+
+<h3>理解現狀 <span class="english">(Understanding the Existing State)</span></h3>
+<p>真正評估和理解業務流程、資產和需求至關重要。未能正確掌握業務需求的全部範圍可能導致遷移到雲端後新環境中缺少資產或能力。</p>
+<p>然而，在進行此項工作的開始，目的不是確定什麼最能滿足業務需求，而是確定這些需求是什麼。需要對資產、流程和需求進行全面盤點，並且有多種方法可以收集這些資料。通常，會聯合使用多種方法以減少遺漏的可能性。</p>
+<p>以下是一些收集業務需求的可能方法：</p>
+<ul>
+    <li>訪談功能經理</li>
+    <li>訪談使用者</li>
+    <li>訪談高階主管</li>
+    <li>觀察員工工作</li>
+    <li>調查客戶</li>
+    <li>收集網路流量</li>
+    <li>盤點資產</li>
+    <li>收集財務記錄</li>
+    <li>收集保險記錄</li>
+    <li>收集行銷資料</li>
+    <li>收集法規要求</li>
+</ul>
+<p>收集足夠資料後，需要進行詳細分析。這就是<span class="key-term">業務衝擊分析</span> <span class="english">(Business Impact Analysis, BIA)</span> 發揮作用的地方。</p>
+<p>BIA 是對組織內每個資產和流程優先順序的評估。適當的分析應考慮對每個資產的任何損害或損失可能對整個組織造成的影響（衝擊）。在 BIA 期間，應特別注意識別關鍵路徑和單點故障。您還需要確定合規成本——即，您組織被強制要求的立法和合約要求。您組織的法規限制將基於許多變數，包括您組織營運的司法管轄區、組織所屬的行業、客戶的類型和位置等等。</p>
+
+<div class="exam-tip">
+    <p>資產可以是<span class="key-term">有形的</span> <span class="english">(tangible)</span> 或<span class="key-term">無形的</span> <span class="english">(intangible)</span>。它們可以包括硬體、軟體、智慧財產權、人員、流程等等。有形資產的例子是像路由器和伺服器這樣的東西，而無形資產通常是您無法觸摸的東西，例如軟體程式碼、思想表達和商業方法。</p>
+</div>
+
+<h3>成本效益分析 <span class="english">(Cost/Benefit Analysis)</span></h3>
+<p>一旦您清楚地了解了您的組織在業務線和流程方面的運作情況，您就可以更好地了解組織可能從雲端遷移中獲得的好處以及與之相關的成本。進行<span class="key-term">成本效益分析</span> <span class="english">(cost/benefit analysis)</span> 可以幫助您以清晰的財務術語理解這種權衡。</p>
+
+<p>顯然，目前推動組織進行雲端遷移的最大驅動力是感知的成本節省，這是一個重要且合理的考量。接下來的幾個部分描述了這種考量的一些方面。</p>
+
+<h4>資本支出減少 <span class="english">(Reduction in Capital Expenditure)</span></h4>
+<p>如果您的組織購買設備在其內部環境中使用，該設備的容量要麼會被充分利用，要麼（更有可能）不會。如果設備在其最大容量下使用，那麼很可能需要它的功能在某個時候會遇到效率低下的問題。即使需求的微小增長也會使設備容量超載。然而，如果設備未被充分利用，那麼組織就為沒有獲得全部價值的東西付了錢。未使用或過剩的容量被浪費了。實際上，除非組織將設備使用到危險地接近超載的程度，否則組織為該設備支付了過高的費用——您不能只買一部分設備。</p>
+<p>此外，從購買設備中可以實現的稅收優惠必須在多年的營運中累計，作為該設備/資產的折舊。對於付費服務（例如雲端），作為<span class="key-term">營運支出</span> <span class="english">(operational expenditure, OpEx)</span>，整個付款（可能是每月或每季）作為費用可以抵稅。</p>
+<p>然而，在雲端中，組織只需為其使用的部分付費（無論處理負載需要多少設備或設備的幾分之幾），不多也不少。這就是前面描述的<span class="key-term">可量測服務</span> <span class="english">(metered service)</span> 方面。因此，組織不會為這些資產多付錢。然而，雲端供應商確實有可分配給雲端客戶的過剩容量，因此您的組織始終處於能夠應對增加的需求（甚至是劇烈、快速和顯著的需求）而不會不堪重負的位置（這就是前面描述的<span class="key-term">快速彈性</span> <span class="english">(rapid elasticity)</span> 方面）。</p>
+<p>組織使用託管雲端服務的一種方式是在需求增加期間，利用託管服務來增強內部私有資料中心的能力。我們稱之為<span class="key-term">雲端爆增</span> <span class="english">(cloud bursting)</span>。組織可能擁有自己的資料中心資產，但在需求高峰期（危機情況、繁忙的假日購物期等）無法處理增加的需求，因此它根據需要從外部雲端供應商租用額外的容量。</p>
+<p>因此，透過部署到雲端環境，組織可以立即實現成本節省（無需為未使用的資源付費）並避免代價高昂的風險（因需求增加而導致服務中斷的可能性）。</p>
+
+<div class="box">
+    <p><span class="key-term">雲端治理</span> <span class="english">(Cloud Governance)</span></p>
+    <p>隨著個別業務單位在未與 IT 部門或其他業務單位協調的情況下做出採用決策，雲端服務可能在整個組織中迅速湧現。</p>
+    <p>雲端治理計畫試圖將組織的所有雲端活動置於更集中的控制之下。它們充當篩選機構，幫助確保組織使用的雲端服務滿足技術、功能和安全要求。它們還提供了一個集中的監控點，用於監控重複服務，防止不同業務單位在可以透過整合降低成本和操作環境複雜性的情況下，花錢購買類似的服務。</p>
+    <p>建立集中的治理計畫還有助於組織避免使用<span class="key-term">影子 IT</span> <span class="english">(shadow IT)</span>，即功能單位自行發現和配置雲端服務以滿足未滿足的技術需求。</p>
+</div>
+
+<h4>人事成本降低 <span class="english">(Reduction in Personnel Costs)</span></h4>
+<p>對於大多數組織（除了那些提供 IT 服務的組織）來說，管理資料不是核心競爭力，更不用說盈利的業務線了。資料管理也是一項專業技能，具有 IT 經驗和培訓的人員相對昂貴（與其他部門的員工相比）。滿足內部 IT 環境實體需求所需的人員對組織而言是一項重大且不成比例的巨大投資。透過遷移到雲端，組織可以在很大程度上剝離大部分（如果不是全部）這些人員。</p>
+
+<h4>營運成本降低 <span class="english">(Reduction in Operational Costs)</span></h4>
+<p>維護和管理內部環境需要大量的精力和費用。當組織遷移到雲端時，成本成為服務價格的一部分，由雲端供應商計算。因此，成本與合約的固定費用捆綁在一起，並且不會因增強的操作（預定更新、緊急應變活動等）而增加。</p>
+
+<h4>轉移部分監管成本 <span class="english">(Transferring Some Regulatory Costs)</span></h4>
+<p>一些雲端供應商可能為其客戶提供整體性、有針對性的監管合規性套件。例如，雲端供應商可能有一套控制措施，可以應用於給定客戶的雲端環境，以確保滿足支付卡產業 (Payment Card Industry, PCI) 的要求。任何想要該套件的客戶都可以在服務合約中指定，而不是嘗試逐項劃分個別控制。透過這種方式，雲端客戶可以減少他們在嘗試制定遵守相關法規的控制框架方面可能產生的部分精力和費用。</p>
+
+<div class="exam-tip">
+    <p>我們將在後續章節中更詳細地討論<span class="key-term">服務水準協議</span> (<span class="key-term">Service-Level Agreements, SLAs</span>) 或服務合約。</p>
+</div>
+
+<p>雖然有可能將部分責任和成本轉移給服務供應商或保險公司，但根本不可能將所有責任轉移給外部供應商。如果您的組織收集<span class="key-term">個人可識別資訊</span> (<span class="key-term">Personally Identifiable Information, PII</span>)，即使您正在使用雲端服務且洩漏/發布是由於雲端供應商的疏忽或攻擊造成的，您仍然對該資料的任何洩漏或發布負最終責任。您也許能夠轉移部分財務風險，但在洩漏事件後，您仍可能面臨監管和/或聲譽風險。</p>
+
+<h4>資料歸檔/備份服務成本降低 <span class="english">(Reduction in Costs for Data Archival/Backup Services)</span></h4>
+<p>異地備份是長期資料歸檔和災難復原目的的標準做法。即使組織不在雲端中進行常規操作，為此目的使用基於雲端的服務也是明智且符合成本效益的。然而，將操作遷移到雲端可以與歸檔/備份使用相結合，產生規模經濟；這可以為組織帶來整體的成本節省。它還可以增強組織的業務連續性和災難復原 (Business Continuity/Disaster Recovery, BC/DR) 策略。</p>
+
+<h3>預期影響 <span class="english">(Intended Impact)</span></h3>
+<p>所有這些好處都可以根據美元價值進行列舉：每個潛在的成本節省措施都可以量化。高階主管——在主題專家的意見下——需要權衡潛在的財務利益與在雲端營運的風險。正是這種由業務需求驅動但由安全考量提供資訊的成本效益計算，將使高階主管能夠決定組織營運環境的雲端遷移是否有意義。</p>
+
+<div class="exam-tip">
+    <p><span class="key-term">投資報酬率</span> (<span class="key-term">Return on Investment, ROI</span>) 是一個與成本效益衡量相關的術語。它用於描述盈利能力比率。通常透過將淨利潤除以淨資產來計算。</p>
+</div>
+
+<div class="exam-tip">
+    <p>雲端遷移也伴隨著許多風險。我們將在本書中詳細討論這些風險。</p>
+</div>
+
+<h2>雲端運算服務類別 <span class="english">(Cloud Computing Service Categories)</span></h2>
+
+<p>雲端服務通常分為三個一般類別，基於供應商提供的內容、客戶的需求以及服務合約中各自的責任。(ISC)² 期望您了解這三種模型以供測試目的。這些類別是<span class="key-term">軟體即服務</span> (<span class="key-term">Software as a Service, SaaS</span>)、<span class="key-term">基礎架構即服務</span> (<span class="key-term">Infrastructure as a Service, IaaS</span>) 和<span class="key-term">平台即服務</span> (<span class="key-term">Platform as a Service, PaaS</span>)。在接下來的部分中，我們將逐一回顧它們。</p>
+
+<div class="exam-tip">
+    <p>一些供應商和顧問非常熱衷於利用「雲端」概念的普及性，並將這個詞納入他們能想到的每一個術語中，以使他們的產品更具吸引力。我們看到諸如<span class="key-term">網路即服務</span> (<span class="key-term">Networking as a Service, NaaS</span>)、<span class="key-term">合規即服務</span> (<span class="key-term">Compliance as a Service, CaaS</span>) 和<span class="key-term">資料科學即服務</span> (<span class="key-term">Data Science as a Service, DSaaS</span>) 等標籤廣泛擴散，但它們大多只是行銷技巧。您在考試和作為從業人員使用時唯一需要了解的服務類別是 IaaS、PaaS 和 SaaS。</p>
+</div>
+
+<h3>軟體即服務 <span class="english">(Software as a Service)</span></h3>
+<p>在<span class="key-term">軟體即服務</span> (<span class="key-term">Software as a Service, SaaS</span>) 產品中，公有雲供應商向其客戶交付完整的應用程式。客戶無需擔心處理、儲存、網路或雲端服務的任何基礎架構細節。供應商編寫應用程式、配置伺服器，基本上為客戶準備好一切，客戶然後只需使用該服務。這些服務通常透過標準的網頁瀏覽器存取，因此客戶端幾乎不需要任何配置。</p>
+<p>軟體即服務應用程式能力類型的常見範例包括由 Google Apps 或 Microsoft Office 365 提供的電子郵件，以及促進跨裝置協作和同步的儲存服務，例如 Box 和 Dropbox。SaaS 應用程式也可以非常專業化，例如信用卡處理服務以及差旅和費用報告管理。</p>
+
+<h3>基礎架構即服務 <span class="english">(Infrastructure as a Service)</span></h3>
+<p><span class="key-term">基礎架構即服務</span> (<span class="key-term">Infrastructure as a Service, IaaS</span>) 供應商的客戶從供應商處購買基本的運算資源，並將它們組合起來以創建自訂的 IT 解決方案。例如，IaaS 供應商可能提供運算能力、資料儲存和其他基本的基礎架構建構模塊。IaaS 領域的四大供應商是 Amazon Web Services (AWS)、Microsoft Azure、Google Compute Engine 和阿里巴巴。</p>
+<p>IaaS 包括這些常見的基礎架構能力類型：</p>
+<ul>
+    <li>在共享硬體上運行的虛擬化伺服器</li>
+    <li>可用作磁碟區的區塊儲存</li>
+    <li>在儲存桶中維護檔案的物件儲存</li>
+    <li>將伺服器相互連接及連接到網際網路的網路容量</li>
+    <li>自動化管理雲端基礎架構工作的協同運作能力</li>
+</ul>
+<p>IaaS 供應商提供隨選、自服務的運算資源存取，允許客戶在需要時請求資源並立即獲得存取權限。</p>
+
+<h3>平台即服務 <span class="english">(Platform as a Service)</span></h3>
+<p>在公有雲運算的最後一個類別中，<span class="key-term">平台即服務</span> (<span class="key-term">Platform as a Service, PaaS</span>)，供應商為客戶提供一個平台，他們可以在該平台上運行自己的應用程式碼，而無需擔心伺服器配置。這是 IaaS 和 SaaS 之間的中間地帶。使用 PaaS，客戶無需擔心管理伺服器，但仍然能夠運行自己的程式碼。</p>
+<p><span class="key-term">函數即服務</span> (<span class="key-term">Function as a Service, FaaS</span>) 是一種常見的 PaaS 能力，客戶可以創建按排程或響應事件運行的專用函數。FaaS 產品的範例包括 AWS Lambda、Microsoft Azure Functions 和 Google Cloud Functions。</p>
+<p>平台能力類型還包括基於雲端的資料庫引擎和服務，以及「大數據」風格的服務，例如資料倉儲和資料探勘。供應商提供對後端引擎/功能的存取，而客戶可以創建/安裝各種應用程式/API 來存取後端。</p>
+
+<h2>雲端部署模型 <span class="english">(Cloud Deployment Models)</span></h2>
+
+<p>雲端部署模型描述了組織可能實施雲端服務的不同方法。基本上，它們描述了資產託管的位置以及誰可以存取它們。主要的雲端部署模型是<span class="key-term">私有雲</span> <span class="english">(private cloud)</span>、<span class="key-term">公有雲</span> <span class="english">(public cloud)</span>、<span class="key-term">混合雲</span> <span class="english">(hybrid cloud)</span>、<span class="key-term">多雲</span> <span class="english">(multi-cloud)</span> 和<span class="key-term">社群雲</span> <span class="english">(community cloud)</span>。</p>
+
+<h3>私有雲 <span class="english">(Private Cloud)</span></h3>
+<p>使用<span class="key-term">私有雲</span> <span class="english">(private cloud)</span> 模型的組織希望獲得雲端的靈活性、可擴展性、敏捷性和成本效益，但不希望與其他組織共享運算資源。在私有雲方法中，組織自己建立並運行其雲端基礎架構，或付費給另一個組織代為執行。</p>
+<p>私有雲的典型特徵是資源專用於單一客戶；沒有其他客戶會共享底層資源（硬體，或許還有軟體）。因此，私有雲不是<span class="key-term">多租戶</span> <span class="english">(multitenant)</span> 環境。</p>
+
+<h3>公有雲 <span class="english">(Public Cloud)</span></h3>
+<p><span class="key-term">公有雲</span> <span class="english">(public cloud)</span> 使用<span class="key-term">多租戶</span> <span class="english">(multitenancy)</span> 模型。在這種方法中，雲端供應商在其資料中心建立龐大的基礎架構，然後將這些資源提供給所有來者。相同的實體硬體可能同時運行許多不同客戶的工作負載。</p>
+
+<h3>混合雲 <span class="english">(Hybrid Cloud)</span></h3>
+<p>採用<span class="key-term">混合雲</span> <span class="english">(hybrid cloud)</span> 方法的組織使用公有雲和私有雲運算的組合。在此模型中，他們可能將公有雲用於某些運算工作負載，但同時也為某些工作負載（通常是出於資料敏感性考量）營運自己的私有雲。</p>
+
+<h3>多雲 <span class="english">(Multi-Cloud)</span></h3>
+<p>雖然許多組織選擇單一公有雲供應商作為其基礎架構合作夥伴，但有些組織選擇採用<span class="key-term">多雲</span> <span class="english">(multi-cloud)</span> 方法，該方法結合了來自兩個或多個公有雲供應商的資源。這種方法允許組織利用服務和價格差異，但伴隨著增加的複雜性成本。</p>
+
+<h3>社群雲 <span class="english">(Community Cloud)</span></h3>
+<p><span class="key-term">社群雲</span> <span class="english">(Community clouds)</span> 類似於私有雲，因為它們不對公眾開放，但它們在一個共同社群內的多個或許多組織之間共享。例如，一群學院和大學可能聯合起來創建一個社群雲，為所有參與學校的教職員工和學生提供共享的運算資源。</p>
+<p>遊戲社群可以被視為社群雲。例如，PlayStation 網路涉及許多不同的實體共同參與線上遊戲：Sony 負責網路的身份和存取管理 (Identity and Access Management, IAM) 任務，某個特定的遊戲公司可能託管一組運行特定遊戲的資訊版權管理 (Information Rights Management, IRM) 功能和處理的伺服器，而個別使用者在他們自己的 PlayStation 上本地進行部分處理和儲存。在這種類型的社群雲中，底層技術（硬體、軟體等）的所有權分散在社群的各個成員之間。</p>
+<p>社群雲也可以由第三方代表社群的各個成員進行配置。例如，雲端供應商可能提供 FedRAMP 雲端服務，僅供美國聯邦政府客戶使用。任何數量的聯邦機構都可能訂閱此雲端服務（例如，農業部、衛生與公眾服務部、內政部等），它們都將使用專門為其使用的底層基礎架構。任何非美國聯邦機構的客戶都將不被允許使用此服務，因為非政府實體不屬於此特定社群的一部分。雲端供應商擁有底層基礎架構，但它是專門為特定社群的使用而配置和提供的。</p>
+
+<div class="exam-tip">
+    <p>參加考試時，您應該記住，沒有哪個雲端部署模型本身優於其他模型。組織可能希望採用重度公有雲的方法以實現更大的成本節省，而其他組織可能有禁止使用共享租賃運算的法規要求。</p>
+</div>
+
+<h2>多租戶 <span class="english">(Multitenancy)</span></h2>
+
+<p>公有雲建立在<span class="key-term">多租戶</span> <span class="english">(multitenancy)</span> 的運作原則之上。這僅僅意味著許多不同的客戶共享使用相同的運算資源。支援我們工作負載的實體伺服器可能與支援您工作負載的實體伺服器相同。</p>
+<p>在理想世界中，單個客戶永遠不應該看到多租戶的影響。伺服器應該看起來完全獨立，並強制執行<span class="key-term">隔離</span> <span class="english">(isolation)</span> 原則。從隱私角度來看，一個客戶永遠不應該能夠看到屬於另一個客戶的資料。從效能角度來看，一個客戶採取的行動永遠不應該影響另一個客戶的行動。保持隔離是雲端服務供應商核心的關鍵安全任務。</p>
+<p>多租戶允許雲端供應商<span class="key-term">超額訂閱</span> <span class="english">(oversubscribe)</span> 其資源。幾乎所有運算工作負載的需求隨時間變化。一個應用程式可能在早上幾個小時有很高的 CPU 使用率，而另一個應用程式則在一天中使用小的峰值，還有一些則有穩定的使用或不同的峰值。</p>
+<p><span class="key-term">超額訂閱</span> <span class="english">(Oversubscription)</span> 意味著雲端供應商可以向客戶出售總容量超過其基礎架構實際實體容量的容量，因為從宏觀角度來看，客戶永遠不會同時使用所有容量。當我們將這些工作負載組合在一起時，它們的總利用率永遠不會超過環境的總容量。</p>
+<p>多租戶之所以可行是因為<span class="key-term">資源池</span> <span class="english">(resource pooling)</span>。實體環境的記憶體和 CPU 容量在許多不同使用者之間共享，並可以根據需要重新分配。</p>
+<p>當然，有時這個概念會失效。如果客戶突然同時對資源產生超過環境總容量的需求，效能就會下降。這會導致速度變慢和中斷。防止這種情況發生是雲端服務供應商的關鍵營運任務之一，他們努力管理工作負載分配以防止這種情況發生。</p>
+
+<h2>雲端運算角色與職責 <span class="english">(Cloud Computing Roles and Responsibilities)</span></h2>
+
+<p>在雲端運算的世界裡，人員和組織扮演不同的角色並承擔不同的職責。作為一名雲端安全專業人員，了解這些不同的角色很重要。雲端運算世界中的兩個主要角色是<span class="key-term">雲端服務供應商</span> <span class="english">(cloud service provider)</span> 和<span class="key-term">客戶</span> <span class="english">(customer)</span>。</p>
+<p><span class="key-term">雲端服務供應商</span> <span class="english">(cloud service provider)</span> 是向第三方銷售雲端運算服務的企業。雲端服務供應商負責建立和維護其服務產品。雲端服務供應商可以透過建立自己的實體基礎架構來做到這一點，或者他們可能將其部分基礎架構外包給其他雲端服務供應商。在這種情況下，他們也是雲端客戶！</p>
+<p><span class="key-term">客戶</span> <span class="english">(Customers)</span> 是雲端運算服務的消費者。他們使用雲端服務作為基礎架構、平台和/或應用程式來幫助他們經營自己的業務。</p>
+<p>雲端服務供應商和客戶之間的關係因服務的性質、重要性和成本而異。客戶可能永遠不會與雲端供應商的員工互動，僅在自服務基礎上購買服務，或者雲端供應商可能有專門的客戶代表幫助管理與不同客戶的關係。</p>
+<p><span class="key-term">雲端服務合作夥伴</span> <span class="english">(Cloud service partners)</span> 在雲端生態系統中扮演另一個重要角色。這些是提供與主要雲端服務供應商產品互動的產品或服務的第三方公司。例如，雲端服務合作夥伴可能協助公司實施雲端應用程式，或者可能提供安全監控服務，為使用雲端基礎架構產品提供營運協助。大型雲端服務供應商通常有一個認證計畫，指定第三方供應商為官方合作夥伴。</p>
+<p><span class="key-term">監管者</span> <span class="english">(Regulators)</span> 在雲端生態系統中也扮演重要角色。不同的監管機構可能對您的業務擁有權力，具體取決於您組織經營業務的地點以及您所處的行業。請務必查閱不同監管機構發布的規則，以確保您使用雲端運算資源不會違反其要求。</p>
+<p>最後，我們要討論的最後一個角色是<span class="key-term">雲端存取安全代理商</span> (<span class="key-term">Cloud Access Security Broker, CASB</span>)。這些是雲端服務供應商，他們為雲端客戶提供託管的身份和存取管理服務，該服務整合了跨雲端服務的安全要求。我們將在本書後面更詳細地討論 CASB。</p>
+<p>當組織使用公有雲資源時，他們必須了解公有雲中的安全性遵循<span class="key-term">共享責任模型</span> <span class="english">(shared responsibility model)</span>。根據雲端服務的性質，雲端服務供應商負責某些安全領域，而客戶負責其他領域。例如，如果您購買雲端儲存服務，您有責任了解您要發送到該服務的資料，並且可能需要配置存取控制策略，說明誰可以存取您的資料。供應商的責任是加密其保管下的資料並正確實施您的存取控制策略。</p>
+
+<h2>雲端運算參考架構 <span class="english">(Cloud Computing Reference Architecture)</span></h2>
+
+<p>國際標準化組織 (International Organization for Standardization, ISO) 在其文件 ISO 17789 中發布了<span class="key-term">雲端參考架構</span> <span class="english">(cloud reference architecture)</span>。該文件制定了一個通用的術語框架，協助雲端服務供應商、雲端服務客戶和雲端服務合作夥伴就角色和職責進行溝通。</p>
+
+<div class="exam-tip">
+    <p>在我們深入探討之前，務必注意雲端參考架構概念是一個有用的框架，但沒有參考架構警察。您應該隨意使用對您的組織有意義的任何術語和框架。也就是說，CCSP 考試確實明確涵蓋了雲端參考架構，因此請務必熟悉它。</p>
+</div>
+
+<p>參考架構定義了雲端生態系統中不同組織負責的不同雲端運算活動。</p>
+<p>讓我們從討論雲端服務客戶的職責開始。參考架構指出，以下活動是客戶的職責：</p>
+<ul>
+    <li>使用雲端服務</li>
+    <li>執行服務試用</li>
+    <li>監控服務</li>
+    <li>管理服務安全</li>
+    <li>提供帳單和使用報告</li>
+    <li>處理問題報告</li>
+    <li>管理租戶</li>
+    <li>執行業務管理</li>
+    <li>選擇和購買服務</li>
+    <li>請求稽核報告</li>
+</ul>
+<p>雲端服務供應商有更多的職責：</p>
+<ul>
+    <li>準備系統並提供雲端服務</li>
+    <li>監控和管理服務</li>
+    <li>管理資產和庫存</li>
+    <li>提供稽核資料</li>
+    <li>管理客戶關係並處理客戶請求</li>
+    <li>與其他雲端供應商執行對等互連</li>
+    <li>確保合規性</li>
+    <li>提供網路連接</li>
+</ul>
+<p>最後，雲端服務合作夥伴根據合作夥伴的類型有不同的活動：</p>
+<ul>
+    <li>設計、創建和維護服務元件</li>
+    <li>測試服務</li>
+    <li>執行稽核</li>
+    <li>建立法律協議</li>
+    <li>獲取和評估客戶</li>
+    <li>評估市場</li>
+</ul>
+<p>在現實世界中，這些活動可能會根據每個組織的性質和所提供的雲端服務而有所轉變。然而，參考架構為我們提供了一個起點。</p>
+
+<h2>虛擬化 <span class="english">(Virtualization)</span></h2>
+
+<p>企業運算的世界多年來發生了巨大變化。<span class="key-term">虛擬化</span> <span class="english">(virtualization)</span> 的出現是這些變革性的變化之一，也是雲端運算基礎架構背後的驅動力。</p>
+<p>僅僅幾十年前，企業運算還局限於資料中心及其大型主機的世界。數十名運算專業人員小心翼翼地照料著這個非常寶貴的資源，它充當著組織的電子神經中樞。</p>
+<p>然後，在 1980 年代和 1990 年代，企業 IT 格局發生了巨大變化。我們從單體大型主機的世界轉向了客戶端-伺服器運算的新環境。這種轉變帶來了巨大的好處。首先，它將運算能力直接放在桌面上，允許使用者直接在其機器上執行許多操作，而無需大型主機存取。集中式運算也得到了改進，允許使用專用伺服器執行特定功能。維護具有離散伺服器的資料中心比照料一台脾氣暴躁的大型主機要容易得多。</p>
+<p>在過去的十年中，我們看到了運算領域的另一次轉變。客戶端-伺服器模型對我們很有用，但也導致了資源浪費。資料中心管理員意識到，在大多數時候，他們的許多伺服器都處於閒置狀態，等待著未來的活動突增。這效率不高。大約在同一時間，虛擬化技術變得可用，它允許多個不同的虛擬伺服器利用相同的底層硬體。這種共享硬體平台使得在需要時輕鬆轉移記憶體、儲存和處理能力成為可能。像 VMware 和 Microsoft Hyper-V 這樣的虛擬化平台使這成為可能。</p>
+<p>在高層次上，虛擬化平台涉及使用實際擁有實體硬體的<span class="key-term">主機</span> <span class="english">(host machine)</span>。該硬體隨後託管多個或許多運行其自身作業系統的<span class="key-term">虛擬客體機</span> <span class="english">(virtual guest machines)</span>。</p>
+
+<h3>Hypervisors <span class="english">(Hypervisors)</span></h3>
+<p>主機運行稱為 <span class="key-term">hypervisor</span> 的特殊軟體來管理客體<span class="key-term">虛擬機</span> (<span class="key-term">Virtual Machines, VMs</span>)。Hypervisor 基本上欺騙每個客體，讓它認為它正在自己的硬體上運行，而實際上，它是在主機的共享硬體上運行。每個客體機上的作業系統都不知道它是虛擬化的，因此客體機上的軟體可以像在實體伺服器上一樣運行。</p>
+<p>有兩種不同類型的 hypervisor：</p>
+<p>在 <span class="key-term">Type 1 hypervisor</span> 中，也稱為<span class="key-term">裸機 hypervisor</span> <span class="english">(bare metal hypervisor)</span>，hypervisor 直接在硬體之上運行，然後在其上託管客體作業系統。這是資料中心中最常見的虛擬化形式。</p>
+<p>在 <span class="key-term">Type 2 hypervisor</span> 中，實體機器實際上運行自己的作業系統，而 hypervisor 作為該作業系統之上的程式運行。這種類型的虛擬化通常用於個人電腦。此場景中使用的常見 hypervisor 是 VirtualBox 和 Parallels。</p>
+
+<h3>虛擬化安全 <span class="english">(Virtualization Security)</span></h3>
+<p>從安全角度來看，虛擬化引入了關於 <span class="key-term">VM 隔離</span> <span class="english">(VM isolation)</span> 的新考量。在實體伺服器環境中，安全團隊知道每個伺服器都在其專用的處理器和記憶體資源上運行，如果攻擊者成功入侵該機器，他們將無法存取其他系統使用的處理器和記憶體。在虛擬化環境中，如果攻擊者能夠突破虛擬化客體作業系統，情況可能就不是這樣了。這種類型的攻擊被稱為 <span class="key-term">VM 逃逸攻擊</span> <span class="english">(VM escape attack)</span>。</p>
+<p>虛擬化技術旨在嚴格執行隔離，虛擬化技術的供應商會認真對待任何可能允許 VM 逃逸的漏洞。在虛擬化環境中工作的安全專業人員應特別注意影響其虛擬化平台的任何安全更新，並及時應用補丁。</p>
+<p>在準備考試時，您還應該注意另一個與虛擬化相關的安全問題。虛擬化使得在資料中心創建新伺服器變得非常容易。管理員通常只需點擊幾下即可創建新伺服器。雖然這是一個巨大的便利，但它也導致了一種被稱為 <span class="key-term">VM 蔓延</span> <span class="english">(VM sprawl)</span> 的情況，即網路上存在大量未使用和廢棄的伺服器。這不僅浪費資源，而且也是一個安全風險，因為這些伺服器沒有得到適當的維護，並且隨著時間的推移，如果沒有適當修補，可能會累積嚴重的安全漏洞。</p>
+<p>虛擬化的主要好處之一是它允許組織採用<span class="key-term">短暫運算</span> <span class="english">(ephemeral computing)</span> 策略。短暫 (Ephemeral) 僅僅意味著暫時的，或持續很短時間。短暫運算意味著您可以創建運算資源，例如伺服器和儲存空間，以解決特定問題，然後在不再需要它們時立即擺脫它們。如果您試圖在實體世界中這樣做，您將需要根據需要安裝和移除設備。透過虛擬化，您只需點擊一下按鈕即可創建和銷毀伺服器和其他運算資源。</p>
+
+<h2>雲端共享考量 <span class="english">(Cloud Shared Considerations)</span></h2>
+
+<p>當您決定組織利用雲端的適當方式時，您應該牢記一系列其他考量。讓我們看看組織在雲端部署工作中必須考慮的一些重要因素。</p>
+
+<h3>安全與隱私考量 <span class="english">(Security and Privacy Considerations)</span></h3>
+<p>在高層次上，雲端運算使用者面臨的安全和隱私考量與任何網路安全專業人員面臨的考量相同。我們有網路安全的三個主要目標：<span class="key-term">機密性</span> (<span class="key-term">confidentiality</span>)、<span class="key-term">完整性</span> (<span class="key-term">integrity</span>) 和<span class="key-term">可用性</span> (<span class="key-term">availability</span>)。這三個目標，通常稱為 <span class="key-term">CIA 三角</span> (<span class="key-term">CIA triad</span>)。我們用保護個人<span class="key-term">隱私</span> (<span class="key-term">privacy</span>) 的額外目標來補充 CIA 三角。</p>
+<ul>
+    <li><span class="key-term">機密性</span> <span class="english">(Confidentiality)</span> 旨在保護資產（資訊和系統）免遭未經授權的存取。</li>
+    <li><span class="key-term">完整性</span> <span class="english">(Integrity)</span> 旨在保護這些相同的資產免遭未經授權的修改。</li>
+    <li><span class="key-term">可用性</span> <span class="english">(Availability)</span> 旨在確保資產在需要時可供授權使用而不會中斷。</li>
+</ul>
+<p>隱私為這些要求增加了另一個維度，確保我們不僅尊重我們自己組織的機密性權利，而且尊重我們儲存、處理和傳輸其個人資訊的個人的權利。這些目標的存在並非新鮮事。無論我們在哪裡使用資訊，我們都擔心資訊的機密性、完整性、可用性和隱私。在雲端運算世界中唯一改變的是，我們的安全規劃工作可能需要包括更多的合作夥伴。這引入了三個新的考量：<span class="key-term">治理</span> <span class="english">(governance)</span>、<span class="key-term">可稽核性</span> <span class="english">(auditability)</span> 和<span class="key-term">法規監管</span> <span class="english">(regulatory oversight)</span>。</p>
+<p>雲端運算治理工作有助於組織審查現有和計劃中的雲端關係，以確保它們符合安全、法律、業務和其他限制。大多數組織設立雲端治理結構，旨在審查潛在供應商、管理關係並監督雲端營運。這些治理結構對於組織雲端工作並確保有效監督至關重要。</p>
+<p><span class="key-term">可稽核性</span> <span class="english">(Auditability)</span> 是治理的重要組成部分。雲端運算合約應規定客戶有權直接或透過第三方稽核雲端供應商。這些稽核可以在預定或非預定的基礎上進行，使客戶能夠確保雲端供應商正在履行其安全義務。稽核也可能包括營運和財務方面的考量。</p>
+<p>最後，<span class="key-term">法規監管</span> <span class="english">(regulatory oversight)</span> 存在於雲端世界，就像在本地運算領域一樣。受 HIPAA、FERPA、PCI DSS 或其他網路安全法規約束的組織必須確保雲端供應商支援其保持合規的能力。一些監管方案包括關於組織如何確保第三方供應商保持合規的具體規定，例如僅使用認證供應商或要求與供應商簽訂書面協議，規定供應商處理資料的方式將符合法規。</p>
+
+<h3>營運考量 <span class="english">(Operational Considerations)</span></h3>
+<p>正如雲端引發了組織必須透過其治理結構考慮的安全考量一樣，它也引發了營運考量。與我們討論的安全考量一樣，雲端運算的營運考量與我們在本地營運中遇到的考量非常相似。讓我們看看其中的一些考量。</p>
+
+<h4>可用性與效能 <span class="english">(Availability and Performance)</span></h4>
+<p>首先，我們提到了可用性作為一個安全考量，但它也是一個營運考量。雲端效能的核心衡量標準之一是服務的<span class="key-term">可用性</span> <span class="english">(availability)</span>。服務正常運行並滿足客戶需求的時間百分比是多少？</p>
+<p>我們可以透過增加<span class="key-term">彈性</span> <span class="english">(resiliency)</span> 來提高可用性。彈性是雲端基礎架構承受破壞性事件的能力。例如，我們可以使用冗餘伺服器來防止單一伺服器故障，我們可以使用多個雲端資料中心來防止整個資料中心的故障。</p>
+<p><span class="key-term">效能</span> <span class="english">(Performance)</span> 是一個密切相關的概念。雲端服務能夠多好地應對我們對其施加的需求？如果我們遇到一個極其繁忙的時期，服務是否會繼續以適當的速率響應？</p>
+<p>所有這三個考量：可用性、彈性和效能，都是雲端營運的關鍵問題。客戶應在合約簽訂過程中與供應商協商具體的服務水準，然後在稱為<span class="key-term">服務水準協議</span> (<span class="key-term">Service-Level Agreements, SLAs</span>) 的書面協議中記錄這些服務水準。SLA 規定了供應商同意滿足的要求，並且通常包括如果供應商未能履行營運義務的財務處罰。</p>
+
+<h4>維護與版本控制 <span class="english">(Maintenance and Version Control)</span></h4>
+<p>世界各地的 IT 團隊也知道預定<span class="key-term">維護</span> <span class="english">(maintenance)</span> 和<span class="key-term">版本控制</span> <span class="english">(version control)</span> 的重要性。管理變更是企業 IT 中的一個難題，而這些考量在雲端中並不會消失。事實上，它們變得更加複雜，因為 IT 團隊不僅必須協調自己的維護排程，還必須考慮雲端供應商的維護排程。供應商是否有預定的維護期？如果是這樣，IT 團隊必須考慮這些時期將如何影響業務營運。</p>
+<p>版本控制允許組織透過追蹤不同開發人員正在處理的不同版本來管理軟體的開發。它是任何軟體開發計畫的重要組成部分。版本控制也可用於追蹤系統和應用程式的配置。</p>
+
+<h4>委外問題 <span class="english">(Outsourcing Issues)</span></h4>
+<p>遷移到雲端也引入了一些因外包部分 IT 營運而產生的雲端特定營運考量。讓我們談談其中的三個考量。</p>
+<p>首先，遷移到雲端或在雲端供應商之間轉換的組織應考慮<span class="key-term">可逆性</span> <span class="english">(reversibility)</span> 的重要性。如果在營運上、技術上或財務上出現問題怎麼辦？恢復原始營運並撤銷遷移會有多困難？組織應將回滾計劃作為每個轉換計劃的一部分。</p>
+<p>同樣，組織應盡可能避免<span class="key-term">供應商鎖定</span> <span class="english">(vendor lock-in)</span>。<span class="key-term">可移植性</span> <span class="english">(Portability)</span> 是一項設計原則，指出工作負載的設計應使其不利用特定於供應商的功能，並且可以更容易地在雲端供應商之間轉移。這並非總是可能的，但這是一個好的設計實踐。</p>
+<p>每個供應商關係也應提供在需要時匯出資料的能力。供應商關係最終會結束，組織將需要能夠檢索儲存在雲端供應商處的任何業務資料，以支援向另一個供應商的轉換或資料歸檔。</p>
+<p>最後，組織在採用新的雲端解決方案時應考慮雲端供應商的<span class="key-term">互操作性</span> <span class="english">(interoperability)</span>。這對於 SaaS 和 PaaS 產品尤其重要。IT 團隊經常被要求整合解決方案，而供應商支援這些整合的能力至關重要。想像一下，如果您的費用報告系統無法與您的財務系統互操作，或者您的儲存供應商無法與您的網頁內容管理解決方案互操作，會產生什麼影響。互操作性至關重要。</p>
+
+<h2>新興技術 <span class="english">(Emerging Technologies)</span></h2>
+
+<p>在準備 CCSP 考試時，您需要熟悉一組在雲端運算世界中特別重要的新興技術。</p>
+
+<h3>機器學習與人工智慧 <span class="english">(Machine Learning and Artificial Intelligence)</span></h3>
+<p><span class="key-term">機器學習</span> <span class="english">(Machine learning)</span> 是一個技術學科，旨在應用資料科學和統計學原理，揭示我們每天積累的資料中隱藏的知識。機器學習技術分析資料以揭示趨勢、分類記錄，並幫助我們更有效地經營業務。</p>
+<p>機器學習是更廣泛領域<span class="key-term">人工智慧</span> (<span class="key-term">artificial intelligence, AI</span>) 的一個子集。AI 是一系列技術的集合，包括機器學習，旨在至少在某種程度上模仿電腦中的人類思維過程。</p>
+<p>當我們進行機器學習時，我們有幾個可能的目標：</p>
+<ul>
+    <li><span class="key-term">描述性分析</span> <span class="english">(Descriptive analytics)</span> 僅僅旨在描述我們的資料。例如，如果我們對客戶記錄執行描述性分析，我們可能會問這樣的問題，我們的客戶中有多少比例是女性？其中有多少是回頭客？</li>
+    <li><span class="key-term">預測性分析</span> <span class="english">(Predictive analytics)</span> 旨在利用我們現有的資料來預測未來事件。例如，如果我們有一個關於客戶如何回應直郵的資料集，我們可能會使用該資料集來建立一個模型，預測個別客戶將如何回應特定的未來郵件。這可能幫助我們調整郵件以提高回應率，例如更改發送日期、修改訊息內容，甚至進行看似微小的更改，如更改字體大小或紙張顏色。</li>
+    <li><span class="key-term">規範性分析</span> <span class="english">(Prescriptive analytics)</span> 旨在透過模擬多種情境來優化我們的行為。例如，如果我們想確定分配行銷資金的最佳方式，我們可能會運行不同的消費者回應模擬，然後使用演算法在該情境下規範我們的行為。同樣，我們可能會使用規範性分析來優化自動化製造過程的效能。</li>
+</ul>
+<p>雲端運算徹底改變了機器學習的世界。我們今天應用人工智慧技術的許多應用，如果沒有雲端提供的可擴展、隨選運算，根本不可能實現。雲端供應商現在提供非常專業化的服務，旨在幫助組織設計、建立和實施機器學習模型。</p>
+
+<h3>區塊鏈 <span class="english">(Blockchain)</span></h3>
+<p>您需要為 CCSP 考試了解的第二項新興技術是<span class="key-term">區塊鏈</span> <span class="english">(blockchain)</span> 技術。區塊鏈，在其最簡單的描述中，是一個<span class="key-term">分散式不可變帳本</span> <span class="english">(distributed immutable ledger)</span>。這意味著它可以儲存記錄，將這些記錄分發到位於世界各地的許多不同系統中，並以防止任何人篡改記錄的方式進行。區塊鏈創建了一個沒有人可以篡改或銷毀的資料儲存。</p>
+<p>區塊鏈的第一個主要應用是<span class="key-term">加密貨幣</span> <span class="english">(cryptocurrency)</span>。區塊鏈最初是作為比特幣的基礎技術發明的，允許在不使用中心化權威的情況下追蹤比特幣交易。透過這種方式，區塊鏈允許存在沒有中央監管機構的貨幣。比特幣交易的權威分佈在比特幣區塊鏈的所有參與者之間。雖然加密貨幣是受到最多關注的區塊鏈應用，但分散式不可變帳本還有許多其他用途，以至於區塊鏈技術的新應用似乎每天都在出現，例如以下範例：</p>
+<ul>
+    <li>財產所有權記錄可以從區塊鏈應用中受益匪淺。這種方法會將這些記錄放置在一個透明的公共儲存庫中，該儲存庫受到保護，免遭故意或意外損壞。</li>
+    <li>區塊鏈也可用於追蹤供應鏈，讓消費者相信他們的產品來自信譽良好的來源，並允許監管機構輕鬆追蹤召回產品的來源。</li>
+    <li>區塊鏈應用可以追蹤重要記錄，例如護照、出生證明和死亡證明。可能性是無窮的。</li>
+</ul>
+<p>雲端運算透過提供可擴展、經濟高效且全球分佈的運算資源來實現區塊鏈。</p>
+
+<h3>物聯網 <span class="english">(Internet of Things)</span></h3>
+<p><span class="key-term">物聯網</span> (<span class="key-term">Internet of Things, IoT</span>) 是 CCSP 考試涵蓋的第三項新興技術。IoT 是一個術語，用於描述將非傳統設備連接到網際網路以進行資料收集、分析和控制。我們看到 IoT 應用出現在家庭和工作場所。</p>
+<p>在家用方面，很難在您的房子或當地的消費電子產品商店裡走動而不看到大量現在被稱為「智慧這個」或「智慧那個」的設備。我們現在可以在家裡擁有智慧電視、智慧車庫門，甚至智慧灑水系統。所有這些智慧僅僅意味著設備由電腦控制並連接到網路。</p>
+<p>IoT 技術始於將我們家中一些較常見的運算設備（例如遊戲機和印表機）首先連接到網路，然後使其無線化。製造商很快意識到我們想要連接性來實現多人遊戲和無線列印，然後將這項技術帶入了家庭。從那時起，可能性是無窮的，無線智慧設備遍布家中，甚至進入車庫，隨著智慧汽車的出現，將車載運算系統暴露給駕駛員和乘客。</p>
+<p>所有這些設備也帶來了安全挑戰。首先，消費者通常很難更新這些設備上的軟體。雖然設備可能運行傳統作業系統的精簡版本，但它們並不總是有顯示器或鍵盤，所以我們看不到我們所謂的「智慧」設備實際上正在運行過時的 Windows 95！</p>
+<p>其次，這些設備連接到我們用於個人生產力的相同無線網路。如果智慧設備被入侵，它可以成為通往我們網路其餘部分的閘道。</p>
+<p>最後，智慧設備通常會連接回雲端服務以進行命令和控制，從而為繞過防火牆的外部攻擊者創建了一條潛在的進入我們網路的路徑。</p>
+
+<h3>容器 <span class="english">(Containers)</span></h3>
+<p><span class="key-term">容器</span> <span class="english">(Containers)</span> 是虛擬化的下一個演進。它們是一種輕量級的方式，可以將整個應用程式打包起來，使其具有可移植性，以便可以輕鬆地在硬體平台之間移動。</p>
+<p>在傳統虛擬化中，我們有支援 hypervisor 的硬體，然後該 hypervisor 支援客體虛擬機。每個客體機都運行自己的作業系統和應用程式，允許應用程式在某種程度上獨立於硬體運行。您可以將虛擬機從一個硬體移動到另一個硬體，只要機器運行相同的 hypervisor。傳統虛擬化的缺點之一是虛擬機有點笨重。每個虛擬機都必須有自己的作業系統和元件。如果您在一個 hypervisor 上運行 10 個不同的 Windows 虛擬伺服器，您同時有運行 10 個不同 Windows 副本的開銷。</p>
+<p><span class="key-term">容器化</span> <span class="english">(Containerization)</span> 旨在透過構建更輕量級的套件來減輕這種負擔。容器將應用程式碼打包成標準化格式，以便可以在系統之間輕鬆轉移。支援容器的系統不運行 hypervisor，而是運行容器化平台。該平台提供了一個標準的作業系統介面，允許容器運行，而不管作業系統和硬體如何。容器相對於虛擬機的主要優點是它們沒有自己的作業系統核心。容器化平台允許它們使用主機的作業系統核心。</p>
+<p>從安全角度來看，容器與虛擬化系統有許多相同的考量。容器化平台必須嚴格執行隔離，以確保容器無法存取分配給其他容器的資料或資源。只要這種隔離保持完整，容器就是輕量級虛擬化運算的高度安全選項。</p>
+
+<h3>量子運算 <span class="english">(Quantum Computing)</span></h3>
+<p><span class="key-term">量子運算</span> <span class="english">(Quantum computing)</span> 是電腦科學和物理學領域的一個先進理論研究領域。理論上，我們可以使用量子力學原理來取代數位運算的二進制 1 和 0 位元，代之以稱為<span class="key-term">量子位元</span> <span class="english">(qubits)</span> 的多維量子位元。</p>
+
+<div class="exam-tip">
+    <p>量子運算是您需要為 CCSP 考試熟悉的新興技術之一，但老實說，您需要知道的並不多。這是因為，截至今天，量子電腦仍局限於理論研究。還沒有人開發出有用的量子電腦的實際實作。</p>
+</div>
+
+<p>如果實用的量子電腦真的出現，它們有可能透過提供有史以來開發的最強大電腦的技術基礎，徹底改變電腦科學的世界。這些電腦將迅速顛覆現代網路安全的許多原則。例如，量子電腦有可能使所有現代密碼學完全失效，並需要重新設計新的、更強的量子密碼學演算法。但這目前都只是理論。除非您是研究物理學家，否則在可預見的未來，量子運算對您的世界不會有太大影響。</p>
+
+<h3>邊緣與霧運算 <span class="english">(Edge and Fog Computing)</span></h3>
+<p>物聯網的出現也正在極大地改變我們配置和使用運算的方式。我們在日常生活中看到了物聯網最引人注目的例子，從聯網和半自動駕駛汽車到改善我們生活和旅行方式的智慧家庭設備。</p>
+<p>然而，物聯網的許多應用都發生在視線之外。工業物聯網應用正在改變製造業。我們看到微型衛星的興起，將科學儀器和其他設備帶入地球軌道及更遠的地方。甚至農業也因物聯網提供的感測器、資訊和分析而發生巨大變化。</p>
+<p>雲端運算模型並不總是適合這些應用。當您的感測器遠離雲端資料中心，並且要麼未連接到網路，要麼透過非常低頻寬的連接進行連接時，該模型開始失效。簡單地將所有資料傳回雲端並在那裡處理是沒有意義的。</p>
+<p><span class="key-term">邊緣運算</span> <span class="english">(Edge computing)</span> 是一種將雲端的許多進步帶到我們網路邊緣的方法。它涉及將處理能力直接放置在遠端感測器上，並允許它們在將該資料的一小部分子集傳回雲端之前，執行處理資料所需的繁重工作。</p>
+<p><span class="key-term">霧運算</span> <span class="english">(Fog computing)</span> 是一個相關概念，涉及在現場放置閘道設備以從感測器收集資訊並執行集中關聯，但在將資料返回雲端之前仍在遠端位置進行。邊緣和霧運算共同承諾提高我們連接物聯網設備和雲端的能力。</p>
+
+<h3>機密運算 <span class="english">(Confidential Computing)</span></h3>
+<p><span class="key-term">機密運算</span> <span class="english">(Confidential computing)</span> 是在極端安全環境（例如軍事和國防部門）中運作的組織的一個新興焦點。它在整個運算過程中擴展了安全性。</p>
+<p>讓我們看看這意味著什麼。在正常的客戶端-伺服器運算模型中，我們有一個客戶端可能想要請求伺服器代表客戶端執行某些操作。該伺服器可能必須存取維護在單獨儲存環境中的某些資料，然後對該資料執行某些處理。</p>
+<p>在傳統的運算模型中，我們知道我們需要為此過程添加一些安全性。我們對儲存設備上保存的資料應用加密，以便未經授權的個人無法存取它。這稱為保護<span class="key-term">靜態資料</span> <span class="english">(data at rest)</span>。我們還對網路通訊添加加密，以防止客戶端和伺服器之間以及伺服器和儲存之間的竊聽攻擊。這稱為保護<span class="key-term">傳輸中資料</span> <span class="english">(data in motion)</span>。</p>
+<p>然而，我們通常不擔心伺服器正在主動處理的資料。我們不對記憶體中的資料應用加密，這稱為<span class="key-term">使用中資料</span> <span class="english">(data in use)</span>。</p>
+<p>機密運算為記憶體中的程式碼和資料增加了保護。它透過提供<span class="key-term">可信執行環境</span> (<span class="key-term">Trusted Execution Environments, TEEs</span>) 來實現。這些可信環境保證任何外部進程都無法查看或更改環境中正在處理的資料。這提供了額外的保證，即資料在運算生命週期的所有階段都是安全的。</p>
+
+<h3>DevOps 與 DevSecOps <span class="english">(DevOps and DevSecOps)</span></h3>
+<p>世界各地的 IT 組織正在迅速採用 <span class="key-term">DevOps</span> 理念，以改善軟體開發人員和技術營運團隊之間的互動。DevOps 運動旨在結合過去常常相互衝突的兩個世界。</p>
+<p>軟體開發人員負責創建程式碼：建構滿足客戶和業務需求的應用程式和整合。他們被激勵快速發布程式碼並滿足這些需求。</p>
+<p>IT 營運人員負責維護基礎架構並保持企業穩定。他們通常對變革持謹慎態度，因為變革會帶來不穩定的可能性。這使得他們在開發人員尋求快速部署新程式碼時感到緊張。</p>
+<p>DevOps 運動旨在透過合作夥伴關係將這兩個學科結合在一起。DevOps 旨在透過開放溝通在開發人員和營運人員之間建立協作關係。DevOps 運動將自動化視為開發和營運的推動者。DevOps 從業人員尋求創建一個環境，讓開發人員可以快速發布新程式碼，而營運人員可以提供穩定的環境。</p>
+<p>DevOps 理念通常與<span class="key-term">敏捷軟體開發</span> <span class="english">(agile software development)</span> 方法論緊密相連。雖然它們是兩個不同的概念，但它們彼此密切相關。遵循這些策略的開發人員尋求實施持續整合軟體開發方法，他們可以快速發布軟體更新，每天創建多個軟體版本，有時甚至在一天內發布數百個更新。</p>
+<p>雲端運算是 DevOps 環境的賦能技術之一。具體來說，DevOps 商店採用一種稱為<span class="key-term">基礎架構即程式碼</span> (<span class="key-term">Infrastructure as Code, IaC</span>) 的概念。透過這種方法，營運團隊不再透過登入並直接修改其配置來手動配置伺服器和其他基礎架構元件。相反，他們編寫腳本，指定如何從基線配置映像開始，然後對其進行自訂以滿足特定情況的要求。例如，組織可能有一個 Linux 系統的標準基線。當有人需要新伺服器時，他們編寫一個腳本，使用基線配置啟動伺服器，然後自動配置它以滿足特定的功能需求。</p>
+<p>基礎架構即程式碼將伺服器配置與特定的實體或虛擬伺服器分離開來。這對組織有一些明顯的優勢。</p>
+<ul>
+    <li>IaC 實現<span class="key-term">可擴展性</span> <span class="english">(scalability)</span>。如果組織需要更多伺服器，程式碼可以非常快速地創建任意數量的伺服器。</li>
+    <li>IaC 透過使用<span class="key-term">不可變伺服器</span> <span class="english">(immutable servers)</span> 來減少使用者錯誤。這意味著工程師永遠不會直接登入或修改伺服器。如果他們需要進行更改，他們會修改程式碼並創建新伺服器。</li>
+    <li>IaC 使測試變得容易。開發人員可以為新伺服器編寫程式碼，並在不影響生產的情況下啟動功能齊全的測試環境。一旦他們驗證了新程式碼正常工作，他們就可以將其移至生產環境並銷毀舊伺服器。</li>
+</ul>
+<p>DevOps 的 IT 方法為組織帶來了許多不同的好處。安全團隊也可以透過使用安全自動化技術從這種方法中受益。網路安全團隊沒有理由不能接受 DevOps 理念，並使用基礎架構即程式碼的方法來建構安全基礎架構和分析工具。</p>
+<p>當 DevOps 用於網路安全計畫時，通常稱為 <span class="key-term">DevSecOps</span>，並引入了一種「安全即程式碼」的網路安全方法。隨著組織轉向 DevOps 策略，網路安全團隊將需要發展其實踐，以便在這個新的營運環境中提供價值。</p>
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+
+<p>在本章中，我們探討了業務需求、雲端定義、雲端運算角色和職責，以及雲端運算的基礎概念。本章為這些主題提供了入門基礎。我們將在後續內容中更詳細地探討每一個主題。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>解釋雲端運算中的不同角色 (Explain the different roles in cloud computing)。</strong> 雲端服務供應商 (Cloud service providers) 提供雲端運算服務供銷售。雲端服務客戶 (Cloud service customers) 購買這些服務並使用它們來實現其業務目標。雲端服務合作夥伴 (Cloud service partners) 協助雲端服務客戶實施他們從供應商處購買的服務。雲端存取服務代理商 (Cloud access service brokers) 為雲端使用者提供中間層的安全服務。監管者 (Regulators) 定義在雲端中使用敏感資料的要求。</p>
+<p><strong>識別雲端運算的關鍵特性 (Identify the key characteristics of cloud computing)。</strong> 雲端運算的關鍵特性是隨需自服務 (on-demand self-service)、廣泛網路存取 (broad network access)、多租戶 (multitenancy)、快速彈性與可擴展性 (rapid elasticity and scalability)、資源池 (resource pooling) 和可量測服務 (measured service)。</p>
+<p><strong>解釋三種雲端服務類別 (Explain the three cloud service categories)。</strong> 三種雲端服務類別是軟體即服務 (Software as a Service, SaaS)、基礎架構即服務 (Infrastructure as a Service, IaaS) 和平台即服務 (Platform as a Service, PaaS)。在 SaaS 產品中，供應商在雲端中運行完整的應用程式並銷售給客戶。在 IaaS 產品中，供應商向客戶銷售技術建構模塊，客戶組裝自己的解決方案。在 PaaS 產品中，供應商銷售一個環境，客戶可以在其中運行自己的程式碼。</p>
+<p><strong>描述五種雲端部署模型 (Describe the five cloud deployment models)。</strong> 公有雲部署 (Public cloud deployments) 使用多租戶在共享硬體上向許多客戶提供服務。私有雲環境 (Private cloud environments) 使用專用於單一客戶的硬體。混合雲環境 (Hybrid cloud environments) 使用公有雲和私有雲服務的組合。社群雲 (Community clouds) 專用於具有共同特徵的一組客戶。一些組織選擇在多雲部署 (multi-cloud deployment) 中結合來自多個供應商的雲端服務。</p>
+<p><strong>識別重要的相關技術 (Identify important related technologies)。</strong> 雲端運算受益於並服務於幾種相關技術。這些包括資料科學 (data science)、機器學習 (machine learning)、人工智慧 (artificial intelligence)、區塊鏈 (blockchain)、物聯網 (the Internet of Things)、容器 (containers)、量子運算 (quantum computing)、邊緣運算 (edge computing)、霧運算 (fog computing)、機密運算 (confidential computing) 和 DevSecOps。</p>
+<p><strong>解釋雲端中的共享考量 (Explain the shared considerations in the cloud)。</strong> 當組織決定是否使用雲端服務時，他們必須分析幾個重要的考量。這些包括互操作性 (interoperability)、可移植性 (portability)、可逆性 (reversibility)、可用性 (availability)、安全性 (security)、隱私性 (privacy)、彈性 (resiliency)、效能 (performance)、治理 (governance)、維護與版本控制 (maintenance and versioning)、服務水準與服務水準協議 (service levels and service-level agreements)、可稽核性 (auditability)、法規考量 (regulatory concerns) 以及委外的影響 (the impact of outsourcing)。</p>
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+      <p>下列何者不是常見的雲端服務模型？</p>
+      <ol type="A">
+        <li>軟體即服務 (SaaS)</li>
+        <li>程式設計即服務 (PaaS)</li>
+        <li>基礎架構即服務 (IaaS)</li>
+        <li>平台即服務 (PaaS)</li>
+      </ol>
+      <p><strong>答案：B. 程式設計即服務 (Programming as a service) 並非常見的產品；其他選項在整個行業中無處不在。</strong></p>
+    </li>
+    <li>
+      <p>下列哪一種新興技術，如果完全實現，將危及當前加密技術的安全性？</p>
+      <ol type="A">
+        <li>量子運算 (Quantum computing)</li>
+        <li>區塊鏈 (Blockchain)</li>
+        <li>物聯網 (Internet of Things)</li>
+        <li>機密運算 (Confidential computing)</li>
+      </ol>
+      <p><strong>答案：A. 量子運算技術 (Quantum computing technology) 有潛力釋放巨大的運算能力，可能破解當前的加密演算法。</strong></p>
+    </li>
+    <li>
+      <p>雲端供應商透過 _______________ 對具有指定指標的合約義務負責。</p>
+      <ol type="A">
+        <li>服務水準協議 (Service-level agreements, SLAs)</li>
+        <li>法規 (Regulations)</li>
+        <li>法律 (Law)</li>
+        <li>紀律 (Discipline)</li>
+      </ol>
+      <p><strong>答案：A. 服務水準協議 (SLAs) 規定了客觀的衡量標準，定義了雲端供應商將向客戶交付的內容。</strong></p>
+    </li>
+    <li>
+      <p>________ 驅動安全決策。</p>
+      <ol type="A">
+        <li>客戶服務回應 (Customer service responses)</li>
+        <li>調查 (Surveys)</li>
+        <li>業務需求 (Business requirements)</li>
+        <li>公眾意見 (Public opinion)</li>
+      </ol>
+      <p><strong>答案：C. 安全通常不是利潤中心，因此受業務驅動因素的約束；安全的目的是支持業務 (support the business)。</strong></p>
+    </li>
+    <li>
+      <p>如果雲端客戶無法存取雲端供應商，這會影響 CIA 三角的哪個部分？</p>
+      <ol type="A">
+        <li>完整性 (Integrity)</li>
+        <li>身分驗證 (Authentication)</li>
+        <li>機密性 (Confidentiality)</li>
+        <li>可用性 (Availability)</li>
+      </ol>
+      <p><strong>答案：D. 當合法使用者無法獲得對系統和資訊的授權存取時，就會出現可用性 (availability) 問題。此處描述的場景剝奪了合法使用者的存取權限，因此是一個可用性問題。</strong></p>
+    </li>
+    <li>
+      <p>您最近與一家第三方供應商合作，協助實施由另一家公司提供的 SaaS 產品。下列哪一個雲端服務角色在此未被代表？</p>
+      <ol type="A">
+        <li>監管者 (Regulator)</li>
+        <li>客戶 (Customer)</li>
+        <li>供應商 (Provider)</li>
+        <li>合作夥伴 (Partner)</li>
+      </ol>
+      <p><strong>答案：A. 在此場景中，沒有提到監管機構 (regulatory agency)。您是雲端客戶 (cloud customer)，並且正在與雲端服務合作夥伴 (cloud service partner) 合作實施由雲端服務供應商 (cloud service provider) 提供的服務。</strong></p>
+    </li>
+    <li>
+      <p>下列哪種類型的 hypervisor 最有可能出現在雲端供應商的資料中心？</p>
+      <ol type="A">
+        <li>Type 1</li>
+        <li>Type 2</li>
+        <li>Type 3</li>
+        <li>Type 4</li>
+      </ol>
+      <p><strong>答案：A. Type 1 hypervisor 或「裸機」(bare metal) hypervisor 是最高效的 hypervisor 形式，也是資料中心環境中使用的技術。Type 2 hypervisor 通常在個人電腦上運行。不存在 Type 3 和 4 hypervisor。</strong></p>
+    </li>
+    <li>
+      <p>下列所有都是組織可能考慮進行雲端遷移的原因，除了 _______________。</p>
+      <ol type="A">
+        <li>降低人事成本 (Reduced personnel costs)</li>
+        <li>消除風險 (Elimination of risks)</li>
+        <li>降低營運費用 (Reduced operational expenses)</li>
+        <li>提高效率 (Increased efficiency)</li>
+      </ol>
+      <p><strong>答案：B. 風險 (Risks) 通常可以降低但永遠無法消除；具體來說，雲端服務並不能消除雲端客戶的風險，因為客戶在遷移後仍然承擔大量風險。</strong></p>
+    </li>
+    <li>
+      <p>普遍接受的雲端運算定義包括下列所有特性，除了 _______________。</p>
+      <ol type="A">
+        <li>隨需自服務 (On-demand self-service)</li>
+        <li>無需備份 (Negating the need for backups)</li>
+        <li>資源池 (Resource pooling)</li>
+        <li>可量測或計量式服務 (Measured or metered service)</li>
+      </ol>
+      <p><strong>答案：B. 無論您的主要資料和備份儲存在何處，備份 (Backups) 仍然像以往一樣重要。</strong></p>
+    </li>
+    <li>
+      <p>您正在進行一個治理專案，旨在確保您組織使用的不同雲端服務能夠良好地協同工作。您試圖實現什麼目標？</p>
+      <ol type="A">
+        <li>效能 (Performance)</li>
+        <li>彈性 (Resiliency)</li>
+        <li>可逆性 (Reversibility)</li>
+        <li>互操作性 (Interoperability)</li>
+      </ol>
+      <p><strong>答案：D. 互操作性 (Interoperability) 是雲端服務相互協作的能力。</strong></p>
+    </li>
+    <li>
+      <p>客戶日後可能無法更換雲端供應商的風險稱為 _______________。</p>
+      <ol type="A">
+        <li>供應商關閉 (Vendor closure)</li>
+        <li>供應商鎖定 (Vendor lock-out)</li>
+        <li>供應商鎖定 (Vendor lock-in)</li>
+        <li>供應商同步 (Vendor synchronization)</li>
+      </ol>
+      <p><strong>答案：C. 供應商鎖定 (Vendor lock-in) 指因技術或合約限制，客戶無法輕易從一個供應商切換到另一個。</strong></p>
+    </li>
+    <li>
+      <p>下列所有都是雲端運算的特性，除了 _______________。</p>
+      <ol type="A">
+        <li>廣泛網路存取 (Broad network access)</li>
+        <li>彈性降低 (Diminished elasticity)</li>
+        <li>快速擴展 (Rapid scaling)</li>
+        <li>隨需自服務 (On-demand self-service)</li>
+      </ol>
+      <p><strong>答案：B. 彈性降低 (Diminished elasticity) 不是特性；雲端運算強調增加的彈性與可擴展性。</strong></p>
+    </li>
+    <li>
+      <p>當雲端客戶將個人可識別資訊 (PII) 上傳到雲端供應商時，誰對該 PII 的安全負最終責任？</p>
+      <ol type="A">
+        <li>雲端供應商 (Cloud provider)</li>
+        <li>監管者 (Regulators)</li>
+        <li>雲端客戶 (Cloud customer)</li>
+        <li>PII 的主體個人 (The individuals who are the subjects of the PII)</li>
+      </ol>
+      <p><strong>答案：C. 雲端客戶 (Cloud customer) 作為資料擁有者，對 PII 的安全負最終責任。</strong></p>
+    </li>
+    <li>
+      <p>我們使用下列哪項來確定組織的關鍵路徑、流程和資產？</p>
+      <ol type="A">
+        <li>業務需求 (Business requirements)</li>
+        <li>業務衝擊分析 (Business impact analysis, BIA)</li>
+        <li>風險管理框架 (Risk Management Framework, RMF)</li>
+        <li>機密性、完整性、可用性 (CIA) 三角 (Confidentiality, integrity, availability (CIA) triad)</li>
+      </ol>
+      <p><strong>答案：B. 業務衝擊分析 (BIA) 用於評估關鍵資產和流程，確定優先順序。</strong></p>
+    </li>
+    <li>
+      <p>如果一個組織擁有某個雲端資料中心的所有硬體和基礎架構，且該資料中心僅供該組織成員使用，這會是哪種雲端部署模型？</p>
+      <ol type="A">
+        <li>私有雲 (Private)</li>
+        <li>公有雲 (Public)</li>
+        <li>混合雲 (Hybrid)</li>
+        <li>動機 (Motive)</li>
+      </ol>
+      <p><strong>答案：A. 私有雲 (Private cloud) 指資源專屬於單一組織使用。</strong></p>
+    </li>
+    <li>
+      <p>由雲端供應商擁有所有權，並向任何想訂閱的人提供服務的雲端部署模型稱為 _______________。</p>
+      <ol type="A">
+        <li>私有雲 (Private)</li>
+        <li>公有雲 (Public)</li>
+        <li>混合雲 (Hybrid)</li>
+        <li>潛在 (Latent)</li>
+      </ol>
+      <p><strong>答案：B. 公有雲 (Public cloud) 向任何用戶提供共享資源。</strong></p>
+    </li>
+    <li>
+      <p>在一個同好群體中具有資產聯合所有權特徵的雲端部署模型稱為 _______________。</p>
+      <ol type="A">
+        <li>私有雲 (Private)</li>
+        <li>公有雲 (Public)</li>
+        <li>混合雲 (Hybrid)</li>
+        <li>社群雲 (Community)</li>
+      </ol>
+      <p><strong>答案：D. 社群雲 (Community cloud) 為具有共同利益或需求的組織共用。</strong></p>
+    </li>
+    <li>
+      <p>您擔心攻擊者可能利用客體虛擬機來存取底層 hypervisor。哪個術語描述了這種威脅？</p>
+      <ol type="A">
+        <li>VM 逃逸 (VM escape)</li>
+        <li>SQL 注入 (SQL injection)</li>
+        <li>中間人攻擊 (Man-in-the-middle)</li>
+        <li>VM 蔓延 (VM sprawl)</li>
+      </ol>
+      <p><strong>答案：A. VM 逃逸 (VM escape) 是指從虛擬機突破到 hypervisor 的攻擊。</strong></p>
+    </li>
+    <li>
+      <p>您正在考慮購買一個電子商務系統，其中雲端供應商在其自己的伺服器上運行託管應用程式。該供應商提供的是哪種雲端服務類別？</p>
+      <ol type="A">
+        <li>IaaS</li>
+        <li>PaaS</li>
+        <li>SaaS</li>
+        <li>FaaS</li>
+      </ol>
+      <p><strong>答案：C. SaaS (Software as a Service) 供應商提供完整應用程式，客戶只需使用即可。</strong></p>
+    </li>
+    <li>
+      <p>如果雲端客戶希望使用雲端供應商提供的儲存、網路和運算資源來建構自己的運算環境，哪種雲端服務類別可能最適合？</p>
+      <ol type="A">
+        <li>IaaS</li>
+        <li>PaaS</li>
+        <li>SaaS</li>
+        <li>FaaS</li>
+      </ol>
+      <p><strong>答案：A. IaaS (Infrastructure as a Service) 提供基礎運算、儲存和網路資源，供客戶自行配置使用。</strong></p>
+    </li>
+  </ol>
+  
+  
+
+
+</body>
+</html>

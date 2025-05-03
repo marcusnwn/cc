@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第五章：雲端平台、基礎架構與營運安全</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .exam-tip { border-left: 5px solid #f0ad4e; padding: 10px; margin: 15px 0; background-color: #fefbed; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第五章：雲端平台、基礎架構與營運安全 <span class="english">(Cloud Platform, Infrastructure, and Operational Security)</span></h1>
+
+<p>保護雲端平台需要改變對本地系統和實踐的心態。雖然許多相同的基本能力在概念或功能層面上存在，但它們的實施以及您使用它們的方式通常有顯著不同。當您考慮保護雲端環境時，您需要考慮您將使用的基礎架構和系統或服務、它們將如何通訊以及如何在共享環境中保護網路流量、這一切將如何被安全地管理——以及如何保護管理平面本身！</p>
+<p>當您使用本章準備 CCSP 考試時，請考慮如何將傳統的本地控制應用於雲端環境，以及由於雲端供應商呈現系統、服務和能力給您的組織的方式，可能會有哪些不同或引發新的考量。您需要思考屬於容器化環境的<span class="key-term">暫時性機器</span> <span class="english">(ephemeral machines)</span>、如何使用<span class="key-term">基線</span> <span class="english">(baselines)</span> 來加固系統和服務、如何使用主機和雲端原生控制來應用<span class="key-term">存取控制</span> <span class="english">(access controls)</span>，以及如何配置和管理<span class="key-term">網路安全控制</span> <span class="english">(network security controls)</span> 等等，以確保安全的雲端營運和基礎架構環境。</p>
+<p>最後，稽核和評估您的環境的能力需要在您的整個設計和實施過程中加以考慮。與傳統環境（稽核員可以簡單地走進您的資料中心並檢查物理系統）不同，雲端環境可能具有額外的限制——包括通常禁止稽核底層環境的事實。</p>
+
+<h2>託管服務的基礎 <span class="english">(Foundations of Managed Services)</span></h2>
+<p>雲端服務的建立是為了讓雲端服務供應商能夠向一系列客戶銷售對其系統、服務和能力的存取權限。這意味著它們的設計允許供應商將其部分能力的存取權限提供給客戶，並且客戶需要理解他們的大部分營運將在<span class="key-term">共享環境</span> <span class="english">(shared environment)</span> 中進行。</p>
+<p>通常，它們包括以下一些元件：</p>
+<ul>
+    <li><span class="key-term">網路和通訊能力</span> <span class="english">(Network and communications capabilities)</span> 允許客戶將資料傳入和傳出雲端運算供應商的環境。供應商必須為其網路和連接性的大規模使用進行設計，並需要在其底層基礎架構中建構冗餘和可擴展性。作為安全專業人員，這意味著您需要考慮您的組織對基礎架構和能力的使用，以及可能影響雲端供應商的其他可能發生的情況。他們是否有保護措施來應對拒絕服務攻擊？他們的網路連接性是否以提供低延遲或其他理想特性的方式連接到您的網際網路服務供應商？</li>
+    <li><span class="key-term">運算</span> <span class="english">(Compute)</span> 是基礎架構即服務 (IaaS) 供應商的重點。雖然這似乎僅限於虛擬機或中央處理單元 (CPU)，但廣義解釋的運算包括儲存、無伺服器運算和容器以及供應商銷售的其他功能。基本上，如果它不屬於網路和通訊能力，也不屬於管理平面，那麼它很可能就是運算。這意味著您作為安全從業人員將要保護的許多內容都屬於 CCSP 平台和基礎架構元件列表中的運算類別。運算通常在客戶之間共享，儘管雲端供應商在必要時會提供專用實例，這些實例僅在系統上運行單一客戶的工作負載以提高安全性，儘管成本更高！</li>
+    <li><span class="key-term">管理平面</span> <span class="english">(management plane)</span> 是平台的第三個元件。管理平面允許您控制網路、通訊、運算和雲端環境的其他服務元素。這意味著保護您的管理平面是您設計和實施中絕對關鍵的組成部分。</li>
+</ul>
+
+<div class="note">
+    <p>您會注意到 CCSP 考試中對 IaaS 環境的偏見。這是因為安全從業人員在雲端中可以做的大量工作都發生在這些環境中。在 SaaS 或 PaaS 環境中，大部分基礎架構和設計安全決策都已經做出，剩下的就是營運安全。這並不意味著在這些環境中安全性不重要，但您將花時間評估供應商及其稽核回應，並確保營運安全實踐到位，而不是在大多數非 IaaS 部署的場景中設計和架構安全環境。</p>
+</div>
+
+<p>根據它們是屬於雲端供應商還是客戶，或者由雙方共享，考慮雲端的安全角色和責任是有幫助的。</p>
+
+<h2>雲端供應商責任 <span class="english">(Cloud Provider Responsibilities)</span></h2>
+<p>雲端服務供應商設計、建立和維護底層託管環境，然後用它們來銷售服務。這意味著從選擇資料中心位置和設計以及選擇網際網路服務供應商 (ISP) 到雇用和管理運行設施的員工的一切。它還涉及設計、建立、營運和保護用於使其服務可用的底層軟體平台和工具。</p>
+<p>為此，雲端供應商需要一個或多個資料中心或其他設施來向其客戶提供服務。他們必須考慮設施的位置、設施內部的物理元件以及支援和連接它們的服務。這意味著他們需要執行關鍵任務，例如保護硬體元件；投資於電力、連接性和環境控制；確保他們有足夠的容量來滿足他們的承諾和客戶需求；以及保護設施和構成雲端環境的系統。</p>
+
+<h2>按服務類型劃分的共享責任 <span class="english">(Shared Responsibilities by Service Type)</span></h2>
+
+<p>主要的雲端服務供應商對供應商和客戶有不同的責任模型。圖 5.1 顯示了三種最常見服務模型的典型劃分。</p>
+
+<h3>IaaS <span class="english">(IaaS)</span></h3>
+<p>在基礎架構即服務供應商模型中，雲端供應商僅託管硬體和公用事業，因此負責設施和系統的物理安全。雙方共同承擔保護基礎架構的責任。客戶承擔所有其他安全方面的責任。</p>
+<div class="note">
+    <p>供應商對其客戶建立和維護安全基礎架構和系統有既得利益。這意味著他們也投資於其環境中安全營運的指南。Amazon 的 AWS Well-Architected 框架 (https://aws.amazon.com/architecture/well-architected) 和 Azure 的 Well-Architected Framework (https://docs.microsoft.com/en-us/azure/architecture/framework) 都是此類設計和實施指南的有用範例。如果您不熟悉它們，查閱其中一個或兩個將讓您很好地了解當今雲端 IaaS 供應商認為有用的最佳實踐是什麼樣的。</p>
+</div>
+
+<h3>PaaS <span class="english">(PaaS)</span></h3>
+<p>在平台即服務模型中，服務供應商提供一個客戶配置和使用的平台。雖然 SaaS 和 PaaS 之間的界線可能模糊不清，但在 PaaS 環境中，客戶通常透過配置活動建立更多的功能和能力。這意味著客戶分擔平台安全的責任，並對其平台使用的應用程式、資料和風險管理負有全部責任。</p>
+
+<h3>SaaS <span class="english">(SaaS)</span></h3>
+<p>軟體即服務實施給予客戶對環境的控制最少，因此服務供應商在此模型中承擔最大的責任。客戶只需擔心存取和管理。儘管如此，由於客戶是資料擁有者，客戶始終擁有誰有權查看和操作資料的最終控制權。</p>
+
+<h2>保護通訊與基礎架構 <span class="english">(Securing Communications and Infrastructure)</span></h2>
+<p>CCSP 考試要求應試者從設計和架構的角度考慮四個與網路安全相關的關鍵概念：</p>
+<ul>
+    <li><span class="key-term">網路安全群組</span> <span class="english">(Network security groups)</span>，通常簡稱為安全群組，是在雲端環境中使用的虛擬防火牆。安全群組使用規則來控制流量，使用埠和協定，就像您可能習慣的防火牆一樣，並且您通常可以使用單獨的規則來控制入站和出站流量。與傳統防火牆非常相似，安全群組通常是<span class="key-term">有狀態的</span> <span class="english">(stateful)</span>，這意味著它們會追蹤請求和回應，以允許回應返回到發出允許請求的系統。</li>
+    <li>在雲端和虛擬環境中進行<span class="key-term">流量檢查</span> <span class="english">(Traffic inspection)</span> 可能更具挑戰性，或者可能需要使用為該環境設計的工具。由於流量通常直接發送到虛擬資源，因此通常沒有混雜模式流量擷取的直接等效物，無法讓您看到更多網路流量。幸運的是，雲端供應商知道您會想要能夠查看、擷取和分析流量，並提供像 AWS 的 VPC 流量鏡像能力 (https://aws.amazon.com/blogs/aws/new-vpc-traffic-mirroring) 這樣的工具。</li>
+    <li><span class="key-term">地理圍欄</span> <span class="english">(Geofencing)</span> 可能是一個重要的工具，因為安全從業人員和組織通常希望根據存取來源地限制對服務或系統的存取。雖然地理圍欄內建於許多應用程式中用於其他原因，但安全工具最有可能使用地理圍欄將登入和活動與其來源地相關聯，以確保憑證未被濫用，並根據地理 IP 資訊識別意外的流量模式。</li>
+    <li><span class="key-term">零信任</span> <span class="english">(Zero trust)</span> 依賴身份和授權來確保使用者和實體在存取資料之前得到驗證。在雲端系統中實施零信任有時比在傳統環境中更容易，因為有綠地構建和環境中內建的能力。您可以閱讀有關 Azure 在 https://azure.microsoft.com/en-us/blog/enabling-zero-trust-with-azure-network-security-services 的零信任支援，Google 在 https://cloud.google.com/beyondcorp，以及 Amazon 在 https://aws.amazon.com/security/zero-trust。</li>
+</ul>
+<div class="note">
+    <p>為什麼在雲端中進行封包擷取和流量檢查更困難？雲端環境在 OSI 模型的第 3 層運行，而傳統網路可以在第 1 層和第 2 層存取。</p>
+</div>
+<p>此外，CCSP 在此背景下特別提到了許多網路安全控制，您需要準備好在雲端中解釋和實施它們。它們如下：</p>
+
+<h3>防火牆 <span class="english">(Firewalls)</span></h3>
+<p><span class="key-term">防火牆</span> <span class="english">(Firewalls)</span> 是根據某些標準限制通訊的工具。在雲端環境中，安全群組（或網路安全群組）通常是部署的第一個防火牆能力。傳統防火牆供應商也提供其工具的虛擬設備或啟用雲端的版本，允許您在本地和雲端站點之間使用相同的防火牆技術，或利用簡單安全群組不提供的特定能力，例如由稱為<span class="key-term">下一代防火牆</span> (<span class="key-term">next-generation firewalls, NGFWs</span>) 的組合安全設備提供的能力。無論其交付方式如何，防火牆通常以類似的方式工作：確定允許哪些流量以及哪些不允許的標準由管理員定義的規則處理。</p>
+<p>在雲端和虛擬環境中發生的一個關鍵變化是系統通常是暫時性的並且可能快速擴展。這意味著防火牆和防火牆規則需要考慮這些變化，並且要麼由添加新系統的相同程式碼進行調整，要麼在規則內部進行擴展以處理可能存在的設備數量，或者可以使用負載平衡器和其他工具來處理基礎架構的變化而無需新規則。</p>
+<div class="note">
+    <p>雖然 CCSP 考試指出了這些特定技術，但典型本地環境武器庫中的所有其他安全工具也存在於雲端中。當您處理安全設計時，您應該考慮像 Web 應用程式防火牆這樣的工具來保護 Web 應用程式以及應用程式閘道和當今安全從業人員可用的所有其他網路安全設備。</p>
+</div>
+<p>防火牆和類似防火牆的技術包括廣泛的解決方案，從簡單的存取控制列表 (ACL) 和網路存取控制列表 (NACL) 到可以維護會話狀態並追蹤攻擊模式以調整規則以回應不需要流量的防火牆系統。更高級的工具（如 NGFW）甚至整合了更多的安全服務和能力，通常充當多合一的安全設備。所有這一切意味著，當您考慮類似防火牆的技術時，您需要考慮您的要求以及您的潛在解決方案可以提供的全部功能和特性，以查看哪種類型的解決方案最適合您的組織。</p>
+
+<h3>入侵偵測/入侵防禦系統 <span class="english">(Intrusion Detection/Intrusion Prevention Systems)</span></h3>
+<p><span class="key-term">入侵偵測系統</span> (<span class="key-term">Intrusion detection systems, IDS</span>) 旨在識別惡意流量並對其發出警報。<span class="key-term">入侵防禦系統</span> (<span class="key-term">Intrusion prevention systems, IPS</span>) 既可以檢測惡意流量，也可以透過阻止它或採取除警報之外的其他行動來回應。每個主要的雲端供應商都有提供 IDS 和 IPS 服務的第三方，其中許多與傳統環境中的基本相同，只是虛擬化和啟用雲端。</p>
+
+<h3>蜜罐 <span class="english">(Honeypots)</span></h3>
+<p><span class="key-term">蜜罐</span> <span class="english">(honeypot)</span> 是一種用於透過分散攻擊者注意力來偵測、識別、隔離和分析攻擊的工具。這通常是一台虛擬機器，通常帶有看似有價值但卻是偽造的資料，部分受保護並配置得像生產環境的真實部分。當攻擊者滲透它並嘗試進行惡意活動時，安全團隊可以監控並記錄攻擊者的行為。這些資訊可用於實際生產環境中的防禦目的，或作為訴訟和起訴行動中的證據。與本地網路（可能存在大量「黑暗」或未使用的公共網路空間）不同，許多雲端環境按公共 IP 位址收費，從而增加了運行蜜罐或蜜網的成本。從業人員需要確定在其設計和評估過程中，在雲端環境中運行蜜罐的成本和價值。</p>
+
+<h3>漏洞評估工具 <span class="english">(Vulnerability Assessment Tools)</span></h3>
+<p>漏洞評估工具，或漏洞掃描器，在雲端環境中既可以作為原生工具（如 Azure 的 Defender (https://docs.microsoft.com/en-us/azure/defender-for-cloud) 和 Amazon 的 Inspector 服務 (https://aws.amazon.com/inspector)）提供，也可以透過其市場提供第三方漏洞評估工具，允許您選擇和使用熟悉的工具或最適合您組織需求的工具。與傳統的本地環境非常相似，您需要考慮網路位置和主機對您的漏洞掃描器的可見性，並確保掃描器在您的設計工作中的安全性。記住雲端環境中的許多系統是暫時性的並且可能在基礎架構即程式碼環境中運行也非常關鍵。這意味著您的掃描需要驗證原始系統以及隨著程式碼更新和元件更新可能發生的任何更改。在您的系統發布管道中強有力地進行漏洞掃描可以提供幫助！</p>
+
+<h3>堡壘主機 <span class="english">(Bastion Hosts)</span></h3>
+<p><span class="key-term">堡壘主機</span> <span class="english">(bastion host)</span> 用於允許管理員從較低安全區域存取私有網路。堡壘主機將在較低和較高安全區域都具有網路介面，並且會因此受到額外的安全關注。</p>
+<div class="note">
+    <p>堡壘主機有時被稱為<span class="key-term">跳轉伺服器</span> <span class="english">(jump servers)</span> 或<span class="key-term">跳轉盒</span> <span class="english">(jump boxes)</span>，因為它們讓您可以在區域之間跳轉。</p>
+</div>
+<p>圖 5.2 顯示了一個簡單的堡壘主機設計，其中堡壘主機位於較低信任的公共網路中，用於存取受保護的私有網路。網路段之間的安全群組和堡壘主機上的主機安全控制有助於確保堡壘主機保持安全。</p>
+<div class="exam-tip">
+    <p>如果您想嘗試設置 Linux 堡壘主機，AWS 提供了一個如何部署它們的快速入門指南。您可以按照 https://aws.amazon.com/quickstart/architecture/linux-bastion 的說明進行嘗試。</p>
+</div>
+
+<h2>雲端與虛擬環境中的身份保證 <span class="english">(Identity Assurance in Cloud and Virtual Environments)</span></h2>
+<p>CCSP 考試大綱指出了在虛擬和雲端系統中進行身份保證對從業人員來說是一個挑戰。這可能是由多種原因造成的。</p>
+<p>雲端環境中最常見的身份挑戰是當組織希望允許使用者攜帶自己的身份時。<span class="key-term">身份驗證</span> <span class="english">(Identity proofing)</span>，即驗證身份屬於某個使用者的過程，如果您允許使用者將 Gmail 帳戶作為其服務的身份，則幾乎不可能。即使是 Facebook 帳戶，在某些情況下可能更容易與實際人員聯繫起來，也存在問題。</p>
+<p>在組織了解其自身員工和其他使用者並透過正常入職流程處理身份驗證的環境中，身份驗證的問題不太可能出現。下一個挑戰是驗證使用者確實是應該在給定情況下或存取系統或服務時使用正在使用的憑證的人。被洩露的憑證——特別是密鑰、API 金鑰和類似的產物——可以為攻擊者提供進入服務的入口。</p>
+<p>因此，<span class="key-term">身份保證</span> <span class="english">(Identity assurance)</span> 需要考慮到憑證丟失、洩露或故意共享的可能性。稽核資訊和日誌必須包含有助於識別個人、服務或系統的資訊，安全監控系統需要能夠發現何時表明潛在問題。無論是地理位置變更、未知的遠端系統，還是非典型的或通常與惡意活動相關的行為，身份保證都是一個重要的安全層——並且是一個持續的挑戰。</p>
+
+<h2>保護硬體與運算 <span class="english">(Securing Hardware and Compute)</span></h2>
+<p>雖然在雲端運算環境中直接存取硬體相對較少，但在少數情況下，您可能對硬體有更多的直接存取或控制權。CCSP 考試目標考慮了兩個特定領域：硬體安全模組 (HSM) 和可信平台模組 (TPM)。</p>
+<div class="note">
+    <p>Amazon 的 HSM 產品稱為 CloudHSM (https://aws.amazon.com/cloudhsm)，Amazon 也提供 AWS KMS 用於金鑰管理。Azure 提供專用 HSM (https://azure.microsoft.com/en-us/services/azure-dedicated-hsm) 和 Key Vault，一個免費的密鑰儲存庫 (https://azure.microsoft.com/en-us/services/key-vault)。Google 提供 Cloud HSM (https://cloud.google.com/kms/docs/hsm) 和 Google KMS (https://cloud.google.com/security-key-management)。</p>
+</div>
+<p><span class="key-term">硬體安全模組</span> (<span class="key-term">Hardware security modules, HSMs</span>) 用於生成、儲存和管理密碼金鑰以及用於雜湊和數位簽章的其他密碼用途，以及用於透過 TLS 卸載和資料庫透明加密來加密和解密資料。這意味著 HSM 持有組織在雲端中使用的一些最敏感的密鑰，使其既成為知識淵博的攻擊者的目標，也成為雲端安全從業人員需要保護的關鍵元件。</p>
+<p>雲端供應商可以將 HSM 作為服務或硬體設備提供。具有非常高安全性或合規性要求的組織可能會選擇專用硬體設備而不是使用 HSM 服務，但在這兩種情況下，設備都在雲端服務供應商的物理控制之下。冗餘和備份仍然至關重要，因為 HSM 故障和資料丟失可能意味著 HSM 中儲存的所有金鑰的丟失。由於雲端服務嚴重依賴金鑰進行安全，HSM 故障可能會使組織停止運轉。</p>
+<p>儘管 CCSP 考試大綱（候選人資訊公告）僅描述了 HSM，但您還應了解<span class="key-term">金鑰管理系統</span> (<span class="key-term">key management system, KMS</span>) 功能，該功能將 HSM 功能作為服務提供，而不是像前面討論的雲端 HSM 產品那樣作為專用實例或硬體。了解您組織的功能和安全要求可以幫助您在專用 HSM 和金鑰管理服務之間做出選擇。</p>
+<p>雖然 HSM 可能是雲端環境中最常見的解決方案，因為大規模使用密鑰，但<span class="key-term">可信平台模組</span> (<span class="key-term">Trusted Platform Module, TPM</span>) 也有其作用。可信平台模組是一種硬體設備，用於保護、儲存和管理用於磁碟加密、可信啟動、硬體驗證和設備密碼管理的密碼金鑰。</p>
+<div class="note">
+    <p>Amazon 和 Azure 都提供了關於 IoT 設備和 TPM 的指南。請訪問 https://azure.microsoft.com/en-us/blog/device-provisioning-identity-attestation-with-tpm 和 https://aws.amazon.com/blogs/iot/using-a-trusted-platform-module-for-endpoint-device-security-in-aws-iot-greengrass 以深入了解 TPM 在連接到兩大雲端服務供應商的端點設備上的使用。</p>
+</div>
+<p>由於雲端供應商通常提供虛擬化硬體，因此基於硬體的 TPM 不是提供給雲端客戶的常見功能。軟體 TPM 和整合到物聯網設備中的 TPM 更可能是安全從業人員關心的問題。</p>
+
+<div class="box">
+    <p><strong>保持雲端儲存安全 (Keeping Cloud Storage Secure)</strong></p>
+    <p>保護雲端儲存有其自身的設計和實施要求集，但一些常見的最佳實踐可以很好地為您服務。</p>
+    <ul>
+        <li>利用旨在確保環境安全的內建工具是關鍵一步。Amazon 的 Trusted Advisor 和 Azure 的 Advisor 都提供配置和使用分析能力來幫助您。</li>
+        <li>最低權限仍然是一個關鍵控制，需要身份和存取管理來確保最低權限是可管理的。</li>
+        <li>對靜態和傳輸中的資料進行加密有助於防止錯誤配置和資料洩露演變成更大的問題。</li>
+        <li>預設阻止公共存取是確保儲存不會成為資料洩露噩夢的最佳方法之一。</li>
+        <li>確保不允許對儲存桶進行通配符或廣泛存取有助於確保您可以追蹤誰有權存取資料。</li>
+        <li>建立安全的預設存取控制列表並定期檢查它們是否存在過於廣泛的存取權限有助於防止權限過於寬鬆的問題。</li>
+        <li>版本控制和複製對於可用性至關重要。</li>
+        <li>監控、稽核和警報都是安全儲存管理計畫的重要組成部分。</li>
+    </ul>
+</div>
+
+<h2>保護軟體 <span class="english">(Securing Software)</span></h2>
+<p>在基礎架構即服務環境中，管理從應用程式到作業系統的軟體是安全營運中持續存在的一個元素。第三方軟體需要更新、配置和監控以確保其盡可能安全。</p>
+<p>使用程式碼定義的基礎架構意味著驗證開源和第三方軟體是一個持續的挑戰。當可以從 Git 儲存庫獲得函式庫和軟體元件時，您的組織如何確保軟體未被洩露？</p>
+
+<div class="box">
+    <p><strong>洩露儲存庫 (Compromising Repositories)</strong></p>
+    <p>2021 年，核心 PHP Git 儲存庫遭到入侵，允許惡意行為者推送兩個提交。這些提交包含一個程式碼注入漏洞，意圖使任何從受信任儲存庫提取 PHP 的組織都可能受到注入攻擊。幸運的是，在這些提交中的程式碼進入任何建構版本之前，問題就被發現了。</p>
+    <p>您可以在 https://news-web.php.net/php.internals/113838 閱讀更多關於此事件的資訊。</p>
+</div>
+
+<p>CCSP 考試大綱（候選人資訊公告）側重於與保護軟體相關的三個領域：第三方軟體管理；經過驗證的開源軟體；以及作業系統加固、基線、監控和補救。</p>
+
+<h3>第三方軟體管理 <span class="english">(Third-Party Software Management)</span></h3>
+<p>管理<span class="key-term">第三方軟體</span> <span class="english">(third-party software)</span> 可能是一個挑戰，因為發布、更新和其他更改可能對您的組織產生廣泛影響。管理流程從軟體選擇開始，其中關注業務需求契合度以及第三方供應商的更新和安全修補實踐，以及他們的通知流程，對於選擇過程都很有用。</p>
+<p>一旦選定軟體，組織需要確定該軟體的配置要求是什麼。這意味著理解安全影響和能力以及功能配置項目。供應商通常提供最佳實踐配置指南，這在成功和安全的實施中可以發揮重要作用。</p>
+<p>軟體到位後，組織需要確保他們收到有關改進安全性和功能的補丁和更新的資訊。在許多情況下，軟體需要在部署前進行測試，這需要測試環境和實踐，可能涉及漏洞掃描或其他自動化測試和驗證步驟。確保您的組織正在接收客戶更新電子郵件或其他通知，並且您知道如何聯繫供應商尋求幫助也很重要。</p>
+<p>在軟體是非商業性的情況下，例如開源軟體套件，由於支援模型的差異，這些實踐可能並非都可行。組織可能需要在軟體支援或商業軟體的成本與其環境中開源軟體的益處之間取得平衡。在許多情況下，可能沒有開源軟體的直接替代品，組織必須努力了解該軟體套件的修補、安全和通知流程是什麼。</p>
+<div class="exam-tip">
+    <p>自動更新非常有用，但它們也可能自動將新問題引入組織。出於這個原因，組織通常會關閉關鍵基礎架構和軟體套件的自動更新，以便他們可以在將新更新部署到關鍵任務系統之前在測試環境中驗證它們。當您考慮修補時，您還應考慮將如何測試補丁以及您可能基於安全關鍵性與潛在業務中斷而延遲更新多長時間。這通常是一個艱難的風險方程式！</p>
+</div>
+<p>像函式庫和其他依賴項這樣的通用程式碼元素是開源軟體安全的主要考量，但它們也可能存在於商業軟體套件中。這意味著套件管理是安全專業人員、開發人員和系統管理員關心的問題，他們需要知道構成其服務和系統的元件本身是否存在漏洞。軟體組成分析工具、套件管理工具和類似技術都在現代軟體所依賴的複雜依賴迷宮中發揮作用。</p>
+
+<h3>驗證開源軟體 <span class="english">(Validating Open-Source Software)</span></h3>
+<p><span class="key-term">開源軟體</span> <span class="english">(Open-source software)</span> 驗證可能是一個挑戰，因為您首先需要確定該軟體的受信任來源，然後確保您正在使用的套件或套件是受信任的。一些軟體套件提供密碼雜湊用於完整性檢查，以確保軟體未被篡改，而另一些則僅從其官方網站提供軟體。</p>
+<p>一些軟體使用開發人員的憑證進行簽名，或者具有 GPG 或 PGP 簽名。雖然檢查這些簽名可能需要額外時間，但在高安全性環境中驗證軟體很可能是必要的。請記住，您需要軟體供應商的公鑰來驗證簽名，並且您需要確保提供的金鑰確實是他們的，否則驗證過程就不可信！</p>
+
+<h3>作業系統加固、監控與補救 <span class="english">(OS Hardening, Monitoring, and Remediation)</span></h3>
+<p>CCSP 考試的最後一個第三方軟體目標是<span class="key-term">作業系統加固</span> <span class="english">(operating system hardening)</span>。您需要了解並知道如何使用 Windows、Linux 和 VMware 的基線、監控和補救流程，作為此目標的一部分。</p>
+<p><span class="key-term">基線</span> <span class="english">(Baselines)</span> 被用作系統加固過程的一部分。基線是組織關於系統應如何配置以滿足功能和安全目標的標準。基線可從例如以下組織獲得：</p>
+<ul>
+    <li>網際網路安全中心 (Center for Internet Security) (www.cisecurity.org/cis-benchmarks)</li>
+    <li>Microsoft 的安全合規性工具包 (Security Compliance Toolkit) (https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-security-configuration-framework/security-compliance-toolkit-10)</li>
+    <li>Azure 特定的 Linux 安全基線 (https://docs.microsoft.com/en-us/security/benchmark/azure/baselines/virtual-machines-linux-security-baseline)</li>
+    <li>RedHat 的安全指南 (https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/security_guide/index)</li>
+    <li>VMware 的加固指南 (www.vmware.com/security/hardening-guides.html)</li>
+</ul>
+<p>了解每個基線包含哪些內容以及您可能如何將其應用於您自己的組織對於考試和從業人員來說都是重要的知識。</p>
+<p>無論您的組織選擇使用哪個基線，您都需要審查並根據您的需求進行調整。基線是一個起點，不應在沒有考慮業務和安全需求的情況下就應用。</p>
+<p><span class="key-term">監控</span> <span class="english">(Monitoring)</span> 也是作業系統加固的關鍵部分。在此背景下，監控涉及確保作業系統保持配置以滿足基線，並且捕獲更改並恢復到所需配置，因組織需求而被接受，或作為事件應變過程的一部分被警報。網際網路安全中心控制自我評估工具 (Center for Internet Security Controls Self-Assessment Tool, CSAT) 是一個 Web 應用程式，用於追蹤 CIS 控制的實施。像這樣的工具可以用於幫助監控工作。您可以在 www.cisecurity.org/insights/blog/cis-csat-free-tool-assessing-implementation-of-cis-controls 找到 CSAT 工具。</p>
+<p>最後，<span class="key-term">補救</span> <span class="english">(remediation)</span> 工作基於監控和基線實施過程。補救旨在使系統和軟體與基線保持一致，無論是在系統建構和設置期間完成，還是在事件或更新之後完成。</p>
+
+<h2>管理虛擬系統 <span class="english">(Managing Virtual Systems)</span></h2>
+<p>CCSP 考試大綱（候選人資訊公告）指出了您應準備作為考試一部分處理的四個主要組成部分。</p>
+<p>首先是<span class="key-term">管理工具的安裝和配置</span> <span class="english">(installation and configuration of management tools)</span>。虛擬化管理工具提供對虛擬系統的更大控制權，可以幫助虛擬化管理平面更有效地處理資源需求和其他任務。當然，與任何額外的軟體套件一樣，這些會產生新的攻擊面，並可能影響虛擬機或 hypervisor。</p>
+<p>接下來，您需要準備回答有關特定於<span class="key-term">虛擬硬體的安全配置要求</span> <span class="english">(security configuration requirements specific to virtual hardware)</span> 的問題：</p>
+<ul>
+    <li>網路配置可能包括使用虛擬防火牆、交換機和其他虛擬化網路設備作為安全設計的一部分。它還可以包括配置虛擬局域網 (VLAN) 或網路段虛擬系統將位於哪個、用於可用性的網路介面卡 (NIC) 聚合以及網路路徑冗餘。</li>
+    <li>儲存可以根據需要分配或預先配置。在任何一種情況下，加密儲存空間是任何共享環境中的重要控制措施。</li>
+    <li>記憶體可以直接分配給虛擬機或根據需要分配。與其他資源非常相似，專用記憶體提供更高的安全性，但會增加成本，因為環境必須根據需要進行配置，而不是允許調整大小和擴展以滿足需求。</li>
+    <li>中央處理單元 (CPU) 通常在虛擬環境中共享，如果惡意行為者可以存取在另一個虛擬機上運行的進程，則使其成為潛在的易受攻擊元件。專用核心或整個物理 CPU 有助於減輕這種風險，但成本更高，因為資源無法共享。</li>
+</ul>
+
+<div class="note">
+    <p>考試大綱（候選人資訊公告）提到了 Type 1 和 Type 2 hypervisor。Type 1 hypervisor 直接在底層主機的硬體上運行，而 Type 2 hypervisor 作為應用程式在作業系統之上運行。如果您正在努力保護 Type 1 hypervisor，您需要關注 hypervisor 平台本身的安全能力。對於 Type 2 hypervisor，您必須保護底層作業系統和 hypervisor。在大多數雲端環境中，供應商出於效率和直接硬體控制的考慮使用 Type 1 hypervisor。Type 1 hypervisor 的範例包括 VMware ESXi 和 Microsoft 的 Hyper-V。VMware Workstation、VirtualBox 和 Microsoft 的 Virtual PC 是 Type 2 hypervisor 的範例。</p>
+</div>
+
+<p>第三，安裝<span class="key-term">客體作業系統 (OS) 虛擬化工具集</span> <span class="english">(guest operating system (OS) virtualization toolsets)</span>，例如 VMware Tools 或 Amazon 的 Windows 實例半虛擬化驅動程式，以及其他雲端環境的類似驅動程式，透過連接到底層虛擬化主機來增加功能。它們可以幫助映射儲存並支援改進的網路、視訊輸出、聲音或輸入能力，或以其他方式改善虛擬化作業系統的體驗和功能。</p>
+<p>最後，<span class="key-term">配置主機和客體作業系統 (OS) 備份和還原功能</span> <span class="english">(configuration of host and guest operating system (OS) backup and restore functions)</span> 允許透過快照備份虛擬機，快照捕獲時間點配置、記憶體狀態、磁碟映像和設置，然後可以根據需要進行還原。這些對於在發生意外事件（例如補丁期間或事件之後出現問題）後進行還原很有用，但它們也可以用於建立基線實例以供以後使用。</p>
+
+<h2>評估漏洞 <span class="english">(Assessing Vulnerabilities)</span></h2>
+
+<p>掃描漏洞在雲端託管環境中可能需要特別考慮。雖然 SaaS 和 PaaS 供應商不太可能允許您掃描它們，但 IaaS 供應商可能對可以掃描的內容有限制，或者如果他們允許掃描，則可能需要通知或有批准流程。</p>
+
+<div class="note">
+    <p>雖然我們在這裡以 AWS 為例，但其他主要的基礎架構即服務供應商也有其等效的政策和程序。作為應試者，關鍵是要理解您的供應商允許和禁止什麼，並確保您的組織遵守它們，以避免服務中斷或帳戶問題。</p>
+</div>
+
+<p>Amazon 的掃描政策描述了可以掃描和不能掃描的內容。截至 2022 年 3 月，未經事先批准允許進行滲透測試的列表包括以下項目：</p>
+<ul>
+    <li>Amazon EC2 實例、NAT 閘道和彈性負載平衡器</li>
+    <li>Amazon RDS</li>
+    <li>Amazon CloudFront</li>
+    <li>Amazon Aurora</li>
+    <li>Amazon API Gateway</li>
+    <li>AWS Lambda 和 Lambda Edge 函數</li>
+    <li>Amazon Lightsail 資源</li>
+    <li>Amazon Elastic Beanstalk 環境</li>
+</ul>
+<p>Amazon 也禁止許多活動。值得注意的是，這些活動中的大多數更有可能導致拒絕服務條件或資源耗盡，從而干擾其他客戶對服務的使用。</p>
+<ul>
+    <li>透過 Amazon Route 53 託管區域進行 DNS 區域傳輸</li>
+    <li>拒絕服務 (DoS)、分散式拒絕服務 (DDoS)、模擬 DoS、模擬 DDoS（這些受 DDoS 模擬測試政策的約束。）</li>
+    <li>埠洪水攻擊</li>
+    <li>協定洪水攻擊</li>
+    <li>請求洪水攻擊（登入請求洪水攻擊、API 請求洪水攻擊）</li>
+</ul>
+<p>Amazon 特別禁止測試 AWS 基礎架構和底層服務，並提供請求流程以獲得授權來模擬其他事件。正如您所期望的，它會請求日期、帳戶資訊和聯繫資訊以及測試人員打算做什麼的描述。Amazon 還提供有關壓力測試和 DDoS 模擬的政策。</p>
+<p>雲端服務通常提供自己的漏洞評估工具。Amazon 的工具稱為 Amazon Inspector，它評估已知漏洞和常見最佳實踐的差距。同時，漏洞掃描工具供應商透過 Amazon 的市場提供自己的虛擬設備和服務，允許組織選擇他們想要的工具或與其現有本地部署匹配的工具。</p>
+<p>當您考慮漏洞掃描時，您需要牢記您為雲端環境設置的網路架構和安全保護。與本地資料中心非常相似，這些保護措施可能會阻止在段或安全區域之間進行漏洞掃描，或者可能會為您的掃描嘗試增加額外的複雜性。設計您的環境以便您可以執行安全評估，並在您需要的每個環境、段或區域中提供工具，是安全且完整的雲端基礎架構設計和營運計劃的一部分。</p>
+
+<h2>保護管理平面 <span class="english">(Securing the Management Plane)</span></h2>
+
+<p>雲端服務提供一個<span class="key-term">管理主控台</span> <span class="english">(management console)</span> 或服務，允許組織使用其服務。雖然每個服務供應商的管理主控台或服務都不同，但它們往往具有一組相似的功能。在這裡，我們將重點關注您通常會在 IaaS 管理平面中找到的內容，但請記住，SaaS 和 PaaS 供應商也將在其管理主控台中內建適合該服務向其使用者提供的控制級別的安全能力和選項。</p>
+<p>CCSP 考試大綱（候選人資訊公告）側重於三個特定領域作為管理平面的關鍵元素，我們將在此處查看以 AWS 為中心的範例：</p>
+<ul>
+    <li><span class="key-term">排程</span> <span class="english">(Scheduling)</span>，或在計劃時間或由於事件而啟動和停止資源的能力。在 AWS 中，這可以透過 Instance Scheduler 或透過 Lambda 函數來完成。排程是成本控制的關鍵元素，因為它可以讓您僅在需要時運行服務。</li>
+    <li><span class="key-term">協同運作</span> <span class="english">(Orchestration)</span> 意味著自動化流程和工作負載。組織將使用協同運作能力來管理資源、工作負載和服務。在 AWS 環境中，協同運作通常使用許多服務來完成所需的任務：
+        <ul>
+            <li>CloudFormation 用於管理和建模基礎架構即程式碼以控制部署。</li>
+            <li>Service Catalog 用於控制和管理正在使用的服務和第三方軟體。</li>
+            <li>OpsWorks 可用於使用像 Puppet 和 Chef 這樣的工具來自動化營運。</li>
+            <li>像 Control Tower、Organizations 和其他的 AWS 管理工具在治理和管理中發揮作用。</li>
+        </ul>
+        <p>您可以在 https://aws.amazon.com/products/management-and-governance/use-cases/provisioning-and-orchestration 閱讀更多關於 AWS 協同運作的資訊，Azure 的自動化概述可以在 https://azure.microsoft.com/en-us/services/automation 找到，而 Google 關於為其環境選擇正確協同運作工具的建議則在 https://cloud.google.com/blog/topics/developers-practitioners/choosing-right-orchestrator-google-cloud。</p>
+    </li>
+     <li><span class="key-term">維護</span> <span class="english">(Maintenance)</span> 在雲端基礎架構環境中通常與傳統的本地專用硬體環境不同。許多雲端原生設計強調暫時性的、程式碼定義的機器，這些機器部署在池中並被銷毀而不是升級。相反，升級後的系統被添加到池中，而舊系統被移除，從而實現無縫升級或修補過程。這並不意味著在雲端中不可能進行修補或升級，但這確實意味著許多環境將與傳統的系統管理實踐不同。</li>
+</ul>
+<div class="note">
+    <p>像本書中的許多主題一樣，雲端環境的協同運作和管理這個主題本身就可以寫成一本完整的書！為了 CCSP 考試的目的，您需要了解排程、協同運作和維護的概念，並能夠理解它們如何工作、如何應用安全要求和最佳實踐，以及它們為何必要。</p>
+</div>
+
+<p>雖然考試大綱強調了排程、協同運作和維護，但管理平面本身的安全性也是一個關鍵考量。管理平面的安全最佳實踐如下：</p>
+<ul>
+    <li>所有帳戶的多重要素驗證。</li>
+    <li>用於存取管理平面或設備的金鑰和其他密鑰的密鑰管理培訓和最佳實踐。無意暴露的密鑰仍然是雲端環境的主要威脅。</li>
+    <li>確保使用者、群組和服務接收其所需權限而不是被單獨手動定義和維護的資源配置實踐。</li>
+    <li>支援資源配置並從最低權限方法開始提供權限的權限和角色管理。</li>
+    <li>配置和管理以快速識別問題並允許適當洞察和行動的監控和警報。帳單和消耗警報在這裡特別重要，以避免意外成本。</li>
+    <li>限制根帳戶的使用，並強調使用具有適當權限的使用者帳戶。</li>
+    <li>使用安全群組和其他控制措施來限制雲端環境內部的範圍和存取。</li>
+</ul>
+<p>雲端環境的管理平面提供了對通常基本上是整個虛擬資料中心的強大存取權限，並直接與花費大量資金的能力相關聯。獲得存取的攻擊者通常使用腳本在供應商的整個環境中自動執行大規模操作，同時盡可能隱藏其活動。透過 MFA 和密鑰管理限制成功攻擊的可能性，以及透過使用安全群組、角色和控制來限制攻擊的影響，對於所有雲端服務管理平面都極其重要。</p>
+
+<h2>稽核您的環境與供應商 <span class="english">(Auditing Your Environment and Provider)</span></h2>
+
+<p>稽核通常分為兩大類。第一類是<span class="key-term">內部稽核</span> <span class="english">(internal audits)</span>，由組織員工進行，旨在確保持續的營運完整性、識別改進或根據行業標準進行驗證。第二類是<span class="key-term">外部稽核</span> <span class="english">(external audits)</span>。外部稽核由第三方進行，可能依賴行業標準實踐或稽核目標。</p>
+<p>稽核通常涵蓋各種主題，包括組織及其管理實踐和程序、組織如何評估和應對風險、其監控和警報能力、處理邏輯和物理存取的控制，以及安全和系統營運。此外，還包括管理、修補和類似主題，以及組織如何溝通和處理意識、如何進行變更管理以及變更是否得到適當記錄。</p>
+<p>鑑於這一廣泛的潛在目標，在雲端中進行稽核可能相當具有挑戰性。由於供應商營運共享環境，他們通常不允許存取底層基礎架構和系統——這是您的組織可能慶幸其他組織也無法獲得的事情，但這使得執行稽核更加困難。</p>
+<p>這意味著許多雲端供應商聘請外部稽核員並公開發布其稽核結果。例如，Microsoft 的 Azure 平台定期提供服務組織控制 (Service Organization Controls, SOC) 2, Type 2 稽核。您可以在 https://docs.microsoft.com/en-us/azure/compliance/offerings/offering-soc-2 找到它們。</p>
+<p>Google 在 https://cloud.google.com/security/compliance/offerings 提供了廣泛的合規性選項。</p>
+<p>Amazon 也在 https://docs.aws.amazon.com/audit-manager/latest/userguide/SOC2.html 提供了各種報告。</p>
+<p>向任何第三方供應商索取稽核資訊是一個良好的安全習慣，了解 SOC 報告的基礎知識以及您在每種類型中會得到什麼對於安全從業人員來說很重要。</p>
+
+<div class="box">
+    <p><strong>探索 SOC 稽核類型 (Exploring SOC Audit Types)</strong></p>
+    <p>SOC 報告是美國註冊會計師協會 (American Institute of Certified Public Accountants, AICPA) 創建的 SSAE 報告格式的一部分。它們被普遍認為在許多行業中可用於監管目的，儘管它們最初是專門設計為確保遵守沙賓法案 (Sarbanes-Oxley Act, SOX) 的機制，該法案管理公開交易的公司。</p>
+    <p>SOC 報告分為三類：SOC 1、SOC 2 和 SOC 3。每一類都有特定的目的，並且還有報告的進一步子類別（稱為類型）。</p>
+    <p>SOC 1 報告嚴格用於稽核公司的財務報告工具，因此不是大多數雲端供應商稽核的重點。了解它們的存在以及 SOC 1 報告有兩種子類：Type 1 和 Type 2 是值得的。</p>
+    <p>SOC 2 報告通常由安全從業人員使用。它們專門用於報告對組織的安全性、可用性、處理完整性、機密性和隱私性的任何控制的稽核。因此，打算證明其可信度的雲端供應商可以透過 SOC 2 報告幫助證明這一點。</p>
+    <p>SOC 2 報告也有兩種類型：Type 1 和 Type 2。SOC 2 Type 1 僅審查控制的設計，而不審查它們的實施和維護方式或其功能。因此，SOC 2 Type 1 對於確定組織的安全性和信任度並不是非常有用。然而，SOC 2 Type 2 報告正是這樣做的：它著眼於控制隨時間推移的操作有效性。這就是為什麼 SOC 2 Type 2 最常被安全從業人員引用的原因，因為它是評估組織安全狀況的有用方法。</p>
+    <p>SOC 3 報告旨在與公眾共享。它們不包含有關稽核目標安全控制的實際數據，而只是斷言稽核已進行且目標組織已通過。</p>
+    <p>這使得 SOC 3 報告對於驗證組織的可信度不太有用，但它可能是某些供應商提供的全部內容。</p>
+    <p>您將在第九章「法律與合規問題」中了解更多關於稽核類型的資訊，因此請務必花些時間閱讀那裡關於 SSAE、SOC 和 ISAE 的內容。</p>
+</div>
+
+<h3>為雲端調整流程 <span class="english">(Adapting Processes for the Cloud)</span></h3>
+<p>如果您的組織有現有的稽核政策和實踐，或者如果您正在使用第三方稽核標準，您很可能需要為雲端環境進行一些更改。缺乏對硬體的直接存取、共享服務和其他限制將意味著您的流程需要麼接受這些限制，要麼確定其他方式來實現稽核目標。</p>
+<p>CCSP 考試大綱（候選人資訊公告）特別提到了您在準備考試時需要牢記的一些保證挑戰，重點關注虛擬化。</p>
+
+<div class="note">
+    <p>SOC 報告沒有任何與雲端合規性相關的特定要求，這意味著您需要根據您的雲端實施和供應商來閱讀要求。其他計劃確實有雲端要求或專門為雲端設計，例如雲端安全聯盟 (CSA)。FedRAMP、HITRUST、ISO 27017 和 PCI DSS 都具有雲端元件。</p>
+</div>
+
+<h4>虛擬化環境與雲端中的保證挑戰 <span class="english">(Assurance Challenges in Virtualized Environments and the Cloud)</span></h4>
+<p><span class="key-term">保證</span> <span class="english">(Assurance)</span>——或斷言系統、流程、程序或資料如其預期般的能力——在虛擬化和雲端環境中可能特別難以確保。許多虛擬化、容器化和雲端系統的暫時性意味著通常可稽核的產物可能不存在於持久、可驗證的方式中。系統和服務將在正常營運過程中被啟動、擴展，然後銷毀，可能會移除所需的可稽核資料。</p>
+<p>這些挑戰意味著稽核員和安全從業人員需要調整稽核和驗證流程以處理虛擬化環境。軟體或程式碼定義的基礎架構可以在程式碼級別進行稽核，方法是檢查程式碼和相關產物，如系統映像、腳本和共享資料儲存。可以擷取日誌資訊並用於記錄何時創建和使用了暫時性系統、在其上發生了什麼以及何時被銷毀。</p>
+<p>容器化、虛擬化和雲端環境中的類似概念都需要成為稽核和評估計劃的一部分，作為安全專業人員，您的一部分職責是確保基礎架構設計支援創建可驗證的稽核軌跡。</p>
+
+<h4>規劃雲端稽核 <span class="english">(Planning for Cloud Audits)</span></h4>
+<p>我們討論過的挑戰意味著準備雲端稽核始於基礎架構設計階段，持續於營運階段，理想情況下會產生一個為稽核做好充分準備的組織。</p>
+<p>在大多數情況下，稽核委託的參數（持續時間、物理/邏輯位置等）在稽核開始之前進行協商。會對稽核期間將檢查哪些位置、產物、系統和業務流程設定限制。這被稱為稽核<span class="key-term">範圍</span> <span class="english">(scope)</span>。這是整個稽核過程中至關重要的一部分，因為制定範圍可以確定稽核結果的影響、價格和有用性。</p>
+<p>雲端稽核需要額外的範圍界定考量。像埠掃描這樣在完全擁有的環境中可能可行的實踐可能會被雲端服務供應商禁止。同時，在本地稽核中可能可用的資料也可能無法透過雲端供應商獲得。驗證底層硬體在其生命週期結束時是否被妥善處置、對伺服器和其他硬體的物理驗證以及許多其他可稽核項目在大多數雲端服務稽核中不再可能。</p>
+<p>所有這一切意味著雲端稽核必須在其範圍內限定為環境中可以完成的事項，並且還必須滿足組織的稽核需求。當您進行雲端稽核時，您將需要在可能實現的、期望的和稽核團隊對雲端環境和供應商的理解水準之間進行導航。此外，了解作為糾正行動計劃 (CAP) 一部分的補救時間表也可能至關重要。</p>
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+
+<p>在本章中，您了解了託管服務的基礎知識，包括在三種最常見的雲端運算模型中對應雲端供應商和客戶的責任。我們探討了如何保護通訊，包括透過使用加密，以及如何使用各種安全技術（如網路安全群組、流量檢查、地理圍欄和零信任）來保護基礎架構。我們還研究了常見的網路安全工具，如防火牆、IDS 和 IPS、蜜罐、漏洞掃描和堡壘主機，所有這些都可以用來幫助保護您的基礎架構。硬體安全設備（如 HSM 和 TPM）也透過保護密鑰安全並在整個雲端環境中幫助加密來發揮作用。</p>
+<p>驗證您使用的軟體安全可靠是任何環境的重要組成部分，但在雲端環境中發現的程式碼定義系統通常更具動態性。這意味著您需要知道如何管理您的組織使用的軟體以及如何驗證正在使用的套件和元件。</p>
+<p>虛擬環境（包括虛擬機和容器）的安全性對於雲端環境至關重要。我們深入探討了網路、儲存、記憶體、處理器、hypervisor、作業系統和虛擬化工具集如何在確保雲端服務安全方面發揮作用。</p>
+<p>雲端環境，與本地系統非常相似，也需要配置管理和加固。主機和客體作業系統的配置技術和實踐以及備份和還原能力的考量都是本章中我們審查的主題。</p>
+<p>身份保證——確保使用者是他們聲稱的人，並驗證他們在整個雲端環境中對服務和系統的使用——在雲端中需要特別注意。託管服務需要與身份提供者整合，密鑰和金鑰管理對於組織和系統安全非常重要。在本章中，您了解了虛擬化和雲端除了典型的身份保證障礙之外還增加了哪些挑戰。</p>
+<p>最後，組織需要能夠確保他們認為正在發生的事情確實正在發生。這就是稽核發揮作用的地方。您現在應該熟悉內部和外部稽核、如何規劃它們，以及在雲端和混合環境中需要規劃的特殊考量。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>理解像安全群組、流量檢查、地理圍欄和零信任這樣的關鍵網路安全概念如何在雲端中運作 (Understand how key network security concepts like security groups, traffic inspection, geofencing, and zero trust work in the cloud)。</strong> 雲端中的安全性依賴於許多與本地基礎架構相同的概念和技術。能夠描述安全群組及其作為虛擬防火牆的角色。解釋為什麼檢查仍然有用，但通常需要使用供應商特定的工具或由於虛擬化環境中網路可見性的限制而受到限制。描述地理圍欄的角色以及在供應商基礎架構中活動可能發生的地點限制，或者哪些區域連接可以提供額外的安全層。解釋為什麼零信任有時在原生啟用它的工具存在的新雲端環境中很容易構建。</p>
+<p><strong>解釋雲端基礎架構元素及其如何被保護 (Explain cloud infrastructure elements and how they can be secured)。</strong> 雲端基礎架構設計要求您了解其能力、風險和限制。解釋為什麼網路通訊應進行端到端加密以防止共享環境中的潛在問題。解釋為什麼在大多數環境中預設情況下儲存也應進行加密以防止對靜態和傳輸中資料的攻擊。理解運算通常是底層硬體上的共享資源，如果供應商未能有效隔離客戶或發現漏洞，則可能存在風險。概述雲端管理平面如何提供對整個基礎架構的控制，並需要強有力的實踐和政策，如通用多重要素驗證、密鑰管理以及根植於最低權限並具有有效監控和警報的安全政策。描述關鍵的管理平面功能，如排程、協同運作複雜系統的能力以及使其更容易管理暫時性和可擴展系統的功能。</p>
+<p><strong>解釋雲端環境中的虛擬化安全 (Explain virtualization security in a cloud environment)。</strong> 解釋 VM 管理工具的角色以及虛擬化環境中硬體元件的安全要求。詳細說明如何保護虛擬網路、儲存和 CPU。描述 Type 1 和 Type 2 hypervisor 之間的區別。解釋虛擬化工具集和插件的角色和目的。解釋雲端環境中身份保證的常見挑戰。</p>
+<p><strong>應用最佳實踐於雲端安全營運 (Apply best practices to cloud security operations)。</strong> 描述硬體安全模組 (HSM) 及其在雲端環境中的使用方式，包括專用和共享使用模式。解釋 TPM 是什麼及其在保護系統中的作用。解釋防火牆、入侵偵測和預防系統的角色。了解如何在分段流量、檢測攻擊和尋找潛在攻擊向量方面使用漏洞掃描和評估工具，以及它們在雲端中的部署可能如何不同。描述堡壘主機在雲端基礎架構中的作用。</p>
+<p><strong>使用安全基線來保護雲端中的系統 (Use security baselines to protect systems in the cloud)。</strong> 描述 SOC 1 和 SOC 2 Type 1 及 Type 2 稽核。解釋如何在雲端中支援稽核目標和流程，以及安全從業人員的角色在內部和外部稽核中可能如何不同。詳細說明雲端中稽核規劃的基本概念。</p>
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>Charles 正在與內部稽核員合作，審查他組織的雲端基礎架構。下列何者不是內部稽核的常見目標？</p>
+        <ol type="A">
+            <li>測試營運完整性 (Testing operational integrity)</li>
+            <li>改進實踐 (Improving practices)</li>
+            <li>向第三方提供符合標準的證明 (Providing attestation of compliance to a standard to a third party)</li>
+            <li>根據行業標準驗證實踐 (Validating practices against an industry standard)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Maria 的組織希望確保如果系統管理員的憑證被洩露，大多數惡意行為者的登入將被禁止。哪種技術通常用於檢查來自國際攻擊的潛在惡意登入？</p>
+        <ol type="A">
+            <li>地理圍欄 (Geofencing)</li>
+            <li>IP 來源 (IPOrigin)</li>
+            <li>多重要素 (Multifactor)</li>
+            <li>生物識別驗證 (Biometric authentication)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Alaina 希望確保她託管在她雲端資料中心的 Web 應用程式的系統實例具有適當的靜態資料安全性。她應該選擇哪種解決方案來幫助確保這一點？</p>
+        <ol type="A">
+            <li>磁碟或卷雜湊 (Disk or volume hashing)</li>
+            <li>僅使用暫時性磁碟或卷 (Use only ephemeral disks or volumes)</li>
+            <li>僅使用唯讀磁碟或卷 (Use read-only disks or volumes)</li>
+            <li>磁碟或卷加密 (Disk or volume encryption)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Jason 想要驗證他下載的開源軟體套件與官方版本相符。通常使用哪種技術來驗證套件？</p>
+        <ol type="A">
+            <li>加密 (Encryption)</li>
+            <li>彩虹表 (Rainbow tables)</li>
+            <li>解密 (Decryption)</li>
+            <li>雜湊 (Hashing)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Naomi 的組織已採用 CIS 安全控制作為其 Windows 系統配置過程的一部分。他們採用了哪種類型的解決方案？</p>
+        <ol type="A">
+            <li>SOC 範本 (A SOC template)</li>
+            <li>ISO 標準 (An ISO standard)</li>
+            <li>安全基線 (A security baseline)</li>
+            <li>NIST 標準 (A NIST standard)</li>
+        </ol>
+    </li>
+     <li>
+        <p>Yarif 的組織希望在雲端環境中處理敏感資訊。該組織關心其整個生命週期的資料。如果安全性是優先事項且成本不太重要，它應為其運算元素選擇哪種保護？</p>
+        <ol type="A">
+            <li>記憶體加密 (Memory encryption)</li>
+            <li>專用硬體實例 (Dedicated hardware instances)</li>
+            <li>共享硬體實例 (Shared hardware instances)</li>
+            <li>避免安裝虛擬化工具 (Avoiding installing virtualization tools)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Valerie 的組織使用安全基線作為其系統配置過程的一部分。下列何者不是基線設定過程的典型部分？</p>
+        <ol type="A">
+            <li>限制管理員存取 (Limiting administrator access)</li>
+            <li>移除反惡意軟體代理 (Removing anti-malware agents)</li>
+            <li>關閉未使用的埠 (Closing unused ports)</li>
+            <li>移除不必要的服務和函式庫 (Removing unnecessary services and libraries)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Hrant 希望確保他組織的 Azure 虛擬網路 (VNet)（Azure 客戶 IaaS 實例的基本建構模塊）內部的流量安全。他應該做些什麼來保護它？</p>
+        <ol type="A">
+            <li>VNet 流量已經安全；他不需要做任何事情。</li>
+            <li>在每個系統之間設置 VPN 隧道。</li>
+            <li>設置並使用堡壘主機來處理所有安全流量。</li>
+            <li>對所有通訊使用端到端加密。</li>
+        </ol>
+    </li>
+    <li>
+        <p>Asha 正在配置虛擬化環境，並希望備份虛擬化伺服器，包括其記憶體狀態。她應該執行哪種類型的備份？</p>
+        <ol type="A">
+            <li>完整備份 (A full backup)</li>
+            <li>快照 (A snapshot)</li>
+            <li>增量備份 (An incremental backup)</li>
+            <li>差異備份 (A differential backup)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Felix 正在為他的組織最近轉換到雲端 SaaS 供應商後的第三方稽核過程做規劃。Felix 最不可能提供哪些資訊？</p>
+        <ol type="A">
+            <li>存取日誌 (Access logs)</li>
+            <li>作業系統日誌 (Operating system logs)</li>
+            <li>活動日誌 (Activity logs)</li>
+            <li>使用者和帳戶權限資訊 (User and account privilege information)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Mark 設置了一系列任務，構成了一個工作流程，以確保他的雲端託管 Web 應用程式環境能夠擴展、更新和自我維護。他正在利用哪個雲端管理平面功能？</p>
+        <ol type="A">
+            <li>維護 (Maintenance)</li>
+            <li>排程 (Scheduling)</li>
+            <li>協同運作 (Orchestration)</li>
+            <li>虛擬化 (Virtualization)</li>
+        </ol>
+    </li>
+     <li>
+        <p>Amanda 下載了 VeraCrypt，一個免費的開源磁碟加密軟體套件。當她下載該軟體時，她在下載頁面上看到了相關資訊。她需要什麼來驗證簽名並確保軟體是合法的？</p>
+        <ol type="A">
+            <li>VeraCrypt 的私鑰 (VeraCrypt’s private key)</li>
+            <li>她的私鑰 (Her private key)</li>
+            <li>VeraCrypt 的公鑰 (VeraCrypt’s public key)</li>
+            <li>她的公鑰 (Her public key)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Ting 在她的 Amazon VPC 中設置了一個系統，該系統位於一個低安全性、面向公眾的網際網路區域，並且還有一個介面連接到一個用於存放應用程式伺服器的高安全性子網，以便她可以管理這些系統。她配置了哪種類型的安全解決方案？</p>
+        <ol type="A">
+            <li>防火牆跳板 (A firewall hopper)</li>
+            <li>堡壘主機 (A bastion host)</li>
+            <li>橋接器 (A bridge)</li>
+            <li>警衛系統 (A bailey system)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Lisa 的組織在它設置的每個虛擬機上安裝虛擬化工具。下列何者不是虛擬化工具的常見功能？</p>
+        <ol type="A">
+            <li>存取聲音和視訊卡 (Access to sound and video cards)</li>
+            <li>映射儲存 (Mapping storage)</li>
+            <li>改進的網路 (Improved networking)</li>
+            <li>控制底層主機作業系統 (Control of the underlying host operating system)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Susan 的組織是一家雲端服務供應商，其 hypervisor 直接在其系統的底層硬體上運行。Susan 運行的是哪種類型的 hypervisor？</p>
+        <ol type="A">
+            <li>Type 1</li>
+            <li>Type 2</li>
+            <li>Type 3</li>
+            <li>Type 4</li>
+        </ol>
+    </li>
+    <li>
+        <p>Gurvinder 公司的 CIO 希望他讓其稽核公司對其雲端基礎架構供應商進行稽核。為什麼雲端基礎架構供應商不太可能允許由客戶贊助的第三方對其系統和基礎架構進行稽核？</p>
+        <ol type="A">
+            <li>他們不希望自己的服務問題被識別出來 (They do not want to have problems with their service identified)。</li>
+            <li>稽核可能會干擾他們的其他客戶或導致這些客戶的資料暴露風險 (Audits may disrupt their other customers or lead to risks of data exposure for those customers)。</li>
+            <li>這是符合行業標準最佳實踐的要求 (It is required for compliance with industry standard best practices)。</li>
+            <li>這將不得不被報告為潛在的資料外洩 (It would have to be reported as a potential data breach)。</li>
+        </ol>
+    </li>
+    <li>
+        <p>Michelle 希望使用雲端服務安全地儲存她組織的密鑰。她應該選擇哪個工具？</p>
+        <ol type="A">
+            <li>TPM 即服務 (TPM as a service)</li>
+            <li>GPG 即服務 (GPG as a service)</li>
+            <li>HSM 即服務 (HSM as a service)</li>
+            <li>SSD 即服務 (SSD as a service)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Helen 希望在她的雲端託管環境中對流量應用規則。哪個雲端工具允許根據目的地或來源主機或 IP 位址、埠和協定等資訊設置允許或阻止流量的規則？</p>
+        <ol type="A">
+            <li>安全群組 (Security groups)</li>
+            <li>無狀態 IDS (Stateless IDS)</li>
+            <li>VPC 邊界 (VPC boundaries)</li>
+            <li>有狀態 IPS (Stateful IPS)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Jaime 想設置一個工具，讓他能夠擷取和分析攻擊者行為，包括在他環境中針對系統的命令行活動和上傳的工具包。他應該部署哪種類型的工具？</p>
+        <ol type="A">
+            <li>暗網 (A dark web)</li>
+            <li>蜜罐 (A honeypot)</li>
+            <li>網路 IPS (A network IPS)</li>
+            <li>網路 IDS (A network IDS)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Chris 正在他的雲端託管環境中使用第三方漏洞掃描應用程式。下列哪個問題是他不太可能用漏洞掃描器檢測到的？</p>
+        <ol type="A">
+            <li>惡意軟體 (Malware)</li>
+            <li>已定義的漏洞 (Defined vulnerabilities)</li>
+            <li>零日漏洞 (Zero-day exploits)</li>
+            <li>程式設計缺陷 (Programming flaws)</li>
+        </ol>
+    </li>
+</ol>
+<ol>
+    <li>C. 內部稽核 (<span class="english">Internal audits</span>) 通常試圖測試營運完整性並確定改進領域。它們也可能根據行業標準驗證實踐。它們通常不旨在向第三方提供證明。</li>
+    <li>A. 地理圍欄 (<span class="english">Geofencing</span>) 通常用作一組控制的一部分，以防止未經授權的登入。稽核來自新的或未經批准地點的登入，甚至阻止來自未經授權地點的登入，可以是一種有用的預防性控制。IPOrigin 是為此問題編造的，多重要素和生物識別登入都用於防止未經授權的存取，而不是檢查潛在的惡意登入。</li>
+    <li>D. Alaina 在雲端中保護虛擬化系統靜態資料的最佳選擇是使用磁碟或卷加密 (<span class="english">disk or volume encryption</span>)。雜湊 (<span class="english">Hashing</span>) 是單向的，對資料儲存沒有意義。暫時性磁碟或卷 (<span class="english">Ephemeral disks or volumes</span>) 可能與生命週期短的實例相關聯，但它們仍應被加密，而唯讀磁碟 (<span class="english">read-only disks</span>) 仍然可能被暴露。</li>
+    <li>D. MD5 或 SHA1 雜湊 (<span class="english">hashing</span>) 通常用於檢查下載軟體的雜湊值與已發布的套件或軟體的官方雜湊值。加密 (<span class="english">Encryption</span>) 和解密 (<span class="english">decryption</span>) 不用於驗證，彩虹表 (<span class="english">rainbow tables</span>) 用於密碼破解。</li>
+    <li>C. CIS 安全控制 (<span class="english">CIS security controls</span>) 是許多組織採用的安全基線 (<span class="english">security baseline</span>)。Naomi 的組織仍應審查和修改控制措施以符合其需求。SOC 是一種稽核報告類型，ISO 和 NIST 都提供標準，但 CIS 安全控制不是 ISO 或 NIST 標準。</li>
+    <li>B. 使用專用硬體實例 (<span class="english">dedicated hardware instances</span>)，雖然昂貴，但對於保護運算免受潛在旁路攻擊或針對雲端託管系統底層 hypervisor 層的攻擊是最安全的選擇。記憶體加密 (<span class="english">Memory encryption</span>) 可能存在於 hypervisor 層級，但雲端供應商通常不會將此作為可存取的選項，並且虛擬化工具 (<span class="english">virtualization tools</span>) 在此場景中既不是主要的安全益處也不是不利因素。</li>
+    <li>B. 移除反惡意軟體代理 (<span class="english">Removing anti-malware agents</span>) 不是基線設定 (<span class="english">baselining</span>) 過程的典型部分。安裝一個可能是！限制管理員存取、關閉未使用的埠和禁用不需要的服務都是常見的基線設定活動。</li>
+    <li>D. 雖然雲端環境中的虛擬網路通常隔離良好，但 Hrant 的最佳選擇是對所有通訊使用端到端加密 (<span class="english">end-to-end encryption</span>)。為每個系統設置 VPN 是不切實際的，堡壘主機 (<span class="english">bastion hosts</span>) 用於提供從較低安全區域到較高安全區域或網路的存取。</li>
+    <li>B. 虛擬環境中的快照 (<span class="english">Snapshots</span>) 不僅捕獲機器的當前狀態，還允許時間點還原。完整、增量和差異備份會備份系統的磁碟機，但不會備份記憶體狀態。</li>
+    <li>B. 軟體即服務環境將無法向第三方稽核員提供作業系統日誌 (<span class="english">operating system logs</span>)，因為服務供應商不太可能將其提供給客戶。存取和活動日誌以及使用者和帳戶權限資訊都可能可用。</li>
+    <li>C. 協同運作 (<span class="english">Orchestration</span>) 描述了允許對服務、流程或工作流程進行自動化基於任務的控制的廣泛能力集。它可以處理維護並使用排程，但其用途比兩者都更廣泛。虛擬化 (<span class="english">Virtualization</span>) 是雲端的關鍵組成部分，但並不能恰當地描述此特定用途。</li>
+    <li>C. 要驗證軟體，她需要 VeraCrypt 的公鑰 (<span class="english">public key</span>)。幸運的是，VeraCrypt 在同一頁面上提供了金鑰和簽名以便於存取。</li>
+    <li>B. 堡壘主機 (<span class="english">Bastion hosts</span>) 用於從較低安全區域連接到較高安全區域。Ting 已配置了一個以允許入站存取，並需要特別注意系統的安全性和監控。其餘答案是為此問題編造的，儘管網路橋接器確實存在。</li>
+    <li>D. 客體作業系統工具的常見功能包括映射儲存；支援改進的網路；以及視訊輸出、聲音或輸入能力。它們通常不允許控制底層主機作業系統 (<span class="english">underlying host operating system</span>)。</li>
+    <li>A. Type 1 hypervisor 直接在底層硬體或「裸機」上運行，而 Type 2 hypervisor 則在像 Windows 或 Linux 這樣的另一個作業系統內部運行。不存在 Type 3 或 4 hypervisor。</li>
+    <li>B. 允許稽核員存取其環境可能導致其廣泛客戶群的服務中斷。如果他們允許對其眾多客戶進行稽核，他們也會陷入永無止境的稽核過程中，這既昂貴又耗時。組織通常確實希望識別其服務的問題。不允許稽核員存取並非最佳實踐所要求，也不會被報告為資料外洩。</li>
+    <li>C. 硬體安全模組 (HSM) 服務將提供 Michelle 正在尋找的功能。TPM 或可信平台模組與本地系統安全相關，而不是用於組織範圍的密鑰儲存和管理。GPG 是一個加密套件，無法滿足她的需求，而 SSD 是儲存設備，不是加密管理工具。</li>
+    <li>A. 安全群組 (<span class="english">Security groups</span>) 在雲端環境中充當防火牆，允許根據主機、埠和協定等資訊設置控制流量的規則，以允許或阻止流量。無狀態和有狀態 IDS 和 IPS 是為此問題編造的，VPC 邊界不是技術解決方案或工具。</li>
+    <li>B. 蜜罐 (<span class="english">Honeypots</span>) 是故意設置的易受攻擊系統，用於擷取攻擊者行為並包含允許分析的工具。術語「暗網」用於描述可透過 TOR 存取的非公共網際網路站點。網路入侵偵測和預防（IDS 和 IPS）系統可用於偵測攻擊，雖然它們可能擷取像上傳的工具包這樣的資訊，但在大多數情況下它們無法擷取命令行活動，因為攻擊者會加密包含命令的流量。</li>
+    <li>C. 漏洞掃描器無法偵測零日漏洞 (<span class="english">zero-day exploits</span>)，因為它們沒有檢測規則或定義。零日漏洞尚未被宣布或偵測到，因此不會成為其庫的一部分。惡意軟體 (<span class="english">Malware</span>)、已知漏洞 (<span class="english">known vulnerabilities</span>) 和程式設計缺陷 (<span class="english">programming flaws</span>) 都可能被漏洞掃描器檢測到。</li>
+</ol>
+
+</body>
+</html>

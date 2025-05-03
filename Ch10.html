@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第十章：雲端供應商管理</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .warning { border-left: 5px solid #d9534f; padding: 10px; margin: 15px 0; background-color: #fdf7f7; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第十章：雲端供應商管理 <span class="english">(Cloud Vendor Management)</span></h1>
+
+<p>供應商關係在雲端中至關重要。由於組織將關鍵業務流程和敏感業務資訊交由雲端供應商處理，他們必須確信供應商正在適當地管理風險並能夠履行其義務。</p>
+<p>在本章中，您將學習管理供應商關係作為更廣泛的企業風險管理 (ERM) 計畫一部分的重要性。您將學習可用於建立穩固供應商關係的實用工具和技術。</p>
+
+<h2>不同地理位置和法律管轄區的影響 <span class="english">(The Impact of Diverse Geographical Locations and Legal Jurisdictions)</span></h2>
+
+<p>如第九章「法律與合規問題」中所討論的，雲端運算的分散式以及地理和地緣政治分佈模型帶來了許多挑戰，包括：</p>
+<ul>
+    <li>資料處理、儲存和運算，各自發生在不同的地緣政治領域</li>
+    <li>評估資料參與者的困難</li>
+    <li>定位資料的困難</li>
+</ul>
+<p>管理雲端運算法律後果的很大一部分困難源於雲端資產的設計。它們必然是分散的，通常跨越市政、州甚至國際邊界。資源不斷地在瞬間被分配和重新分配。此外，特定資產的具體控制和管理可能難以確定和建立。</p>
+<p>正是這種跨界方面在允許雲端客戶遵守法律和監管要求方面最為麻煩。正如我們在第九章中討論的那樣，每個司法管轄區都可以有自己的要求，這些要求可能因司法管轄區而異，並且司法管轄區可能重疊。一個城市在一個縣或其他市鎮中，後者又在一個州或省中，後者又在一個國家中，它們都可能有相互衝突的指導方針和利益。此外，立法和指導方針總是在變化，尤其是在我們的行業中。立法者和標準機構不斷努力跟上新技術以及這些技術的使用方式所提出的要求和問題。而這些法律差異不僅影響雲端客戶（就客戶必須如何行為和回應法律行動而言），還影響雲端供應商必須如何回應。</p>
+<p>兩個實體——雲端客戶和雲端供應商——使用的治理都必須考慮到所有這些因素，以便在承認法律風險和責任的情況下合理運作。</p>
+
+<div class="note">
+    <p>重要的是不要混淆「治理」和「公司治理」的概念。治理指的是地區和國家的法律和監管要求。公司治理是股東與組織內其他利益相關者相對於公司高階主管之間的關係。</p>
+</div>
+
+<h2>安全政策框架 <span class="english">(Security Policy Framework)</span></h2>
+
+<p>組織的資訊安全政策框架包含一系列文件，旨在描述組織的網路安全計畫。這些文件的範圍和複雜性差異很大，具體取決於組織的性質及其資訊資源。這些框架通常包括四種不同類型的文件：</p>
+<ul>
+    <li><span class="key-term">政策</span> <span class="english">(Policies)</span></li>
+    <li><span class="key-term">標準</span> <span class="english">(Standards)</span></li>
+    <li><span class="key-term">程序</span> <span class="english">(Procedures)</span></li>
+    <li><span class="key-term">指南</span> <span class="english">(Guidelines)</span></li>
+</ul>
+<p>在以下部分中，您將了解這些文件類型之間的差異。但是，請記住，這些類別的定義因組織而異，並且它們之間的界限通常很模糊。儘管乍一看這似乎不正確，但這是安全理論遇到現實世界時的自然現象。只要文件達到其預期目的，使用您組織偏好的任何命名系統都沒有壞處。</p>
+
+<h3>政策 <span class="english">(Policies)</span></h3>
+<p><span class="key-term">政策</span> <span class="english">(Policies)</span> 是管理層意圖的廣泛陳述。遵守政策是強制性的。資訊安全政策通常會包含關於網路安全目標的概括性陳述，包括以下內容：</p>
+<ul>
+    <li>關於網路安全對組織重要性的陳述</li>
+    <li>要求所有員工和合約採取措施保護資訊和資訊系統的機密性、完整性和可用性</li>
+    <li>關於組織創建和/或擁有的資訊所有權的陳述</li>
+    <li>指定首席資訊安全官 (CISO) 或其他個人作為負責網路安全問題的高階主管</li>
+    <li>授予 CISO 制定實施該政策的標準、程序和指南的權力委派</li>
+</ul>
+<p>在許多組織中，制定政策的過程是費力的，需要高階主管的批准，通常來自首席執行官 (CEO)。保持政策陳述的措辭寬泛，可以為 CISO 提供靈活性，以適應業務和技術環境的變化來調整和更改具體的安全要求。例如，聖母大學的五頁資訊安全政策僅僅陳述：</p>
+<blockquote>資訊治理委員會將為每個高度敏感資料元素制定處理標準。資料管家可以為其管理下的其他資料元素制定標準。這些資訊處理標準將規定控制措施以管理大學資訊和相關資產基於其分類的風險。大學的所有個人都有責任遵守這些控制措施。</blockquote>
+<p>這種類型的政策允許組織維護一個高階文件，並用它來指導標準、程序和指南的制定，這些標準、程序和指南與企業目標和宗旨保持一致。</p>
+<p>相比之下，聯邦政府的醫療保險和醫療補助服務中心 (CMS) 有一份長達 95 頁的資訊安全政策。這份龐大的文件包含了極其詳細的要求，例如：</p>
+<blockquote>所有監控請求的記錄必須由 CMS CIO 連同監控期間產生的任何其他摘要結果或文件一起保存。記錄還必須透過記錄搜索術語和技術來反映監控的範圍。所有從監控中收集的資訊都必須受到控制和保護，其分發僅限於監控請求中確定的個人以及由 CMS 管理員或 CMS CIO 特別指定為具有特定知情需要的其他個人。</blockquote>
+<p>CMS 文件甚至包含一個複雜的圖表，描述了整個機構中個人擔任的眾多網路安全角色。</p>
+<p>這種方法可能滿足 CMS 的需求，但很難想像該文件的長期維護。冗長的安全政策通常很快就會過時，因為對個別要求的必要更改會累積起來並被忽略，因為工作人員厭倦了不斷發布新版本的政策。</p>
+
+<!-- Standards, Procedures, Guidelines sections omitted for brevity -->
+
+<h3>例外與補償性控制 <span class="english">(Exceptions and Compensating Controls)</span></h3>
+<p>在採用新的安全政策、標準和程序時，組織還應提供針對這些規則的例外機制。不可避免地會出現需要偏離要求的意外情況。政策框架應規定獲得例外的具體要求以及批准例外的個人或委員會的權限。</p>
+<p>華盛頓州使用一個例外流程，要求請求者記錄以下資訊：</p>
+<ul>
+    <li>需要例外的標準/要求</li>
+    <li>不合規的原因</li>
+    <li>業務和/或技術理由</li>
+    <li>例外的範圍和持續時間</li>
+    <li>與例外相關的風險</li>
+    <li>任何減輕與例外相關風險的補充控制的描述</li>
+    <li>實現合規的計劃</li>
+    <li>任何未緩解風險的識別</li>
+</ul>
+<p>許多例外流程要求使用<span class="key-term">補償性控制</span> <span class="english">(compensating controls)</span> 來減輕與安全標準例外相關的風險。支付卡產業資料安全標準 (PCI DSS) 包括當今使用的最正式的補償性控制流程之一。它規定了補償性控制必須滿足的三個標準才能令人滿意：</p>
+<ol>
+    <li>該控制必須滿足原始要求的意圖和嚴格性。</li>
+    <li>該控制必須提供與原始要求相似的防禦水準，以便補償性控制充分抵消原始 PCI DSS 要求旨在防禦的風險。</li>
+    <li>該控制必須「超越」其他 PCI DSS 要求。</li>
+</ol>
+<p>例如，一個組織可能發現它需要在特定機器上運行一個過時版本的作業系統，因為運行業務所需的軟體只能在該作業系統版本上運行。大多數安全政策會禁止使用過時的作業系統，因為它可能容易受到安全漏洞的攻擊。該組織可以選擇將此系統運行在一個隔離的網路上，幾乎沒有或根本沒有對其他系統的存取權限，作為一種補償性控制。</p>
+<p>總體思路是，當組織無法滿足原始控制要求時，補償性控制會尋找替代方法來實現目標。儘管 PCI DSS 提供了一個非常正式的補償性控制流程，但在許多不同的組織中，即使是不受 PCI DSS 約束的組織，使用補償性控制也是一種常見的策略。補償性控制平衡了這樣一個事實，即在每種情況下簡單地實施每個要求的安全控制是不可能的，同時又希望將風險管理到最大可行程度。</p>
+<p>在許多情況下，組織採用補償性控制來解決對安全要求的臨時例外。在這些情況下，組織還應制定補救計劃，旨在使組織恢復符合原始控制的文字和意圖。</p>
+
+<h3>制定政策 <span class="english">(Developing Policies)</span></h3>
+<p>在制定新政策時，網路安全管理人員應將其工作與組織內可能存在的任何其他政策制定機制保持一致。領導者能夠將網路安全政策工作與現有流程保持一致的程度越大，這些舉措就越容易獲得支持。無論如何，網路安全管理人員在進行政策制定工作時應遵循幾個關鍵原則：</p>
+<p><span class="key-term">從所有相關利益相關者那裡獲取意見 (Obtain input from all relevant stakeholders)。</span> 仔細考慮所有可能受政策影響的領導者和團隊，並在制定政策時努力理解他們的觀點。這並不意味著組織中的每個人都必須同意擬議的政策；這意味著每個人都應感到他們的意見在過程中被徵求和聽取。</p>
+<p><span class="key-term">遵循指揮鏈 (Follow the chain of command)。</span> 了解組織結構對於政策倡議的成功至關重要。網路安全管理人員必須意識到正式的治理權力線以及組織完成工作的非正式機制。</p>
+<p><span class="key-term">適應組織文化 (Accommodate the organizational culture)。</span> 每個組織都可以採用的一刀切的安全政策是有充分理由不存在的。這是因為每個組織都是不同的。確保您創建的政策適合組織文化並與其他領導者的「高層基調」相匹配。</p>
+<p><span class="key-term">滿足內部和外部要求 (Meet internal and external requirements)。</span> 網路安全計畫受到嚴格監管，既受內部治理流程的約束，也受外部法律和法規的約束。在許多情況下，這些要求可能決定了安全政策的部分內容。至少，安全政策不應與這些要求相矛盾。</p>
+<p>政策草擬完成後，應透過組織使用的政策批准機制進行審批。政策獲得最終簽字後，網路安全管理人員可以將政策傳達給受影響的個人和團隊，並開始實施過程。根據變更的性質，這可能涉及使用分階段的方法，允許組織逐步適應新要求。</p>
+
+<h2>企業風險管理 <span class="english">(Enterprise Risk Management)</span></h2>
+
+<p>組織面臨著幾乎令人眼花撩亂的網路安全風險，範圍從與個人資訊洩露相關的聲譽和財務損害到自然災害造成的營運問題。風險管理的學科旨在為識別和應對這些風險的過程帶來秩序。</p>
+<p>我們生活在一個充滿風險的世界。如果您今天早上離開家開車去辦公室，您就遇到了大量的風險。您可能會捲入車禍，遇到火車延誤，或者在人行道上被自行車撞到。我們在腦海深處意識到這些風險，但我們不會讓它們使我們癱瘓。相反，我們會採取簡單的預防措施來幫助管理我們認為最有可能擾亂我們生活的風險。</p>
+<p>在<span class="key-term">企業風險管理</span> (<span class="key-term">Enterprise Risk Management, ERM</span>) 計畫中，組織採取正式的風險分析方法，該方法始於識別風險，接著確定每種風險的嚴重性，然後採取一種或多種風險管理策略來應對每種風險。</p>
+<p>在我們過於深入風險評估過程之前，讓我們定義一些我們在討論中會使用的重要術語：</p>
+<ul>
+    <li><span class="key-term">威脅</span> <span class="english">(Threats)</span> 是任何可能對我們資訊或資訊系統的機密性、完整性和/或可用性產生不利影響的可能事件。</li>
+    <li><span class="key-term">漏洞</span> <span class="english">(Vulnerabilities)</span> 是我們系統或控制中的弱點，可能被威脅利用。</li>
+    <li><span class="key-term">風險</span> <span class="english">(Risks)</span> 發生在漏洞與可能利用該漏洞的威脅的交集處。沒有相應漏洞的威脅不構成風險，沒有相應威脅的漏洞也不構成風險。</li>
+</ul>
+<p>考慮前面關於下班後停車走在人行道上去上班的例子。您在人行道上沒有任何保護是一個漏洞。一輛在該人行道上飛馳的自行車是一個威脅。這些因素結合的結果是您有在人行道上被自行車撞到的風險。如果您透過將車停在您大樓下面的車庫來消除漏洞，您就不再面臨該特定威脅的風險。同樣，如果城市豎起障礙阻止自行車進入人行道，您也不再面臨風險。當然，您的新情況可能會引入新的威脅，例如停車場倒塌！</p>
+<p>讓我們考慮另一個來自網路安全領域的例子。組織定期進行漏洞掃描，旨在識別其環境中的潛在漏洞。其中一次掃描可能識別出一台向世界暴露 TCP 埠 22 的伺服器，允許攻擊者進行暴力破解 SSH 嘗試。暴露埠 22 是一個漏洞。一個擁有暴力破解掃描工具的攻擊者是一個威脅。埠暴露和攻擊者存在的結合構成了一個風險。</p>
+<p>在這種情況下，您沒有任何方法可以消除攻擊者，因此您無法真正應對威脅，但您可以控制在您系統上運行的服務。如果您關閉 SSH 服務並關閉埠 22，您就消除了漏洞，因此也消除了風險。</p>
+<p>當然，我們不可能總是完全消除風險，因為關閉服務並非總是可行的。我們可能會決定採取措施來降低風險。我們將在本章後面討論風險管理策略時更多地討論這些選項。</p>
+
+<h3>風險識別 <span class="english">(Risk Identification)</span></h3>
+<p>風險識別過程需要識別存在於您營運環境中的威脅和漏洞。這些風險可能來自各種來源，從惡意駭客到颶風。考慮組織面臨的一些不同風險類別：</p>
+<ul>
+    <li><span class="key-term">外部風險</span> <span class="english">(External risks)</span> 是那些源自組織外部來源的風險。這是一個極其廣泛的風險類別，包括網路安全對手、惡意程式碼和自然災害等許多其他類型的風險。</li>
+    <li><span class="key-term">內部風險</span> <span class="english">(Internal risks)</span> 是那些源自組織內部的風險。它們包括惡意內部人員、授權使用者犯的錯誤、設備故障和類似風險。</li>
+    <li><span class="key-term">多方風險</span> <span class="english">(Multiparty risks)</span> 是那些影響不止一個組織的風險。例如，一個城市街區的停電是一個多方風險，因為它影響了該街區的所有建築物。同樣，SaaS 供應商資料庫的洩露是一個多方風險，因為它洩露了該 SaaS 供應商許多不同客戶的資訊。</li>
+    <li><span class="key-term">遺留系統</span> <span class="english">(Legacy systems)</span> 給組織帶來獨特的風險類型。這些過時的系統通常無法接收安全更新，網路安全專業人員必須採取額外措施來保護它們免受無法修補的漏洞的侵害。</li>
+    <li><span class="key-term">智慧財產權 (IP) 盜竊風險</span> <span class="english">(Intellectual property (IP) theft risks)</span> 發生在公司擁有商業秘密或其他專有資訊，如果洩露可能損害組織的業務優勢時。</li>
+    <li><span class="key-term">軟體合規/授權風險</span> <span class="english">(Software compliance/licensing risks)</span> 發生在組織從供應商處授權軟體並有意或無意地違反使用限制，從而使客戶面臨財務和法律風險時。</li>
+</ul>
+<p>這並非您組織面臨的所有可能風險類型的詳盡列表。它旨在幫助說明存在的不同類型風險，作為您基於面臨的具體情況進行自身風險分析的起點。</p>
+
+<h3>風險計算 <span class="english">(Risk Calculation)</span></h3>
+<p>並非所有風險都是平等的。回到街上行人的例子，被自行車撞到的風險遠比被流星砸到的風險更令人擔憂。這在直覺上是有道理的，但讓我們探討一下導致該結論的潛在思維過程。這是一個稱為風險計算的過程。</p>
+<p>當我們評估任何風險時，我們使用兩個不同的因素：</p>
+<ul>
+    <li><span class="key-term">發生可能性</span> <span class="english">(likelihood of occurrence)</span>，或機率，即風險發生的可能性。我們可能將其表示為在指定時間段內（例如在下一年內）威脅利用漏洞的機會百分比。</li>
+    <li>風險如果發生將對組織產生的<span class="key-term">影響幅度</span> <span class="english">(magnitude of the impact)</span>。我們可能將其表示為我們因風險而將產生的財務成本，儘管還有其他可能的衡量標準。</li>
+</ul>
+<p>使用這兩個因素，我們可以為每個風險分配一個概念性分數，方法是結合機率和幅度。這導致許多風險分析師使用以下公式來表示風險的嚴重性：</p>
+<p>風險嚴重性 = 可能性 × 影響</p>
+<p>重要的是要指出，這個方程式並不總是需要字面解釋。儘管您最終可能會在某些風險評估過程中將這些值相乘，但最好從概念上將其視為結合可能性和影響來確定風險的嚴重性。</p>
+<p>當我們評估在街上被自行車或流星撞到的風險時，我們可以使用這些因素來評估風險嚴重性。我們被自行車撞到的機率可能很高。那種事故的影響幅度可能是中等的，使我們願意考慮採取措施來降低我們的風險。被流星砸到顯然會產生災難性的影響幅度，但這種事件的機率極低，導致我們承認風險並在不改變我們行為的情況下繼續前進。</p>
+<p>一個行業面臨的法律和法規可能在確定風險的影響方面發揮重要作用。例如，受歐盟通用資料保護條例 (GDPR) 約束的組織如果發生影響歐盟居民個人資訊的資料外洩，將面臨巨額罰款。這些罰款的大小將顯著影響隱私洩露風險的影響評估。因此，組織必須隨時了解影響其風險態勢的法規。</p>
+
+<h3>風險評估 <span class="english">(Risk Assessment)</span></h3>
+<p><span class="key-term">風險評估</span> <span class="english">(Risk assessments)</span> 是一種形式化的風險優先級排序方法，允許組織以結構化的方式進行審查。風險評估遵循兩種不同的分析方法：</p>
+<ul>
+    <li><span class="key-term">定量風險評估</span> <span class="english">(Quantitative risk assessments)</span> 在分析中使用數字數據，從而產生允許非常直接地對風險進行優先級排序的評估。</li>
+    <li><span class="key-term">定性風險評估</span> <span class="english">(Qualitative risk assessments)</span> 用主觀判斷和類別代替嚴格的數值分析，從而允許評估難以量化的風險。</li>
+</ul>
+<p>由於組織尋求向利益相關者提供清晰的風險因素溝通，他們通常會結合定量和定性風險評估的元素。讓我們回顧一下這兩種方法。</p>
+
+<!-- Quantitative and Qualitative Risk Assessment sections omitted for brevity -->
+
+<h3>重新評估風險 <span class="english">(Reassessing Risk)</span></h3>
+<p>風險評估不是一次性的專案——它是一個持續的過程。各種內部和外部因素會隨著時間推移而變化，從而修改現有的風險情景並產生全新的潛在風險。例如，如果一種新型攻擊者開始針對您所在行業的組織，這是一個應促使重新評估風險的新風險因素。同樣，如果您進入新的業務領域，那也會產生新的潛在風險。</p>
+<p>風險管理人員應監控內部和外部環境的變化情況，以應對需要重新評估風險的情況。這些可能包括威脅格局的變化、不斷演變的監管要求，甚至地緣政治變化。組織應維持一套<span class="key-term">關鍵風險指標</span> (<span class="key-term">key risk indicators, KRIs</span>) 以促進風險監控。這些 KRI 是風險的量化衡量標準，可以輕鬆監控超出定義閾值或令人擔憂趨勢的情況。</p>
+<p>每當 KRI 或其他因素表明環境正在發生重大變化時，都應進行風險重新評估。風險管理人員還應定期進行重新評估，即使沒有明顯的變化，以幫助組織識別以前未發現的問題。這些重新評估的結果可能會促使組織資訊安全計畫的元素發生變化。</p>
+
+<h2>風險處理與回應 <span class="english">(Risk Treatment and Response)</span></h2>
+
+<p>完成風險評估後，組織可以將注意力轉向應對這些風險。<span class="key-term">風險處理</span> <span class="english">(Risk treatment)</span> 是系統地回應組織面臨風險的過程。風險評估在風險管理過程中扮演兩個重要角色：</p>
+<ul>
+    <li>風險評估提供風險優先級排序的指導，以便首先處理具有最高機率和影響幅度的風險。</li>
+    <li>定量風險評估有助於確定風險的潛在影響是否證明採用特定風險管理方法所產生的成本是合理的。</li>
+</ul>
+<p>風險管理人員應審查風險評估並為評估中包含的每個風險確定適當的管理策略。管理人員有四種策略可供選擇：<span class="key-term">風險緩解</span> <span class="english">(risk mitigation)</span>、<span class="key-term">風險規避</span> <span class="english">(risk avoidance)</span>、<span class="key-term">風險轉移</span> <span class="english">(risk transference)</span> 和<span class="key-term">風險接受</span> <span class="english">(risk acceptance)</span>。在接下來的幾個部分中，我們將使用兩個範例來討論這些策略中的每一個。</p>
+<p>首先，我們討論與員工筆記型電腦被盜相關的財務風險。在此範例中，我們假設筆記型電腦不包含任何未加密的敏感資訊。我們正在管理的風險是丟失實際硬體的財務影響。</p>
+<p>其次，我們討論與針對組織網站的分散式拒絕服務 (DDoS) 攻擊相關的業務風險。</p>
+<p>我們使用這兩個場景來幫助您理解選擇風險管理策略時可用的不同選項以及該選擇過程中涉及的權衡。</p>
+
+<h3>風險緩解 <span class="english">(Risk Mitigation)</span></h3>
+<p><span class="key-term">風險緩解</span> <span class="english">(Risk mitigation)</span> 是應用安全控制以降低風險發生機率和/或影響幅度的過程。風險緩解是最常見的風險管理策略，安全專業人員的大部分工作都圍繞著透過安全控制的設計、實施和管理來緩解風險。許多這些控制涉及在功能、效能和安全性之間進行工程權衡。</p>
+<p>當您選擇緩解風險時，您可以應用一個安全控制或一系列安全控制。這些控制中的每一個都應降低風險發生的機率、風險發生時的影響幅度，或同時降低機率和幅度。</p>
+<p>在我們的第一個場景中，我們擔心組織中筆記型電腦被盜。如果我們想緩解該風險，我們可以從各種安全控制中進行選擇。例如，為筆記型電腦購買纜線鎖可能會降低盜竊發生的機率。</p>
+<p>在我們的第二個場景中，即針對組織網站的 DDoS 攻擊，我們可以選擇多種緩解控制措施。例如，我們可以簡單地購買更多頻寬和伺服器容量，從而使我們能夠吸收 DDoS 攻擊的轟炸，從而降低攻擊的影響。我們也可以選擇購買第三方 DDoS 緩解服務，該服務可以阻止流量到達我們的網路，從而降低攻擊的機率。</p>
+
+<h3>風險規避 <span class="english">(Risk Avoidance)</span></h3>
+<p><span class="key-term">風險規避</span> <span class="english">(Risk avoidance)</span> 是一種風險管理策略，我們改變我們的業務實踐以完全消除風險發生的可能性。風險規避最初可能看起來是一種非常理想的方法。畢竟，誰不想消除其組織面臨的風險呢？然而，有一個主要缺點。風險規避策略通常會對業務產生嚴重的負面影響。</p>
+<p>例如，考慮本章前面討論的筆記型電腦盜竊風險。我們可以採取風險規避策略，完全消除風險，方法是不允許員工購買或使用筆記型電腦。這種方法笨拙，並且可能因對員工生產力的負面影響而遭到員工和管理人員的強烈反對。</p>
+<p>同樣，我們可以透過簡單地關閉網站來避免針對組織網站的 DDoS 攻擊風險。如果沒有網站可供攻擊，那麼 DDoS 攻擊影響該站點的風險就不存在了。但是，業務領導者極不可能接受關閉網站作為一種可行的方法。事實上，您可能會認為被迫關閉網站以避免 DDoS 攻擊是最終的拒絕服務攻擊！</p>
+
+<h3>風險轉移 <span class="english">(Risk Transference)</span></h3>
+<p><span class="key-term">風險轉移</span> <span class="english">(Risk transference)</span>（或風險分擔）將風險的部分影響從經歷風險的組織轉移到另一個實體。風險轉移最常見的範例是購買涵蓋風險的保險單。購買保險時，客戶向保險公司支付保費。作為交換，保險公司同意承擔保單中指定的風險造成的損失。</p>
+<p>在筆記型電腦盜竊的範例中，財產保險單可以涵蓋該風險。如果員工的筆記型電腦被盜，保險單將提供資金來彌補被盜設備的價值或更換設備的成本，具體取決於承保範圍的類型。</p>
+<p>財產保險單不太可能涵蓋 DDoS 攻擊。事實上，許多一般商業保單都排除了所有網路安全風險。尋求針對此類攻擊的保險保障的組織應購買<span class="key-term">網路安全保險</span> <span class="english">(cybersecurity insurance)</span>，無論是作為單獨的保單還是作為現有商業保險單的附加條款。此承保範圍將償還部分或全部恢復營運的成本，也可能涵蓋攻擊期間損失的收入。</p>
+
+<h3>風險接受 <span class="english">(Risk Acceptance)</span></h3>
+<p><span class="key-term">風險接受</span> <span class="english">(Risk acceptance)</span> 是最終的風險管理策略，它歸結為故意選擇不採取其他風險管理策略，而只是在面臨風險的情況下繼續正常營運。如果緩解風險的成本大於風險本身的影響，則風險接受方法可能是合理的。</p>
+<div class="warning">
+    <p>風險接受是經過深思熟慮分析後做出的審慎決定。它不應作為預設策略。僅僅在沒有分析的情況下聲明「我們接受此風險」並不是可接受風險的範例；這是未管理風險的範例！</p>
+</div>
+<p>在我們的筆記型電腦盜竊範例中，我們可能會決定其他風險管理策略都不合適。例如，我們可能覺得使用纜線鎖是不必要的負擔，並且盜竊恢復標籤不太可能起作用，從而使我們沒有可行的風險緩解策略。業務領導者可能要求員工擁有筆記型電腦設備，從而排除了風險規避作為可行選項。而筆記型電腦保險單的成本可能太高而無法證明其合理性。在這種情況下，我們可能會決定我們將簡單地接受風險，並在盜竊發生時承擔被盜設備的成本。這就是風險接受。</p>
+<p>在 DDoS 風險的情況下，我們可能會進行類似的分析，並決定風險緩解和轉移策略成本太高。如果我們繼續營運該站點，我們可能會這樣做，接受 DDoS 攻擊可能導致站點關閉的風險。</p>
+
+<div class="exam-tip">
+    <p>當您參加考試時，請理解四種風險處理/回應選項（風險緩解、風險規避、風險接受和風險轉移/分擔）。準備好提供這些策略的範例，並識別在給定場景中正在使用哪種策略。</p>
+</div>
+
+<h2>風險分析 <span class="english">(Risk Analysis)</span></h2>
+<p>當您努力管理風險時，您將實施旨在緩解這些風險的控制措施。在準備考試時，這裡有幾個關鍵術語可以用來描述風險的不同狀態：</p>
+<ul>
+    <li>組織面臨的<span class="key-term">固有風險</span> <span class="english">(inherent risk)</span> 是在實施任何控制之前存在的原始風險水準。固有風險得名於它是組織業務固有的風險水準。</li>
+    <li><span class="key-term">殘餘風險</span> <span class="english">(residual risk)</span> 是組織實施旨在緩解、規避和/或轉移固有風險的控制後仍然存在的風險。</li>
+    <li>組織的<span class="key-term">風險偏好</span> <span class="english">(risk appetite)</span> 是其願意接受作為經營成本的風險水準。</li>
+</ul>
+<p>這三個概念透過組織管理風險的方式聯繫起來。組織從其固有風險開始，然後實施風險管理策略以降低該風險水準。它會一直這樣做，直到殘餘風險等於或低於組織的風險偏好。</p>
+
+<div class="box">
+    <p><strong>控制風險 (Control Risk)</strong></p>
+    <p>公共會計領域為我們帶來了控制風險的概念。控制風險是指組織內部缺乏內部控制可能導致組織財務報告出現重大錯報的風險。如果資訊技術風險危及財務資訊的完整性或可用性，則它們可能導致控制風險。因此，財務稽核通常包括對保護財務系統的控制措施的測試。</p>
+</div>
+
+<p>只有在具有高度風險意識的情況下，組織才能實施應對這些概念的實踐。組織必須了解他們面臨的風險以及他們可以實施來管理這些風險的控制措施。他們還必須定期進行風險控制評估和自我評估，以確定這些控制措施是否繼續有效運作。</p>
+
+<h2>風險報告 <span class="english">(Risk Reporting)</span></h2>
+<p>隨著風險管理人員努力追蹤和管理風險，他們必須將其結果傳達給其他風險專業人員和業務領導者。風險登記冊是風險管理專業人員用來追蹤組織面臨風險的主要工具。</p>
+<p>風險登記冊是一份冗長的文件，通常為業務領導者提供過多的細節。在向高階主管溝通風險管理概念時，風險專業人員通常使用<span class="key-term">風險矩陣</span> <span class="english">(risk matrix)</span> 或<span class="key-term">熱圖</span> <span class="english">(heat map)</span>。這種方法可以快速總結風險，讓高階主管能夠快速關注組織面臨的最重大風險以及這些風險可能如何影響組織目標。</p>
+<p>也會出現領導者和管理人員需要了解組織風險狀況變化的情況。這些可能是基於活躍緊急情況或基於不斷演變的風險格局的較慢移動討論的緊急情況。資訊安全管理人員應建立定期的報告節奏，定期提供風險報告，以及快速提供緊急更新的機制。在所有情況下，風險管理人員都應在充分了解其受眾的情況下撰寫報告，根據每個目標群體的知識、需求和具體考量來調整內容。</p>
+
+<h2>評估供應商風險管理實踐 <span class="english">(Assessing Provider Risk Management Practices)</span></h2>
+<p>當您對您的雲端服務供應商進行定期評估時，您應納入對每個供應商自身風險管理實踐的評估。檢查他們的 ERM 計畫，特別關注回答以下問題：</p>
+<ul>
+    <li>供應商的整體風險狀況是什麼？他們面臨的風險如何影響您的業務和營運？</li>
+    <li>供應商在其自身風險管理工作中採用了哪些方法和政策？他們是否有成熟的 ERM 計畫？</li>
+    <li>供應商有哪些控制措施來緩解已識別的風險？殘餘風險水準是多少？供應商的風險偏好是否與您自己組織的風險偏好一致？</li>
+</ul>
+<p>回答這些問題將幫助您確定供應商的風險管理方法和風險承受能力是否與您自己組織的需求相容。</p>
+
+<!-- Risk Management Frameworks section omitted for brevity -->
+
+<h2>雲端合約設計 <span class="english">(Cloud Contract Design)</span></h2>
+<p>與任何外包關係一樣，從雲端服務供應商處獲取雲端服務的協議應使用書面合約來定義關係的參數。當您協商新的供應商關係時，您正在記錄該關係的條款和條件，這些條款和條件在當時可能看起來微不足道，但在關係的後期階段可能變得至關重要。因此，客戶應特別注意雲端合約中包含的語言。</p>
+
+<h3>業務需求 <span class="english">(Business Requirements)</span></h3>
+<p>在簽訂任何類型的雲端運算服務合約之前，組織應評估許多事項。首先，應該有充分的理由來聘用雲端供應商。決策應有助於企業實現其長期目標。決策絕不應僅僅因為它們看起來有吸引力或基於您的競爭對手正在做什麼而做出。您應該有充分的業務理由來決定使用雲端供應商以及確定選擇哪一家。</p>
+<p>作為審查雲端運算作為可行解決方案的盡職調查的一部分，應檢查更多項目。也許並非所有業務單位都需要參與決策制定。也許某些變更對它們幾乎沒有或根本沒有影響，在這種情況下它們不需要參與。這稱為<span class="key-term">範圍界定</span> <span class="english">(scoping)</span>，用於指僅包括受任何雲端參與影響的部門或業務單位。</p>
+<p>評估雲端運算解決方案的另一個重要方面是法規合規性。調查監管機構對雲端運算解決方案的期望以及參與雲端解決方案將給組織帶來的額外或不同風險至關重要。</p>
+<p>最後，您必須密切關注與任何類型的災難復原或中斷情況相關的成本以及您能夠承受的程度。像<span class="key-term">恢復時間目標 (RTO)</span>、<span class="key-term">恢復點目標 (RPO)</span> 和<span class="key-term">最大允許停機時間 (MAD)</span> 這樣的衡量標準在做出選擇雲端運算解決方案的決策時至關重要。您必須能夠根據您的風險狀況承受一定數量的中斷，因為它們在某個時候必然會發生。了解如何處理它們以及您的雲端供應商將如何處理它們至關重要。</p>
+
+<h3>供應商管理 <span class="english">(Vendor Management)</span></h3>
+<p>供應商在每個組織的資訊技術營運中都扮演著重要角色。無論是從外部公司簡單地購買硬體或軟體，還是從戰略合作夥伴處提供雲端運算服務，供應商在提供我們向客戶提供的 IT 服務方面都是不可或缺的。安全專業人員必須特別注意以保護組織資訊和 IT 系統的機密性、完整性和可用性的方式管理這些供應商關係。</p>
+<p>也許最重要的經驗法則是，您應始終確保供應商遵循的安全政策和程序至少與您在自己環境中應用的政策和程序一樣有效。供應商擴展了您組織的技術環境，如果他們代表您處理資料，您應期望他們執行的謹慎程度與您在自己營運中執行的程度相同。否則，供應商可能成為鏈條中的薄弱環節，危及您的安全目標。</p>
+<div class="note">
+    <p>評估供應商安全控制不是一次性的過程。除了您在關係開始時執行的任何供應商評估之外，您還應定期進行重新評估，以驗證您最初的評估仍然準確，並且控制措施仍然到位並有效運作。</p>
+</div>
+<p>供應商關係在雲端運算世界中絕對至關重要，因為這些關係不可避免地包含某種程度的<span class="key-term">供應商鎖定</span> <span class="english">(vendor lock-in)</span>——您正在選擇一個將成為長期合作夥伴的供應商，如果情況變得不利，很難快速擺脫這種關係。</p>
+<p>因此，您需要確保進行<span class="key-term">盡職調查</span> <span class="english">(due diligence)</span>，以確保您正在與一個可靠且財務狀況良好的供應商建立關係。研究供應商的業務可行性有助於確保您不會與即將破產的供應商建立關係！</p>
+
+<h4>供應商管理生命週期 <span class="english">(Vendor Management Lifecycle)</span></h4>
+<p>負責管理供應商關係的安全專業人員可能會認為他們的工作遵循標準的生命週期。大型組織在一年內增加數十甚至數百個新供應商並不罕見，而且組織通常會因定價、功能或其他考量而更換供應商。</p>
+<p><strong>第 1 步：供應商選擇 (Step 1: Vendor Selection)</strong></p>
+<p>供應商管理生命週期的第一步是選擇新供應商。根據您組織的採購環境，這可能包括從正式的<span class="key-term">提案請求</span> (<span class="key-term">Request For Proposal, RFP</span>) 到非正式的評估和選擇過程的任何內容。無論哪種情況，安全都應扮演重要角色，為發送給供應商的要求做出貢獻，並在評估過程中發揮作用。</p>
+<p>在評估期間，您還應評估供應商自身風險管理計畫的品質和有效性。他們有哪些控制措施、方法和政策來控制可能影響您組織的風險？</p>
+<p><strong>第 2 步：入職 (Step 2: Onboarding)</strong></p>
+<p>一旦組織選擇了新供應商，<span class="key-term">入職</span> <span class="english">(onboarding)</span> 過程就開始了。這應包括供應商和客戶之間的對話，以驗證合約的細節並確保一切都從正確的基礎開始。</p>
+<p>入職通常涉及設置資料傳輸的技術安排，組織應確保他們對用於保護傳輸中資訊的加密技術和其他控制措施感到滿意，並在供應商系統中靜態時維護其安全性。</p>
+<p>入職過程還應包括建立安全事件通知的程序。</p>
+<p><strong>第 3 步：維護 (Step 3: Maintenance)</strong></p>
+<p>供應商建立並運行後，安全團隊的工作並未結束。供應商隨後應進入維護階段，客戶透過進行持續的供應商評估來繼續監控安全實踐。這可能包括現場訪問和定期對話以及對獨立稽核和評估報告的審查。</p>
+<p>維護階段很可能還涉及處理在供應商站點發生的安全事件。如果供應商從未報告過安全事件，這可能是一個危險信號，因為幾乎每個組織偶爾都會經歷某種安全漏洞。</p>
+<p><strong>第 4 步：離職 (Step 4: Offboarding)</strong></p>
+<p>所有美好的事物最終都會結束，現實是即使是最具生產力的業務關係也會在某個時候終止。<span class="key-term">離職</span> <span class="english">(offboarding)</span> 過程是供應商生命週期的最後一步，包括確保供應商銷毀其擁有的所有機密資訊，並確保關係以有序的方式解除。</p>
+<p>根據業務需求，生命週期隨後可能隨著新供應商的選擇而重新開始。</p>
+<div class="exam-tip">
+    <p>如果您想更詳細地探討此主題，您可能希望查閱 ISO 27036，該標準涵蓋了供應商關係的資訊安全。特別是，該標準的第 4 部分包含有關雲端服務供應商安全的指南。</p>
+</div>
+
+<h3>資料保護 <span class="english">(Data Protection)</span></h3>
+<p>隨著組織開始越來越多地使用供應商提供的包含敏感資訊儲存、處理和傳輸的服務，他們必須特別注意供應商的資訊管理實踐。</p>
+<p>資料擁有權問題通常出現在供應商關係中，特別是當供應商代表客戶創建資訊時。在建立新的供應商關係之前達成的協議應包含關於資料擁有權的明確語言。</p>
+<p>在大多數情況下，客戶會希望確保他們保留對資訊的不受限制的所有權，並且供應商使用該資訊的權利僅限於代表客戶並在其知情和同意下執行的活動。</p>
+<p>此外，客戶應確保合約包含要求供應商在關係結束後在可接受的時間內安全刪除所有客戶資訊的語言。</p>
+<p>一個特別關注的領域是資料共享。客戶應在供應商協議中包含語言，禁止供應商在未經客戶明確同意的情況下與第三方共享客戶資訊。</p>
+<p>客戶應在合約中包含資料保護要求。如果供應商將是屬於客戶的關鍵資訊的唯一保管人，這一點尤其重要。合約應規定供應商負責保存資訊並實施適當的容錯和備份程序以防止資料丟失。在資訊特別關鍵的情況下，協議甚至可能包含規定供應商必須採取的確切控制措施以保護資訊的條款。</p>
+<p>這些控制措施可能包括<span class="key-term">資料託管</span> <span class="english">(data escrow)</span> 條款。資料託管將您組織資料的副本放置在一個中立的第三方處，該第三方負責保護資料，如果供應商倒閉或未能履行其義務，則會將資料釋放給您。</p>
+
+<!-- Contract Negotiation, Common Provisions, Contracting Documents, Government Standards sections omitted for brevity -->
+
+<h2>管理與相關方的溝通 <span class="english">(Manage Communication with Relevant Parties)</span></h2>
+
+<p>雲端供應商和雲端客戶都必須為供應鏈上的業務合作夥伴建立持久、有彈性的溝通渠道，原因/目的多種多樣。特別值得關注的是以下內容：</p>
+<ul>
+    <li><span class="key-term">供應商和合作夥伴</span> <span class="english">(Vendors and partners)</span>：為了確保有足夠數量和類型的資源/資產可用於營運，與供應商進行清晰的溝通是必要的。這對於緊急/應急情況尤其如此，此時資源的即時性/可用性至關重要（例如發電機燃料、損壞系統的更換元件等）。</li>
+    <li><span class="key-term">客戶</span> <span class="english">(Customers)</span>：客戶可以指產品/服務的個人最終使用者，也可以指在供應鏈中接收產品/服務的企業。與客戶溝通對於管理期望（例如，在服務中斷前通知客戶）、維護品牌意識以及確保滿足後勤需求至關重要。同樣，這在災難情況下尤其如此，此時交付可能會延遲或中斷。法律也可能要求這樣做，例如在涉及隱私資料、受資料外洩通知法影響的司法管轄區的情況下。</li>
+    <li><span class="key-term">監管者</span> <span class="english">(Regulators)</span>：在受監管的行業中，第三方決定您進行業務的能力，與監管者保持溝通至關重要。應讓監管者了解組織可能不符合相關標準或法規的任何情況（例如在災難期間或犯罪後果中）。應讓監管者了解事態發展、管理層正在考慮的潛在解決方案、在此期間使用的任何權宜之計或補償性控制措施，以及恢復合規的預計持續時間。</li>
+    <li><span class="key-term">其他利益相關者</span> <span class="english">(Other stakeholders)</span>：每個組織都在其自己獨特的文化和供應商生態系統中運作。確保您已將任何其他對您的組織重要的利益相關者納入您的溝通計劃中。</li>
+</ul>
+<p>對於供應鏈中所有各方的溝通，強烈建議使用次要甚至三級溝通能力，尤其是在災難情況下。（不要依賴電話在災難期間還能正常工作。）</p>
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+<p>供應商在現代 IT 環境中扮演著至關重要的角色，特別是當組織大量使用雲端服務供應商時。在本章中，您了解了組織如何制定和維護企業風險管理 (ERM) 計畫來管理這些風險，並採取風險緩解、風險轉移、風險規避和風險接受的策略，以維持與組織風險偏好一致的風險狀況。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>政策框架由政策、標準、程序和指南組成 (Policy frameworks consist of policies, standards, procedures, and guidelines)。</strong> 政策是資訊安全計畫管理意圖的高階陳述。標準描述了政策的詳細實施要求。程序提供了執行安全活動的逐步說明。政策、標準和程序的合規性是強制性的。指南提供了補充政策框架其他元素的選擇性建議。</p>
+<p><strong>組織通常採用一套涵蓋其安全計畫不同領域的安全政策 (Organizations often adopt a set of security policies covering different areas of their security programs)。</strong> 安全計畫中使用的常見政策包括資訊安全政策、可接受使用政策、資料擁有權政策、資料保留政策、帳戶管理政策和密碼政策。任何組織採用的具體政策將取決於該組織的文化和業務需求。</p>
+<p><strong>政策文件應包括例外流程 (Policy documents should include exception processes)。</strong> 例外流程應概述接收安全政策例外所需的資訊以及每個例外的批准權限。該流程還應描述與批准的安全政策例外相關的風險緩解的補償性控制要求。</p>
+<p><strong>了解風險識別和評估如何幫助組織優先處理網路安全工作 (Know how risk identification and assessment helps organizations prioritize cybersecurity efforts)。</strong> 網路安全分析師試圖識別其組織面臨的所有風險，然後進行業務衝擊分析以評估基於其發生機率和對組織潛在影響幅度的潛在風險程度。這項工作使安全專業人員能夠優先處理風險並與組織中的其他人溝通風險因素。</p>
+<p><strong>知道供應商是外部風險的來源 (Know that vendors are a source of external risk)。</strong> 組織應將其自身的系統評估作為其風險評估實踐的一部分來進行，但他們也應進行供應鏈評估。執行供應商盡職調查可以降低先前未識別的供應商風險對組織產生負面影響的可能性。硬體來源真實性技術驗證硬體在離開供應商場所後未被篡改。</p>
+<p><strong>熟悉組織可能採用的風險管理策略 (Be familiar with the risk management strategies that organizations may adopt)。</strong> 風險規避策略改變業務實踐以消除風險。風險緩解技術降低風險的機率或幅度。風險轉移方法將部分風險轉移給第三方。風險接受承認風險，正常業務營運在風險存在的情況下繼續進行。</p>
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>Jen 在一台 Windows 伺服器上發現了一個遺漏的補丁，該補丁可能允許攻擊者獲得系統的遠端控制權。在與她的經理協商後，她應用了該補丁。從風險管理的角度來看，她做了什麼？</p>
+        <ol type="A">
+            <li>移除了威脅 (Removed the threat)</li>
+            <li>降低了威脅 (Reduced the threat)</li>
+            <li>移除了漏洞 (Removed the vulnerability)</li>
+            <li>降低了漏洞 (Reduced the vulnerability)</li>
+        </ol>
+    </li>
+    <li>
+        <p>您注意到針對您組織運行的 Web 應用程式的大量 SQL 注入攻擊，因此您安裝了一個 Web 應用程式防火牆來阻止這些攻擊中的許多到達伺服器之前。您如何改變了此風險的嚴重性？</p>
+        <ol type="A">
+            <li>降低了影響幅度 (Reduced the magnitude)</li>
+            <li>消除了漏洞 (Eliminated the vulnerability)</li>
+            <li>降低了機率 (Reduced the probability)</li>
+            <li>消除了威脅 (Eliminated the threat)</li>
+        </ol>
+    </li>
+    <li>
+        <p>問題 3-7 參考以下場景：
+        Aziz 負責管理一個每天為其公司產生 100,000 美元收入的電子商務網站。該網站使用一個包含有關公司客戶敏感資訊的資料庫。
+        Aziz 正在評估針對該資料庫的拒絕服務攻擊風險，攻擊者將銷毀資料庫中包含的資料。他預計從現有記錄重建資料庫大約需要 500,000 美元。在諮詢威脅情報後，他認為在任何給定年份成功攻擊的可能性為 5%。</p>
+        <p>資產價值 (AV) 是多少？</p>
+        <ol type="A">
+            <li>$5,000</li>
+            <li>$100,000</li>
+            <li>$500,000</li>
+            <li>$600,000</li>
+        </ol>
+    </li>
+    <li>
+        <p>暴露因子 (EF) 是多少？</p>
+        <ol type="A">
+            <li>5 percent</li>
+            <li>20 percent</li>
+            <li>50 percent</li>
+            <li>100 percent</li>
+        </ol>
+    </li>
+    <li>
+        <p>單次損失預期 (SLE) 是多少？</p>
+        <ol type="A">
+            <li>$5,000</li>
+            <li>$100,000</li>
+            <li>$500,000</li>
+            <li>$600,000</li>
+        </ol>
+    </li>
+     <li>
+        <p>年發生率 (ARO) 是多少？</p>
+        <ol type="A">
+            <li>0.05</li>
+            <li>0.20</li>
+            <li>2.00</li>
+            <li>5.00</li>
+        </ol>
+    </li>
+    <li>
+        <p>年損失預期 (ALE) 是多少？</p>
+        <ol type="A">
+            <li>$5,000</li>
+            <li>$25,000</li>
+            <li>$100,000</li>
+            <li>$500,000</li>
+        </ol>
+    </li>
+    <li>
+        <p>問題 8-11 參考以下場景：
+        Grace 最近完成了對其組織資料外洩暴露的風險評估，並確定與敏感個人資訊丟失相關的風險水準很高。她正在考慮各種方法來管理此風險。</p>
+        <p>Grace 的第一個想法是添加一個 Web 應用程式防火牆來保護她的組織免受 SQL 注入攻擊。這種方法採用了哪種風險管理策略？</p>
+        <ol type="A">
+            <li>風險接受 (Risk acceptance)</li>
+            <li>風險規避 (Risk avoidance)</li>
+            <li>風險緩解 (Risk mitigation)</li>
+            <li>風險轉移 (Risk transference)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Grace 正在考慮放棄收集和儲存敏感個人資訊的客戶活動。Grace 的方法將使用哪種風險管理策略？</p>
+        <ol type="A">
+            <li>風險接受 (Risk acceptance)</li>
+            <li>風險規避 (Risk avoidance)</li>
+            <li>風險緩解 (Risk mitigation)</li>
+            <li>風險轉移 (Risk transference)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Grace 的公司決定安裝 Web 應用程式防火牆並繼續開展業務。他們仍然擔心防火牆未解決的其他資訊風險，並正在考慮購買保險單來涵蓋這些風險。這種策略使用了什麼？</p>
+        <ol type="A">
+            <li>風險接受 (Risk acceptance)</li>
+            <li>風險規避 (Risk avoidance)</li>
+            <li>風險緩解 (Risk mitigation)</li>
+            <li>風險轉移 (Risk transference)</li>
+        </ol>
+    </li>
+    <li>
+        <p>最後，Grace 發現保險單太貴，決定不購買。她沒有採取任何額外行動。在這種情況下，Grace 使用的是哪種風險管理策略？</p>
+        <ol type="A">
+            <li>風險接受 (Risk acceptance)</li>
+            <li>風險規避 (Risk avoidance)</li>
+            <li>風險緩解 (Risk mitigation)</li>
+            <li>風險轉移 (Risk transference)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Brian 最近進行了一次風險緩解演習，並確定了實施一系列控制措施後仍然存在的風險水準。哪個術語最能描述這種風險？</p>
+        <ol type="A">
+            <li>固有風險 (Inherent risk)</li>
+            <li>控制風險 (Control risk)</li>
+            <li>風險偏好 (Risk appetite)</li>
+            <li>殘餘風險 (Residual risk)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Joe 正在編寫一份文件，向系統管理員解釋一種可能符合組織要求加密所有筆記型電腦的方法。Joe 正在編寫哪種類型的文件？</p>
+        <ol type="A">
+            <li>政策 (Policy)</li>
+            <li>指南 (Guideline)</li>
+            <li>程序 (Procedure)</li>
+            <li>標準 (Standard)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列哪個文件通常必須由 CEO 或類似的高階主管批准？</p>
+        <ol type="A">
+            <li>標準 (Standard)</li>
+            <li>程序 (Procedure)</li>
+            <li>指南 (Guideline)</li>
+            <li>政策 (Policy)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Greg 想創建一個總括協議，為他的組織與供應商進行的所有未來工作提供安全條款和條件。Greg 應該使用哪種類型的協議？</p>
+        <ol type="A">
+            <li>BPA</li>
+            <li>MOU</li>
+            <li>MSA</li>
+            <li>SLA</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列何者通常不會在組織的資訊安全政策中找到？</p>
+        <ol type="A">
+            <li>關於網路安全重要性的陳述 (Statement of the importance of cybersecurity)</li>
+            <li>使用 AES-256 加密的要求 (Requirement to use AES-256 encryption)</li>
+            <li>權力委派 (Delegation of authority)</li>
+            <li>指定負責的高階主管 (Designation of responsible executive)</li>
+        </ol>
+    </li>
+     <li>
+        <p>Gwen 正在為她的組織制定新的安全政策。下列哪個陳述不反映政策制定的最佳實踐？</p>
+        <ol type="A">
+            <li>所有利益相關者都應同意擬議的政策 (All stakeholders should agree with the proposed policy)。</li>
+            <li>政策應遵循正常的公司政策批准流程 (The policy should follow normal corporate policy approval processes)。</li>
+            <li>政策應與高階主管的「高層基調」相匹配 (Policies should match the “tone at the top” from senior business leaders)。</li>
+            <li>網路安全管理人員通常負責溝通和實施批准的安全政策 (Cybersecurity managers are typically responsible for communicating and implementing approved security policies)。</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列哪個項目通常不包含在安全政策的例外請求中？</p>
+        <ol type="A">
+            <li>補償性控制的描述 (Description of a compensating control)</li>
+            <li>與例外相關風險的描述 (Description of the risks associated with the exception)</li>
+            <li>對安全政策的擬議修訂 (Proposed revision to the security policy)</li>
+            <li>例外的業務理由 (Business justification for the exception)</li>
+        </ol>
+    </li>
+    <li>
+        <p>一家美國聯邦政府機構正在與雲端服務供應商協商使用 IaaS 服務。在簽訂此協議之前，供應商應通過哪個計畫的認證？</p>
+        <ol type="A">
+            <li>FIPS 140-2</li>
+            <li>Common Criteria</li>
+            <li>FedRAMP</li>
+            <li>ISO 27001</li>
+        </ol>
+    </li>
+    <li>
+        <p>您組織的會計部門正在考慮使用新的雲端服務供應商。當您調查該供應商時，您發現其主要投資者之一已撤回支持，並且將不提供未來資金。您應該提出什麼主要擔憂？</p>
+        <ol type="A">
+            <li>供應商鎖定 (Vendor lock-in)</li>
+            <li>供應商適用性 (Vendor suitability)</li>
+            <li>供應商安全 (Vendor security)</li>
+            <li>供應商可行性 (Vendor viability)</li>
+        </ol>
+    </li>
+</ol>
+<ol start="1">
+    <li>C. 透過應用補丁，Jen 移除了她伺服器上的漏洞 (<span class="english">vulnerability</span>)。這也具有消除此特定風險的效果。Jen 無法控制試圖存取她伺服器的外部威脅 (<span class="english">threat</span>)。</li>
+    <li>C. 安裝 Web 應用程式防火牆降低了攻擊到達 Web 伺服器的機率 (<span class="english">probability</span>)。Web 應用程式中可能仍然存在漏洞 (<span class="english">Vulnerabilities</span>)，外部攻擊的威脅 (<span class="english">threat</span>) 並未改變。成功的 SQL 注入攻擊的影響 (<span class="english">impact</span>) 也未因 Web 應用程式防火牆而改變。</li>
+    <li>C. 此案例中面臨風險的資產是客戶資料庫。失去對資料庫的控制將導致 500,000 美元的罰款，因此資產價值 (AV) (<span class="english">asset value (AV)</span>) 為 500,000 美元。</li>
+    <li>D. 攻擊將導致儲存在資料庫中的客戶資料完全丟失，使暴露因子 (EF) (<span class="english">exposure factor (EF)</span>) 為 100%。</li>
+    <li>C. 我們透過將資產價值 (AV) (500,000 美元) 乘以暴露因子 (EF) (100%) 來計算單次損失預期 (SLE) (<span class="english">single loss expectancy (SLE)</span>)，得到 SLE 為 500,000 美元。</li>
+    <li>A. Aziz 的威脅情報研究確定該威脅每年有 5% 的發生可能性。這是 0.05 的年發生率 (ARO) (<span class="english">annualized rate of occurrence (ARO)</span>)。</li>
+    <li>B. 我們透過將 SLE (500,000 美元) 乘以 ARO (0.05) 來計算年損失預期 (ALE) (<span class="english">annualized loss expectancy (ALE)</span>)，得到 ALE 為 25,000 美元。</li>
+    <li>C. 安裝新控制或升級現有控制是為了降低風險的機率或幅度。這是風險緩解 (<span class="english">risk mitigation</span>) 活動的一個範例。</li>
+    <li>B. 更改業務流程或活動以消除風險是風險規避 (<span class="english">risk avoidance</span>) 的一個範例。</li>
+    <li>D. 保險單使用風險轉移 (<span class="english">risk transference</span>) 策略，將部分或全部財務風險從組織轉移到保險公司。</li>
+    <li>A. 當一個組織決定不採取進一步行動來應對剩餘風險時，他們選擇了風險接受 (<span class="english">risk acceptance</span>) 策略。</li>
+    <li>D. 殘餘風險 (<span class="english">Residual risk</span>) 是組織實施旨在緩解、規避和/或轉移固有風險的控制後仍然存在的風險。</li>
+    <li>B. 此場景中的關鍵術語是「一種方式」(<span class="english">one way</span>)。這表明遵守該文件不是強制性的，因此 Joe 必須正在編寫指南 (<span class="english">guideline</span>)。政策、標準和程序都是強制性的。</li>
+    <li>D. 政策 (<span class="english">Policies</span>) 需要最高管理層（通常是 CEO）的批准。其他文件通常可以由其他管理人員（例如 CISO）批准。</li>
+    <li>C. 主服務協議 (MSA) (<span class="english">Master service agreements (MSAs)</span>) 為供應商在較長時間內與組織進行的工作提供總括合約。MSA 通常包括詳細的安全和隱私要求。每次組織與供應商簽訂新專案時，他們可能會創建一份工作說明書 (SOW)，其中包含特定於專案的細節並引用 MSA。</li>
+    <li>B. 安全政策通常不包含規定性的技術指南，例如要求使用特定的加密演算法。這種類型的細節通常會在庫存安全標準 (<span class="english">standard</span>) 中找到。</li>
+    <li>A. 政策應以徵求所有相關利益相關者意見的方式制定，但不一定要獲得所有利益相關者的同意或批准。政策應遵循正常的公司政策批准流程，並應以符合組織文化和「高層基調」的方式撰寫。一旦資訊安全政策獲得批准，通常由資訊安全管理人員負責溝通和實施該政策。</li>
+    <li>C. 安全政策的例外請求 (<span class="english">exception to a security policy</span>) 通常不包括對政策的擬議修訂。例外是因特定技術和/或業務要求而對政策進行的文件化偏差。它們不會改變原始政策，原始政策對未被例外涵蓋的系統仍然有效。</li>
+    <li>C. 所有這些計畫都可能在關係中發揮作用，但最重要的是聯邦風險和授權管理計畫 (FedRAMP) (<span class="english">Federal Risk and Authorization Management Program (FedRAMP)</span>)。該計畫專門適用於雲端服務並適用於整個美國政府。FIPS 140-2 認證僅對密碼模組要求，問題中沒有提到這些服務。通用準則 (<span class="english">Common Criteria</span>) 通常僅用於硬體和軟體，而非服務。ISO 27001 是美國聯邦政府不要求的自願性標準。</li>
+    <li>D. 雖然所有這些考量都存在於任何供應商關係中，但此問題中的關鍵問題是供應商可能沒有足夠的財務支持來繼續營運。如果供應商有可能在合約期結束前關閉服務，這是一個供應商可行性 (<span class="english">vendor viability</span>) 問題。</li>
+</ol>
+
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第二章：資料分類</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .box { border: 1px solid #ccc; padding: 15px; margin: 15px 0; background-color: #f9f9f9; }
+        .exam-tip { border-left: 5px solid #f0ad4e; padding: 10px; margin: 15px 0; background-color: #fefbed; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .warning { border-left: 5px solid #d9534f; padding: 10px; margin: 15px 0; background-color: #fdf7f7; }
+        code { background-color: #eee; padding: 2px 4px; border-radius: 3px; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第二章：資料分類 <span class="english">(Data Classification)</span></h1>
+
+<p>資料是一種資產。如同所有其他資產，了解您擁有什麼資料、它在哪裡（邏輯上和實體上），以及其相對價值和保護需求，對於適當利用安全資源至關重要。在本章中，您將了解資料如何被分類和分級，為什麼資料的位置很重要，如何使用資訊版權管理工具來保護資料，以及資料控管、資料保留和刪除的要求。</p>
+
+<h2>資料盤點與探索 <span class="english">(Data Inventory and Discovery)</span></h2>
+
+<p>在上一章中，我們討論了建立資產盤點清單的重要性；這項工作的一部分將需要識別組織擁有的所有資料。了解您的資料在哪裡、誰擁有它、可以用它做什麼，以及它的生命週期看起來像什麼，對於在整個組織中管理資料非常重要。</p>
+
+<div class="note">
+    <p>我們將在第三章「雲端資料安全」中涵蓋完整的雲端資料生命週期。目前，您需要記住的是，資料在組織中被創建和使用，然後最終被處置，並且該生命週期依賴於資料分類和版權管理才能成功。</p>
+</div>
+
+<h3>資料擁有權 <span class="english">(Data Ownership)</span></h3>
+<p>為了適當地處理和控制資料，最重要的步驟之一是根據誰擁有資料的持有權和合法所有權來分配職責。這些職責通常與指定的角色相關聯。雖然組織可以自行定義這些術語和名稱，但它們也可能在特定的法律、法規和合約中有具體的定義。</p>
+<p>以下術語通常用於描述資料擁有權：</p>
+<ul>
+    <li><span class="key-term">資料擁有者</span> <span class="english">(data owner)</span>，一般而言，是指收集或創建資料的組織。在組織內部，我們通常指定一個特定的資料擁有者，作為對該資料擁有權利和責任的個人；這通常是創建或收集某個資料集的部門主管或業務單位經理。從雲端的角度來看，雲端客戶通常是資料擁有者。許多國際條約和框架將資料擁有者稱為<span class="key-term">資料控管者</span> <span class="english">(data controller)</span>。</li>
+    <li><span class="key-term">資料保管人</span> <span class="english">(data custodian)</span> 是負責資料日常維護和管理的任何個人或實體。保管人還負責根據資料擁有者的指示應用適當的安全控制和流程。在組織內部，保管人可能是資料庫管理員。</li>
+    <li><span class="key-term">資料管家</span> <span class="english">(Data stewards)</span> 負責確保資料的背景和意義被理解，並利用這些知識來確保他們負責的資料被正確使用。</li>
+    <li><span class="key-term">資料處理者</span> <span class="english">(data processor)</span> 是代表資料擁有者操作、儲存或移動資料的任何組織或個人。處理是指可以對資料執行的任何操作：複製、列印、銷毀、利用等。從國際法的角度來看，雲端供應商是資料處理者。</li>
+</ul>
+<p>關於資料擁有權和保管權的權利與責任，需要記住以下要點：</p>
+<ul>
+    <li>資料處理者不一定都與資料擁有者有直接關係；處理者可以是第三方，甚至是供應鏈中更下游的單位。</li>
+    <li>資料擁有者對其擁有的所有資料負有最終法律責任。即使資料被資料擁有者下游多層的資料處理者洩露，這仍然是真的。</li>
+    <li>擁有權、保管權、權利、責任和義務都與相關的資料集有關，因此僅適用於特定情況下的特定資料。例如，雲端供應商通常是雲端客戶資料的資料處理者，但供應商對於其收集和創建的資訊（例如供應商自己的客戶名單、資產盤點清單和帳單資訊）則是資料擁有者。</li>
+    <li><span class="key-term">系統擁有者</span> <span class="english">(System owners)</span> 不一定是資料擁有者。雲端供應商可能是底層基礎架構的系統擁有者，但可能不對儲存在這些系統上的資料負責。</li>
+</ul>
+
+<div class="note">
+    <p>歐盟的通用資料保護規則 (General Data Protection Regulation, GDPR) 描述了資料控管者和資料處理者以及資料保護官等特定角色。如果您關心 GDPR 合規性，請確保您了解其使用的具體定義。（參見 www.gdpreu.org/the-regulation/key-concepts。）</p>
+</div>
+
+<h3>資料分類 <span class="english">(Data Categorization)</span></h3>
+<p>資料擁有者最能理解資料將如何在組織中使用。這使得資料擁有者能夠適當地對資料進行分類。組織可以有任意數量的類別或資訊類型；這些可能是明確定義並在整個組織中重複使用的，也可能是在創建資料時由資料擁有者任意分配的。分類通常由以下一個或多個因素驅動：</p>
+<p><span class="key-term">法規遵循</span> <span class="english">(Regulatory Compliance)</span> 不同的業務活動受不同法規的約束。組織可能希望根據適用於特定資料集的法規或要求創建類別。這可能包括格雷姆-里奇-比利雷法案 (Gramm-Leach-Bliley Act, GLBA)、支付卡產業資料安全標準 (Payment Card Industry Data Security Standard, PCI DSS)、沙賓法案 (Sarbanes-Oxley, SOX)、健康保險可攜性與責任法案 (Health Insurance Portability and Accountability Act, HIPAA)、歐盟通用資料保護規則 (EU’s General Data Protection Regulation, GDPR) 或其他國際、國家、州或地方的要求。</p>
+<p><span class="key-term">業務功能</span> <span class="english">(Business Function)</span> 組織可能希望為資料的不同用途設定特定的類別。也許資料根據其在帳單、行銷或營運中的用途進行標記；按客戶類型；或按某些其他功能要求或描述符。</p>
+<p><span class="key-term">功能單位</span> <span class="english">(Functional Unit)</span> 每個部門或辦公室可能有自己的類別，並將其控制的所有資料保留在自己的類別內。</p>
+<p><span class="key-term">按專案</span> <span class="english">(By Project)</span> 一些組織可能將資料集按其相關的專案來定義，作為創建離散、區隔化專案的一種方式。</p>
+<p>無論組織使用何種分類方法，都應在整個組織內統一採用和執行。臨時分類可能導致安全、合規或其他問題上的差距，並可能導致資料外洩或損失。</p>
+
+<h3>資料分級 <span class="english">(Data Classification)</span></h3>
+<p>與分類非常相似，資料分級是資料擁有者的責任，並根據給定資料集的特定特徵，按照整體的組織政策進行分配。分級，像分類一樣，可以採用組織定義的任何形式，並且應該統一應用。</p>
+<p>分級的類型可能包括以下內容：</p>
+<p><span class="key-term">敏感度</span> <span class="english">(Sensitivity)</span> 這是美國軍方使用的分級模型。資料根據其敏感度進行分級，基於未經授權的揭露會造成的負面影響。在此類模型中，必須對所有資料進行分級，即使是否定的，因此不被視為敏感的資料必須被分配「非機密」標籤。我們稍後將討論標籤化。</p>
+<p><span class="key-term">司法管轄區</span> <span class="english">(Jurisdiction)</span> 資料來源或儲存點的地理位置可能對如何處理和操作該資料產生重大影響。例如，從歐盟公民收集的個人可識別資訊 (PII) 受歐盟隱私法的約束，該法律比美國的隱私法更為嚴格和全面。</p>
+<p><span class="key-term">關鍵性</span> <span class="english">(Criticality)</span> 被視為對組織生存至關重要的資料可能以不同於瑣碎、基本營運資料的方式進行分級。正如我們從上一章所知，業務衝擊分析 (BIA) 有助於我們確定哪些資料應以此方式分級。</p>
+
+<div class="note">
+    <p>除了那些由特定法規（例如，美國軍方使用聯邦法律定義的分級結構）涵蓋的領域外，沒有行業定義的、法定強制性的資料分類與分級定義。這些術語通常可以互換使用。為了本書的目的，資料按其用途分類，並按特定特徵分級。(ISC)² 並未對這些術語做出具體區分。</p>
+</div>
+
+<h3>資料分類政策 <span class="english">(Data Classification Policies)</span></h3>
+<p>資料分類通常基於組織政策。政策通常有助於識別組織希望使用的分類級別，特別是那些由法規或合約指定的級別。它們可以分配職責和定義角色，並且是組織資料治理的重要組成部分。當組織考慮使用自動化工具來支援分類時，它們也是重要的工具，因為它們為分類過程提供了基礎。</p>
+
+<h3>資料對應 <span class="english">(Data Mapping)</span></h3>
+<p>在組織之間（有時甚至在部門之間）共享的資料必須進行<span class="key-term">標準化</span> (<span class="key-term">normalized</span>) 和<span class="key-term">轉換</span> (<span class="key-term">translated</span>)，使其以對雙方都有意義的方式保持一致。這通常稱為<span class="key-term">資料對應</span> <span class="english">(data mapping)</span>。在分類工作的背景下使用時，對應是必要的，以便在一個系統/組織中被認為是敏感（且需要保護）的資料在被接收系統/組織識別為此類，從而使這些保護得以繼續。如果沒有適當的對應工作，被分級為特定級別的資料可能會暴露於不當的風險或威脅之下。</p>
+<p>資料對應可以是手動的、自動的或介於兩者之間，但無論您採用何種方法，重要的是確保資料分類和標籤透過對應得以延續，以確保在其他上下文中使用時資料不會失去其安全控制和監督。</p>
+
+<div class="note">
+    <p>越來越多的基於隱私的法規現在要求進行資料對應。這意味著您可能在法律上被要求識別像 PII 這樣的資料以滿足合規要求。包含資料對應要求的法律範例包括歐盟的通用資料保護規則 (GDPR) 以及 2018 年的加州消費者隱私法案 (California's Consumer Privacy Act)。</p>
+</div>
+
+<h3>資料標籤化 <span class="english">(Data Labeling)</span></h3>
+<p>當資料擁有者創建、分類和分級資料時，資料也需要被<span class="key-term">標籤化</span> <span class="english">(labeled)</span>。標籤應指示資料擁有者是誰，通常是以辦公室或角色的形式，而不是個人姓名或身份（因為，當然，人員可以在組織內變更角色或離職）。標籤應採用任何必要的形式，以使其持久、易於理解且一致；例如，雖然硬拷貝資料上的標籤可能是列印的頁首和頁尾，但電子檔案上的標籤可能嵌入檔名中或添加為中繼資料。</p>
+
+<div class="note">
+    <p>當資料在不同的服務和轉換中移動時，創建持久的資料標籤可能是一個挑戰。當您閱讀下一節關於資料流圖的內容時，請考慮如何在您自己的組織中將資料標籤沿著資料使用模式向前傳遞，包括在不同的服務和雲端供應商之間。</p>
+</div>
+
+<p>標籤應該是顯而易見的，並傳達相關概念，而不必揭示它們所描述的資料。</p>
+<p>根據組織的需求及其營運性質，標籤可能包括以下類型的資訊：</p>
+<ul>
+    <li>創建日期</li>
+    <li>預定銷毀/處置日期</li>
+    <li>機密性級別</li>
+    <li>處理說明</li>
+    <li>傳播/分發說明</li>
+    <li>存取限制</li>
+    <li>來源</li>
+    <li>司法管轄區</li>
+    <li>適用法規</li>
+</ul>
+<p>標籤通常被用作資料管理工具的一部分，以允許生命週期控制以及支援像資料外洩防護系統這樣的安全控制。雖然標籤可以被故意移除，但一致地使用標籤，特別是對於敏感資料，可以對您的組織適當處理資料的能力產生重大影響。</p>
+<p>這也意味著自動化標籤是資料生命週期中的關鍵技術元件和能力——無論是在創建時還是在使用中，當資料可能被修改或與其他資料合併時，導致需要更新結果輸出的資料標籤。</p>
+
+<h3>資料流 <span class="english">(Data Flows)</span></h3>
+<p><span class="key-term">資料流圖</span> <span class="english">(data flow diagram)</span> 可以幫助組織追蹤其資料流向何處、使用哪些埠和協定、資料如何受到保護以及有哪些控制措施。更複雜的圖表會顯示資料如何傳輸，例如透過 HTTPS 加密連接在 Web 服務之間傳輸，或透過本機 SQL 查詢到使用者資料庫。它也可能包含有關安全設備或服務、關鍵服務帳戶以及其他將完整描述資料在組織內流動位置和方式的資訊。</p>
+<p>重要的是要記住，資料流圖可能包含第三方服務和系統，您可能需要記錄哪些資料離開您的組織或透過這些第三方服務和系統進入您的組織。當您記錄資料流時，您需要確保它們是完整的，並且不要僅僅在您組織的邊界處結束。</p>
+
+<h3>資料探索方法 <span class="english">(Data Discovery Methods)</span></h3>
+<p>為了確定並準確盤點其控制下的資料，組織可以採用各種工具和技術。<span class="key-term">資料探索</span> <span class="english">(Data discovery)</span> 是一個可以指代幾種任務的術語：它可能意味著組織正在嘗試創建其擁有的資料的初始盤點清單，或者組織正在參與電子發現 (<span class="key-term">electronic discovery, e-discovery</span>，法律術語，指在調查或訴訟中收集電子證據的方式；我們將在第九章「法律與合規問題」中更深入地討論)，它也可能意味著現代使用資料探勘工具來發現組織庫存中已有的資料中的趨勢和關係。</p>
+
+<h4>基於標籤的探索 <span class="english">(Label-Based Discovery)</span></h4>
+<p>顯然，由資料擁有者創建的標籤將極大地有助於任何資料探索工作。有了準確且充足的標籤，組織可以輕鬆確定其控制哪些資料以及每種資料的數量。這是標籤化的習慣和過程如此重要的另一個原因。</p>
+<p>當探索工作是為了響應具有特定目的的指令（例如法院命令或監管要求）而進行時，標籤尤其有用：如果需要所有與 X 相關的資料，並且所有此類資料都已輕鬆標記，則很容易收集和揭露所有適當的資料，並且僅揭露適當的資料。</p>
+
+<h4>基於中繼資料的探索 <span class="english">(Metadata-Based Discovery)</span></h4>
+<p>除了標籤之外，<span class="key-term">中繼資料</span> <span class="english">(metadata)</span> 對於探索目的也很有用。通俗地說，「關於資料的資料」，中繼資料是有關特定資料元素或集合的特徵和屬性的列表。中繼資料通常在創建資料的同時自動創建，通常由用於創建父資料的硬體或軟體創建。例如，大多數現代數位相機在每次拍照時都會創建大量中繼資料，例如照片拍攝的日期、時間和地點、相機的品牌和型號等等；所有這些中繼資料都嵌入圖片檔案中，並且在圖像本身被複製或移動時也會被複製和傳輸。</p>
+<p>因此，資料探索可以使用中繼資料，就像使用標籤一樣；可以掃描中繼資料的特定欄位以查找特定術語，並收集所有匹配的資料元素以用於特定目的。</p>
+<div class="note">
+    <p>標籤通常是一種中繼資料，因此請務必記住這些探索方法可能會重疊。</p>
+</div>
+
+<h4>基於內容的探索 <span class="english">(Content-Based Discovery)</span></h4>
+<p>即使沒有標籤或中繼資料，探索工具也可以透過深入研究資料集的內容來定位和識別特定類型的資料。這種技術可以像術語搜索一樣基本，也可以使用複雜的模式匹配技術。</p>
+<div class="note">
+    <p>內容分析也可用於更具體的安全控制以及探索；我們將在第三章中討論出口監控解決方案。</p>
+</div>
+
+<h4>結構化、半結構化與非結構化資料 <span class="english">(Structured, Semi-Structured, and Unstructured Data)</span></h4>
+<p>根據有意義的、離散的類型和屬性排序的資料，例如關聯式資料庫中的資料，稱為<span class="key-term">結構化資料</span> <span class="english">(structured data)</span>。未排序的資料（例如使用者「寄件備份」資料夾中各種電子郵件的內容，其中可能包含任何主題的討論或包含所有類型的內容）被視為<span class="key-term">非結構化資料</span> <span class="english">(unstructured data)</span>。對結構化資料執行資料探索操作通常要容易得多，因為該資料已經被定位和整理。</p>
+<p><span class="key-term">半結構化資料</span> <span class="english">(Semi-structured data)</span> 使用標籤或其他元素在資料內創建欄位和記錄，而無需依賴結構化資料所需的嚴格結構。半結構化資料的範例包括 XML（可擴展標記語言）和 JSON（JavaScript 物件表示法），兩者都提供靈活的結構，同時仍然允許資料描述。越來越多的資料庫依賴像 JSON 這樣的半結構化資料格式。MongoDB 是使用 JSON 的常見資料庫範例。與結構化資料非常相似，對半結構化資料執行資料探索更容易，但由於半結構化資料的靈活性，它可能比結構化資料更具挑戰性。</p>
+<p>如果您以前使用過 HTML，XML 的結構會看起來很熟悉，如下面的簡短程式碼範例所示。您可以看到 XML 具有一定的結構，但並非嚴格定義。使用了標記，但比資料庫表格可能具有的靈活性更大。</p>
+<code><menu id="example" value="example"></code><br>
+<code> <popup></code><br>
+<code>  <menuitem value="action1" onclick="action1()" /></code><br>
+<code>  <menuitem value="action2" onclick="action2()" /></code><br>
+<code>  <menuitem value="action3" onclick="action3()" /></code><br>
+<code> </popup></code><br>
+<code></menu></code><br>
+<p>由於 XML 非常靈活，因此您遇到的並非所有 XML 程式碼都會與前面的範例完全相同。在 CCSP 考試的背景下，您需要了解結構化資料、像 XML 這樣的半結構化資料和非結構化資料之間的區別。</p>
+
+<h4>資料位置與資料探索 <span class="english">(Data Locations and Data Discovery)</span></h4>
+<p>當您進行資料探索時，資料位置可能會產生許多挑戰。法律和法規可能會限制您可以進行的探索類型或方法，或者您可以對資料做什麼，以及您可以將其儲存在何處以及如何儲存。歐盟的通用資料保護規則 (GDPR) 對於儲存資料的位置和方式有要求，因此可能對探索產生影響，其他法規也可能適用，具體取決於您組織的合規要求。</p>
+<p>資料位置也可能對探索造成技術障礙。如果資料以非結構化形式儲存，或者儲存在以使其難以進行探索的方式處理資料的服務中，您可能需要圍繞這些限制進行設計。位置也可能影響成本，因為雲端的入口和出口成本差異很大，這可能影響您處理資料的位置以及您是傳輸資料還是在原地處理。</p>
+<p>對包含結構化資料的傳統資料庫執行某些類型的探索操作要容易得多。內部嵌入資料的非結構化資料，例如來自客戶的自由格式文本，可能需要更複雜的查詢，這更有可能導致遺漏資料。像日誌檔案或基於 JSON 的資料庫這樣的半結構化資料可能相對簡單，也可能根據資料及其創建和結構化方式而具有額外的複雜性。</p>
+<p>所有這一切意味著您需要了解資料位於何處、您正在處理什麼類型的資料以及探索的目標是什麼。了解資料使用類型及其分析方式是設計和保護資料探索及使用模型的關鍵。</p>
+
+<h4>資料分析與資料探索 <span class="english">(Data Analytics and Data Discovery)</span></h4>
+<p>資料分析系統和工具可以提供額外的方法來執行資料探索。在許多情況下，這些工具會從環境中已存在的資料集中創建新的資料饋送，通常是以自動化或半自動化的方式進行。這意味著您需要考慮如何處理這些資料集的資料標籤、分類以及您通常會為其他資料集執行的所有其他任務。常見的資料分析方法類型包括以下內容：</p>
+<p><span class="key-term">資料探勘</span> <span class="english">(Data Mining)</span> 此列表上其他選項所源自的活動系列的術語。這種類型的資料分析是雲端常規使用所提供可能性的產物，也稱為「大數據」。當組織收集了各種資料流並可以跨這些不同饋送運行查詢時，它可以檢測和分析以前未知的趨勢和模式，這些趨勢和模式可能非常有用。</p>
+<p><span class="key-term">即時分析</span> <span class="english">(Real-Time Analytics)</span> 在某些情況下，工具可以在資料創建和使用的同時提供資料探勘功能。這些工具依賴自動化並需要高效率才能正常執行。</p>
+<p><span class="key-term">商業智慧</span> <span class="english">(Business Intelligence)</span> 最先進的資料探勘涉及遞迴、迭代的工具和流程，可以檢測趨勢中的趨勢，並識別歷史和近期資料中更不明顯的模式。</p>
+
+<h2>資訊版權管理 <span class="english">(Information Rights Management)</span></h2>
+
+<p>您可能聽過 <span class="key-term">DRM</span> 或<span class="key-term">數位版權管理</span> <span class="english">(digital rights management)</span> 這個術語。DRM 用於控制對數位資料的存取，試圖確保版權持有者和所有者可以決定誰修改、共享或存取其用於保護的檔案和媒體。<span class="key-term">資訊版權管理</span> (<span class="key-term">Information Rights Management, IRM)</span> 用於描述數位版權管理工具和技術應用於個人創建的檔案，並且通常側重於保護文件中包含的資訊，而不是誰可以觀看電影或玩電玩遊戲。</p>
+
+<div class="note">
+    <p>用於描述版權管理工具的其他術語包括<span class="key-term">企業版權管理</span> (<span class="key-term">enterprise rights management, ERM</span>)、<span class="key-term">文件版權管理</span> (<span class="key-term">document rights management</span>，令人困惑的是也使用 DRM 作為縮寫) 和<span class="key-term">智慧版權管理</span> (<span class="key-term">intelligent rights management</span>，另一個 IRM 縮寫) 以及諸如 <span class="key-term">E-DRM</span> (用於電子數位版權管理) 等分支。沒有確定的國際或行業標準來定義這些術語或它們可能如何在給定的流程或工具中應用，因此組織和供應商如何稱呼它們可能會因其應用、行銷或目的而異。</p>
+</div>
+
+<p>廣義而言，版權管理工具依賴於使用特定的控制措施，這些控制措施作用於或補充組織的其他存取控制機制，以保護某些資產，通常是在檔案級別。例如，組織可能有一個整體的存取控制程式，要求使用者登入他們用於執行工作職能的系統。除了該基本存取權之外，使用者操作的特定檔案（例如敏感的財務文件）可能具有額外的「版權管理」保護，以防止使用者刪除、修改或複製這些檔案。</p>
+<p>CCSP 考試側重於您需要準備從設計和實施角度考慮的三個 IRM 目標：</p>
+<p><span class="key-term">資料權限</span> <span class="english">(Data Rights)</span> 權限描述了授權使用者可以對給定資產執行的操作，以及如何設定、應用、修改和移除這些權限。典型的權限與您已經熟悉的其他檔案類型相符：創建、編輯、複製、查看或存取、列印、轉發和刪除都是 IRM 工具通常控制的事項。轉發可能脫穎而出，因為 IRM 工具可能應用於電子郵件和其他通訊工具，您需要將 IRM 視為在其整個生命週期中控制資料的工具。</p>
+<p><span class="key-term">資源配置</span> <span class="english">(Provisioning)</span> 在 IRM 系統中為使用者配置權限對於確保 IRM 的使用不會中斷業務，同時仍然有效地進行權限管理至關重要。在大多數情況下，需要創建和使用角色和群組，以確保 IRM 可以廣泛使用。精細的權限和詳細的權限控制增加了複雜性，因此安全管理員必須考慮他們做出的權限決策的影響，以及是否可以透過資源配置流程（特別是對於新使用者）進行大規模管理。</p>
+<p><span class="key-term">存取模型</span> <span class="english">(Access Models)</span> 您的組織用於 IRM 保護檔案的存取模型是設計和實施的關鍵部分。如果檔案是透過 Web 應用程式提供的，您可能需要確保有保護措施來防止從 Web 應用程式複製和貼上，或防止使用螢幕截圖來提取資訊。如果您使用像 SharePoint 這樣的基於檔案的工具，加密檔案並確保它們與描述可以對其執行什麼操作以及誰可以執行這些操作的授權檔案配對將是您需要採取的途徑。因此，作為應試者，您應該將資料使用的存取模型視為 IRM 設計的一部分。</p>
+
+<h3>憑證與 IRM <span class="english">(Certificates and IRM)</span></h3>
+<p>在 IRM 系統中識別使用者和電腦的一種常見方法是頒發<span class="key-term">憑證</span> <span class="english">(certificates)</span> 和<span class="key-term">授權</span> <span class="english">(licenses)</span>。授權描述了使用者對其附加內容擁有的權限，而憑證用於驗證使用者或電腦的身份。使用中央憑證管理系統來頒發和撤銷憑證，然後根據需要提供一種檢查每個憑證狀態的方法，是其中的關鍵部分。</p>
+
+<h3>雲端中的 IRM <span class="english">(IRM in the Cloud)</span></h3>
+<p>資訊版權管理功能在許多雲端平台中原生存在。雖然有很多選擇，但查看一個範例以了解 IRM 工具在供應商平台內部可以提供什麼會很有幫助。在 Azure 中，IRM 可以在 SharePoint 管理中心等工具中找到，其中 Azure Rights Management 允許您控制文件庫、列表和一系列支援的檔案類型。該工具會加密檔案，只允許授權使用者查看它們，並且每個檔案都使用包含的授權資訊來確定個人對該檔案擁有的權限。</p>
+<p>正如您所期望的，附加到檔案的 IRM 需要能夠解密檔案並支援 IRM 系統提供的版權管理功能和要求的本地客戶端或 Web 應用程式。</p>
+
+<h3>IRM 工具特性 <span class="english">(IRM Tool Traits)</span></h3>
+<p>IRM 可以由製造商、供應商或內容創建者在企業中實施。受 IRM 解決方案保護的資料通常需要與資料相關聯的標籤或中繼資料，以便 IRM 工具能夠以自動化或半自動化方式正常運行。</p>
+<p>IRM 實施在技術複雜性和技術方面可能有所不同。以下是一些 IRM 已經或可能應用的方式：</p>
+<p><span class="key-term">基本參考檢查</span> <span class="english">(Rudimentary Reference Checks)</span> 內容本身可以自動檢查是否正確使用或擁有。例如，在許多老式電腦遊戲中，遊戲會在操作中暫停，直到玩家輸入一些只能透過購買授權版遊戲才能獲得的資訊，例如遊戲隨附手冊中的單字或短語。</p>
+<p><span class="key-term">線上參考檢查</span> <span class="english">(Online Reference Checks)</span> Microsoft 軟體套件，包括 Windows 作業系統和 Office 程式，通常以相同的方式鎖定，要求使用者在安裝時輸入產品金鑰；程式稍後會在系統連接到網際網路時對照線上資料庫檢查產品金鑰。</p>
+<p><span class="key-term">本地代理檢查</span> <span class="english">(Local Agent Checks)</span> 使用者安裝一個參考工具，該工具會根據使用者的授權檢查受保護的內容。同樣，遊戲引擎通常以這種方式運作，玩家在安裝從這些分銷商處購買的任何遊戲時，必須下載 Steam 或 GOG.com 的代理；代理會根據線上授權資料庫檢查使用者的系統，以確保遊戲未被盜版。</p>
+<p><span class="key-term">基於支援的授權</span> <span class="english">(Support-Based Licensing)</span> 一些 IRM 實施基於內容需要持續支援的前提；這對於生產軟體尤其如此。授權軟體可能被允許隨時存取更新和補丁，而供應商可以阻止未經授權的版本獲得此類支援。</p>
+<p>IRM 實施通常在包含受保護資料的檔案和物件上包含額外的存取控制層（超越企業用於其自身營運目的的層）。IRM 也可用於實施本地化的資訊安全政策；例如，特定使用者或使用者群組可能使其創建的所有內容都特別標記並標記有適當的存取限制。</p>
+<p>在雲端而不是本地託管環境中採用 IRM 可能會引入額外的挑戰：</p>
+<ul>
+    <li><span class="key-term">複製限制</span> <span class="english">(Replication restrictions)</span>：因為 IRM 通常涉及防止未經授權的複製，並且雲端需要創建、關閉和複製虛擬化主機實例（包括本地儲存在虛擬主機上的使用者特定內容），IRM 可能會干擾自動資源分配流程。</li>
+    <li><span class="key-term">司法管轄區衝突</span> <span class="english">(Jurisdictional conflicts)</span>：雲端跨越邊界和國界，當智慧財產權受地域限制時，這可能會造成問題。</li>
+    <li><span class="key-term">代理/企業衝突</span> <span class="english">(Agent/enterprise conflicts)</span>：需要本地安裝軟體代理以進行強制執行的 IRM 解決方案可能無法在雲端環境、虛擬化引擎或自攜設備 (Bring Your Own Device, BYOD) 企業中使用的各種平台上正常運作。</li>
+    <li><span class="key-term">對應身份和存取管理 (IAM) 與 IRM</span> <span class="english">(Mapping Identity and Access Management (IAM) and IRM)</span>：由於額外的存取控制層（通常涉及特定於內容的存取控制列表，或 ACL），IRM IAM 流程可能與企業/雲端 IAM 衝突或無法正常運作。當雲端 IAM 功能外包給第三方（例如雲端存取安全代理商 (CASB)）時，衝突的可能性更大。</li>
+    <li><span class="key-term">API 衝突</span> <span class="english">(API conflicts)</span>：因為 IRM 工具通常整合到內容中，所以資料的使用可能無法在不同的應用程式（例如內容閱讀器或媒體播放器）之間提供相同水準的效能。</li>
+</ul>
+<p>總體而言，無論內容或格式類型如何，IRM 都應提供以下功能：</p>
+<p><span class="key-term">持久保護</span> <span class="english">(Persistent Protection)</span> IRM 應跟隨其保護的內容，無論該內容位於何處、是副本還是原始檔案，或者如何被利用。這種保護不應輕易被規避。</p>
+<p><span class="key-term">動態策略控制</span> <span class="english">(Dynamic Policy Control)</span> IRM 工具應允許內容創建者和資料擁有者修改其控制下受保護資料的 ACL 和權限。</p>
+<p><span class="key-term">自動過期</span> <span class="english">(Automatic Expiration)</span> 由於某些智慧財產權法律保護的性質（在本章前面描述），大量數位內容不會受到永久保護。當法律保護終止時，IRM 保護應終止。相反，授權也會過期；對受保護內容的存取和權限應同樣過期，無論該內容在授權期結束時存在於何處。</p>
+<p><span class="key-term">持續稽核</span> <span class="english">(Continuous Auditing)</span> IRM 應允許對內容的使用和存取歷史進行全面的監控。</p>
+<p><span class="key-term">複製限制</span> <span class="english">(Replication Restrictions)</span> IRM 的主要目的是限制受保護內容的非法或未經授權的複製。因此，IRM 解決方案應在存在的許多複製形式中強制執行這些限制，包括螢幕抓取、列印、電子複製、電子郵件附件等等。</p>
+<p><span class="key-term">遠端權限撤銷</span> <span class="english">(Remote Rights Revocation)</span> 特定智慧財產權的所有者應有權隨時撤銷這些權限；這種能力可能因訴訟或侵權而被使用。</p>
+
+<h2>資料控管 <span class="english">(Data Control)</span></h2>
+
+<p>組織需要在其整個生命週期中控制資料。CCSP 考試側重於資料保留、封存和刪除政策，以及法律保留，作為您需要準備回答的關鍵知識。</p>
+
+<div class="exam-tip">
+    <p>雖然 CCSP 考試大綱側重於 2.7 中的政策，但它也提到了程序和機制。當您思考這些主題中的每一個時，請考慮政策如何透過技術和系統影響實踐中的實施，以及政策本身可能如何被使用。</p>
+</div>
+
+<h3>資料保留 <span class="english">(Data Retention)</span></h3>
+<p>資料保留政策是組織資料處理的核心部分。資料保留政策需要處理以下關鍵項目：</p>
+<p><span class="key-term">保留期</span> <span class="english">(Retention Periods)</span> 保留期是組織應保留資料的時間長度。這通常指用於長期儲存的資料——即當前未在生產環境中使用的資料。保留期通常以天數表示（對於像日誌這樣的暫時性資料），以年數表示（對於業務資料或因法律或法規原因需要保留的資料）。資料保留期也可能由合約協議強制規定或修改。</p>
+<p><span class="key-term">法規與合規</span> <span class="english">(Regulations and Compliance)</span> 如前所述，保留期可能由法規或合約強制規定；保留政策應參考所有適用的監管指南。在存在相互衝突的法規的情況下尤其如此；政策應反映管理層如何處理和解決這種衝突的決定，並以政策作為適當的機制。例如，法律可能對特定類型的資料規定不同的保留期，並且組織可能在具有不同強制保留期的州或國家營運。</p>
+<p><span class="key-term">資料分類</span> <span class="english">(Data Classification)</span> 高度敏感或受管制的資料可能需要特定的保留期，無論是透過強制規定、合約或最佳實踐。組織可以使用資料的分類級別來確定特定資料集或資料類型需要保留多長時間。</p>
+<p><span class="key-term">保留方式</span> <span class="english">(Retention)</span> 如果有需要滿足特定類型資料的要求，政策應規定資料實際如何被封存。例如，某些類型的資料按規定要求在儲存期間保持加密狀態。在這些情況下，政策應包括對加密要求的描述。</p>
+<p><span class="key-term">資料刪除</span> <span class="english">(Data Deletion)</span> 一旦資料達到其保留期結束，就必須妥善處置。雖然我們將在幾頁後深入探討資料刪除的細節，但政策及其驅動的機制在這裡對於確保資料被妥善處置非常重要。刪除政策應規定誰將刪除資料以及刪除的要求是什麼，並且通常指向程序文件，提供有關如何確保安全刪除發生並得到驗證的指南。</p>
+<p>此外，資料刪除政策和程序需要考慮合規和法律要求。這可能包括由於法律保留、設定固定保留或處置期的行業合規要求，或要求在客戶請求時刪除客戶資料的要求。</p>
+<p><span class="key-term">封存與檢索程序和機制</span> <span class="english">(Archiving and Retrieval Procedures and Mechanisms)</span> 將資料儲存起來很有用；儲存的資料可用於糾正生產錯誤，可作為災難復原和業務連續性 (DR/BC) 備份，並可進行資料探勘以獲取商業智慧。但儲存的資料只有在能夠以高效且符合成本效益的方式檢索並放回生產環境時才有用。政策應強制要求創建詳細描述將資料存入儲存和恢復資料的流程的文件，以及對封存和檢索能力的定期測試。詳細流程可以作為政策的附件包含或透過引用實際流程文件的方式提及；流程可能比政策需要更頻繁的更新和編輯，應分開保存——在大多數組織中，程序比政策更容易更新！</p>
+
+<div class="note">
+    <p>備份很好，但您沒有測試過的備份就不是備份。很多時候，組織不練習從備份中恢復，並且對需要恢復的情況毫無準備，恢復工作因備份無法正常工作而受阻或失敗。定期測試備份是封存和檢索流程的關鍵部分。</p>
+</div>
+
+<p><span class="key-term">監控、維護與執行</span> <span class="english">(Monitoring, Maintenance, and Enforcement)</span> 與組織中的所有政策一樣，政策應詳細列出其審查和修訂的頻率、由誰執行、未能遵守政策的後果以及組織內哪個實體負責執行。</p>
+
+<h4>在雲端中處理保留、刪除與封存 <span class="english">(Addressing Retention, Deletion, and Archiving in the Cloud)</span></h4>
+<p>由於存在許多雲端模型，從軟體即服務工具（它們將設定自己的底層備份和保留實踐）到基礎架構即服務產品（它們依賴您在底層服務之上建立自己的解決方案，這些服務也具有自己的冗餘和彈性能力），在雲端中處理這些主題是一個複雜的問題。</p>
+<p>在雲端中管理資料保留可能特別棘手。很難確保雲端供應商不會在保留期之後保留組織的資料；這是因為底層雲端儲存通常設計為自動複製資料，並且以對您的組織可見的方式刪除資料可能不會立即在供應商的基礎架構中到處刪除。對許多組織來說，雲端的部分吸引力在於雲端供應商在保留資料和不丟失資料方面有多麼出色——有意地擺脫資料則完全是另一回事！在考慮雲端遷移時，以及在與潛在雲端供應商進行談判期間，組織應著重確保供應商能夠支援組織的保留政策，並了解當他們使用雲端服務時實際發生了什麼。</p>
+<p>由於您可以作為封存過程一部分使用的服務種類繁多，在雲端服務中封存資料也可能引入額外的複雜性。使用 Amazon S3 進行儲存的組織可能希望封存到像 Glacier 這樣的服務，該服務對於長期、低存取率的儲存要便宜得多。像這樣的決策涉及設計實踐（理解使用和存取模型）和政策（決定資料應可用多長時間以及何時將被處置）。</p>
+<p>最後，刪除在雲端中也可能產生額外的考量。您需要了解您的雲端供應商如何移除被刪除的資料，以及像取消配置系統或服務這樣的常見活動對您的刪除過程意味著什麼。雖然許多雲端供應商都有技術確保殘留資料不會被底層基礎架構的下一個使用者存取，但過去曾有過殘留資料可被恢復的情況。</p>
+<p>所有這一切意味著，當您在雲端環境中營運時，您組織的政策可能保持不變，但您在實踐中的設計和實施需要考慮雲端環境中存在的特定能力和模型。</p>
+
+<h3>法律保留 <span class="english">(Legal Holds)</span></h3>
+<p>電子發現，或 e-discovery，涉及識別、收集和產生與案件相關的資料，而<span class="key-term">法律保留</span> <span class="english">(legal holds)</span>（有時稱為訴訟保留）旨在確保案件所需的資料被收集和保存。除了資料保留的組織和監管需求外，法律保留也是保留流程的驅動因素，並且可能需要偏離組織正常實踐的資料保留和銷毀。</p>
+
+<div class="note">
+    <p>e-discovery 將在第九章中更深入地介紹。</p>
+</div>
+
+<p>當組織被通知（a）執法或監管實體正在開始調查或（b）私人實體正在對組織提起訴訟時，就會發生法律保留。一旦組織收到適當的通知，它必須暫停所有相關的資料銷毀活動，直到調查/訴訟完全解決。這意味著流程和技術能力需要能夠為法律保留進行修改。同時，組織可以根據其正常的保留和銷毀排程繼續銷毀與特定案件無關的資料。</p>
+<p>法律保留通常優先於其他現有的組織政策和實踐或合約協議。例如，在美國，這個概念是由《聯邦證據規則》規定的，該規則強制規定法律保留通知具有優先權，甚至優先於要求在保留期結束時銷毀資料的聯邦法律（例如 HIPAA）。</p>
+
+<div class="note">
+    <p>許多組織在其保留政策中考慮了法律保留的可能性。如果您沒有資料，就無法在法庭案件中出示它，而長期保留資料可能被視為對組織的風險驅動因素。因此，保留期是組織需求與法律風險之間的謹慎平衡。</p>
+</div>
+
+<h3>資料稽核與稽核機制 <span class="english">(Data Audit and Audit Mechanisms)</span></h3>
+<p>如同在雲端內外處理其他資產一樣，組織需要定期審查、盤點和檢查其擁有的資料的使用情況和狀況。資料稽核是達成這些目的的強大工具。組織可以制定一項政策來對其資料進行稽核，該政策包括對以下項目的詳細描述：</p>
+<ul>
+    <li>稽核週期</li>
+    <li>稽核範圍</li>
+    <li>稽核職責（內部和/或外部）</li>
+    <li>稽核流程和程序</li>
+    <li>適用法規</li>
+    <li>監控、維護和執行</li>
+</ul>
+
+<div class="note">
+    <p>與所有類型的稽核一樣，組織應特別小心，確保稽核員不向擁有或受被稽核資料影響的管理結構中的任何人報告；必須避免利益衝突，稽核才能具有有效性和實用性。</p>
+</div>
+
+<p>在大多數組織和企業中，稽核都基於<span class="key-term">記錄</span> <span class="english">(logging)</span>。記錄可以有多種形式：事件記錄、安全記錄、流量記錄等等。日誌可以由應用程式、作業系統和設備生成，用於一般或特定目的（例如，作為營運副產品收集日誌的設備，如伺服器，或以記錄為主要目的的設備，如 IDS [入侵偵測系統] 和 SIEM [安全資訊和事件管理系統]）。</p>
+<p>日誌審查和稽核對於具有特定培訓和經驗的人員來說是一項專業任務，而對雲端服務的日誌分析可能需要關於服務的記錄能力、格式和語法的額外特定知識。記錄本身相當容易；現代企業中的大多數軟體、設備和服務都提供記錄功能，允許組織記錄他們可能想要捕獲的大多數內容。然而，閱讀和分析這些日誌可能具有挑戰性，組織面臨常見問題：</p>
+<p><span class="key-term">日誌審查和分析通常不是優先事項 (Log review and analysis is not often a priority)。</span> 大多數組織沒有足夠的資源來投入所需的人員有效地分析日誌資料，尤其是在它可以生成的體量下。通常，日誌審查成為分配給另一個辦公室（例如安全部門）某人的額外職責。自動化有幫助，但它本身也需要配置和維護。</p>
+<p><span class="key-term">日誌審查是單調乏味的重複性工作 (Log review is mundane and repetitive)。</span> 日誌的體量，特別是當它們沒有被有效過濾或配置以滿足組織目標時，可能導致負責監控它們的人員注意力不集中。</p>
+<p><span class="key-term">審閱者需要了解營運 (The reviewer needs to have an understanding of the operation)。</span> 如果審閱者無法區分什麼是授權活動，什麼不是，他們就沒有為流程增加安全價值。</p>
+<p><span class="key-term">記錄可能很昂貴 (Logging can be expensive)。</span> 記錄會佔用大量空間和時間，並且通常伴隨著額外的軟體成本來管理和監督所有收集到的資訊。因此，組織常常難以維護他們想要或可能需要維護的所有日誌。</p>
+<p>日誌就像資料備份一樣：許多組織執行記錄，並且日誌易於設置、獲取和儲存。然而，挑戰在於確定日誌將被審查或稽核的頻率、由誰執行、執行的流程等等。擁有日誌是一回事；審查您擁有的日誌是另一回事。</p>
+<p>雲端服務供應商之間的記錄能力差異很大——就像 SaaS 和 IaaS 供應商之間的資料保留差異一樣，根據您使用的雲端服務，記錄可能會非常不同。雲端供應商可能不希望（或者實際上，出於營運或合約原因甚至無法）向客戶揭露底層日誌資料，原因涉及安全性、責任或競爭原因。因此，組織在選擇雲端遷移時必須再次考慮具體的稽核要求，並在與雲端供應商的合約中包含任何此類規範。</p>
+
+<h4>稽核機制 <span class="english">(Audit Mechanisms)</span></h4>
+<p>CCSP 考試大綱（候選人資訊公告）要求您考慮用於稽核機制規劃和實施的雲端環境中的三個特定領域。</p>
+<p><span class="key-term">日誌收集</span> <span class="english">(Log Collection)</span> 您需要為 CCSP 考試考慮的稽核機制設計的第一個組成部分是日誌收集。在雲端環境中用於稽核目的的日誌收集既有優點也有挑戰。許多雲端服務供應商擁有可以啟用或自動可用的原生 ​​日誌收集工具，這可以使記錄活動更容易處理。同時，多雲、SaaS、混合雲以及本地環境可能使日誌收集更加困難。當您規劃稽核時，請仔細考慮您組織的雲端服務選擇和設計可能對您收集和存取日誌的能力產生的影響。</p>
+<p><span class="key-term">日誌關聯</span> <span class="english">(Log Correlation)</span> 僅僅收集日誌是不夠的——您仍然需要對它們做些什麼。這就是關聯分析發揮作用的地方，也是更多挑戰開始出現的地方。在具有內建或第三方工具的單一雲端環境中，關聯分析可能更容易，但需要在多個雲端供應商之間，或在本地和雲端環境之間關聯日誌的組織可能會面臨額外的挑戰。幸運的是，現代安全資訊和事件管理 (SIEM) 工具和其他安全平台具有可以提供幫助的攝取和關聯工具。</p>
+
+<div class="exam-tip">
+    <p>雖然這可能看起來很明顯，但確保您的服務之間的時間戳準確且被正確解釋是設置用於稽核的記錄環境的重要一步。像時區錯誤或時間不準確這樣簡單的事情都可能導致事件無法關聯或錯誤關聯，讓安全從業人員追逐幻影！</p>
+</div>
+
+<p><span class="key-term">封包擷取</span> <span class="english">(Packet Capture)</span> 稽核雲端和本地系統可能需要封包擷取來驗證流量流，但它也可能在評估期間用於其他目的。雲端環境可能使封包擷取更加困難——甚至不可能——安全從業人員在假定封包擷取可行之前，需要考慮雲端服務供應商可能設定的架構、技術和合約限制。</p>
+<p>通常，除非供應商直接參與，否則在大多數 SaaS 或 PaaS 環境中無法進行封包擷取，而且這種程度的參與很少見，因為底層服務層並非設計為讓客戶看到服務之間的流量。這意味著您既想要又可能能夠執行封包擷取的情況幾乎完全限於像 AWS、Azure 和類似服務這樣的 IaaS 環境。</p>
+<p>即使在這些服務中，您也可能面臨限制。使用像 Wireshark 這樣的工具進行傳統封包擷取並將網路介面設置為混雜模式以收集資訊可能在技術上不可行或可能無法按預期工作。幸運的是，IaaS 供應商通常直接提供封包擷取或虛擬網路分接 (tap) 功能。這並不意味著它總是簡單或容易的，因為即使在單一供應商的產品和解決方案內部，雲端環境也可能有限制。例如，一些供應商提供的基礎架構即服務環境與他們提供的抽象解決方案（如資料庫）整合，其中封包擷取功能可能不可用。作為安全從業人員，您需要了解您的供應商允許什麼、他們提供哪些功能，以及如何使用這些功能來滿足您對封包擷取的稽核要求。</p>
+
+<h2>資料銷毀/處置 <span class="english">(Data Destruction/Disposal)</span></h2>
+
+<p>在組織擁有包括資料、硬體和軟體在內的所有基礎架構的所有權和控制權的本地環境中，資料處置選項相對直接和簡單。在雲端中，資料處置可能需要更多的規劃和深思熟慮才能實現您的目標。</p>
+<p>在本地環境中，您的選項如下：</p>
+<p><span class="key-term">媒體和硬體的實體銷毀</span> <span class="english">(Physical Destruction of Media and Hardware)</span> 包含相關資料的任何硬體或可攜式媒體都可以透過燃燒、熔化、撞擊（敲打、鑽孔、研磨等）或工業粉碎來銷毀。這通常是首選的清理方法，因為資料在物理上無法恢復。</p>
+<p><span class="key-term">消磁</span> <span class="english">(Degaussing)</span> 這涉及對資料所在的硬體和媒體施加強磁場，有效地使其空白。它不適用於固態硬碟 (SSD)、快閃記憶體和 USB 隨身碟等固態硬碟。</p>
+<p><span class="key-term">覆寫</span> <span class="english">(Overwriting)</span> 當媒體需要重複使用時，覆寫是允許銷毀資料同時保持媒體完整的選項之一。覆寫使用多遍隨機字元寫入資料所在的位置，或者可能只是寫入零——一個稱為<span class="key-term">歸零化</span> <span class="english">(zeroization)</span> 的過程。對於大型設備來說，這可能非常耗時，對於抗覆寫的固態硬碟來說，這也不是一種有效的技術，並且可能導致殘留資料。</p>
+<p><span class="key-term">加密銷毀</span> <span class="english">(Crypto-Shredding)</span>（<span class="key-term">加密擦除</span> (<span class="key-term">Cryptographic Erasure)</span>）這涉及使用強加密引擎加密資料，然後獲取該過程中生成的金鑰，使用不同的加密引擎對其進行加密，並銷毀第二輪加密產生的金鑰。加密銷毀被認為是比覆寫更好的解決方案，因為從其生命週期一開始就加密然後銷毀的資料即使有殘留資料也無法恢復。加密銷毀的主要缺點是加密和解密檔案所需的 CPU 和效能開銷。</p>
+
+<div class="warning">
+    <p>僅僅透過刪除資料永遠無法清理硬體和媒體。刪除，作為一種操作，並不會擦除資料；它只是移除用於處理目的的資料的邏輯指標。</p>
+</div>
+
+<p>在雲端中，許多這些選項是不可用或不可行的。由於雲端供應商（而不是資料擁有者）擁有硬體，因此實體銷毀通常是不可能的，除非有針對專用硬體和處置的特定合約覆蓋，這相當昂貴。此外，由於難以知道資料在任何給定時刻（或歷史上）的實際具體物理位置，因此幾乎不可能確定所有需要銷毀的元件和媒體。出於同樣的原因，覆寫不是在雲端中清理資料的實用方法。在像公有雲這樣的多租戶環境中，客戶無法物理銷毀或覆寫儲存空間或媒體，因為這會影響其他客戶的資料。對於 SaaS 供應商來說，這些擔憂甚至更為顯著，因為整個解決方案都對客戶隱藏。在 SaaS 和大多數 PaaS 環境中，只能透過合約要求來處理資料銷毀。</p>
+<p>這使得加密銷毀成為雲端中資料處置唯一務實的選項。加密銷毀可能需要時間來完成，時間長短取決於卷的大小和使用的技術。一般來說，由於加密銷毀是資料、設備或系統生命週期的一部分，因此銷毀過程的速度對其使用並不是一個顯著的障礙。</p>
+<p>與其他資料管理功能一樣，組織需要制定資料處置政策。該政策應包括對以下內容的詳細描述：</p>
+<ul>
+    <li>資料處置流程</li>
+    <li>適用法規</li>
+    <li>明確指示何時應銷毀資料</li>
+</ul>
+<p>當然，安全從業人員也關心<span class="key-term">資料殘留</span> <span class="english">(data remanence)</span>——也就是說，在嘗試了清理和處置方法後殘留的任何資料。如果正確執行加密銷毀，則不應有殘留；然而，以某種方式未包含在原始加密中的資料（例如，在加密過程中離線的虛擬實例，然後添加到雲端環境）可能被視為殘留。與所有密碼學實踐一樣，正確的實施對於成功至關重要。</p>
+
+<div class="note">
+    <p>資料處置政策涉及資料生命週期中的銷毀階段活動，您將在第三章中了解。</p>
+</div>
+
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+
+<p>本章討論了資料生命週期以及資料生命週期內的資料管理功能，包括資料保留、稽核和處置。描述了與資料擁有權相關的各種角色、權利和責任。</p>
+<p>資料探索允許組織將資料識別為結構化、半結構化或非結構化資料。一旦識別出資料，通常會根據組織的分類方案對其進行分類。該分類用於標記資料，並且可以透過轉換和傳輸進行對應，以允許其在其他系統和服務中使用。本章還側重於資料流以及理解和記錄它們的重要性，尤其是在複雜和相互連接的雲端系統中。</p>
+<p>隨著資料在組織中移動並被系統、服務和個人存取，資訊版權管理 (IRM) 工具用於確保資料權限得到執行。IRM 依賴於存取模型來確定哪些主體可以執行哪些操作，而這些模型驅動了以自動化方式為使用者和系統提供所需權限的資源配置流程。</p>
+<p>最後，我們回顧了稽核作為資料的安全控制，包括在雲端和混合環境中的日誌收集、關聯和分析。封包擷取作為一種稽核和安全機制也很重要，如果在像軟體即服務和平台即服務供應商這樣的某些雲端環境中不可能實現，它可能會很複雜。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>描述資料流及其在雲端環境中的用途 (Describe data flows and their use in a cloud environment)。</strong> 資料流用於描述資料在環境中移動的位置和方式。像埠、協定、服務以及發送和接收的資料欄位或類型等細節是資料流的重要組成部分，這些資訊通常記錄在資料流圖中。</p>
+<p><strong>理解資料分類和分級的目的與方法 (Understand the purpose and method of data categorization and classification)。</strong> 了解資料擁有者為何以及如何為其控制下的特定資料集分配類別和分級。解釋資料分類政策的典型組成部分。描述資料對應和資料標籤化。了解如何以及何時標記資料，以及由誰標記。理解基於內容的探索以及在中繼資料探索工作中使用。</p>
+<p><strong>理解與資料擁有權相關的各種角色、權利和責任 (Understand the various roles, rights, and responsibilities related to data ownership)。</strong> 知道誰是資料主體、擁有者、控管者、處理者和保管人。理解與每個人相關的權利和責任。</p>
+<p><strong>熟悉資料探索方法 (Be familiar with data discovery methods)。</strong> 描述結構化、半結構化和非結構化資料之間的差異，並提供每種類型資料的範例。理解為什麼資料位置很重要，以及它可能對資料探索過程和能力產生什麼影響。</p>
+<p><strong>理解實作資訊版權管理的目標和使用的工具 (Understand the objectives of and tools used to implement information rights management)。</strong> IRM 工具旨在保護資料權限，並需要資源配置，根據其角色和職責給予適當使用者權限。存取模型用於確定誰將獲得權限，而用於身份驗證的憑證和列出使用者或系統權限或許可用性的授權組合被用於使 IRM 工作。</p>
+<p><strong>了解資料保留、刪除和封存政策應包含哪些內容 (Know what should be included in policies for data retention, deletion, and archiving)。</strong> 理解像保留 (retention) 和處置 (disposal) 這樣的基本方面。了解保留格式、法規如何規定這些事項，以及每項政策需要包含哪些維護、監控和執行的細節。</p>
+<p><strong>理解資料和媒體清理 (Understand data and media sanitization)。</strong> 大多數傳統的清理方法在雲端環境中無法使用。加密擦除是少數幾種可以在無法確保物理銷毀資料和設備的環境中確保安全資料處置的方法之一。覆寫和其他技術無法在雲端環境中提供資料銷毀的保證。</p>
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄中找到複習題的答案。</p>
+
+<ol>
+    <li>
+      <p>下列何者不是常見的資料探索方法？</p>
+      <ol type="A">
+        <li>基於內容 (Content-based)</li>
+        <li>基於使用者 (User-based)</li>
+        <li>基於標籤 (Label-based)</li>
+        <li>基於中繼資料 (Metadata-based)</li>
+      </ol>
+      <p><strong>答案：B. 其他選項都是有效的資料探索 (data discovery) 方法；基於使用者 (user-based) 是一個沒有意義的干擾項。</strong></p>
+    </li>
+    <li>
+      <p>Sara 正在為她的組織規劃實施資料標籤化。下列哪項不是她應該考慮的資料標籤欄位？</p>
+      <ol type="A">
+        <li>資料創建日期 (Date data was created)</li>
+        <li>資料擁有者 (Data owner)</li>
+        <li>資料值 (Data value)</li>
+        <li>預定銷毀日期 (Date of scheduled destruction)</li>
+      </ol>
+      <p><strong>答案：C. 資料創建日期、資料擁有者和預定銷毀日期可能包含在資料標籤 (data labels) 中，但我們通常不包含資料值 (data value)，因為它容易頻繁更改，而且我們可能不希望向任何不需要知道的人揭露這些資訊。</strong></p>
+    </li>
+    <li>
+      <p>Sarah 正在繼續她的資料標籤化工作，並收到了關於將用於她公司營運的多個國家的資料的適當資料標籤的建議，作為持續的安全和資料生命週期工作的一部分。下列哪項標籤對該用途沒有幫助？</p>
+      <ol type="A">
+        <li>來源 (Source)</li>
+        <li>語言 (Language)</li>
+        <li>處理限制 (Handling restrictions)</li>
+        <li>司法管轄區 (Jurisdiction)</li>
+      </ol>
+      <p><strong>答案：B. 雖然語言 (Language) 對於內部實踐可能有用，但它對於生命週期管理或安全功能沒有用。資料來源、任何處理限制以及收集或使用資料的司法管轄區在處理可能在不同國家之間移動的資料時都很有用。</strong></p>
+    </li>
+    <li>
+      <p>Asha 想要記錄資料從創建到儲存在她機構資料庫中的路徑。作為這項工作的一部分，她創建了一個資料流圖。下列何者不是資料流圖的常見元素？</p>
+      <ol type="A">
+        <li>列出的每個服務使用的憑證 (Credentials used for each service listed)</li>
+        <li>每個涉及的系統的主機名稱和 IP 位址或位址區塊 (Hostnames and IP addresses or address blocks for each system involved)</li>
+        <li>用於資料傳輸的埠和協定 (Ports and protocols used for data transfer)</li>
+        <li>圖中每個點使用的安全控制 (Security controls used at each point in the diagram)</li>
+      </ol>
+      <p><strong>答案：A. 憑證 (Credentials) 通常不包含在文件中，應保存在安全位置。主機名稱、IP 位址、埠、協定和安全控制通常記錄在資料流圖 (data flow diagrams) 中。</strong></p>
+    </li>
+    <li>
+      <p>Mei 想在她的組織中進行資料探索活動。下列哪種類型的資料探索最適合用於識別所有使用特定型號相機拍攝的照片（基於相機生成的原始檔案）？</p>
+      <ol type="A">
+        <li>基於標籤 (Label-based)</li>
+        <li>基於中繼資料 (Metadata-based)</li>
+        <li>基於副檔名 (Extension-based)</li>
+        <li>基於內容 (Content-based)</li>
+      </ol>
+      <p><strong>答案：B. 大多數相機都會生成有關其創建圖像的中繼資料 (metadata)。Mei 可以依賴嵌入在原始圖像檔案中的中繼資料來進行她需要的探索。</strong></p>
+    </li>
+    <li>
+      <p>Felix 想要監控他的 IaaS 雲端託管資料中心內兩個系統之間的資料傳輸。下列哪種稽核機制是他不太可能獲得的，但在本地環境中通常可用？</p>
+      <ol type="A">
+        <li>日誌審查 (Log review)</li>
+        <li>封包擷取 (Packet capture)</li>
+        <li>資料流圖 (Data flow diagrams)</li>
+        <li>日誌關聯 (Log correlation)</li>
+      </ol>
+      <p><strong>答案：B. 由於架構和安全原因，封包擷取 (Packet capture) 在雲端託管環境中通常是不可能的。Felix 可能想確定另一種驗證資料傳輸流量流的方法。</strong></p>
+    </li>
+    <li>
+      <p>Megan 正在記錄角色，作為實施她組織的資料分類政策的一部分。她的組織使用軟體即服務工具來接受來自客戶的申請。哪個術語最能描述 SaaS 供應商？</p>
+      <ol type="A">
+        <li>資料保管人 (A data custodian)</li>
+        <li>資料擁有者 (A data owner)</li>
+        <li>資料處理者 (A data processor)</li>
+        <li>資料管家 (A data steward)</li>
+      </ol>
+      <p><strong>答案：C. 在法律術語中，當定義資料處理者 (data processor) 時，它指的是代表資料擁有者或控管者儲存、處理、移動或操作資料的任何人。在雲端運算領域，特別是對於軟體即服務工具，這就是雲端服務供應商。</strong></p>
+    </li>
+    <li>
+      <p>Jaime 已被告知他的公司將面臨法律訴訟，現在必須確保保留與案件相關的資料。哪個術語描述了這種情況？</p>
+      <ol type="A">
+        <li>法律保留 (Legal retention)</li>
+        <li>法律封存 (Legal archiving)</li>
+        <li>法院保留 (Court hold)</li>
+        <li>法律保留 (Legal hold)</li>
+      </ol>
+      <p><strong>答案：D. 法律保留 (Legal holds) 要求組織和個人保留與法院案件相關的資料。當資料受到法律保留的影響時，組織不能遵循其正常的資料銷毀和生命週期實踐。</strong></p>
+    </li>
+    <li>
+      <p>組織內的所有政策都應包含一個部分，其中包括下列所有內容，除了 _______________。</p>
+      <ol type="A">
+        <li>政策維護 (Policy maintenance)</li>
+        <li>政策監控 (Policy monitoring)</li>
+        <li>政策執行 (Policy enforcement)</li>
+        <li>政策轉移 (Policy transference)</li>
+      </ol>
+      <p><strong>答案：D. 除轉移 (Transference) 外的所有元素都需要在每個政策中處理。轉移不是資料保留政策的一個元素。</strong></p>
+    </li>
+    <li>
+      <p>Melissa 知道，由於服務是使用共享硬體和服務架構的，許多資料銷毀選項不適用於儲存在雲端中的資料。對於她的組織來說，要以安全方式處置雲端託管資料，最佳選擇是下列哪項？</p>
+      <ol type="A">
+        <li>熔化 (Melting)</li>
+        <li>加密銷毀 (Crypto-shredding)</li>
+        <li>歸零化 (Zeroization)</li>
+        <li>覆寫 (Overwriting)</li>
+      </ol>
+      <p><strong>答案：B. 大多數雲端服務不提供對持有資料的硬體設備的物理所有權、控制權甚至存取權限，因此物理銷毀（包括熔化 (melting)）不是一個選項。覆寫 (Overwriting) 和歸零化 (zeroization) 依賴於對物理磁碟的存取，並且只有在您可以確保包含資料的整個磁碟或空間將被覆寫時才有效，這在雲端託管、共享和虛擬化環境中無法保證。加密銷毀 (Crypto-shredding) 是在大多數情況下營運時的唯一替代方案。</strong></p>
+    </li>
+    <li>
+      <p>下列何者不是由 IRM 系統控制的常見資料權限？</p>
+      <ol type="A">
+        <li>版權 (Copyright)</li>
+        <li>創建 (Creating)</li>
+        <li>編輯 (Editing)</li>
+        <li>查看 (Viewing)</li>
+      </ol>
+      <p><strong>答案：A. 版權 (Copyrights) 是受保護的有形創意表達。IRM 版權管理 (IRM rights management) 側重於諸如創建 (creating)、編輯 (editing)、複製 (copying)、查看 (viewing)、列印 (printing)、轉發 (forwarding) 和類似能力。</strong></p>
+    </li>
+    <li>
+      <p>Jason 想要正確描述他的組織正在使用的資料類型。他知道資料儲存在 MySQL 資料庫中。Jason 的組織儲存的是哪種類型的資料？</p>
+      <ol type="A">
+        <li>非結構化資料 (Unstructured data)</li>
+        <li>表格式資料 (Tabular data)</li>
+        <li>結構化資料 (Structured data)</li>
+        <li>倉儲資料 (Warehoused data)</li>
+      </ol>
+      <p><strong>答案：C. 像 MySQL 這樣的傳統資料庫用於包含結構化資料 (structured data)。非結構化資料 (unstructured data) 未以定義格式儲存。表格式資料 (tabular data) 和倉儲資料 (warehoused data) 不是 CCSP 考試使用的術語。</strong></p>
+    </li>
+    <li>
+      <p>敏感度、司法管轄區和關鍵性都可能被考慮用於哪種雲端資料安全活動？</p>
+      <ol type="A">
+        <li>加密銷毀 (Crypto-shredding)</li>
+        <li>資料流圖 (Data flow diagramming)</li>
+        <li>分類 (Classification)</li>
+        <li>權杖化 (Tokenization)</li>
+      </ol>
+      <p><strong>答案：C. 資料分類 (Data classification) 活動通常使用敏感度、司法管轄區和關鍵性作為輸入來確定組織資料的分類級別。加密銷毀 (Crypto-shredding) 是用於銷毀資料的過程，可能因其生命週期結束時的分類而需要。資料流圖 (Data flow diagramming) 可能會註明分類級別，但不太可能顯示此級別的細節，而權杖化 (tokenization) 則用於用非敏感資料元素替換敏感資料元素，以允許處理而無潛在資料洩露風險。</strong></p>
+    </li>
+    <li>
+      <p>Angela 希望根據使用者的角色為他們提供檔案的存取權限。IRM 系統的哪種能力最直接地支援這項要求？</p>
+      <ol type="A">
+        <li>資源配置 (Provisioning)</li>
+        <li>DRM</li>
+        <li>CRM</li>
+        <li>資料標籤化 (Data labeling)</li>
+      </ol>
+      <p><strong>答案：A. IRM 資源配置 (IRM provisioning) 能力旨在根據使用者的角色或其他標準為他們提供權限。資料標籤化 (data labeling) 用於確定應基於 IRM 規則處理哪些資料，但不將角色與權限匹配。DRM 是數位版權管理 (digital rights management)，是控制的技術實施——它不將權限與基於角色的檔案匹配。最後，CRM 是客戶關係管理 (customer relationship management) 的縮寫，是一個完全不同的工具！</strong></p>
+    </li>
+    <li>
+      <p>Nina 的公司已將非結構化資料儲存在 AWS 的 S3 儲存桶中。她想對資料執行資料探索，但她擁有的探索工具要求資料位於本地。Nina 對於從雲端服務檢索大量資料應表示什麼擔憂？</p>
+      <ol type="A">
+        <li>效能可能很低 (Performance may be low)</li>
+        <li>資料入口成本可能很高 (Data ingress costs may be high)</li>
+        <li>資料出口成本可能很高 (Data egress costs may be high)</li>
+        <li>在探索運行之前，資料需要被結構化 (The data will need to be structured before discovery can run)</li>
+      </ol>
+      <p><strong>答案：C. 從雲端服務移動大量資料可能導致高昂的出口費用 (egress fees)。Nina 可能希望在與資料相同的雲端中使用工具來分析資料。沒有跡象表明可能導致檢索資料效能低下的問題，入口成本 (ingress costs) 通常較低，因為雲端供應商希望客戶將其資料帶來並使用儲存服務，而且資料是非結構化的，問題中沒有任何內容表明需要在分析之前對其進行結構化。</strong></p>
+    </li>
+    <li>
+      <p>Tej 想對他組織的資料庫進行資料探索；然而，他知道資料儲存在多個國家。在進行探索過程之前，他應該提出什麼擔憂？</p>
+      <ol type="A">
+        <li>結構化資料更難進行探索 (Structured data is harder to conduct discovery on)</li>
+        <li>探索過程可能會對資料庫伺服器造成拒絕服務狀況 (The discovery process may create a denial of service condition on the database servers)</li>
+        <li>司法管轄區和當地法律可能會影響執行探索的能力 (Jurisdiction and local laws may impact the ability to perform discovery)</li>
+        <li>非結構化資料更難進行探索 (Unstructured data is harder to conduct discovery on)</li>
+      </ol>
+      <p><strong>答案：C. 司法管轄區和當地法律 (Jurisdiction and local law) 可能對資料探索產生考量。某些資料可能需要特定處理，並且在探索和相關行動採取之前需要加以說明。結構化資料通常更容易進行探索，因為其結構清晰。雖然探索過程可能使資料庫伺服器過載，但 Tej 應能夠配置其探索工具以避免產生問題，並應在運行時對其進行監控。</strong></p>
+    </li>
+    <li>
+      <p>Naomi 實施了一個資料封存流程，作為她組織雲端設計的一部分。她的封存計劃的哪個重要部分應該優先考慮以確保其長期成功？</p>
+      <ol type="A">
+        <li>資料分類 (Data classification)</li>
+        <li>定期測試 (Periodic testing)</li>
+        <li>資料對應 (Data mapping)</li>
+        <li>雜湊 (Hashing)</li>
+      </ol>
+      <p><strong>答案：B. 定期測試 (Periodic testing) 資料封存、備份和恢復能力是確保其長期成功的關鍵部分。分類和資料對應有助於確定應封存什麼以及何時應銷毀或丟棄，但它們對於封存過程本身的成功並非至關重要。雜湊對於封存過程並不關鍵，但可以用於驗證資料未被更改。</strong></p>
+    </li>
+    <li>
+      <p>Yasine 的組織希望啟用系統來使用由 IRM 控制的資料。在允許系統信任的同時，最常用於識別系統的方法是什麼？</p>
+      <ol type="A">
+        <li>LEAP 驗證 (LEAP authentication)</li>
+        <li>多重要素驗證 (Multifactor authentication)</li>
+        <li>基於憑證的驗證和授權 (Certificate-based authentication and authorization)</li>
+        <li>TACACS</li>
+      </ol>
+      <p><strong>答案：C. 憑證 (Certificates) 通常用於允許系統通過 IRM 系統進行身份驗證和接收授權以存取資料。多重要素驗證通常需要事件和人類互動，使其對於基於系統的存取不太有用。TACACS 和 LEAP 都不用於此目的。</strong></p>
+    </li>
+    <li>
+      <p>Meena 正在對以 JSON 編碼的資料進行資料探索。她正在處理哪種類型的資料？</p>
+      <ol type="A">
+        <li>結構化 (Structured)</li>
+        <li>半結構化 (Semi-structured)</li>
+        <li>超結構化 (Super-structured)</li>
+        <li>非結構化 (Unstructured)</li>
+      </ol>
+      <p><strong>答案：B. JSON 是半結構化資料 (semi-structured data) 的一個範例。傳統資料庫是結構化資料的範例，非結構化資料沒有內建的標籤或其他分類資訊，而超結構化資料不是 CCSP 考試使用的術語。</strong></p>
+    </li>
+    <li>
+      <p>Isaac 想向他的團隊描述常見的資訊版權管理 (IRM) 功能。下列何者不是常見的 IRM 功能？</p>
+      <ol type="A">
+        <li>持久性 (Persistency)</li>
+        <li>加密銷毀 (Crypto-shredding)</li>
+        <li>自動過期 (Automatic expiration)</li>
+        <li>動態策略控制 (Dynamic policy control)</li>
+      </ol>
+      <p><strong>答案：B. IRM 工具應包括除加密銷毀 (crypto-shredding) 之外的所有列出功能，加密銷毀通常與生命週期管理相關，而不是版權管理。</strong></p>
+    </li>
+  </ol>
+  
+
+</body>
+</html>

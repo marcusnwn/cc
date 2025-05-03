@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter Viewer</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: sans-serif;
+            height: 100vh; /* Ensure body takes full viewport height */
+            overflow: hidden; /* Prevent body scrollbars when nav scrolls or content overflows */
+        }
+
+        #left-nav {
+            width: 150px; /* Default width for larger screens */
+            border-right: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f4f4f4;
+            height: 100%; /* Make nav full height */
+            box-sizing: border-box; /* Include padding in width/height */
+            flex-shrink: 0; /* Prevent nav from shrinking */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+
+        #left-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #left-nav li {
+            margin-bottom: 10px;
+        }
+
+        #left-nav a {
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+            display: block; /* Make link fill li for easier clicking */
+            padding: 5px 0; /* Add some vertical padding */
+        }
+
+        #left-nav a:hover {
+            color: #007bff;
+        }
+
+        #content-area {
+            flex-grow: 1; /* Allow content area to fill remaining space */
+            padding: 0;
+            height: 100%; /* Make content area full height */
+            overflow: hidden; /* Hide iframe scrollbars if possible */
+        }
+
+        #content-frame {
+            width: 100%;
+            height: 100%;
+            border: none; /* Remove default iframe border */
+        }
+
+        /* --- Responsive Styles --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: 100vh; /* Re-apply viewport height for stacking */
+                overflow: hidden; /* Still prevent body scroll */
+            }
+
+            #left-nav {
+                width: 100%; /* Full width on small screens */
+                height: auto; /* Adjust height based on content */
+                max-height: 35vh; /* Limit height (e.g., 35% of viewport) */
+                overflow-y: auto; /* Enable vertical scroll if needed */
+                border-right: none; /* Remove side border */
+                border-bottom: 1px solid #ccc; /* Add bottom border */
+                flex-shrink: 0; /* Ensure it doesn't shrink */
+            }
+
+            #content-area {
+                 height: auto; /* Allow height to fill remaining space */
+                 flex-grow: 1; /* Take up remaining vertical space */
+                 overflow: hidden; /* Keep iframe contained */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="left-nav">
+        <h2>Chapters</h2>
+        <ul>
+            <li><a href="Ch1.html" data-chapter="Ch1.html">Chapter 1</a></li>
+            <li><a href="Ch2.html" data-chapter="Ch2.html">Chapter 2</a></li>
+            <li><a href="Ch3.html" data-chapter="Ch3.html">Chapter 3</a></li>
+            <li><a href="Ch4.html" data-chapter="Ch4.html">Chapter 4</a></li>
+            <li><a href="Ch5.html" data-chapter="Ch5.html">Chapter 5</a></li>
+            <li><a href="Ch6.html" data-chapter="Ch6.html">Chapter 6</a></li>
+            <li><a href="Ch7.html" data-chapter="Ch7.html">Chapter 7</a></li>
+            <li><a href="Ch8.html" data-chapter="Ch8.html">Chapter 8</a></li>
+            <li><a href="Ch9.html" data-chapter="Ch9.html">Chapter 9</a></li>
+            <li><a href="Ch10.html" data-chapter="Ch10.html">Chapter 10</a></li>        
+        </ul>
+    </nav>
+    <main id="content-area">
+        <iframe id="content-frame" name="contentFrame" src="" title="Chapter Content"></iframe>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('#left-nav a[data-chapter]');
+            const contentFrame = document.getElementById('content-frame');
+
+            // Optional: Load Chapter 1 by default
+            if (navLinks.length > 0) {
+                 contentFrame.src = navLinks[0].getAttribute('data-chapter');
+            }
+
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default link navigation
+                    const chapterFile = link.getAttribute('data-chapter');
+                    if (chapterFile) {
+                        contentFrame.src = chapterFile;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

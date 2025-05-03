@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第九章：法律與合規問題</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; }
+        h1, h2, h3 { color: #333; }
+        .note { border-left: 5px solid #5bc0de; padding: 10px; margin: 15px 0; background-color: #f4f8fa; }
+        .exam-tip { border-left: 5px solid #f0ad4e; padding: 10px; margin: 15px 0; background-color: #fefbed; }
+        .key-term { font-weight: bold; }
+        .english { color: #555; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<h1>第九章：法律與合規問題 <span class="english">(Legal and Compliance Issues)</span></h1>
+
+<p>在雲端營運會引發大量的法律和合規問題，網路安全專業人員必須意識到這些考量。國際法院和法庭對有關全球網路的法律和法規進行權衡。同樣不乏需要合規的法律、法規和標準。所有這些因素的結合提供了一個豐富的討論領域。</p>
+<p>重要的是要記住，雲端運算的性質使其適合基於需求的資源共享，而不是基於位置。因此，位於世界各地的資料中心同時儲存來自多個來源的雲端資料並運行應用程式。由於地方法律、法規和指南的複雜性，這在安全和隱私問題上帶來了挑戰。在本章中，我們將提供背景知識並回顧重要的概念、法律、法規和標準，以便 CCSP 考生在處理這些複雜問題時能夠提供合理的建議和指導。</p>
+
+<h2>雲端環境中的法律要求與獨特風險 <span class="english">(Legal Requirements and Unique Risks in the Cloud Environment)</span></h2>
+
+<p>美國和世界各地的法律來自各種來源。許多人已經熟悉<span class="key-term">憲法</span> <span class="english">(Constitution)</span> 本身所包含的法律，以及透過聯邦和州立法程序通過的法律。法律的其他來源包括政府機構頒布的<span class="key-term">行政法規</span> <span class="english">(administrative rules and regulations)</span>、<span class="key-term">判例法</span> <span class="english">(case law)</span>、<span class="key-term">普通法</span> <span class="english">(common law)</span> 和<span class="key-term">合約法</span> <span class="english">(contract law)</span>。</p>
+
+<h3>憲法 <span class="english">(Constitutional Law)</span></h3>
+<p>美國憲法是美國最高級別的法律來源，任何其他來源的法律都不得與憲法及其修正案的規定相衝突。憲法正文包含七條條款，其目的如下：</p>
+<ul>
+    <li>第一條設立立法部門。</li>
+    <li>第二條設立行政部門。</li>
+    <li>第三條設立司法部門。</li>
+    <li>第四條定義聯邦政府與各州政府之間的關係。</li>
+    <li>第五條創立了修改憲法本身的程序。</li>
+    <li>第六條包含最高條款，確立憲法是國家的最高法律。</li>
+    <li>第七條規定了聯邦政府最初建立的程序。</li>
+</ul>
+
+<div class="exam-tip">
+    <p>在美國法律體系下，美國憲法是國家的最高法律。任何法律都不得與任何憲法要求相衝突，修改憲法要求的唯一方法是透過修正案程序。</p>
+</div>
+
+<p>第五條描述了透過使用修正案來修改憲法的程序。這個程序，從設計上講，是困難的，因為創始人為修改這份重要的治理文件的條款設定了相當高的門檻。修正案程序要求國會兩院以三分之二多數通過修正案。在國會批准後，修正案將送交各州，各州有機會批准它。修正案只有在獲得四分之三（38 個）州批准後才會添加到憲法中。</p>
+<p>美國憲法目前包含 27 條修正案，涵蓋從確立個人權利到定義總統繼任條款的各種主題。這些修正案中的前 10 條，被稱為<span class="key-term">權利法案</span> <span class="english">(Bill of Rights)</span>，列舉了個人的公民自由保護，包括言論自由、集會自由和宗教自由。</p>
+<p>值得注意的是，<span class="key-term">隱私</span> <span class="english">(privacy)</span> 一詞並未出現在憲法的任何文本中，儘管存在對個人隱私的既定憲法保護。這些來自兩個來源：<span class="key-term">第四修正案</span> <span class="english">(Fourth Amendment)</span> 和最高法院的判例。</p>
+<p>憲法第四修正案內容如下：</p>
+<blockquote>人民保護其人身、住宅、文件和財物不受無理搜查和扣押的權利，不得侵犯，除非有基於可能原因、經宣誓或確認證實、並特別說明搜查地點和扣押人或物的令狀，否則不得簽發令狀。</blockquote>
+<p>該修正案確立了個人有權免受某些政府干預其私生活的權利。最高法院的判例進一步確立了個人「不受干擾」的權利。</p>
+<p>雖然美國憲法沒有明確授予隱私權，但一些州憲法的語言確實明確授予了這項權利。例如，加州憲法第一條第 23 款規定：</p>
+<blockquote>每個自然人都有不受干擾和免受政府侵犯其個人私生活的權利，除非本條另有規定。本條款不得解釋為限制公眾依法律規定查閱公共記錄和會議的權利。</blockquote>
+<p>佛羅里達州在其憲法第 6 條中包含以下語言：</p>
+<blockquote>人民的隱私權得到承認，除非顯示出令人信服的國家利益，否則不得侵犯。立法機關應採取積極步驟來實施這項權利。</blockquote>
+<p>阿拉斯加、亞利桑那、夏威夷、伊利諾伊、路易斯安那、蒙大拿、新罕布夏、南卡羅來納和華盛頓州的憲法中也有類似的規定保護隱私權。</p>
+
+<h3>立法 <span class="english">(Legislation)</span></h3>
+<p>當今美國適用的大多數隱私和安全法律並非來自憲法，而是來自本章前面提到的標準立法程序。擬議的法案由國會兩院通過，然後由總統簽署成為法律。當然，這些法律只有在符合憲法條款的情況下才能執行。</p>
+<p>美國國會通過的法律在美國所有州和領地都具有效力和約束力。州立法機關也可以透過類似的程序通過法律，其通過的法律僅在其本州內適用。大多數州的立法程序都效仿聯邦程序，要求法律必須經過州立法機關兩院通過並由州長簽署成為法律。</p>
+
+<h3>行政法 <span class="english">(Administrative Law)</span></h3>
+<p>行政部門的機構頒布一系列規則和條例，以實施國會通過的許多法律。這些規則構成了<span class="key-term">行政法</span> <span class="english">(administrative law)</span> 的主體，通常記錄在《聯邦法規彙編》(Code of Federal Regulations, CFR) 中。</p>
+<p>例如，1996 年柯林頓總統簽署了《健康保險可攜性與責任法案》(Health Insurance Portability and Accountability Act, HIPAA) 成為法律。該法律的部分內容對醫療保健提供者和其他涵蓋實體施加了新的安全和隱私義務。然而，它並沒有詳細說明適用於這些實體的具體隱私和安全要求。相反，它責成衛生與公眾服務部 (Department of Health and Human Services, HHS) 制定包含這些實施細節的行政法。</p>
+<p>為響應這項授權，HHS 發布了 HIPAA 隱私規則和 HIPAA 安全規則，其中包含對受該法律規定約束的組織的詳細要求。這些規則是在立法授權下創建的，但並未經過立法程序，因此它們符合行政法的範例。</p>
+<p>機構不能隨意制定行政法。它們必須經過允許公眾評論的正式規則制定程序，並且行政法的規定仍然受到司法審查，也可能被立法行為所推翻。</p>
+
+<h3>判例法 <span class="english">(Case Law)</span></h3>
+<p>司法部門的主要作用是解釋法律並將其應用於解決民事和刑事糾紛。法院隨著時間推移做出的解釋確立了一個<span class="key-term">判例法</span> <span class="english">(case law)</span> 體系，其他法院在做出自己的裁決時可能會參考該體系。</p>
+<p>在許多情況下，法院做出的判例法裁決對該法院及其任何下級法院都具有約束力。法院通常遵循<span class="key-term">遵循先例</span> <span class="english">(stare decisis)</span>（拉丁語，意為「讓判決確定」）的法律原則，即先前對法律問題的裁決作為指導該法院及其下級法院未來裁決的先例。出於這個原因，即使是最高法院也不願重新審視過去法院做出的裁決，即使法官們認為他們可能會得出與其前任不同的結論。</p>
+<p>關於隱私主題存在相當多的判例法。例如，1996 年 Smyth 訴 Pillsbury 公司案在美國賓夕法尼亞東區地方法院的裁決確立了員工通常對其使用公司提供的電子郵件帳戶沒有隱私權。儘管此案未上訴至更高級別的法院，但許多其他司法管轄區已將其引用為相關判例法。</p>
+
+<h3>普通法 <span class="english">(Common Law)</span></h3>
+<p>美國是眾多遵守<span class="key-term">普通法</span> <span class="english">(common law)</span> 的國家之一，普通法是一套透過多代判例法傳承下來的司法先例。普通法的這個子集包括許多從未在立法中編纂但仍然指導許多司法裁決的長期法律原則。普通法的主體可以追溯到英國法院系統，因此通常存在於歷史上是英國殖民地的現代國家。這些國家中的每一個都隨著時間的推移逐漸將普通法原則調整為其自身的文化和司法哲學。</p>
+<p>美國的普通法體系包括對個人隱私權的保護。在本章後面，您將了解過失侵權和侵犯隱私侵權。這兩個概念都源於普通法。</p>
+<p>普通法與具有憲法或立法來源的法律之間存在微妙的關係。憲法和立法法律可以凌駕於普通法的某些方面。當這些法律留下解釋空間時，普通法也會從其他法律中產生，普通法原則指導法院制定填補這些空白的判例法。因此，許多州已將普通法的部分內容編纂到自己的法規中。</p>
+<p>在本章後面，我們將討論侵犯隱私侵權。這是與隱私相關的普通法的一個範例。</p>
+
+<h3>合約法 <span class="english">(Contract Law)</span></h3>
+<p><span class="key-term">合約</span> <span class="english">(Contracts)</span> 是雙方之間具有法律約束力的協議，他們將交換有價值的東西。當雙方同意簽訂合約時，他們在法律上有義務履行其義務。只要合約條款不違法，它就可以在法庭上強制執行。合約應明確規定各方對違反合約的具體責任。</p>
+<p>合約要有效必須滿足幾個條件：</p>
+<ul>
+    <li>合約的每一方都必須有能力同意該合約。</li>
+    <li>必須有一方提出要約。此要約可以是口頭的或書面的，但書面條款始終優先於口頭條款，並且許多類型的交易（例如涉及房地產的交易）必須以書面形式進行。</li>
+    <li>另一方必須接受該要約。</li>
+    <li>必須有<span class="key-term">對價</span> <span class="english">(consideration)</span>，這意味著雙方都必須交換有價值的東西。例如，如果我簽訂合約賣給你我的車，我給你車（有價值的東西），作為回報，你用現金支付給我（有價值的東西）。</li>
+    <li>最後，必須有<span class="key-term">相互意圖</span> <span class="english">(mutual intent)</span> 受約束。雙方都必須在同意條款的意圖下簽訂合約。</li>
+</ul>
+<p>違反合約通常不涉及執法機構，因此它們被視為當事人之間的私人糾紛，並在民事法庭處理。這些案件被稱為<span class="key-term">違約</span> <span class="english">(breaches of contract)</span>，法院可以採取行動強制執行合約條款、取消合約或判給損害賠償以補償一方因另一方違約而造成的損害。</p>
+<p>從隱私角度來看，組織通常在與供應商的合約中包含語言，要求他們保護個人可識別資訊的隱私。例如，受 HIPAA 約束的醫療保健組織使用正式的<span class="key-term">業務夥伴協議</span> (<span class="key-term">Business Associate Agreements, BAAs</span>) 來記錄其服務供應商的隱私義務。</p>
+
+<h2>分析法律 <span class="english">(Analyzing a Law)</span></h2>
+
+<p>全國和世界各地的司法管轄區現在經常通過新的隱私法。這些法律可能涵蓋新的行業、新的資訊元素或新的司法管轄區。作為安全專業人員，我們經常被要求閱讀和解釋這些隱私法，確定它們如何適用於我們的組織。</p>
+
+<h3>確定司法管轄區 <span class="english">(Determining Jurisdiction)</span></h3>
+<p>在分析新法律時，隱私專業人員首先應做的事情之一是確定法律的<span class="key-term">司法管轄區</span> <span class="english">(jurisdiction)</span>。司法管轄區是法律適用的地理區域。確定司法管轄區是透過閱讀法律本身以及評估制定該法律的機構的權力來完成的。儘管這可能看起來很直接，但解釋隱私法相當複雜。</p>
+<p>例如，當歐盟首次通過通用資料保護規則 (GDPR) 時，該法律規定它適用於全球範圍內的歐盟居民的個人資訊。如果歐盟居民與一家美國公司有業務往來，並且該資訊實際儲存在美國，歐盟則聲稱對該資訊擁有管轄權。美國公司的隱私專業人員不確定歐盟是否真的有管轄權來做出此聲明。</p>
+<p>GDPR 的適用性仍在不斷發展，但歐洲法院 2019 年的一項裁決限制了其適用性。在該裁決 (Google LLC 訴 Commission nationale de l'informatique et des libertés [CNIL]) 中，法院表示被遺忘權僅在歐盟境內適用。他們是在一個人請求將其搜索結果從 Google 中移除的背景下做出此決定的。該決定表示，儘管 Google 必須移除歐盟境內訪客看到的結果，但該法律並未要求他們在全球範圍內實施被遺忘權。</p>
+<p>州資料外洩通知法也產生了重大的司法管轄區問題，類似於 Google 案中討論的問題。我們將在本章後面更詳細地討論這些問題。</p>
+<p>正如法律有司法管轄區一樣，法院也有由法院對其標的物及其地理適用性作出法律判決的權力所定義的司法管轄區。例如，聯邦法院僅對聯邦法律擁有管轄權，而州法院僅對州法律擁有管轄權。聯邦巡迴法院僅對特定州具有地理管轄權。例如，第七巡迴上訴法院對印第安納州、伊利諾伊州和威斯康辛州擁有管轄權。該法院做出的裁決僅在該巡迴區內適用。另一方面，最高法院擁有全國範圍的管轄權。</p>
+
+<h3>範圍與適用性 <span class="english">(Scope and Application)</span></h3>
+<p>一旦您確定了法律的司法管轄區，您就應該確定該法律對您自己組織營運的<span class="key-term">範圍</span> <span class="english">(scope)</span> 和<span class="key-term">適用性</span> <span class="english">(applicability)</span>。在許多情況下，這是顯而易見的。例如，《家庭教育權利和隱私法》(Family Educational Rights and Privacy Act, FERPA) 規範了大多數教育機構處理學生記錄的方式。FERPA 明顯適用於大學維護的學生教育記錄。HIPAA 明顯適用於醫院維護的醫療記錄。但您可能會驚訝地發現，FERPA 不適用於醫院維護的員工專業教育記錄，而 HIPAA 可能不適用於學生健康中心維護的醫療記錄。</p>
+<div class="note">
+    <p>FERPA 的範圍實際上更為細微。該法律僅適用於根據美國教育部某些計畫獲得聯邦資助的教育機構。這幾乎包括所有高等教育機構，但不包括許多小學和中學的私立學校。</p>
+</div>
+<p>隱私專業人員有責任仔細閱讀法律、諮詢律師，並確定哪些業務活動屬於每項法律的範圍。</p>
+
+<!-- Legal Liability, Torts, etc. sections omitted for brevity, as requested -->
+
+<h2>資訊安全管理系統 <span class="english">(Information Security Management Systems)</span></h2>
+
+<p>ISO 創建了<span class="key-term">資訊安全管理系統</span> (<span class="key-term">information security management system, ISMS</span>) 的概念，這是一個組織內整個安全計畫的整體概述。ISMS 在 ISO 27001 中有詳細說明。</p>
+<p>ISMS 旨在為制定和實施政策、程序和標準提供標準化的國際模型，該模型考慮了利益相關者的識別和參與，採用自上而下的方法來處理和管理組織中的風險。它建立在資訊應透過行業普遍接受和認可的實踐得到充分保護的前提之上；它是平台/產品無關的，可以為任何組織進行定制。</p>
+<p>ISO 27001 可能是全球最受認可的安全計畫標準，將被許多監管機構/司法管轄區接受為滿足降低責任的應盡注意要求。然而，應用該標準並獲得應用認證並不便宜；ISO 合規性是一個非常昂貴的前景，這可能使其對中小型組織來說缺乏吸引力或不可能。</p>
+<p>有關更多資訊，請參見 www.iso.org/iso/iso27001。</p>
+<div class="note">
+    <p>安全實踐、設備和工具以及諸如稽核和安全功能之類的業務流程的管理和監督構成了 (ISC)² CCSP 考試大綱（候選人資訊公告）描述的「內部資訊安全控制系統」，這是一個組織內部安全控制的整體計畫。從 ISO 的角度來看，ISMS 實現了這個目的。</p>
+</div>
+
+<h3>ISO/IEC 27017:2015</h3>
+<p>國際標準化組織 (ISO) 和國際電工委員會 (IEC) 創建了 ISO/IEC 27017:2015，這是一套關於適用於雲端服務提供和使用以及雲端服務客戶的資訊安全控制指南的標準。換句話說，它提供了一套不僅適用於提供雲端服務，還適用於應如何控制雲端客戶資訊和隱私的標準。儘管 ISO 標準在國際上得到認可，但它們並非法定法律，也不反映歐盟等政府機構的監管。然而，在某些司法管轄區，某些行業在法律上被要求遵守 ISO 標準。</p>
+
+<h2>雲端隱私 <span class="english">(Privacy in the Cloud)</span></h2>
+<p>隨著組織遷移到雲端，他們還必須考慮其努力對託管給他們的個人資訊隱私的影響。有幾個重要的框架有助於這項工作，包括<span class="key-term">普遍接受的隱私原則</span> (<span class="key-term">Generally Accepted Privacy Principles, GAPP</span>) 和 ISO 27018。</p>
+
+<h3>普遍接受的隱私原則 <span class="english">(Generally Accepted Privacy Principles)</span></h3>
+<p><span class="key-term">普遍接受的隱私原則</span> (<span class="key-term">Generally Accepted Privacy Principles, GAPP</span>) 旨在建立一個全球性的隱私管理框架。GAPP 包括 10 項原則，是由兩個國家會計組織：美國註冊會計師協會 (AICPA) 和加拿大特許會計師協會 (CICA) 共同努力制定的。這兩個組織尋求專家意見，以制定一套普遍接受的隱私原則。</p>
+<p>10 項 GAPP 原則如下：</p>
+<ol>
+    <li>管理 (Management)</li>
+    <li>通知 (Notice)</li>
+    <li>選擇與同意 (Choice and Consent)</li>
+    <li>收集 (Collection)</li>
+    <li>使用、保留與處置 (Use, Retention, and Disposal)</li>
+    <li>存取 (Access)</li>
+    <li>向第三方揭露 (Disclosure to Third Parties)</li>
+    <li>隱私安全 (Security for Privacy)</li>
+    <li>品質 (Quality)</li>
+    <li>監控與執行 (Monitoring and Enforcement)</li>
+</ol>
+<p>以下各節將更詳細地探討這些原則中的每一個。</p>
+
+<div class="exam-tip">
+    <p>這裡要仔細注意縮寫！AICPA 和 CICA 同時發布了普遍接受的隱私實踐 (GAPP) 和普遍接受的會計原則 (GAAP)！</p>
+</div>
+
+<!-- Detailed GAPP Principles sections omitted for brevity -->
+
+<h3>ISO 27018</h3>
+<p>除了 GAPP 原則外，組織可能還希望採用與資訊隱私相關的 ISO 標準的元素。ISO 27018 提供了一套在公有雲環境中保護個人可識別資訊的實踐準則。</p>
+
+<h3>直接與間接識別碼 <span class="english">(Direct and Indirect Identifiers)</span></h3>
+<p>隱私資訊可以採取多種形式。在某些司法管轄區，根據某些法律，個人的姓名、出生日期和家庭住址被視為 PII；在其他國家/地區，個人的手機號碼和 IP 位址也是 PII；這完全取決於這些司法管轄區的法律。這些 PII 元素有時被稱為<span class="key-term">直接識別碼</span> <span class="english">(direct identifiers)</span>。直接識別碼是那些立即揭示特定個人的資料元素。</p>
+<p>還有<span class="key-term">間接識別碼</span> <span class="english">(indirect identifiers)</span>，也應受到保護。間接識別碼是個人的特徵和特徵，當聚合起來時，可能會揭示身份。例如，如果我們獲取一組不敏感的間接識別碼，例如一個出生在紐約、目前居住在印第安納州、養狗並在資訊安全領域工作的男性，我們可能會揭示本書作者之一的身份，從而不敏感的資訊元素（地點、出生地、寵物、行業等）中推導出敏感資訊（身份）。</p>
+<p>移除識別碼的行為稱為<span class="key-term">匿名化</span> <span class="english">(anonymization)</span>；某些司法管轄區、法律和標準要求對資料進行匿名化，包括直接和間接識別碼。</p>
+
+<h3>隱私影響評估 <span class="english">(Privacy Impact Assessments)</span></h3>
+<p>有了個人資訊庫存清單，組織現在可以轉向對其當前隱私計畫狀態的評估。此評估應使用一套標準的隱私實踐，這些實踐源自行業標準框架或組織面臨的監管要求。</p>
+<p>例如，組織可以選擇採用國際標準化組織題為「安全技術——ISO/IEC 27001 和 ISO/IEC 27002 對隱私資訊管理的擴展——要求和指南」並記錄在 ISO 27701 中的隱私框架。</p>
+<div class="note">
+    <p>ISO 27701 與管理資訊安全的兩個 ISO 標準 ISO 27001 和 27002 密切相關。這是協調隱私和安全計畫利益的另一個機會。ISO 27701 的附件 F 提供了關於在已經使用資訊安全標準的組織中應用隱私標準的建議。這些標準也與美國國家標準與技術研究院的網路安全框架 (CSF) 緊密相連，允許組織在他們為隱私和安全採用的標準和框架之間清晰地對應控制措施。</p>
+</div>
+<p>隱私評估的最終結果應是一份<span class="key-term">隱私影響分析</span> <span class="english">(privacy impact analysis)</span>，用於識別組織業務實踐處理個人資訊的任何地方，並描述這些實踐對組織法律和道德隱私義務的影響。</p>
+
+<!-- Cloud Forensics and Audit sections omitted for brevity -->
+
+<h2>摘要 <span class="english">(Summary)</span></h2>
+<p>如您所見，國際法律、標準和法規的性質使得雲端運算變得複雜，有時難以理解。國際標準化組織 (ISO)、國際電工委員會 (IEC) 以及經濟合作暨發展組織 (OECD) 頒布了已成為美國以外絕大多數國際社會資訊安全和隱私事實上標準的標準。在美國境內，稽核員仍然主要使用諸如 GLBA、PCI DSS、SSAE 18 和 HIPAA 等標準和法規。機構和政府機構不斷產生這些標準和法規，使得難以獲得一致的標準。然而，CCSP 有責任理解這些挑戰，以便在與客戶和供應商的架構、政策和管理工作合作時提供合理的建議。</p>
+
+<h2>考試要點 <span class="english">(Exam Essentials)</span></h2>
+
+<p><strong>解釋美國法律的不同來源 (Explain the different sources of law in the United States)。</strong> 聯邦法規由立法部門制定，經過國會兩院通過並獲得總統簽署。行政部門可以制定行政法以協助解釋和執行法規。司法部門審查、適用和解釋立法和行政法，從而形成判例法體系。</p>
+<p><strong>解釋刑事與民事責任的區別 (Explain the difference between criminal and civil liability)。</strong> 責任允許一方在法庭上對另一方採取行動。當一個人違反刑法時，就會產生刑事責任。如果一個人被判犯有刑事違法行為，他們可能會被剝奪自由而入獄。當一個人聲稱另一個人未能履行他們應履行的法律義務時，就會產生民事責任。</p>
+<p><strong>描述過失侵權的四個要素 (Describe the four elements of the tort of negligence)。</strong> 過失是一種常見的侵權行為，當一方因其行為或不作為而對另一方造成損害時發生。過失的責任理論涉及四個要素。首先，必須存在注意義務。其次，必須違反該注意義務。第三，必須涉及損害。第四，必須存在因果關係。</p>
+<p><strong>解釋監管鏈 (Explain the chain of custody)。</strong> 在收集可能用於法庭的鑑識證據時，調查人員必須記錄他們如何以及何時收集證據，以及在收集和呈堂之間每次有人處理證據的情況。這被稱為記錄監管鏈，以證明證據在任何時候都得到了妥善管理。</p>
+<p><strong>理解電子發現的目的 (Understand the purpose of e-discovery)。</strong> 當一個組織受到訴訟時，它必須保存與該事項相關的任何記錄。電子發現 (e-discovery) 程式提供了一個收集和保留該資訊的流程和機制。在雲端環境中，電子發現可能受到 ISO 27050 和雲端安全聯盟 (CSA) 指南的指導。</p>
+<p><strong>描述敏感資訊的類型 (Describe the types of sensitive information)。</strong> 組織可能在雲端中處理多種類型的敏感資訊。這包括關於個人的資訊，稱為個人可識別資訊 (PII)。它還包括關於醫療保健的資訊，稱為受保護健康資訊 (PHI)，以及支付卡資訊。</p>
+<p><strong>解釋管轄雲端安全與隱私的主要法律 (Explain the major laws that govern security and privacy in the cloud)。</strong> 雲端中的安全和隱私工作受到許多不同法律和法規的約束。醫療保健組織受《健康保險可攜性與責任法案》(HIPAA) 的約束。金融機構受《格雷姆-里奇-比利雷法案》(GLBA) 的約束。公開交易的公司受《沙賓法案》(SOX) 的約束。在歐盟開展業務的組織受《通用資料保護規則》(GDPR) 的約束。</p>
+
+
+<hr>
+
+<h2>複習題 <span class="english">(Review Questions)</span></h2>
+
+<p>您可以在附錄 A 中找到複習題的答案。</p>
+
+<ol>
+    <li>
+        <p>Katie 正在評估她組織的隱私實踐，並確定該組織先前收集客戶地址是為了運送貨物，現在正在使用這些地址郵寄促銷資料。如果先前未揭露這種可能性，該組織最有可能違反了哪個隱私原則？</p>
+        <ol type="A">
+            <li>品質 (Quality)</li>
+            <li>管理 (Management)</li>
+            <li>通知 (Notice)</li>
+            <li>安全 (Security)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Kara 是一家維護用於行銷目的的客戶資訊資料庫的組織的首席隱私官。哪個術語最能描述 Kara 的組織相對於該資料庫的角色？</p>
+        <ol type="A">
+            <li>資料主體 (Data subject)</li>
+            <li>資料保管人 (Data custodian)</li>
+            <li>資料控管者 (Data controller)</li>
+            <li>資料處理者 (Data processor)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Richard 想使用行業標準參考來設計他組織的隱私控制。下列哪個 ISO 標準最適合此目的？</p>
+        <ol type="A">
+            <li>ISO 27001</li>
+            <li>ISO 27002</li>
+            <li>ISO 27701</li>
+            <li>ISO 27702</li>
+        </ol>
+    </li>
+    <li>
+        <p>在設計隱私控制時，組織應被哪種類型的分析結果所告知？</p>
+        <ol type="A">
+            <li>衝擊分析 (Impact analysis)</li>
+            <li>差距分析 (Gap analysis)</li>
+            <li>業務分析 (Business analysis)</li>
+            <li>授權分析 (Authorization analysis)</li>
+        </ol>
+    </li>
+    <li>
+        <p>州資料外洩通知法可能要求組織通知下列哪些方？</p>
+        <ol type="A">
+            <li>受資料外洩影響的消費者 (Consumers impacted by the breach)</li>
+            <li>州監管機構 (State regulatory authorities)</li>
+            <li>國家信用報告機構 (National credit reporting agencies)</li>
+            <li>以上皆是 (All of the above)</li>
+        </ol>
+    </li>
+     <li>
+        <p>下列何者不是組織在資料外洩後根據州法律可能面臨的潛在後果？</p>
+        <ol type="A">
+            <li>向受影響的消費者提供免費信用監控的義務 (An obligation to provide free credit monitoring to affected consumers)</li>
+            <li>來自州檢察長的執法行動，包括罰款 (Enforcement actions, including penalties, from state attorneys general)</li>
+            <li>消費者根據私人訴權提起的民事訴訟 (Civil actions brought by consumers under a private right of action)</li>
+            <li>對允許資料外洩發生的公司員工的刑事起訴 (Criminal prosecution of company employees who allowed the breach to occur)</li>
+        </ol>
+    </li>
+    <li>
+        <p>MediRecs Co. 提供安全的伺服器空間來幫助醫療保健提供者儲存醫療記錄。根據 HIPAA，MediRecs 最適合被描述為下列哪項？</p>
+        <ol type="A">
+            <li>服務提供者 (Service provider)</li>
+            <li>業務夥伴 (Business associate)</li>
+            <li>涵蓋的合作夥伴 (Covered partner)</li>
+            <li>涵蓋的實體 (Covered entity)</li>
+        </ol>
+    </li>
+    <li>
+        <p>Dimitri 三個月前在 County Bank 兌現了一張支票，但他沒有在那裡開戶，之後也沒有再去過。根據 GLBA，County Bank 應將 Dimitri 視為下列哪項？</p>
+        <ol type="A">
+            <li>客戶 (Customer)</li>
+            <li>消費者 (Consumer)</li>
+            <li>訪客 (Visitor)</li>
+            <li>與銀行無關 (No relationship with the bank)</li>
+        </ol>
+    </li>
+    <li>
+        <p>美國憲法的哪個修正案明確授予個人隱私權？</p>
+        <ol type="A">
+            <li>第一修正案 (First Amendment)</li>
+            <li>第四修正案 (Fourth Amendment)</li>
+            <li>第五修正案 (Fifth Amendment)</li>
+            <li>以上皆非 (None of the above)</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個來源包含了美國政府制定的大部分行政法？</p>
+        <ol type="A">
+            <li>美國法典 (U.S. Code)</li>
+            <li>權利法案 (Bill of Rights)</li>
+            <li>聯邦法規彙編 (Code of Federal Regulations)</li>
+            <li>美國憲法 (U.S. Constitution)</li>
+        </ol>
+    </li>
+    <li>
+        <p>在一場過失訴訟中，法院裁定被告無過失，因為原告沒有提供證據證明他們遭受了某種形式的損害。此案中缺少哪個過失要素？</p>
+        <ol type="A">
+            <li>注意義務 (Duty of care)</li>
+            <li>違反義務 (Breach of duty)</li>
+            <li>因果關係 (Causation)</li>
+            <li>損害 (Damages)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列哪個要素並非總是創建合法合約所必需的？</p>
+        <ol type="A">
+            <li>要約 (An offer)</li>
+            <li>接受要約 (Acceptance of an offer)</li>
+            <li>書面協議 (Written agreement)</li>
+            <li>對價 (Consideration)</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個法律類別最能描述 HIPAA 隱私規則？</p>
+        <ol type="A">
+            <li>憲法 (Constitutional law)</li>
+            <li>普通法 (Common law)</li>
+            <li>立法 (Legislative law)</li>
+            <li>行政法 (Administrative law)</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個法規處理美國金融業的安全和隱私問題？</p>
+        <ol type="A">
+            <li>GLBA</li>
+            <li>FERPA</li>
+            <li>SOX</li>
+            <li>HIPAA</li>
+        </ol>
+    </li>
+    <li>
+        <p>被遺忘權指的是下列哪項？</p>
+        <ol type="A">
+            <li>不再繳稅的權利 (The right to no longer pay taxes)</li>
+            <li>消除犯罪記錄 (Erasing criminal history)</li>
+            <li>要求刪除資料主體所有資料的權利 (The right to have all of a data subject’s data erased)</li>
+            <li>遮罩 (Masking)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列哪個組織最不可能受到 HIPAA 要求的約束？</p>
+        <ol type="A">
+            <li>健康保險公司 (Health insurance company)</li>
+            <li>醫院 (Hospital)</li>
+            <li>醫療設備製造商 (Medical device manufacturer)</li>
+            <li>健康資訊交換所 (Health information clearinghouse)</li>
+        </ol>
+    </li>
+     <li>
+        <p>下列哪個選項不再有效用於保護歐盟與其他國家之間的個人資訊傳輸？</p>
+        <ol type="A">
+            <li>充分性決定 (Adequacy decisions)</li>
+            <li>歐盟/美國隱私護盾 (EU/US Privacy Shield)</li>
+            <li>約束性企業規則 (Binding Corporate Rules)</li>
+            <li>標準合約條款 (Standard Contractual Clauses)</li>
+        </ol>
+    </li>
+    <li>
+        <p>下列何者不是雲端安全專業人員會關心的法律？</p>
+        <ol type="A">
+            <li>GLBA</li>
+            <li>HIPAA</li>
+            <li>PCI DSS</li>
+            <li>SOX</li>
+        </ol>
+    </li>
+    <li>
+        <p>哪個標準管轄在美國境內發生的 SOC 稽核？</p>
+        <ol type="A">
+            <li>SSAE 16</li>
+            <li>SSAE 18</li>
+            <li>ISAE 3402</li>
+            <li>ISAE 3602</li>
+        </ol>
+    </li>
+    <li>
+        <p>您正在考慮與雲端供應商合作，並希望審查包含有關安全控制詳細資訊的稽核結果。供應商要求您在審查資料之前簽署保密協議 (NDA)。您最有可能審查哪種類別的報告？</p>
+        <ol type="A">
+            <li>SOC 1</li>
+            <li>SOC 2</li>
+            <li>SOC 3</li>
+            <li>SOC 4</li>
+        </ol>
+    </li>
+</ol>
+<ol start="1">
+    <li>C. 通知 (<span class="english">Notice</span>) 原則的規定之一是組織應在將資訊用於先前未揭露的目的之前通知資料主體。</li>
+    <li>C. Kara 的組織正在為其自身的業務需求收集和處理這些資訊。因此，它最適合被描述為資料控管者 (<span class="english">data controller</span>)。</li>
+    <li>C. ISO 27701 涵蓋了實施隱私控制的最佳實踐。ISO 27001 和 ISO 27002 涉及組織的資訊安全計畫。ISO 27702 尚不存在。</li>
+    <li>B. 差距分析 (<span class="english">Gap analysis</span>) 是識別阻止組織實現其隱私目標的缺陷的正式過程。差距分析的結果可用於設計新的控制措施。</li>
+    <li>D. 雖然因州而異，但資料外洩通知法可能要求通知消費者、州監管機構和信用報告機構。</li>
+    <li>D. 雖然並非所有州都施加所有這些處罰，但向受影響的消費者提供免費信用監控、州檢察長的執法行動（包括罰款）以及消費者根據私人訴權提起的民事訴訟都是組織可能面臨的潛在後果。除非發生了其他犯罪行為，否則對員工的刑事起訴 (<span class="english">Criminal prosecution</span>) 極不可能。</li>
+    <li>B. 根據 HIPAA，業務夥伴 (<span class="english">business associates</span>) 是參與處理涵蓋實體 PHI 的第三方公司。涵蓋實體需要與此類公司簽訂業務夥伴協議 (BAA)，將 HIPAA 合規性責任授予第三方。</li>
+    <li>B. GLBA 區分客戶和消費者 (<span class="english">consumers</span>)。客戶是像帳戶持有人一樣與銀行有持續關係的人。消費者可能只與銀行進行孤立的交易。這很重要，因為銀行對 Dimitri 的義務根據 GLBA 較少，因為他在技術上不是客戶。</li>
+    <li>D. 這是一個棘手的問題。第四修正案 (<span class="english">Fourth Amendment</span>) 已被解釋為向個人提供一些隱私權，但它並未明確確立隱私權。隱私 (<span class="english">privacy</span>) 一詞並未出現在憲法的任何文本中。</li>
+    <li>C. 行政法 (<span class="english">Administrative law</span>) 通常記錄在聯邦法規彙編 (CFR) 中。美國法典包含立法法律。美國憲法及其修正案（包括權利法案）包含憲法法律。</li>
+    <li>D. 為了在過失 (<span class="english">negligence</span>) 索賠中勝訴，原告必須證明存在損害 (<span class="english">damages</span>)，這意味著他們遭受了某種形式的財務、物理、情感或聲譽損害。</li>
+    <li>C. 許多州確實有法律要求某些合約必須以書面形式存在，但沒有普遍要求合約協議必須以書面形式進行，儘管書面合約顯然更可取。合約要可強制執行必須滿足的條件包括合約的每一方都必須有能力同意該合約，必須有一方提出要約並被另一方接受，必須有對價，並且必須有相互意圖受約束。</li>
+    <li>D. 健康保險可攜性與責任法案 (HIPAA) 是國會通過的立法。然而，HIPAA 隱私規則和 HIPAA 安全規則並未經過立法程序。它們是由衛生與公眾服務部制定以實施 HIPAA 要求的行政法 (<span class="english">administrative law</span>) 的範例。</li>
+    <li>A. 格雷姆-里奇-比利雷法案 (GLBA) 管轄美國金融業的安全和隱私事務。家庭教育權利和隱私法案 (FERPA) 適用於教育機構。沙賓法案 (SOX) 管轄公開交易公司的記錄。健康保險可攜性與責任法案 (HIPAA) 適用於醫療保健提供者、健康保險公司和健康資訊交換所。</li>
+    <li>C. 被遺忘權 (<span class="english">right to be forgotten</span>) 最初是根據歐盟的通用資料保護規則 (GDPR) 確立的。它要求在許多情況下，公司應刪除 (<span class="english">erased</span>) 維護的關於個人的個人資訊。</li>
+    <li>C. HIPAA 適用於三種類型的涵蓋實體：醫療保健提供者（例如醫生和醫院）、健康保險公司和健康資訊交換所。醫療設備製造商 (<span class="english">Medical device manufacturer</span>) 不屬於這些類別中的任何一個，並且不太可能處理個別患者的受保護健康資訊。</li>
+    <li>B. 當歐盟與其他國家之間存在充分性決定 (<span class="english">adequacy decision</span>) 時，組織可以轉移資訊，以表明其他國家的法律符合 GDPR。他們也可以選擇採用標準合約條款 (SCC) 或約束性企業規則 (BCR)。他們過去能夠根據歐盟-美國隱私護盾 (<span class="english">EU-U.S. Privacy Shield</span>) 的安全港條款轉移資料，但在 Schrems II 裁決中該條款被推翻。</li>
+    <li>C. 所有這些法規都可能涉及雲端安全專業人員。然而，支付卡產業資料安全標準 (PCI DSS) 是一個私營的監管方案，不是法律 (<span class="english">law</span>)。</li>
+    <li>B. 在美國進行的 SOC 稽核受 SSAE 18 (<span class="english">SSAE 18</span>) 的約束。針對這些稽核的早期 SSAE 16 標準已不再適用。ISAE 3402 標準管轄美國境外的 SOC 稽核。</li>
+    <li>B. SOC 2 (<span class="english">SOC 2</span>) 報告包含有關組織安全控制的資訊，並包含詳細的敏感資訊。它們通常不會在 NDA 之外共享。SOC 3 報告包含類似類型的資訊，但其級別適合公開揭露。SOC 1 報告通常用作財務稽核的組成部分。不存在 SOC 4 報告。</li>
+</ol>
+
+</body>
+</html>
