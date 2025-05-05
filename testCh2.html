@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第二章 問題：架構與設計（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第二章 問題：架構與設計（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> 電子郵件是哪種類型數據的範例？</p>
+    <ol>
+        <li>結構化數據</li>
+        <li>半結構化數據</li>
+        <li>RFC 定義的數據</li>
+        <li>非結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 電子郵件和其他自由格式文本是非結構化數據的範例。像資料庫中的數據一樣的結構化數據是經過仔細定義的，而像 XML 和 JSON 一樣的半結構化數據則應用了結構但沒有嚴格控制。雖然電子郵件本身是由 RFC 定義的，但術語 RFC 定義的數據在此上下文中不使用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> Nick 希望確保數據一旦分類後能得到妥善處理。他知道數據標籤對這個過程很重要，並且將幫助他的數據丟失預防工具防止數據洩露和暴露。在他的數據生命週期中，應何時標記數據？</p>
+    <ol>
+        <li>創建</li>
+        <li>儲存</li>
+        <li>使用</li>
+        <li>銷毀</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據標籤通常發生在數據生命週期的創建階段。數據標籤也可能在數據使用過程中更改或添加，因為數據會被修改。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Jacinda 計劃在她的雲環境中部署數據丟失預防 (DLP) 系統。以下哪個挑戰最有可能影響她的 DLP 系統判斷敏感數據是否正在傳輸到其組織外部的能力？</p>
+    <ol>
+        <li>缺乏數據標籤</li>
+        <li>使用傳輸中數據加密</li>
+        <li>數據標籤不當</li>
+        <li>使用靜態數據加密</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jacinda 很可能因為在雲環境中廣泛且一致地使用傳輸中數據或動態數據加密而面臨 DLP 系統的挑戰。她需要特別注意設計和架構她的環境，以允許 DLP 系統訪問其所需的流量。如果數據標籤缺乏或不當，這可能是一個挑戰，但 DLP 系統可以使用模式匹配和其他技術來識別數據。靜態數據通常對 DLP 系統來說不是問題，因為防止丟失需要了解數據何時流向某處，而不是它停留在某個位置。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> Susan 希望確保她的雲環境中的超級用戶訪問能夠被妥善審計。以下哪項 *不是* 審計特權用戶訪問的常見要求項目？</p>
+    <ol>
+        <li>遠程 IP 地址</li>
+        <li>使用的帳戶</li>
+        <li>使用的密碼</li>
+        <li>本地 IP 地址</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 密碼是有意不被捕獲或記錄的，因為創建包含密碼的審計日誌將是一個重大的安全問題。源和目標 IP 地址以及用於特權訪問的帳戶都是常見的日誌數據，有助於審計事件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> Ben 的組織對其本地系統和第三方提供的雲託管系統使用相同的數據刪除程序。Ben 認為當前使用的過程存在問題，該過程涉及在重複使用之前對使用中的磁碟和卷執行單次零擦除。Ben 應該為雲環境強調此方法的哪個問題？</p>
+    <ol>
+        <li>加密銷毀是第三方託管雲平台的安全選項。</li>
+        <li>僅零擦除是不夠的，還應使用隨機模式。</li>
+        <li>零擦除需要多次傳遞以確保沒有殘留數據。</li>
+        <li>應對硬碟進行消磁而不是擦除或加密銷毀，以確保數據在物理層面上完全銷毀。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 加密擦除或加密銷毀是確保第三方託管的硬碟和卷被安全清除的唯一方法。零擦除可能會留下殘留數據，尤其是在硬碟在託管環境中動態分配空間的情況下。消磁或其他物理銷毀通常對於第三方託管系統來說是不可能的，除非有特殊合同和專用硬體。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Jason 已被告知，他的組織需要對與未決訴訟相關的資訊實施法律保留。他應採取什麼行動來實施保留？</p>
+    <ol>
+        <li>從備份中恢復文件，使其與保留請求的日期匹配。</li>
+        <li>搜索與訴訟相關的所有文件，並立即將其提供給對方律師。</li>
+        <li>刪除法律保留中指定的所有文件，以限制訴訟範圍。</li>
+        <li>識別範圍內的文件並將其保存起來，直到需要出示為止。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 法律保留要求組織識別並保存符合保留範圍的數據。Jason 應識別這些文件並將其保存起來，直到需要時為止。恢復文件可能會刪除重要數據，刪除文件完全違背了保留的概念，而且保留不需要立即出示——它們就像聽起來那樣，是保留數據的要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> Murali 正在審查其組織客戶關係管理工具中的客戶文件，並看到客戶的社會安全號碼列為 XXX-XX-8945。使用了哪種數據混淆技術？</p>
+    <ol>
+        <li>匿名化</li>
+        <li>遮蔽 (Masking)</li>
+        <li>隨機化</li>
+        <li>哈希</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據遮蔽涉及用備用字符（如 X 或 *）替換數據。這通常是通過軟體或資料庫本身的控制來完成的，因為底層數據在資料庫中保持不變。匿名化或去識別化會刪除可能允許識別個人的數據。哈希用於允許通過哈希引用數據而不顯示實際數據，但它會導致可能需要用於測試的數據屬性丟失。隨機化或混淆數據會移動數據，使其去關聯，但將真實數據留在原地進行測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> XML 文件被視為什麼類型的數據？</p>
+    <ol>
+        <li>非結構化數據</li>
+        <li>重構數據</li>
+        <li>半結構化數據</li>
+        <li>結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> XML 和 JSON 都是半結構化數據的例子。其他例子包括 CSV 文件、XML、NoSQL 資料庫和 HTML 文件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> Lucca 希望在基礎設施即服務雲服務提供商的環境中為他的 Linux 實例實施日誌記錄。他希望捕獲諸如系統創建和銷毀之類的事件，作為性能擴展要求的一部分。他應該使用哪個日誌記錄工具或服務來對這些事件獲得最深入的了解？</p>
+    <ol>
+        <li>來自 Linux 系統的 Syslog</li>
+        <li>雲服務提供商的內建日誌記錄功能</li>
+        <li>來自 Linux 系統的 Syslog-NG</li>
+        <li>來自 Linux 系統的本地事件日誌和應用程式日誌</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 提供商自己的日誌記錄功能是最佳選擇。關於系統創建和銷毀的資訊不會存在於本地系統上，因此 syslog、syslog-ng 和本地日誌都無法工作。此外，Linux 通常沒有應用程式日誌——事件和應用程式日誌都是 Windows 系統的常見日誌。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> Joanna 的公司使用負載均衡器在多個 Web 伺服器之間分配流量。當流量通過雲環境中的負載均衡器傳遞到本地 Web 伺服器時，通常會丟失哪個數據點？</p>
+    <ol>
+        <li>源 IP 地址</li>
+        <li>目標端口</li>
+        <li>查詢字符串</li>
+        <li>目標 IP 地址</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 原始源 IP 地址可能在本地 Web 伺服器日誌中不可見。幸運的是，如果需要，可以使用負載均衡器日誌。目標 IP 地址通常會保留，目標端口和實際查詢也是如此。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> Isaac 正在使用哈希函數進行完整性檢查，並允許引用地址數據而無需暴露實際數據。當數據被哈希時，數據的以下哪個屬性 *不會* 丟失？</p>
+    <ol>
+        <li>其唯一標識的能力</li>
+        <li>數據的長度</li>
+        <li>數據的格式</li>
+        <li>根據街道號碼對數據進行排序的能力</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 哈希將可變長度數據轉換為固定長度輸出，這意味著長度、格式以及使用字符串或數字對數據執行操作的能力都將丟失。其唯一標識的能力不會丟失——Isaac 只需要知道給定地址的哈希值即可繼續引用該數據元素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> Amanda 的安全數據儲存操作程序要求她確保使用數據分散技術。Amanda 需要做什麼才能符合此要求？</p>
+    <ol>
+        <li>刪除所有不在安全儲存中的數據。</li>
+        <li>將數據儲存在多個位置或服務中。</li>
+        <li>避免以完整形式儲存數據，需要從多個位置的數據才能使用一個數據集。</li>
+        <li>將數據地理上分開至少 15 英里，以確保單一自然災害無法銷毀它。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據分散是確保重要數據儲存在多個位置或服務中的做法。它不一定需要特定的距離或地理限制，不需要刪除不在安全儲存中的數據，也不需要您使用多個數據集來訪問數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Lisa 在她的雲託管環境中運行 Windows 實例。每個 Windows 實例都創建有一個 C: 驅動器，用於存放操作系統和應用程式文件。哪種類型的儲存最能描述這些 Windows 實例的 C: 驅動器？</p>
+    <ol>
+        <li>長期儲存</li>
+        <li>臨時儲存</li>
+        <li>原始儲存</li>
+        <li>基於卷的儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 與實例關聯並在實例關閉時將被銷毀的儲存是臨時儲存。原始儲存是指您可以直接訪問的儲存，例如具有底層設備訪問權限的硬碟或 SSD。長期儲存是指旨在持續存在的儲存，通常用於日誌或數據儲存。基於卷的儲存是指在雲中分配為虛擬驅動器或設備的儲存。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Steve 正在根據其組織的數據分類策略對數據進行分類。以下哪項 *不是* 常見的分類類型？</p>
+    <ol>
+        <li>數據大小</li>
+        <li>數據敏感性</li>
+        <li>涵蓋數據的管轄權</li>
+        <li>數據關鍵性</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據或文件的大小通常不是數據分類類型或字段。敏感性、管轄權和關鍵性都是常用的數據分類方法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> Chris 正在審查他的數據生命週期，並希望在數據創建階段採取行動，以幫助他的數據丟失預防系統更有效。他應採取以下哪個行動來提高其 DLP 控制的成功率？</p>
+    <ol>
+        <li>數據標籤</li>
+        <li>數據分類</li>
+        <li>哈希</li>
+        <li>地理位置標記</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據標籤可以幫助 DLP 系統識別和管理數據，因此 Chris 應確保數據在其創建過程中被標記，以幫助他的 DLP 識別和保護它。分類很重要，但如果沒有標籤，DLP 將無法使用。哈希可用於幫助 DLP 識別特定文件，但通常由 DLP 系統本身在需要時完成，地理位置標記不是典型的 DLP 保護措施。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> Gary 正在代表他的公司收集數據以支持法律案件。為什麼他可能會在收集文件時對其進行數字簽名，並將其與數據一起以經過記錄、驗證的方式保存？</p>
+    <ol>
+        <li>允許數據分散</li>
+        <li>確保文件不被複製</li>
+        <li>通過加密保護文件安全</li>
+        <li>支持不可否認性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 保管鏈文件記錄（通常包括哈希文件等操作）通常用於支持不可否認性。數字簽名文件和數據分散不會阻止複製，也不會加密它們。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> Valerie 正在為她的雲環境執行風險評估，並希望識別她的組織用於可擴展、基於虛擬機的環境中系統驅動器的臨時卷儲存的風險。以下哪項 *不是* 臨時儲存的威脅？</p>
+    <ol>
+        <li>無意暴露</li>
+        <li>因憑證盜竊導致的惡意訪問</li>
+        <li>因其臨時性質導致的性能不佳</li>
+        <li>鑑識產物的丟失</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 臨時儲存將具有其整體儲存類型的性能，因此性能不佳不是預期的問題。無意暴露、惡意訪問和鑑識產物的丟失都是臨時儲存的問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> 在存儲被重新分配給其他客戶（如果未在解除分配時進行加密銷毀而僅進行零擦除）的環境中，哪種類型的存儲最有可能存在殘留數據問題？</p>
+    <ol>
+        <li>臨時儲存</li>
+        <li>原始儲存</li>
+        <li>長期儲存</li>
+        <li>磁光儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 原始儲存提供對磁碟的直接訪問，如果不進行加密銷毀，使用後很可能在磁碟上留下殘留數據。由於長期儲存和臨時儲存通常是抽象的，因此在未分配或重新分配的扇區中留下殘留數據的可能性較小，這些扇區不會通過典型的擦除操作清除。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> Kathleen 希望對大型數據集執行數據發現，並且知道某些數據類型比其他數據類型更難執行發現。以下哪種數據類型最難執行發現操作？</p>
+    <ol>
+        <li>非結構化數據</li>
+        <li>半結構化數據</li>
+        <li>嚴格結構化數據</li>
+        <li>結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 非結構化數據最難執行發現，因為數據未標記，需要使用搜索或其他可以處理任意數據的技術來完成發現。嚴格結構化數據不是 CCSP 考試目的的常見數據類型描述。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Isaac 希望根據身份驗證的來源國過濾事件。他應該使用哪個日誌資訊來對登錄進行盡力匹配？</p>
+    <ol>
+        <li>userID</li>
+        <li>IP 地址</li>
+        <li>地理位置</li>
+        <li>MAC 地址</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然並不總是完全準確，但地理位置（有時稱為 geoIP）數據試圖識別給定 IP 地址的位置。Isaac 可以使用該數據嘗試將身份驗證事件與用戶的登錄位置匹配，儘管 VPN 和其他工具可能會掩蓋實際的登錄位置。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> Charleen 希望使用一種數據混淆方法，允許使用真實數據而無需數據是與特定用戶或個人相關的實際數據。她應該使用哪種數據混淆方法？</p>
+    <ol>
+        <li>哈希</li>
+        <li>混洗 (Shuffling)</li>
+        <li>隨機化</li>
+        <li>遮蔽</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然可能存在一些關於使用真實數據的擔憂，但 Charleen 的目標是擁有實際數據進行測試，這使得混洗成為她的最佳選擇。哈希、隨機化和遮蔽都以有意義的方式刪除或修改數據，導致測試不像針對真實數據那樣準確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> Michelle 希望跟踪對象儲存桶中文件的刪除。如果她的組織大量使用基於對象的儲存來儲存臨時文件，她應該意識到什麼潛在問題？</p>
+    <ol>
+        <li>日誌記錄可能不準確。</li>
+        <li>如果事件過多，日誌記錄可能會自動禁用。</li>
+        <li>無法在文件系統中記錄創建和刪除事件。</li>
+        <li>高容量的日誌記錄可能會增加運營成本。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Michelle 應該意識到，記錄刪除事件以及任何其他高容量事件可能會給她的組織帶來額外的成本。由於問題特別提到了臨時文件和大量使用，這對她的組織來說可能是一個更重要的問題。日誌將顯示相關資訊，沒有理由表明它們不準確，日誌記錄由帳戶持有人或所有者啟用或禁用，對象儲存文件系統支持創建和刪除事件日誌記錄。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> Diana 正在概述她的組織將用於其數據的標籤方案。以下哪項 *不是* 常見的數據標籤？</p>
+    <ol>
+        <li>創建日期</li>
+        <li>數據貨幣價值</li>
+        <li>計劃銷毀日期</li>
+        <li>機密性級別</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據的機密性級別通常包含在標籤中，但貨幣價值不是常見的數據標籤。創建日期和計劃銷毀日期也是常見的數據標籤。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> Susan 希望為法律保留做好準備。哪個組織策略通常會考慮法律保留？</p>
+    <ol>
+        <li>數據分類策略</li>
+        <li>保留策略</li>
+        <li>可接受使用策略</li>
+        <li>數據洩露響應策略</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 保留策略通常包含解決法律保留的語言，因為保留會影響保留實踐和要求。數據分類、可接受使用和數據洩露響應策略通常不包括法律保留語言。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> Henry 希望遵循 OWASP 金鑰儲存指南。以下哪項 *不是* 金鑰儲存的最佳實踐？</p>
+    <ol>
+        <li>金鑰必須以明文形式儲存以允許訪問。</li>
+        <li>金鑰必須在易失性和持久性記憶體中都受到保護。</li>
+        <li>儲存在資料庫中的金鑰應使用金鑰加密金鑰進行加密。</li>
+        <li>金鑰應在儲存中受到保護，以確保它們不會被無意中修改或更改。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 金鑰永遠不應以明文形式儲存，而應儲存在安全的方式中——通常在硬體安全模塊或其他密鑰庫中進行加密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Marco 希望實施資訊權限管理工具。數據生命週期的哪個階段嚴重依賴 IRM 來確保組織保留對其數據的控制權？</p>
+    <ol>
+        <li>創建</li>
+        <li>儲存</li>
+        <li>分享</li>
+        <li>銷毀</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然 IRM 在雲數據生命週期的許多階段都很有用，但 Marco 知道共享數據是 IRM 最常用來確保數據不會被無意暴露或濫用的時候。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> JSON 是哪種類型數據的範例？</p>
+    <ol>
+        <li>結構化數據</li>
+        <li>半結構化數據</li>
+        <li>非結構化數據</li>
+        <li>標記數據</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> JSON 是半結構化數據的例子。其他例子包括 CSV 文件、XML、NoSQL 資料庫和 HTML 文件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> Charleen 希望對其組織的數據執行數據發現，這些數據儲存在由其組織的雲服務提供商託管的歸檔儲存中。關於此發現計劃，她應該指出什麼問題？</p>
+    <ol>
+        <li>由於歸檔儲存的設計和定價方式，它可能緩慢且昂貴。</li>
+        <li>數據可能不存在，因為它已被歸檔。</li>
+        <li>發現過程無法針對歸檔儲存運行，因為它在正常情況下不線上。</li>
+        <li>在掃描以進行發現之前，需要解密數據。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲歸檔儲存通常主要設計為儲存位置，具有不頻繁和較小規模的訪問，而不是像發現過程那樣的大規模交互式訪問。如果在歸檔位置掃描數據，它可能會很慢且可能成本高昂。Charleen 應驗證掃描歸檔數據是否有意義，或者將其移動到不同的儲存層是否更符合組織的需求。數據應該存在，因為歸檔儲存用於保存數據；歸檔儲存是在線的，但可能很慢；並且沒有提到加密，所以我們不能假設它已加密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> Ujama 的經理要求他執行數據映射以準備他的下一個任務。Ujama 將做什麼？</p>
+    <ol>
+        <li>向非結構化數據添加數據標籤</li>
+        <li>將一個資料庫中的字段與另一個資料庫中的字段匹配</li>
+        <li>識別系統驅動器上特定類型文件的儲存位置</li>
+        <li>為數據儲存構建文件和文件夾結構</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據映射是匹配資料庫中字段以允許它們集成或用於數據遷移等目的的過程。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Lin 希望確保其組織的數據標籤與數據保持一致。她應該如何標記她的數據，以使其最有機會保留其標籤？</p>
+    <ol>
+        <li>將標籤嵌入文件名中。</li>
+        <li>在文件內容的開頭添加標籤。</li>
+        <li>向文件元數據添加標籤。</li>
+        <li>在文件內容的末尾添加標籤。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 將標籤作為文件元數據的一部分添加是一種常見做法，與包含在文件名中相比，更改的可能性較小。修改文件本身以在文件開頭或結尾包含數據可能會導致處理問題，這些處理可能未準備好處理帶標籤的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> Nina 的組織丟失了與其一個雲端伺服器相關的密碼金鑰。Nina 可以做什麼來恢復受金鑰保護的數據？</p>
+    <ol>
+        <li>生成新金鑰以恢復數據。</li>
+        <li>使用金鑰的密碼短語來恢復金鑰。</li>
+        <li>反轉用於加密數據的哈希。</li>
+        <li>數據已丟失，Nina 無法恢復。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 金鑰託管和備份非常重要，一旦金鑰丟失，就無法恢復，數據應被視為丟失。生成新金鑰無法解密數據，密碼短語不足以恢復金鑰，哈希不是一種加密形式，無法反轉。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> Madani 計劃對其組織擁有的各種數據集和文件執行數據發現。哪種類型的數據最容易執行發現？</p>
+    <ol>
+        <li>非結構化數據</li>
+        <li>半結構化數據</li>
+        <li>加密數據</li>
+        <li>結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Madani 知道結構化數據定義良好且有組織，最容易執行發現操作。除非為發現過程解密數據，否則無法對加密數據執行發現。在大多數情況下，非結構化數據比半結構化數據更難發現。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> Ashley 跟踪鑑識圖像的處理，包括記錄處理人、收集時間和每次傳輸時間以及傳輸原因。Ashley 正在執行什麼實踐？</p>
+    <ol>
+        <li>記錄保管鏈</li>
+        <li>確保不可否認性</li>
+        <li>法律保留</li>
+        <li>鑑識會計</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ashley 正在記錄圖像的保管鏈以確保其可用於法庭。如果未正確記錄保管鏈，則可能發生否認。法律保留不一定需要保管鏈文件記錄，儘管組織可能會選擇或被要求確保它。鑑識會計是用於描述財務調查的術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> 以下哪項 *不是* 數據分類策略的常見目標？</p>
+    <ol>
+        <li>識別分類級別</li>
+        <li>分配責任</li>
+        <li>定義角色</li>
+        <li>映射數據</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據映射是用於描述匹配資料庫中字段以允許數據遷移或集成的術語。數據分類策略確實識別分類級別、分配責任和定義角色。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> Hiroyuki 希望優化其組織的數據標籤流程。他應如何以及何時實施數據標籤才能最有效率和效果？</p>
+    <ol>
+        <li>在數據創建階段手動標籤</li>
+        <li>在數據創建階段自動標籤</li>
+        <li>在數據使用階段自動標籤</li>
+        <li>在數據使用階段手動標籤</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在創建時標記數據可確保其在整個生命週期中得到妥善處理。盡可能自動標記是可取的，以避免人為錯誤並適應大多數組織創建的數據量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> Jen 希望確保其組織中個人使用的金鑰能夠得到妥善處理。以下哪項 *不是* 處理人類使用的長期金鑰的最佳實踐？</p>
+    <ol>
+        <li>使用金鑰匿名化訪問</li>
+        <li>識別金鑰用戶</li>
+        <li>識別金鑰使用時間</li>
+        <li>唯一標記金鑰</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用金鑰匿名化訪問消除了提供問責制的能力，違背了組織的最佳實踐。識別金鑰、用戶以及使用時間和方式支持使用問責制。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> Danielle 希望確保其雲託管數據中心中不再需要的數據得到妥善銷毀。她應該選擇以下哪個選項？</p>
+    <ol>
+        <li>物理銷毀媒體</li>
+        <li>加密銷毀</li>
+        <li>消磁</li>
+        <li>覆寫</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在大多數情況下，加密銷毀是受第三方組織控制或管理的環境中唯一可行的選擇。物理銷毀不受第三方提供商的支持或允許，消磁也是如此，消磁對許多現代硬碟也無效。覆寫可能可行，但對於 SSD 和動態分配的卷來說，殘留數據是一個問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> Charles 希望使用標記化作為其組織數據的安全實踐。他需要滿足哪個技術要求才能完成此操作？</p>
+    <ol>
+        <li>他需要加密他的數據。</li>
+        <li>他將需要兩個不同的資料庫。</li>
+        <li>他將需要使用支持 FIPS 140-2 的密碼引擎來創建令牌。</li>
+        <li>他需要對數據進行去識別化。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 標記化依賴於兩個不同的資料庫，一個包含實際數據，一個包含標記化數據。令牌伺服器然後在需要時從真實數據資料庫中提取令牌所代表的數據。此過程不需要加密、指定 FIPS 140 要求或涉及去識別化實踐。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> 一旦 Charles 準備好他的兩個資料庫，標記化過程中的下一步是什麼？</p>
+    <ol>
+        <li>數據發現以識別敏感數據</li>
+        <li>索引值的標記化</li>
+        <li>對資料庫中的每個項目進行哈希</li>
+        <li>資料庫中數據的隨機化以準備標記化</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在準備好源資料庫和標記化資料庫後，下一步是識別應標記化的數據。並非所有數據都是敏感的，因此並非所有數據都需要標記化。一旦您知道要標記化哪些數據，您就可以對其進行標記化——有時通過哈希處理數據。隨機化不是此過程的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Jack 希望了解數據在其組織中的使用方式。通常使用什麼工具來幫助 IT 專業人員了解數據在組織中的使用和移動位置及方式？</p>
+    <ol>
+        <li>數據分類</li>
+        <li>數據映射</li>
+        <li>數據流圖</li>
+        <li>數據策略</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據流圖是組織了解數據在整個組織中創建、移動和使用方式的關鍵部分。它們通常包括端口、協議、數據元素和分類以及其他詳細信息，可以幫助您不僅了解數據在哪裡，還了解它如何到達那裡以及使用中的數據是什麼。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> Annie 有一個字段標題為“chosen name”的資料庫，她還有另一個字段標題為“name”的資料庫。她知道這些字段在她組織中用於相同目的，並希望使用來自兩個資料庫的數據。她可以使用什麼過程來匹配這些字段和其他字段，以便她更容易地做到這一點？</p>
+    <ol>
+        <li>數據映射</li>
+        <li>列合併</li>
+        <li>數據標籤</li>
+        <li>列聚合</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Annie 應該映射資料庫字段之間的數據，然後使用映射來幫助她根據需要排序和管理數據。數據標籤用於使用重要資訊（如分類、創建日期或時間或其他元素）標記數據。列合併和列聚合是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> 以下哪個項目通常不包含在數據流圖中？</p>
+    <ol>
+        <li>數據類型或字段</li>
+        <li>服務</li>
+        <li>系統</li>
+        <li>數據生命週期資訊</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據生命週期不是數據流圖中的典型條目，因為它們側重於流程而非策略。數據類型、字段或名稱、服務、系統、端口、協議和安全詳細信息通常都包含在數據流圖中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> Jim 的組織希望實施密碼擦除作為其銷毀數據的主要手段。在數據的生命週期中，支持此操作需要首先採取哪個步驟？</p>
+    <ol>
+        <li>在創建時對所有數據進行哈希。</li>
+        <li>在使用前對硬碟進行零擦除，以確保沒有以前的數據駐留。</li>
+        <li>在創建時加密硬碟或卷。</li>
+        <li>以上所有。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在創建時加密硬碟或卷可確保寫入硬碟或卷的任何數據在其生命週期內都將被加密，並且銷毀加密金鑰將導致數據的安全銷毀。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> Charles 希望將數據儲存在關係資料庫中，該資料庫使用列和表來描述數據。以下哪種類型的數據無法輕易地儲存在關係資料庫中，除非作為文本塊 (text blob)？</p>
+    <ol>
+        <li>結構化數據</li>
+        <li>半結構化數據</li>
+        <li>非結構化數據</li>
+        <li>以上所有</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 非結構化數據沒有所需的結構，無法輕易地儲存在資料庫中。半結構化和結構化數據更容易儲存在關係資料庫中，因為它們具有描述符和元素，使其更容易映射到字段中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> Olivia 希望為她的組織制定數據保留策略。以下哪個列表最能描述保留策略的常見組成部分？</p>
+    <ol>
+        <li>保留期、監管合規要求、數據分類、數據刪除和生命週期以及歸檔和檢索程序</li>
+        <li>保留期、日誌記錄、數據分類、數據刪除流程和合規要求</li>
+        <li>數據分類要求、監管合規要求、數據創建和標記要求以及數據檢索程序</li>
+        <li>監管和合規要求以及與組織保留期的映射、法律保留流程和數據刪除要求</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 保留策略通常包括保留期、監管和合規要求、數據分類對保留的影響、應如何以及何時刪除數據以及歸檔和檢索程序。此外，Olivia 可能希望包括監控、維護和執行。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> Hui 希望撤銷由其資訊權限管理 (IRM) 系統頒發的證書。她如何驗證證書已被撤銷？</p>
+    <ol>
+        <li>使用與原始證書相同的信息頒發新證書。</li>
+        <li>嘗試使用她自己的證書訪問數據。</li>
+        <li>檢查 IRM 的證書撤銷列表。</li>
+        <li>刪除原始證書的私鑰。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> IRM 需要維護一個證書撤銷列表，允許用戶和應用程式驗證證書，就像任何其他使用證書的服務一樣。這意味著 Hui 應該能夠檢查列表以驗證她的操作，從而驗證已撤銷的證書是否在列表中。使用相同信息頒發新證書、使用她自己的證書訪問數據或刪除私鑰都無法使現有證書失效。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> Frank 的組織正準備採用資訊權限管理工具。哪個 IRM 能力側重於根據個人角色提供權限以確保適當的數據訪問？</p>
+    <ol>
+        <li>標記</li>
+        <li>數據標籤</li>
+        <li>加密</li>
+        <li>配置 (Provisioning)</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> IRM 系統的配置能力側重於根據角色和工作職能提供權限。標記和數據標籤用於確保根據規則適當處理數據。加密可保護靜態和傳輸中的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> Randy 正在遵循其組織的數據分類策略，並標記在組織業務影響分析中識別出的數據。Randy 正在執行哪種類型的分類？</p>
+    <ol>
+        <li>關鍵性 (Criticality)</li>
+        <li>管轄權 (Jurisdiction)</li>
+        <li>安全性 (Security)</li>
+        <li>敏感性 (Sensitivity)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 業務影響分析有助於確定繼續業務運營所需的數據。這是對數據關鍵性的評估，Randy 知道他標記的數據可能在發生災難或其他業務連續性問題時是必要的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> Susan 擔心她的組織不了解關鍵應用程式在其雲環境中的工作方式。最近的問題表明，她組織的開發人員和雲架構師對於系統和服務如何協同工作有不同的看法。Susan 應該準備什麼來幫助記錄和解釋系統和服務如何協同工作？</p>
+    <ol>
+        <li>數據分類</li>
+        <li>業務影響分析</li>
+        <li>數據流圖</li>
+        <li>數據映射</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 應準備一份數據流圖，與她的應用程式開發人員和雲架構師共享，以確保應用程式和服務環境得到正確記錄。數據映射匹配資料庫中的字段，業務影響分析工作評估數據對組織工作的重要性，數據分類根據敏感性、管轄權或關鍵性等因素描述數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> Jane 正在考慮將數據分散作為其組織的安全和可用性策略。如果她的組織確實採用多供應商方法進行分散，她應該強調哪個風險是最重大的潛在問題？</p>
+    <ol>
+        <li>數據分散使得加密數據變得困難。</li>
+        <li>地理分散可能會影響性能。</li>
+        <li>提供商的停機可能會導致數據不可用。</li>
+        <li>大多數雲供應商不支持分散。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 最常見的風險，因此也是此列表中影響最大的風險，是提供商停機導致無法訪問分散數據的可能性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> Selah 正在實施一個資訊權限管理系統。如果她想控制工作站和筆記本電腦上的文件，她會遇到什麼要求？</p>
+    <ol>
+        <li>需要部署雲原生伺服器</li>
+        <li>需要在端點設備上安裝代理</li>
+        <li>需要部署本地伺服器</li>
+        <li>需要在基於雲的系統上安裝代理</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 通常需要安裝本地代理才能讓 IRM 系統確保在端點系統上正確處理數據。問題沒有指定在雲端或本地使用伺服器，提到的端點不是基於雲的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> 音頻和視頻文件是哪種類型數據的範例？</p>
+    <ol>
+        <li>非結構化數據</li>
+        <li>敏感數據</li>
+        <li>標記數據</li>
+        <li>結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 非結構化數據包括圖像、音頻、視頻、文字處理文件以及其他不像結構化數據那樣具有正式定義結構的數據。沒有信息表明這是敏感數據，也沒有提到問題中的標籤。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> Wayne 希望使用託管在不同雲服務中的工具對儲存在雲服務中的非常大的數據集執行數據發現，這將需要將數據複製到工具所在的雲中。在評估這樣的選項時，他應該考慮的主要成本問題是什麼？</p>
+    <ol>
+        <li>數據當前所在的儲存層的成本</li>
+        <li>在雲服務之間移動數據的入口和出口費用</li>
+        <li>在其託管的雲中由發現過程生成的日誌成本</li>
+        <li>在數據所在的雲中由發現過程生成的日誌成本</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在此努力中，入口和出口費用通常是最高的費用之一。由於數據已包含在儲存層中，因此不應產生新的費用。日誌是基於文本的，可以有效地儲存，因此日誌文件不太可能成為主要的成本驅動因素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> Amanda 的組織使用保管鏈流程處理鑑識數據，並已從其雲環境中託管的受損系統捕獲了硬碟映像。Amanda 希望分析硬碟，同時避免可能導致硬碟映像否認或映像保管鏈問題的問題。她應該採取什麼行動來分析硬碟？</p>
+    <ol>
+        <li>在連接到鑑識寫保護設備的同時分析硬碟。</li>
+        <li>僅使用經批准的鑑識軟體分析硬碟。</li>
+        <li>製作原始映像的副本，對其進行驗證，然後分析該副本。</li>
+        <li>記錄對原始硬碟副本採取的所有操作以維護保管鏈。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Amanda 知道應保留原始硬碟，並且只應對鑑識副本採取操作。使用原始硬碟，無論過程如何，都不是鑑識最佳實踐。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> 以下哪項 *不是* 常見的資訊權限管理工具控制能力？</p>
+    <ol>
+        <li>防止截屏或拍攝顯示文本的照片</li>
+        <li>禁用複製文本</li>
+        <li>防止保存本地副本</li>
+        <li>禁止打印</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然 IRM 系統可以控制系統上的操作，但拍攝顯示文本的照片（甚至截屏）通常超出了它們的能力。防止複製、打印和製作副本都是常見的 IRM 功能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> Felix 在多個國家（包括歐盟成員國）運營其組織的雲資源。關於在其雲儲存中包含的數據集上進行數據發現，Felix 應表達的最重要擔憂是什麼？</p>
+    <ol>
+        <li>不同地區的成本可能有所不同，使得難以估計發現的價格。</li>
+        <li>不同地點的監管要求會有所不同，可能使發現期間的合規性變得困難。</li>
+        <li>結構化數據比非結構化數據更難處理，使得跨區域發現具有挑戰性。</li>
+        <li>區域之間可能不允許加密，使得發現的安全性降低。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 監管合規性對組織很重要，Felix 需要指出，跨多個國家和地區的發現可能涉及一套複雜的法規需要遵守。不同地區的成本可能有所不同，但這不是 Felix 需要提出的主要擔憂。問題中沒有提到數據是否結構化，雖然法律可能涵蓋加密導入和導出，但如果需要，可以使用每個地區的本地工具進行發現。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> Jason 希望降低在其雲基礎設施即服務環境中使用儲存來存放不經常訪問的日誌和其他數據的持續成本。他應該考慮對這些數據做什麼？</p>
+    <ol>
+        <li>刪除數據以節省成本。</li>
+        <li>將數據歸檔到成本較低的儲存層。</li>
+        <li>將數據移動到第三方服務提供商以降低成本。</li>
+        <li>將數據歸檔到性能更高的儲存層。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 將數據歸檔到成本較低且通常性能較低的儲存層是雲數據保留的常見策略。像 Amazon 的 Glacier 這樣的例子允許長期儲存，訪問不頻繁或緩慢，並且可能需要額外的檢索成本，但在數據不太可能被訪問時優化成本。刪除數據不允許使用它，移動到第三方服務提供商更複雜，移動到性能更高的儲存層不符合他的成本需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> Frank 知道他的組織在創建數據時會為數據添加數據標籤。雲數據生命週期的哪個額外階段通常會在數據組合或修改時包含數據標籤？</p>
+    <ol>
+        <li>儲存</li>
+        <li>使用</li>
+        <li>分享</li>
+        <li>刪除</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據生命週期的使用階段通常包括數據的修改，因此需要更改或添加標籤。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> Chris 希望安全地將數據從他的 Web 應用程式發送到客戶端系統。他應該使用哪個加密協議？</p>
+    <ol>
+        <li>SSL</li>
+        <li>MD5</li>
+        <li>SHA-1</li>
+        <li>TLS</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> TLS 或傳輸層安全是 Web 應用程式流量的首選加密協議。它取代了 SSL。MD5 和 SHA-1 都是哈希算法，而不是加密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> Kathleen 的組織使用一種稱為位拆分的技術，將加密資訊分散到多個雲服務中，使其更難獲取和恢復數據。哪個雲數據概念最能描述此類活動？</p>
+    <ol>
+        <li>數據分散</li>
+        <li>數據映射</li>
+        <li>業務連續性</li>
+        <li>數據流</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據分散最能描述此情況，位拆分是一種數據分散形式，儘管它更常與惡意使用相關聯，以避免鑑識分析和調查。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> Gurleen 的組織因法律保留而保存了數據，但該數據已達到法定要求的保留期限。Gurleen 應該怎麼做？</p>
+    <ol>
+        <li>聯繫相關政府機構，詢問有關法律保留的法規。</li>
+        <li>根據法定要求刪除數據。</li>
+        <li>繼續保存數據以滿足法律保留要求。</li>
+        <li>為法律保留製作數據副本並刪除原始數據。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 法律保留通常優先於其他刪除要求。雖然 Gurleen 應諮詢其組織的法律顧問，但一般來說，她應繼續保存數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> Quentin 的組織使用附加到其實例化系統的臨時儲存，這些系統在其組織的雲託管環境中。當實例終止時會發生什麼？</p>
+    <ol>
+        <li>該卷將被保留以供將來的實例使用。</li>
+        <li>該卷將被擦除並重新用於 Quentin 組織擁有的下一個實例化實例。</li>
+        <li>數據將被移動到長期儲存層，直到手動刪除。</li>
+        <li>儲存將被擦除並由提供商回收以分配給其他地方。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在大多數雲提供商的基礎設施中，與實例關聯的臨時儲存會在實例終止時被擦除並回收以重新分配。如果實例只是關閉，儲存將被保留以便系統重新激活。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Renee 希望在其數據保留策略中為日誌文件設置一個保留期，以最小化持續的保留成本。對於沒有合同或法律保留要求的臨時日誌，她應選擇哪個保留期？</p>
+    <ol>
+        <li>45 天</li>
+        <li>6 個月</li>
+        <li>3 年</li>
+        <li>7 年</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 臨時數據通常保留較短的時間，例如 45 天，這段時間足以進行調查，而不會積累大量不會使用且儲存成本高昂的數據。較長的保留期可能由法律或合同規定，或由於特定的合同要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> Brian 受命對加密硬碟執行密碼擦除過程。他需要採取哪些步驟來確保數據被安全銷毀？</p>
+    <ol>
+        <li>銷毀加密金鑰的所有副本。</li>
+        <li>加密，然後解密硬碟。</li>
+        <li>解密，然後用新金鑰重新加密硬碟。</li>
+        <li>對硬碟進行消磁，然後進行零擦除。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然看起來很簡單，但安全地刪除加密金鑰的所有副本即可完成加密銷毀的銷毀過程。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> Lincoln 希望識別對像 Amazon Glacier 這樣的長期儲存服務中儲存數據的可用性的威脅。以下哪個威脅應被識別為影響可用性？</p>
+    <ol>
+        <li>服務中斷</li>
+        <li>憑證盜竊</li>
+        <li>權限不當</li>
+        <li>缺乏加密</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 服務中斷是此列表中唯一直接威脅可用性的威脅。Lincoln 在做出採用該服務的決定時，應審查服務提供商的服務中斷和問題歷史記錄。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> Theresa 希望為其資訊權限管理系統識別端點系統而非用戶。通常使用什麼來向 IRM 識別系統？</p>
+    <ol>
+        <li>系統名稱</li>
+        <li>IP 地址</li>
+        <li>用戶 ID 和密碼</li>
+        <li>證書</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 資訊權限管理系統通常依賴證書來識別系統。它們可以集中頒發和管理，並用於數字簽名和加密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> Derek 的組織使用應用於資料庫中數據的密碼單向函數，以允許引用數據而無需使用實際數據。他們正在使用哪種匿名化技術？</p>
+    <ol>
+        <li>匿名化</li>
+        <li>遮蔽</li>
+        <li>哈希</li>
+        <li>混洗</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Derek 的組織正在使用哈希，它使用單向密碼函數將數據替換為可以引用而無需暴露實際數據的值。匿名化側重於刪除可與特定用戶或個人相關聯的數據，遮蔽使用備用字符隱藏數據，混洗則在保留實際數據進行測試的同時切換數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> Henry 將其雲環境的日誌文件儲存在一個專為日誌的持久性和性能而設計的文件系統中。他正在使用哪種類型的儲存？</p>
+    <ol>
+        <li>長期儲存</li>
+        <li>臨時儲存</li>
+        <li>原始儲存</li>
+        <li>基於卷的儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 長期儲存是指旨在持續存在且通常用於日誌或數據儲存的儲存。與實例關聯並在實例關閉時將被銷毀的儲存是臨時儲存。原始儲存是指您可以直接訪問的儲存，例如具有底層設備訪問權限的硬碟或 SSD。基於卷的儲存是指在雲中分配為虛擬驅動器或設備的儲存。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> Alaina 的組織使用其雲服務提供商提供的秘密管理服務。Alaina 知道這些秘密對服務的操作至關重要，並希望在服務不可用時實施“打碎玻璃”應急程序。以下哪項 *不是* 這類秘密恢復能力的常見最佳實踐？</p>
+    <ol>
+        <li>為秘密構建自動備份系統。</li>
+        <li>定期測試秘密的恢復過程。</li>
+        <li>在原始提供商的雲中使用第二個實例進行備份系統。</li>
+        <li>加密備份並將其放置在安全儲存中。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> OWASP 的秘密管理備忘單描述了“打碎玻璃”秘密備份環境的三個主要要求：確保根據秘密數量及其生命週期定期執行自動備份，經常測試恢復過程，以及加密備份並將其放置在安全的、受監控的儲存中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> Alaina 希望實施秘密檢測以幫助識別秘密暴露問題。以下哪種技術最能幫助她的組織在內部測試環境中輕鬆檢測不良做法而不會產生過度風險？</p>
+    <ol>
+        <li>為開發、測試和生產使用秘密管理器以確保秘密安全。</li>
+        <li>使用標準測試秘密並蒐索它們。</li>
+        <li>使用多個檢測實用程序以減少遺漏秘密的機會。</li>
+        <li>使用高熵秘密以限制猜測秘密的可能性。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用標準測試秘密使其更容易在暴露位置檢測到。由於 Alaina 特別擁有內部測試環境，這是使用標準秘密的正確位置。秘密管理器應在所有位置使用，但它們無助於識別秘密暴露問題。多個實用程序可能很誘人，但它們會增加開銷和額外工作，而正確配置和測試的實用程序在大多數情況下將提供足夠的檢測。高熵秘密很有用，但具有已知且一致格式的秘密更容易被檢測到，因此可以檢測到暴露問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Angie 希望將其組織的 100 TB 數據移動到其雲提供商環境中的歸檔類儲存。在決定新解決方案的成本時，以下哪個決策點影響最大？</p>
+    <ol>
+        <li>要歸檔的數據量</li>
+        <li>數據類型</li>
+        <li>數據的敏感性</li>
+        <li>檢索時間</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 檢索時間，即訪問數據所需的時間，是雲環境中歸檔儲存成本的主要驅動因素。問題中的數據大小是固定的，因此 Angie 需要弄清楚她可以控制哪些其他選項。數據的類型和敏感性不影響成本，但可能會影響 Angie 為保護和管理數據而採取的做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> 下圖顯示了什麼過程？ (圖示：顯示兩個資料庫表 DB1 和 DB2。DB1 有字段：Name, Primary email, Home phone。DB2 有字段：Firstnamelastname, Preferred_email, Cell phone, Home phone, Business phone。箭頭從 DB1 的字段指向 DB2 的相應字段。)</p>
+    <ol>
+        <li>字段哈希</li>
+        <li>表匹配</li>
+        <li>字符串比較</li>
+        <li>數據映射</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 該圖顯示了兩個資料庫表之間匹配名稱、電話號碼和電子郵件地址的數據映射過程。字符串比較比較兩個字符串以確定它們是否相同。字段哈希和表匹配是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> Wei 的組織正在實施資訊權限管理系統。哪個 IRM 過程確保用戶收到他們訪問受 IRM 保護的文件所需的權限和特權？</p>
+    <ol>
+        <li>標記</li>
+        <li>配置 (Provisioning)</li>
+        <li>標籤</li>
+        <li>數據映射</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 為 IRM 系統進行配置可為用戶提供他們需要訪問的文件的權限和特權。標記和標籤有助於根據數據分類指南標記文件，從而允許 IRM 適當地應用規則，數據映射則將資料庫中的字段相互映射。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> Dana 準備將其組織的數據移動到雲歸檔儲存。以下哪項是與歸檔儲存性能相關的最重要考慮因素？</p>
+    <ol>
+        <li>儲存成本</li>
+        <li>數據訪問模式</li>
+        <li>數據量或數量</li>
+        <li>數據將儲存的時間長度</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在選擇歸檔儲存之前，了解數據訪問模式是最重要的事情之一。歸檔儲存類別和服務通常側重於廉價、低頻率、慢速訪問，但其他選項可以包括更動態的訪問能力——通常成本更高，因為儲存需要能夠支持更高的性能。儲存成本就是成本，不是性能。數據量以及數據儲存的時間長度也會影響成本，而不是性能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> 數據分類策略定義的哪個角色對數據負有總體責任，並且通常是高級管理層成員？</p>
+    <ol>
+        <li>數據保管人</li>
+        <li>數據所有者</li>
+        <li>數據處理者</li>
+        <li>數據用戶</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據所有者由數據分類策略定義，對其擁有的數據負有總體責任。數據保管人負責數據，確保訪問控制、適當儲存和其他操作控制。數據處理者通常是作為業務流程一部分處理數據的第三方，數據用戶是使用數據完成其工作的最終用戶。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> Elaine 的組織遭受了數據洩露，標記化的數據已被暴露。Elaine 應對標記化的數據表示什麼擔憂？</p>
+    <ol>
+        <li>可以對其進行反哈希以揭示原始數據。</li>
+        <li>標記化的數據不會引起數據洩露擔憂。</li>
+        <li>只有在與其匹配的資料庫也暴露時，標記化的數據才令人擔憂。</li>
+        <li>如果令牌的加密金鑰也被盜，標記化的數據可能會被解密。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 只有在包含其引用的原始數據的資料庫也暴露時，標記化的數據才是一個問題。令牌未加密，雖然哈希用於許多標記化過程，但哈希是單向函數，應具有額外的轉換以確保僅僅哈希數據以獲取匹配項不會成功。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> Asha 希望能夠在其雲服務環境中輕鬆恢復意外更改的文件。她可以使用哪個功能來實現輕鬆恢復？</p>
+    <ol>
+        <li>啟用版本控制。</li>
+        <li>使用每日備份過程。</li>
+        <li>設置定期快照。</li>
+        <li>啟用自動歸檔。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 像 Amazon S3 環境中找到的版本控制工具允許您在發生意外更改、數據損壞或文件刪除時恢復到以前的版本。在某些情況下，這可能會佔用大量額外空間，因此 Asha 應仔細考慮在她的雲環境中啟用版本控制的位置和時間。每日備份、定期快照或歸檔過程在大多數情況下需要更長的時間來恢復，並且可能允許在備份、快照或歸檔發生之前進行多次更改。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> Brian 正在審查其組織的秘密管理策略和實踐。以下哪項 *不是* 他們應使用的實踐？</p>
+    <ol>
+        <li>減少具有對秘密儲存庫的管理訪問權限的人數。</li>
+        <li>定期輪換秘密。</li>
+        <li>最大化重要秘密的權限以減少所需的秘密總數。</li>
+        <li>啟用對秘密訪問和使用的日誌記錄和警報。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 最小特權的概念也適用於秘密，最大化秘密提供的權限而不是最小化它是一個壞主意。Brian 應尋求限制給定秘密提供的權限，以限制潛在洩露或濫用的影響。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> Chris 希望審計對其雲提供商塊儲存服務中儲存的高度敏感數據的訪問。他應啟用哪種類型的日誌記錄來監控特權帳戶對特定儲存桶的訪問？</p>
+    <ol>
+        <li>啟用身份驗證日誌記錄。</li>
+        <li>啟用訪問日誌記錄。</li>
+        <li>啟用帶寬監控。</li>
+        <li>啟用時間戳。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 訪問日誌記錄將允許 Chris 監控個人（包括特權帳戶）對特定儲存桶的訪問。身份驗證日誌記錄不會顯示訪問，帶寬日誌記錄也不會。任何日誌事件都應默認啟用時間戳。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> Jaime 正在執行數據發現，並希望在她正在處理的非結構化數據中搜索特定術語。她正在執行哪種類型的發現？</p>
+    <ol>
+        <li>基於標籤的發現</li>
+        <li>基於元數據的發現</li>
+        <li>基於內容的發現</li>
+        <li>基於結構的發現</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jaime 正在執行基於內容的發現，方法是在非結構化數據中搜索特定術語。基於標籤的發現將依賴數據標籤，基於元數據的發現使用元數據資訊，基於結構的發現是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> Mike 已意識到某個證書的私鑰在一次事件中被暴露。Mike 應首先做什麼來限制暴露的潛在影響？</p>
+    <ol>
+        <li>立即頒發新證書並安全地將其傳輸給用戶。</li>
+        <li>立即撤銷證書並將其添加到證書撤銷列表中。</li>
+        <li>搜索證書的所有位置以了解其暴露可能產生的影響。</li>
+        <li>採訪用戶或所有者以確定證書為何暴露。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Mike 應立即撤銷證書，以便限制任何惡意使用。然後他可能想確定證書為何暴露，並頒發新證書以確保用戶或所有者可以繼續執行其工作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> Dan 的 DLP 部署在基於模式匹配進行關鍵詞匹配時一直出現誤報，導致其組織的安全團隊額外工作。如果 DLP 目前依賴模式匹配作為識別敏感資訊的主要手段，他可以做些什麼來最好地提高 DLP 的性能？</p>
+    <ol>
+        <li>用其敏感性級別標記數據。</li>
+        <li>應用數據生命週期並刪除不需要的數據以減少被監控的數據量。</li>
+        <li>根據分類方案對數據進行分類。</li>
+        <li>使用正則表達式來提高模式匹配算法的成功率。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 標記數據將有助於 DLP 在不依賴模式匹配的情況下適當地管理它。減少總體數據量可能會有所幫助，但 Dan 的首要任務應該是使用更有效的方法。分類數據有幫助，但前提是您對其進行標記或以其他方式幫助 DLP 輕鬆管理它。正則表達式是模式匹配的一部分。改進它們可能會有所幫助，但依賴最具挑戰性的匹配模式的根本問題仍然存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> Olivia 的雲環境使用臨時機器，這些機器會根據利用率的增長和縮減而實例化和關閉。她擔心確定事件發生在哪個系統上的能力。當每台機器發送日誌數據時，她應確保記錄哪個關鍵數據元素？</p>
+    <ol>
+        <li>系統的 IP 地址</li>
+        <li>與系統關聯的管理用戶</li>
+        <li>每個系統實例的唯一標籤</li>
+        <li>系統的刪除時間</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在處理臨時系統時，標籤是一個重要的工具。雖然 IP 地址可能會被重複使用，管理帳戶可能在各個系統中相同，但標籤可以是唯一的，允許將事件跟踪到一個實例。系統的刪除時間應該被記錄，實例化的時間也應該被記錄，但這顯然不會出現在機器創建的每個日誌事件中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> Valerie 的組織在法律上被允許在 7 年後處置特定的運營數據，並有一個基於生命週期標籤刪除數據的自動處置過程。Valerie 最近被告知，來自一位客戶的數據已被置於法律保留狀態。她應該怎麼做？</p>
+    <ol>
+        <li>刪除數據；法律允許在 7 年後處置，無論法律保留如何。</li>
+        <li>保存請求的數據，直到法律保留結束。</li>
+        <li>保留完整的數據集，直到法律保留結束。</li>
+        <li>製作所有數據的副本，將其移動到備用儲存，並刪除原始數據以滿足兩個法律要求。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 法律保留通常優先於其他協議和生命週期。Valerie 應僅保存請求或涵蓋在法律保留範圍內的數據，並應繼續對剩餘數據執行正常做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> Heikki 準備部署一個數據丟失預防系統。他已對其數據進行了優先級排序、分類和標記。他需要做什麼來確保該系統能夠幫助保護其組織的數據？</p>
+    <ol>
+        <li>建立 DLP 策略。</li>
+        <li>執行數據匹配。</li>
+        <li>定義數據生命週期。</li>
+        <li>培訓用戶。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Heikki 的下一步將是建立策略，將適當的控制應用於他已分類和標記的數據。一旦設定了這些策略，他就可以培訓用戶並運行 DLP。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> Kara 正在對大量圖片執行數據發現，並使用嵌入在照片中的數據，包括拍攝時間、相機和類似數據。她正在執行哪種類型的發現？</p>
+    <ol>
+        <li>基於元數據的發現</li>
+        <li>基於內容的發現</li>
+        <li>基於標籤的發現</li>
+        <li>基於標籤的發現</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Kara 正在執行基於元數據的發現，使用大多數數碼照片中已存在的元數據。基於內容的發現可能會比較照片以尋找特定主體，基於標籤或標籤的發現將利用數據標籤。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> Rick 被告知，他組織的一個應用程式的開發團隊正在使用標記化數據處理客戶信息。根據此信息，Rick 知道什麼？</p>
+    <ol>
+        <li>實際客戶信息儲存在標記化資料庫中。</li>
+        <li>客戶數據是安全的，因為令牌無法被破解。</li>
+        <li>令牌資料庫的洩露將導致客戶數據洩露。</li>
+        <li>標記化的數據可以根據包含客戶數據的資料庫進行查找。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Rick 知道標記化的數據可以根據包含原始客戶數據的資料庫進行查找，從而允許根據需要訪問它。實際客戶數據儲存在單獨的資料庫中，這意味著令牌資料庫的洩露不會導致客戶數據洩露。客戶數據更安全，但如果攻擊者利用令牌及其查找能力，仍然可能被洩露。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> 作為事件響應過程的一部分，Jack 希望驗證其雲環境中運行的系統實例的完整性。他可以做什麼來快速有效地檢查虛擬機映像是否未被修改？</p>
+    <ol>
+        <li>檢查雲提供商的日誌以查找對機器的修改。</li>
+        <li>將機器實例的哈希與原始哈希進行比較。</li>
+        <li>將機器上的文件時間戳和日期與原始文件進行比較。</li>
+        <li>重建機器並手動將其與原始機器進行比較。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 哈希可用於驗證映像是否已被修改，但需要注意的是，正在運行的機器與原始機器的哈希會有所不同。Jack 可能需要檢查特定的文件哈希。雲提供商日誌可能不會顯示對實例的更改，時間戳耗時檢查且可能在文件複製時被修改，重建機器通常會導致差異。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> Tara 將其雲服務的備份儲存在其雲服務提供商提供的長期儲存服務中，以及一個單獨的第三方長期備份環境中。Tara 實施了哪個概念？</p>
+    <ol>
+        <li>重複數據刪除</li>
+        <li>分散</li>
+        <li>受保護的供應鏈</li>
+        <li>生命週期管理</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 分散是確保數據位於多個位置的概念，這樣單一故障、事件或損失不會導致數據的銷毀或丟失。重複數據刪除涉及從數據集中刪除重複項；受保護的供應鏈和生命週期管理是指數據在其整個生命週期中如何管理，並不具體描述數據儲存在何處以實現冗餘。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> Christina 的組織在多個國家設有分支機構，但希望將其數據歸檔到位於北美的組織主要雲託管環境中。關於在此場景中集中數據，她應提出的最重要擔憂是什麼？</p>
+    <ol>
+        <li>需要確保監管合規性</li>
+        <li>數據移動時可能暴露的風險</li>
+        <li>來自國際地點的傳輸速度</li>
+        <li>由於移動可能需要重新映射權限的事實</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當數據在其他國家創建和使用時，可能受到特定於這些國家的法規的約束。Christina 應指出監管合規性至關重要，並且在此場景中可能證明複雜。應通過使用加密進行所有傳輸等最佳實踐來解決暴露問題。歸檔數據的傳輸速度通常不像運營數據那樣關鍵，應設置權限以適用於數據，無論位置如何。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> 在下圖中，哪個雲數據生命週期階段發生在問號處？ (圖示：一個六邊形生命週期圖，階段為創建、儲存、分類、？、轉移、刪除)</p>
+    <ol>
+        <li>歸檔</li>
+        <li>分發</li>
+        <li>加密</li>
+        <li>使用</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用階段發生在分類之後以及轉移或歸檔之前。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> Ben 對一個文件使用了哈希算法。以下哪項是他對輸出 *不* 知道的事情？</p>
+    <ol>
+        <li>它將是固定長度的。</li>
+        <li>它將是不可逆的。</li>
+        <li>相同的文件將生成相同的輸出。</li>
+        <li>兩個不同的文件可以哈希到相同的輸出。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ben 知道哈希是單向函數，不能反轉。它們從可變長度輸入生成固定長度輸出，相同的文件將生成相同的輸出。兩個不同的文件永遠不應生成相同的輸出——這被稱為衝突，在哈希算法中是不可接受的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> Jacinda 希望實施資訊權限管理解決方案。雲數據生命週期的哪個階段將嚴重依賴 IRM 來確保權限得到適當管理？</p>
+    <ol>
+        <li>創建</li>
+        <li>儲存</li>
+        <li>分享</li>
+        <li>銷毀</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> IRM 在雲數據生命週期的共享階段尤其有用，因為資訊權限管理工具可以確保在數據在組織內部移動甚至可能離開組織時，權限和對數據的訪問得到適當管理。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> 下圖中問號處發生哪個雲數據生命週期階段？ (圖示：一個六邊形生命週期圖，階段為創建、？、使用和訪問、分類、轉移、刪除)</p>
+    <ol>
+        <li>儲存</li>
+        <li>加密</li>
+        <li>標籤</li>
+        <li>配置</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 儲存發生在雲數據生命週期中的創建之後。標籤通常是創建過程的一部分。配置可能在任何時候進行，但通常與使用相關。加密不是一個階段。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> Naomi 的組織已從數據集中刪除了地址、姓名和電話號碼，同時保留了客戶信息，如訂單和網站活動。她使用了哪種數據混淆技術？</p>
+    <ol>
+        <li>匿名化</li>
+        <li>哈希</li>
+        <li>混洗</li>
+        <li>標記化</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Naomi 試圖通過刪除個人身份數據來匿名化數據。哈希使用單向密碼函數來引用數據，而無需暴露或使用數據本身。混洗移動數據，使其與其原始條目去關聯，但允許使用實際數據進行測試。標記化使用兩個資料庫，其中包含映射到稱為令牌的參考項的數據，允許引用令牌，然後引用這些令牌引用的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> Melissa 正在設計其組織的數據保留策略。以下哪項 *不是* 數據保留策略的常見組成部分？</p>
+    <ol>
+        <li>保留期</li>
+        <li>數據價值</li>
+        <li>監管合規性</li>
+        <li>數據分類</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據價值通常不包含在數據保留策略中。相反，保留期、合規要求和數據分類以及生命週期要求以及歸檔和檢索程序都包括在內。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> Gary 的雲提供商作為其託管計劃的一部分，為他提供對伺服器中實際硬碟的直接訪問權限。當他在這些硬碟上安裝操作系統和應用程式時，Gary 正在使用哪種類型的儲存？</p>
+    <ol>
+        <li>長期儲存</li>
+        <li>臨時儲存</li>
+        <li>原始儲存</li>
+        <li>基於卷的儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 原始儲存是指您可以直接訪問的儲存，例如具有底層設備訪問權限的硬碟或 SSD。長期儲存是指旨在持續存在且通常用於日誌或數據儲存的儲存。與實例關聯並在實例關閉時將被銷毀的儲存是臨時儲存。基於卷的儲存是指在雲中分配為虛擬驅動器或設備的儲存。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> Maria 為其雲託管的 SharePoint 站點實施了資訊權限管理工具。她的組織的 SharePoint 用戶需要滿足什麼要求才能訪問受控文件？</p>
+    <ol>
+        <li>他們將需要僅通過本地文件共享訪問文件。</li>
+        <li>他們將需要對所有文件訪問使用多因素身份驗證。</li>
+        <li>他們將需要使用支持 IRM 的工具打開文件。</li>
+        <li>他們將需要在打開每個文件之前請求訪問權限。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> IRM 工具要求客戶端設備和應用程式支持 IRM，或者它們通過可以提供 IRM 控制的 Web 應用程式訪問文件。幸運的是，SharePoint 用戶傾向於大量使用 Microsoft Office，這意味著許多（如果不是大多數）文件將使用本身支持 IRM 的工具打開。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> Angelo 正在實施數據發現過程。他應從以下哪個步驟開始，以幫助加快發現過程？</p>
+    <ol>
+        <li>將數據映射到合規要求。</li>
+        <li>提取和編目元數據。</li>
+        <li>掃描敏感數據。</li>
+        <li>分類數據。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用現有元數據將有助於 Angelo 進行數據發現過程，因此他應從此開始。一旦他處理了元數據，他就可以用它來加快其他編目工作，例如掃描敏感數據、分類數據以及將數據映射到合規要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> Bob 已與其雲服務提供商簽訂合同，允許其組織由於特殊要求直接訪問其環境中的 SSD，並證明硬碟在其組織使用後已從中移除並進行了物理銷毀。Bob 正在使用哪種類型的儲存？</p>
+    <ol>
+        <li>長期</li>
+        <li>原始儲存</li>
+        <li>臨時儲存</li>
+        <li>塊儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個原始儲存的例子，它直接向用戶呈現底層硬體。</p>
+</div>
+
+</body>
+</html>

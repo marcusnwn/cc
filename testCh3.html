@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第三章 問題：雲平台與基礎設施安全（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第三章 問題：雲平台與基礎設施安全（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> Barry 是一家組織的 CIO，該組織最近遭遇了嚴重的運營問題，需要啟動災難恢復計劃。他想召開一次經驗教訓會議來審查這次事件。誰是這次會議的最佳主持人？</p>
+    <ol>
+        <li>Barry，作為首席資訊官</li>
+        <li>首席資訊安全官</li>
+        <li>災難恢復團隊負責人</li>
+        <li>外部顧問</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Barry 應招募一位獨立的主持人來主持會議。讓一位未直接參與此次工作的外部主持人可以鼓勵誠實和開放的反饋。雖然不一定需要使用外部顧問，但他們可以輕鬆地擔任此角色。也可以找到合格的內部員工來擔任此職位，但不應是參與事件響應工作或在計劃中有重大利益關係的人，例如 Barry、CISO 或 DR 團隊負責人。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> 如果雲用於 BC/DR 目的，失去 ___________________ 可能會嚴重影響您組織的 RTO。</p>
+    <ol>
+        <li>任何雲管理員</li>
+        <li>特定的 VM</li>
+        <li>您的政策和合同文件</li>
+        <li>ISP 連接性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 沒有 ISP 連接性，任何人都無法使用網際網路，因此也無法使用雲。當然，現實情況是，沒有網際網路連接，大多數組織無論是在雲端還是在本地運營，都無法完成太多業務。失去任何單一雲管理員不太可能嚴重影響您組織的 RTO。失去特定的 VM 可能不會嚴重影響您組織的 RTO。VM 可以輕鬆地重新實例化。選項 B 不正確。失去您的政策和合同文件不會嚴重影響您組織的 RTO。選項 C 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Brent 正在審查將保護其組織在其本地數據中心發生持續停電事件時的控制措施。以下哪個解決方案最能滿足他的需求？</p>
+    <ol>
+        <li>冗餘伺服器</li>
+        <li>不間斷電源 (UPS)</li>
+        <li>發電機</li>
+        <li>RAID</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 發電機能夠在停電事件中提供持續的備用電源，但它們需要時間才能啟動。不間斷電源 (UPS) 提供即時的、由電池驅動的電源，用於覆蓋短暫的電力損失，但無法覆蓋持續的電力損失。廉價磁碟冗餘陣列 (RAID) 和冗餘伺服器是高可用性控制，但不涵蓋電力損失場景。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> Carolyn 擔心她網路上的用戶可能未經適當授權或安全控制就在他們的硬碟上儲存敏感資訊，例如社會安全號碼。她可以實施哪個第三方安全服務來最好地檢測此活動？</p>
+    <ol>
+        <li>IDS</li>
+        <li>IPS</li>
+        <li>DLP</li>
+        <li>TLS</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據丟失預防 (DLP) 系統可以識別儲存在端點系統上或在網路上傳輸的敏感資訊。這是它們的主要目的。DLP 系統通常作為第三方託管服務提供。入侵檢測和預防系統 (IDSs/IPSs) 可能會使用為此目的構建的簽名來識別一些敏感資訊，但這不是這些工具的主要作用，它們在此任務上的效果不如 DLP 系統。TLS 是一種網路加密協議，可用於保護敏感資訊，但它沒有任何識別敏感資訊的能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> 哪些個人應該有權訪問雲數據中心的管理平面？</p>
+    <ol>
+        <li>服務提供商工程師</li>
+        <li>客戶工程師</li>
+        <li>終端用戶</li>
+        <li>A 和 B</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲服務提供商數據中心的管理平面應保留給該提供商自己的工程師使用。管理平面上的流量控制著基礎設施本身的運行，授予客戶（即使是訓練有素的工程師）訪問該網路可能會危及其他客戶的安全。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Roland 是一家組織的物理安全專家，該組織擁有大量經常在設施內移動的昂貴實驗室設備。以下哪種技術能以最具成本效益的方式提供庫存控制過程的最大自動化？</p>
+    <ol>
+        <li>IPS</li>
+        <li>Wi-Fi</li>
+        <li>RFID</li>
+        <li>乙太網</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 無線射頻識別 (RFID) 技術是一種追蹤設施內物品的經濟有效方式。雖然 Wi-Fi 可用於相同目的，但其實施成本要高得多。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> Becka 最近簽訂了一份合同，內容是關於一個備用數據處理設施，該設施將在發生災難時為她的公司提供空間。該設施包括 HVAC、電力和通信線路，但沒有硬體。Becka 使用的是哪種類型的設施？</p>
+    <ol>
+        <li>冷站</li>
+        <li>暖站</li>
+        <li>熱站</li>
+        <li>移動站</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 冷站包括數據中心運營所需的基本能力——空間、電力、HVAC 和通信——但不包括恢復運營所需的任何硬體。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> 您的組織將其生產環境託管在雲環境中。您正在考慮也將雲備份服務用於您的 BC/DR 目的。就冗餘和彈性而言，這種方法的最佳策略可能是什麼？</p>
+    <ol>
+        <li>讓您的雲提供商也提供 BC/DR 備份。</li>
+        <li>在您公司總部的場所保留 BC/DR 備份。</li>
+        <li>使用另一個雲提供商進行 BC/DR 備份。</li>
+        <li>將您的生產環境移回您的公司場所，並使用您的雲提供商託管您的 BC/DR 備份。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 最好在另一個雲提供商處進行備份，以防任何導致服務中斷的原因發生在您的主要提供商的整個環境中；這將更加複雜和昂貴，但它提供了最佳的冗餘和彈性。使用相同的提供商進行生產和備份不是一個壞選擇，但它帶來了相同的應急情況影響數據兩個副本的風險。將備份或生產環境本地化都不能提供最佳保護，因此選項 B 和 D 都不是可取的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> Philip 正在開發一個新的安全工具，該工具將被他組織的許多不同子公司的個人使用。他選擇使用 Docker 來部署該工具以簡化配置。哪個術語最能描述這種方法？</p>
+    <ol>
+        <li>虛擬化</li>
+        <li>抽象化</li>
+        <li>簡化</li>
+        <li>容器化</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 所有這些術語都準確地描述了這種技術的使用。然而，Docker 的使用最好被描述為容器化技術，所以這是最佳的答案選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> 在雲 BC/DR 活動中，需要保護的最重要資產是什麼？</p>
+    <ol>
+        <li>知識產權</li>
+        <li>雲數據中心的硬體</li>
+        <li>人員</li>
+        <li>可攜式媒體上的數據</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在所有安全活動中，健康和人類安全始終是至關重要的。所有這些資產都需要某種類型的保護；然而，人類安全必須始終是最高優先級。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> Carla 正在開發一個雲基礎設施服務產品的設計，她將把這個產品轉售給一些客戶。她的堆疊中哪個組件最直接負責執行屬於不同客戶的虛擬機的租戶分區？</p>
+    <ol>
+        <li>訪問控制列表</li>
+        <li>網路安全組</li>
+        <li>防火牆</li>
+        <li>Hypervisor</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 所有這些技術都在租戶分區中扮演一定角色。然而，這個問題特別詢問了屬於不同租戶的虛擬機的分區。這是虛擬化平台上 hypervisor 的責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> Carlos 正在為一個將建在新的四層公司總部內的數據中心進行設計規劃。該建築包括一個地下室和三個地上樓層。數據中心的最佳位置是哪裡？</p>
+    <ol>
+        <li>地下室</li>
+        <li>一樓</li>
+        <li>二樓</li>
+        <li>三樓</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據中心應位於建築物的核心。將其置於地下室使其容易受到洪水侵襲。一樓是建築物的正常入口點，使其更容易受到物理闖入。將其置於頂樓使其容易受到風和屋頂損壞。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Chris 是一家大型公司的資訊安全專業人員，當他走進大樓時，他注意到一個安全區域的門被敞開了。物理安全不屬於他的職責範圍，但他立即採取行動關上門，並通知物理安全團隊他的行動。Chris 正在展示哪個原則？</p>
+    <ol>
+        <li>盡職調查 (Due care)</li>
+        <li>審慎查核 (Due diligence)</li>
+        <li>職責分離</li>
+        <li>知情同意</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 盡職調查原則規定，個人應在情況下使用任何理性人都會期望的相同程度的謹慎來行事。這是一個非常廣泛的標準。審慎查核原則是盡職調查的一個更具體的組成部分，它規定被分配責任的個人應盡職盡責地準確、及時地完成它。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Roger 最近在一家公司接受了一個新的安全專業人員職位，該公司在 IaaS 環境中運行其整個 IT 基礎設施。以下哪項最可能是 Roger 公司的責任？</p>
+    <ol>
+        <li>配置網路防火牆</li>
+        <li>應用 hypervisor 更新</li>
+        <li>修補操作系統</li>
+        <li>在處置前擦除硬碟</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在基礎設施即服務環境中，供應商負責硬體和網路相關的責任。這些包括配置網路防火牆、維護 hypervisor 和管理物理設備。客戶保留對其虛擬機實例上操作系統的修補責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> Candace 正在為她組織的文件伺服器設計備份策略。她希望每個工作日執行一次備份，並且佔用的儲存空間盡可能小。她應該執行哪種類型的備份？</p>
+    <ol>
+        <li>增量備份</li>
+        <li>完整備份</li>
+        <li>差異備份</li>
+        <li>事務日誌備份</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 增量備份提供了包含最小數據量的選項。在這種情況下，那將是自上次增量備份以來修改的數據。差異備份將備份自上次完整備份以來修改的所有數據，這將是一個相當大的數量。完整備份將包括伺服器上的所有資訊。事務日誌備份專門設計用於支持資料庫伺服器，對文件伺服器無效。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> Alyssa 的團隊最近實施了一個新系統，該系統從各種日誌來源收集資訊，分析該資訊，然後觸發自動化 playbook 以響應安全事件。哪個術語最能描述這項技術？</p>
+    <ol>
+        <li>SIEM</li>
+        <li>日誌存儲庫</li>
+        <li>IPS</li>
+        <li>SOAR</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全資訊和事件管理 (SIEM) 系統從多個來源關聯資訊並執行分析，但它們止步於提供自動化 playbook 響應。這是安全編排、自動化和響應 (SOAR) 平台的領域。入侵防禦平台範圍更有限，允許根據 IPS 本身執行的分析來阻止流量。日誌存儲庫僅收集日誌資訊，不執行分析。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> Nick 正在評估他組織未來數據中心的選項。以下哪個選項通常會產生最大的前期成本？</p>
+    <ol>
+        <li>主機托管設施</li>
+        <li>雲數據中心</li>
+        <li>本地數據中心</li>
+        <li>SaaS 產品</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是“購買與構建”決策的一個典型例子。任何時候組織選擇構建資本資源，例如本地數據中心，都會涉及非常高的前期投資。這裡的其他產品涉及利用他人進行的資本投資，前期成本較低（或沒有），但經常性成本較高。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> Ben 是一位 IT 審計員，希望確保組織有適當的機制來為系統和應用程式創建適當的審計跟踪。以下哪個技術聚合和關聯日誌條目？</p>
+    <ol>
+        <li>SIEM</li>
+        <li>IPS</li>
+        <li>EDR</li>
+        <li>CASB</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全資訊和事件管理 (SIEM) 解決方案聚合來自許多不同來源的日誌條目，並將它們關聯起來以創建可解釋的審計跟踪。入侵防禦系統 (IPS) 分析和阻止可疑的網路流量。端點檢測和響應 (EDR) 平台監控端點是否存在惡意軟體並響應惡意軟體感染。雲訪問安全代理 (CASB) 在雲提供商之間執行組織的安全策略。IPS、EDR 和 CASB 解決方案是組織安全計劃的重要組成部分，但它們不聚合和關聯日誌條目。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> 除了雲提供商實施的安全控制之外，雲客戶還必須考慮由 ___________________ 實施的安全控制。</p>
+    <ol>
+        <li>各自的監管機構</li>
+        <li>終端用戶</li>
+        <li>雲客戶先前在本地環境中使用的任何供應商</li>
+        <li>提供商依賴的任何第三方</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於供應鏈依賴性會影響服務，雲客戶將需要確保任何第三方依賴性是安全的。監管機構和終端用戶不提供企業安全性，因此選項 A 和 B 不正確。用於本地安全的供應商將不再影響數據，因此選項 C 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Brittney 正在審查她組織的災難恢復流程數據，並注意到該企業資料庫伺服器的 MTD 為 30 分鐘。她對該伺服器的 RTO 有何了解？</p>
+    <ol>
+        <li>它需要少於 30 分鐘。</li>
+        <li>它需要至少 30 分鐘。</li>
+        <li>MTD 太短，需要更長。</li>
+        <li>RTO 太短，需要更長。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當 Brittney 審查恢復時間目標 (RTO) 數據時，她需要確保組織能夠在基於 30 分鐘最大容忍停機時間 (MTD) 的中斷後不到 30 分鐘內恢復。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> Cameron 擔心針對其公司主要 Web 應用程式的分佈式拒絕服務 (DDoS) 攻擊。以下哪個選項將提供對大規模 DDoS 攻擊的最大彈性？</p>
+    <ol>
+        <li>實施 CDN。</li>
+        <li>增加 Web 應用程式伺服器集群中的伺服器數量。</li>
+        <li>通過公司的 ISP 簽訂 DDoS 緩解服務合同。</li>
+        <li>增加可從一個或多個 ISP 獲得的帶寬量。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由主要提供商運營的內容分發網路 (CDN) 可以比任何其他解決方案更容易地處理大規模 DDoS 攻擊。通過 ISP 使用 DDoS 緩解技術是次有用的能力，其次是增加帶寬和增加 Web 應用程式伺服器集群中的伺服器數量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> John 的網路開始出現緩慢的症狀。他啟動了一個數據包捕獲工具，意識到網路正受到 TCP SYN 數據包的轟炸，並認為他的組織是拒絕服務攻擊的受害者。正在違反哪個資訊安全原則？</p>
+    <ol>
+        <li>可用性</li>
+        <li>完整性</li>
+        <li>機密性</li>
+        <li>拒絕</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 拒絕服務 (DoS) 攻擊旨在壓垮系統，直到它無法處理合法請求。此類攻擊的目的是拒絕合法用戶訪問系統，這是對可用性原則的違反。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> Mike 最近實施了一個入侵防禦系統，旨在阻止常見的網路攻擊影響他的組織。Mike 正在推行哪種類型的風險管理策略？</p>
+    <ol>
+        <li>風險接受</li>
+        <li>風險規避</li>
+        <li>風險緩解</li>
+        <li>風險轉移</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 風險緩解策略試圖降低風險發生的概率和/或影響。入侵防禦系統試圖降低成功攻擊的概率，因此是風險緩解的例子。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> 您正在嘗試確定您的組織必須在您的 BC/DR 活動中保護的關鍵資產。以下哪個產物對您的工作最有用？</p>
+    <ol>
+        <li>定量風險分析</li>
+        <li>定性風險分析</li>
+        <li>業務影響分析</li>
+        <li>風險偏好</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 業務影響分析 (BIA) 正是為此目的而設計的：確定組織內資產/資源/數據的關鍵路徑。它是用於制定 BC/DR 計劃的完美工具。風險分析選項和風險偏好選項可能會為 BIA 提供輸入，但它們不是用於確定保護 BC/DR 活動所需關鍵資產的工具。因此，選項 A、B 和 D 都是不正確的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> 主 HVAC 系統中的組件故障導致 Kim 管理的數據中心出現高溫警報。解決問題後，Kim 應考慮做些什麼來防止將來出現類似問題？</p>
+    <ol>
+        <li>閉環冷卻器</li>
+        <li>冗餘冷卻系統</li>
+        <li>沼澤冷卻器</li>
+        <li>將數據中心搬遷到更冷的氣候</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 設計良好的數據中心應對其基礎設施的每個關鍵部分具有冗餘系統和能力。這意味著電力、冷卻和網路連接都應是冗餘的。Kim 應確定如何確保單一系統故障不會使她的數據中心離線。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Joe 是一家基於雲的 ERP 系統的安全管理員。他正準備為幾位新員工創建帳戶。當他創建帳戶時，他應該給所有新員工什麼默認訪問權限？</p>
+    <ol>
+        <li>只讀</li>
+        <li>編輯者</li>
+        <li>管理員</li>
+        <li>無訪問權限</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在這種情況下，Joe 應遵循最小特權原則。他應默認不應用任何訪問權限，然後根據業務需要為每個用戶提供執行其工作職責所需的必要權限。只讀、編輯者和管理員權限可能對這些用戶中的一個或多個是必要的，但這些權限應基於業務需要分配，而不是默認分配。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> Jason 運營一個雲數據中心，並希望提高管理員以編程方式與管理平面上的後端解決方案互動的能力。他可以使用哪種技術來最好地實現此類自動化？</p>
+    <ol>
+        <li>CASB</li>
+        <li>API</li>
+        <li>Hypervisor</li>
+        <li>Python</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 應用程式編程接口 (API) 允許以編程方式與服務和平台進行交互。Jason 可以使用 API 將不同的技術聯繫在一起並以編程方式與它們互動。Python 腳本可能在該自動化中發揮作用，但它們本身無法實現自動化，因為腳本必須使用 API 與服務互動。雲訪問安全代理 (CASB) 在各種服務中執行客戶安全策略，不是後端安全解決方案。hypervisor 是管理平面的一個組件，將是自動化的目標，而不是自動化的促進者。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> 以下哪個是專門設計用於處理密碼密鑰管理的設備？</p>
+    <ol>
+        <li>密鑰管理盒 (KMB)</li>
+        <li>硬體安全模塊 (HSM)</li>
+        <li>票據授予票據 (TGT)</li>
+        <li>可信計算基 (TCB)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 問題描述的是 HSM。KMB 是一個用作干擾項的無意義術語，因此不正確。TGT 是與 Kerberos 單一登錄系統相關的術語，不正確。TCB 包括確保系統只能由具有適當權限的人（即具有 root 控制權限的管理員）控制的硬體和軟體（通常在操作系統中）元素，因此也不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> 組織中的哪個個人對災難恢復計劃的成功負有最終責任？</p>
+    <ol>
+        <li>終端用戶</li>
+        <li>BC/DR 團隊負責人</li>
+        <li>CISO</li>
+        <li>CEO</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 成功回答這個問題的關鍵是注意到它問的是誰負有“最終責任”。首席執行官 (CEO) 對組織的成功負有最終責任，因此如果業務失敗，他將是被追究責任的人。當然，組織中的每個人都對他們在計劃成功中的角色負有一定的責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Michael 負責鑑識調查，並且正在調查一起涉及公司網站被篡改的安全事件。相關 Web 伺服器運行在虛擬化平台上，市場營銷團隊希望盡快讓網站恢復運行。Michael 最合理的下一步是什麼？</p>
+    <ol>
+        <li>保持網站離線直到調查完成。</li>
+        <li>將虛擬化平台作為證據下線。</li>
+        <li>對受損系統進行快照並將其用於調查。</li>
+        <li>忽略該事件並專注於快速恢復網站。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Michael 應該進行他的調查，但有迫切的業務需求需要讓網站重新上線。最合理的做法是對受損系統進行快照並將其用於調查，同時盡快恢復網站的運行，並利用調查結果來提高網站的安全性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> 在虛擬化計算環境中，哪個組件負責在客戶機之間強制隔離？</p>
+    <ol>
+        <li>客戶操作系統</li>
+        <li>Hypervisor</li>
+        <li>內核</li>
+        <li>保護管理器</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> hypervisor 負責協調對物理硬體的訪問，並在運行在同一物理平台上的不同虛擬機之間強制隔離。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> 規劃雲數據中心設施物理彈性的最佳實踐包括 ___________________。</p>
+    <ol>
+        <li>為人員設置一個出口點</li>
+        <li>確保冗餘佈線/連接從建築物/物業的不同側面進入設施</li>
+        <li>確保所有停車區靠近發電機，以便即使在公共電力不可用時，高流量區域的人員也能始終被應急照明照亮</li>
+        <li>確保設施的基礎能夠承受地震震顫</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 為避免單一物理連接被切斷導致其備份也被切斷的情況（例如建築/景觀美化等），應讓冗餘線路從建築物的不同側面進入。為了健康和人類安全，每個設施都應有多個出口點（通常是法律要求的）；選項 A 不正確。應急照明應無論其與電源的距離如何都能獲得電力，並且從安全角度來看，將車輛停在發電機附近是一個壞主意；選項 C 不正確。並非所有設施都需要承受地震；這對加利福尼亞的數據中心可能是真的，但對悉尼的數據中心則不然，因此這不是行業範圍的最佳實踐。選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> Jen 正在設計一個數據中心，該數據中心將用於向其組織的客戶提供雲服務。她擔心將屬於不同客戶的資訊處理系統相互隔離。哪種網路技術最能幫助她實現這種隔離？</p>
+    <ol>
+        <li>BGP</li>
+        <li>LAN</li>
+        <li>VLAN</li>
+        <li>VPN</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 虛擬局域網 (VLAN) 用於在數據中心內創建邏輯隔離，是提供網路分段的最具成本效益的方式。創建單獨的 LAN 將需要冗餘設備和不必要的費用。虛擬專用網路 (VPN) 用於通過不安全的網路連接遠程用戶和站點，與安全數據中心內無關。邊界網關協議 (BGP) 用於在網路站點之間路由流量，與此場景無關。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> 風險應始終從業務角度考慮。當接受風險時，應由相應的 ___________________ 來平衡。</p>
+    <ol>
+        <li>利潤</li>
+        <li>性能</li>
+        <li>成本</li>
+        <li>機會</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 組織接受任何風險的唯一原因是，風險活動也提供了潛在的收益。利潤不是每個機會（或每個組織——許多組織是非營利或政府機構）的標誌，因此選項 A 不正確。同樣，並非所有風險活動都提供提高性能的機會，因此選項 B 不正確。成本不是收益，因此這在問題的上下文中甚至沒有意義；選項 C 不正確且是一個干擾項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> 您正在設計一個預計達到 Uptime Institute 標準 Tier 2 狀態的雲數據中心。您必須達到哪個級別的可用性才能滿足此標準？</p>
+    <ol>
+        <li>99.422%</li>
+        <li>99.671%</li>
+        <li>99.741%</li>
+        <li>99.995%</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Tier 2 數據中心預計達到 99.741% 的可用性。Tier 1 數據中心預計達到 99.671% 的可用性。Tier 3 數據中心預計達到 99.982% 的可用性。Tier 4 數據中心預計達到 99.995% 的可用性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> Ursula 正在檢查她的組織在 IaaS 服務中運行的幾個虛擬伺服器。她發現這些伺服器都在運行一個組織不再使用的調度服務。她應該採取什麼行動？</p>
+    <ol>
+        <li>確保服務已完全修補。</li>
+        <li>移除服務。</li>
+        <li>除非引起問題，否則不要管服務。</li>
+        <li>聯繫供應商獲取說明。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在伺服器上運行不必要的服務會增加攻擊面並使組織面臨不必要的風險。因此，Ursula 應通過組織正常的變更管理流程來移除該服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> 在討論雲時，我們通常將數據中心分為計算、儲存和網路術語。計算由 ___________________ 和 ___________________ 組成。</p>
+    <ol>
+        <li>路由器；主機</li>
+        <li>應用程式編程接口 (API)；北向接口 (NBI)</li>
+        <li>中央處理單元 (CPU)；隨機存取記憶體 (RAM)</li>
+        <li>虛擬化；實際硬體設備</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲數據中心的計算節點可以根據中心內可用的中央處理單元 (CPU) 數量和隨機存取記憶體 (RAM) 數量來衡量。選項 A 不正確，因為路由器將被視為數據中心網路的一部分（並且因為選項 C 是更好的答案）。選項 B 涉及應用程式以及它們與儲存控制器之間的流量流動；它與計算節點無關，因此是錯誤的。選項 D 可能會被間接視為正確，因為它在技術上是真實的（計算節點將包括虛擬和硬體機器），但選項 C 是一個更好、更準確的選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> 通常使用哪種類型的 IaaS 儲存來提供可掛載到虛擬伺服器實例上的磁碟卷？</p>
+    <ol>
+        <li>專用磁碟</li>
+        <li>塊儲存</li>
+        <li>加密儲存</li>
+        <li>對象儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 塊儲存，也稱為卷儲存，為伺服器提供磁碟卷。雲環境通常不提供專用磁碟，因為這種方法效率低下。對象儲存將文件儲存為單個對象，不能用作磁碟卷。任何類型的儲存都可以加密或不加密，但儲存被加密的事實並不能使其可用於磁碟卷。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> 以下關於雲中文件儲存安全的陳述哪個是正確的？</p>
+    <ol>
+        <li>文件儲存庫在雲中始終以明文形式保存。</li>
+        <li>無法清理雲中的文件儲存空間。</li>
+        <li>虛擬化阻止了基於應用程式的安全控制的使用。</li>
+        <li>虛擬機器在不使用時儲存為快照文件。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> VM 在不使用時會被快照並簡單地儲存為文件；攻擊者如果獲得這些文件儲存的訪問權限，可能會輕易地竊取高度可移植、易於複製格式的整個機器。因此，這些雲儲存空間必須包含大量控制措施。可以使用加密銷毀來清理雲文件空間。虛擬化不阻止使用基於應用程式的安全控制。管理員可以自由加密基於雲的文件儲存。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Javier 正在協助實施基於雲的 SaaS 解決方案。他擔心遠程用戶通過利用 Web 應用程式漏洞直接與支持該應用程式的資料庫互動的能力。哪種類型的漏洞會允許這種訪問？</p>
+    <ol>
+        <li>SQL 注入</li>
+        <li>跨站點腳本</li>
+        <li>跨站點請求偽造</li>
+        <li>服務器端請求偽造</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> SQL 注入漏洞允許攻擊者通過 Web 應用程式向支持該應用程式的資料庫發送命令。跨站點腳本攻擊在遠程用戶的系統上執行代碼。跨站點請求偽造和服務器端請求偽造攻擊試圖通過欺騙系統授權未經授權的活動來利用信任關係。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> 在考慮雲數據備份策略（即，您是在塊、文件還是資料庫級別進行備份）時，您的組織 BC/DR 計劃的哪個元素受您的選擇影響最大？</p>
+    <ol>
+        <li>恢復時間目標</li>
+        <li>恢復點目標</li>
+        <li>最大允許停機時間</li>
+        <li>平均故障時間</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 恢復點目標 (RPO) 是衡量在不對組織造成無法彌補的損害的情況下可能丟失的數據量。數據複製策略將對此指標影響最大，因為策略的選擇將決定有多少最近的數據可用於恢復目的。恢復時間目標 (RTO) 是衡量組織在不造成無法彌補的損害的情況下可以承受的中斷時間。這可能會受到複製策略的影響，但不如 RPO 受到的影響大。選項 A 不正確。最大允許停機時間 (MAD) 是組織在停止運營之前可以承受的中斷時間。這不依賴於 RPO，數據複製策略對其影響不大。選項 C 不正確。平均故障時間 (MTTF) 是衡量資產預期壽命（通常是硬體）的指標，由製造商/供應商確定。數據複製策略對此毫無影響。選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> 網站通常實施以下哪種技術來加密在 Web 伺服器和終端用戶之間發送的數據？</p>
+    <ol>
+        <li>VPN</li>
+        <li>TLS</li>
+        <li>VLAN</li>
+        <li>IPsec</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 傳輸層安全 (TLS) 是用於實施 HTTPS 標準以實現伺服器和用戶之間安全通信的主要協議。虛擬專用網路 (VPN) 也會加密 Web 流量，但它們是通常由用戶雇主而非遠程網站提供的單獨服務。虛擬局域網 (VLAN) 用於網路分段而非加密。IPsec 是用於實施 VPN 的協議。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> “恢復正常運營”是 BC/DR 活動的一個階段，在緊急情況結束且常規生產可以恢復時進行。當組織使用兩個不同的雲提供商進行生產和 BC/DR 環境時，以下哪個有時可能是結果？</p>
+    <ol>
+        <li>兩個提供商都受到緊急情況的影響，延長了恢復正常所需的時間。</li>
+        <li>BC/DR 提供商成為新的正常生產環境。</li>
+        <li>監管機構會發現該組織違反了合規性指南。</li>
+        <li>所有數據都無法挽回地丟失了。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 理論上，所有選項都可能成立。然而，選項 B 最有可能發生；從一個環境/提供商遷移到另一個環境/提供商的成本和風險相當大，因此留在次要提供商處（使其成為新的主要提供商）是降低恢復正常所涉及風險的好方法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> 當 Gary 決定應授予每個用戶哪些訪問權限時，哪個原則應指導他關於默認權限的決定？</p>
+    <ol>
+        <li>職責分離</li>
+        <li>最小特權</li>
+        <li>聚合</li>
+        <li>特權分離</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Gary 應遵循最小特權原則，僅向用戶授予執行其工作職責所需的權限。聚合是一個術語，用於描述隨著時間的推移無意中積累的權限，也稱為權限蠕變。職責分離和特權分離是用於保護敏感流程的原則。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> 當 Gary 設計程序時，他使用了此處顯示的矩陣。此矩陣最直接有助於強制執行哪個資訊安全原則？ (圖示：一個顯示角色/任務的職責分離矩陣，標記出潛在的衝突區域。)</p>
+    <ol>
+        <li>職責分離</li>
+        <li>聚合</li>
+        <li>雙人控制</li>
+        <li>縱深防禦</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 圖中顯示的矩陣被稱為職責分離矩陣。它用於確保一個人不會獲得兩個會產生潛在衝突的權限。聚合是一個術語，用於描述隨著時間的推移無意中積累的權限，也稱為權限蠕變。雙人控制用於兩個人必須共同工作才能執行敏感操作。縱深防禦是用於描述重疊安全控制理念的一般安全原則。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> Gary 準備為聯邦政府機構的新用戶創建一個帳戶。他正在努力為 HR 資料庫分配權限。在授予此訪問權限之前，Gary 必須驗證哪兩個資訊元素？</p>
+    <ol>
+        <li>憑證和知情需要</li>
+        <li>許可和知情需要</li>
+        <li>密碼和許可</li>
+        <li>密碼和生物識別掃描</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在授予訪問權限之前，Gary 應驗證用戶是否具有有效的安全許可和業務知情需要。Gary 正在執行授權任務，因此他不必驗證用戶的憑證，例如密碼或生物識別掃描。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> Gary 準備圍繞對根加密密鑰的訪問制定控制措施，並希望應用專門為非常敏感的操作設計的安全原則。他應應用哪個原則？</p>
+    <ol>
+        <li>最小特權</li>
+        <li>縱深防禦</li>
+        <li>通過模糊實現安全</li>
+        <li>雙人控制</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Gary 應遵循雙人控制原則，要求兩個獨立的授權個人同時採取行動才能訪問加密密鑰。他還應應用最小特權和縱深防禦原則，但這些原則適用於所有操作，並非特定於敏感操作。Gary 應避免通過模糊實現安全的原則，即依賴安全機制的保密性來為系統或過程提供安全性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> Gary 和他的團隊應多久對用戶擁有的敏感系統的特權訪問進行一次審查？（選擇所有適用項。）</p>
+    <ol>
+        <li>定期進行</li>
+        <li>當用戶離開組織時</li>
+        <li>當用戶更改角色時</li>
+        <li>每天進行</li>
+    </ol>
+    <p class="answer"><strong>答案： A, B, C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 特權訪問審查是組織安全計劃中最關鍵的組成部分之一，因為它們確保只有授權用戶有權執行最敏感的操作。每當具有特權訪問權限的用戶離開組織或更改角色以及定期進行時，都應進行審查。然而，期望這些耗時的審查每天進行是不合理的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> 以下哪種類型的 hypervisor 通常被認為提供最高級別的安全性？</p>
+    <ol>
+        <li>Type 1</li>
+        <li>Type 2</li>
+        <li>Type 3</li>
+        <li>Type 4</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Type 1 或“裸機”hypervisor 直接運行在硬體之上，比 Type 2 hypervisor 提供更高程度的安全性。這是因為 Type 2 hypervisor 必須運行在另一個操作系統之上，增加了總攻擊面。Type 3 和 4 hypervisor 不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> Yolanda 正在幫助她的組織決定是建造自己的數據中心還是從主機托管提供商處租賃空間。使用主機托管提供商的主要好處是什麼？</p>
+    <ol>
+        <li>降低成本</li>
+        <li>提高安全性</li>
+        <li>降低複雜性</li>
+        <li>提高能力</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 組織租賃主機托管設施空間的主要因素是通過規模經濟實現的成本降低。租賃設施不一定比定制設施更安全或更複雜，也不一定具有更高的能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> 以下哪個組件在 Tier 1 數據中心中 *不是* 必需的？</p>
+    <ol>
+        <li>不間斷電源</li>
+        <li>系統中的雙電源</li>
+        <li>備用發電機</li>
+        <li>冷卻</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Tier 1 數據中心需要 IT 系統的專用空間、用於線路調節和備份目的的不間斷電源 (UPS) 系統、足以服務所有關鍵設備的冷卻系統以及用於延長電力中斷的發電機，發電機至少有 12 小時的燃料以足夠負載運行 IT 系統。雙電源是 Tier 3 數據中心的要求，Tier 1 數據中心不需要。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> Fred 正在為雲環境設計安全控制，其中遠程系統需要以自動化方式獲得對 Linux 伺服器的命令行訪問權限。以下哪個身份驗證方法將在此場景中提供最強的安全性？</p>
+    <ol>
+        <li>多因素身份驗證</li>
+        <li>數字證書</li>
+        <li>生物識別身份驗證</li>
+        <li>強密碼</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這個問題最重要的細節是訪問必須是自動化的。這意味著系統將在沒有任何人工干預的情況下相互連接。由於這個要求，生物識別控制是無用的，因為它們要求個人參與身份驗證過程。使用密碼需要在遠程伺服器上儲存該密碼。這是可能的，但從安全角度來看並不理想。由於我們不想使用密碼或生物識別，多因素身份驗證也是不可行的。這使得數字證書成為保護這些連接的最可行選項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> 在軟體定義網路 (SDN) 中，北向接口 (NBI) 通常處理 ___________________ 和 ___________________ 之間的流量。</p>
+    <ol>
+        <li>雲客戶；ISP</li>
+        <li>SDN 控制器；SDN 應用程式</li>
+        <li>雲提供商；ISP</li>
+        <li>路由器；主機</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> NBI 通常處理 SDN 控制器和 SDN 應用程式之間的流量。選項 A 和 C 不正確，因為它們都沒有列出 SDN 基礎設施的任何部分，無論是控制器還是應用程式。選項 D 可能可以說是正確的，因為可能存在處理這些節點之間流量的 NBI，但選項 B 更具體，並且對於此定義始終為真，因此是更好的選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> 一個用戶登錄到一個基於雲的社交媒體平台。在另一個瀏覽器選項卡中，該用戶發現一篇值得發佈到社交媒體平台的文章。用戶點擊文章網站上列出的平台圖標，文章會自動發佈到用戶在社交媒體平台上的帳戶。這是什麼的例子？</p>
+    <ol>
+        <li>單一登錄</li>
+        <li>不安全的直接標識符</li>
+        <li>身份聯合</li>
+        <li>跨站點腳本</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個非常流行的身份聯合功能。單一登錄 (SSO) 類似於聯合，但僅限於單個組織；聯合基本上是跨多個組織的 SSO。選項 A 不正確。選項 B 和 D 是開放 Web 應用程式安全項目 (OWASP) Top 10 中列出的威脅；它們是不正確的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> 以下哪個是專門用於處理密碼密鑰的頒發、分發和儲存的設備？</p>
+    <ol>
+        <li>密鑰管理盒 (KMB)</li>
+        <li>硬體安全模塊 (HSM)</li>
+        <li>票據授予票據 (TGT)</li>
+        <li>可信計算基 (TCB)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 硬體安全模塊 (HSM) 是旨在管理密碼密鑰周圍流程的安全解決方案。密鑰管理盒 (KMB) 用於管理物理密鑰。票據授予票據 (TGT) 是 Kerberos 身份驗證過程的一個組件。可信計算基 (TCB) 在計算機系統內部提供安全的運行環境。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> 蔓延主要是一個(n) ___________________ 問題。</p>
+    <ol>
+        <li>技術</li>
+        <li>外部</li>
+        <li>管理</li>
+        <li>邏輯</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 蔓延需要從管理角度來解決，因為它是由允許的用戶操作（通常是完全授權的能力）引起的。技術和邏輯是同義詞，可以被認為是導致蔓延的原因，因為虛擬化的技術能力創造了可能導致蔓延的易用性。然而，管理是更好的答案，因為這主要是一個人的問題。外部是不正確的；蔓延發生在組織內部。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> 您負責為您的組織創建業務連續性和災難恢復 (BC/DR) 計劃和程序。您決定進行 BC/DR 活動的桌面演練測試。以下哪項將在測試期間提供最大價值？</p>
+    <ol>
+        <li>讓所有參與者通過遠程會議技術進行各自的活動。</li>
+        <li>指派一位精通 BC/DR 行動的主持人來監督並向參與者呈現場景，包括隨機化的特殊事件。</li>
+        <li>向所有參與者提供 BC/DR 策略的副本。</li>
+        <li>允許您組織中的所有用戶參與。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 訓練有素且經驗豐富的主持人可以指導參與者完成活動，提高他們的培訓效果並指出陷阱和改進領域。選項 A 不是首選，因為讓參與者聚集在一起可以確保他們全神貫注並提供遠程參與可能無法產生的互動。選項 C 是一個基線；所有參與者當然都應擁有該策略的副本。選項 D 在桌面演練中是無用的；只有組織中的關鍵參與者才應參加桌面演練。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> 對雲環境中使用的基線虛擬映像進行審計可以揭示什麼？</p>
+    <ol>
+        <li>數據中心有足夠的物理保護。</li>
+        <li>在此之前可能發生的潛在犯罪活動。</li>
+        <li>必要的安全控制是否已到位並正常運行。</li>
+        <li>缺乏用戶培訓和意識。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基線將包含在整個環境中統一應用的安全控制套件。VM 映像審計不太可能涉及任何形式的物理安全；A 不正確。基線無法預測性地顯示惡意活動；B 不正確。基線也與用戶培訓和意識無關；選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> 您負責為您的組織創建業務連續性和災難恢復 (BC/DR) 計劃和程序。您的組織將其生產環境託管在雲提供商處，並且您已採取適當的保護措施。以下哪項是您 BC/DR 備份的重要考慮因素？</p>
+    <ol>
+        <li>在 BC/DR 恢復站點有足夠的人員以確保正常運行</li>
+        <li>良好的密碼金鑰管理</li>
+        <li>訪問儲存 BC/DR 備份的伺服器</li>
+        <li>鑑識分析能力</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個難題，需要深思熟慮。選項 B 是正確的，因為適當的雲數據安全實踐將需要加密大量數據，擁有金鑰將是應急操作期間訪問備份所必需的；沒有金鑰，您將無法訪問您的數據。選項 A 不正確，因為使用雲進行 BC/DR 將允許人員從任何可以獲得寬帶連接的地方訪問備份，而不一定是恢復站點。選項 C 不正確，因為客戶很少能物理訪問雲環境中的伺服器。選項 D 不正確，因為鑑識分析在 BC/DR 中不是重要的考慮因素；它對事件響應更為重要。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> 雲數據中心的最低基本特性通常被稱為“ping, power, pipe”。這個術語意味著什麼？</p>
+    <ol>
+        <li>客戶遠程訪問數據中心機架設備；電力設施；連接到網際網路服務提供商 (ISP)/網際網路</li>
+        <li>應用程式適用性；可用性；連接性</li>
+        <li>基礎設施即服務 (IaaS)；軟體即服務 (SaaS)；平台即服務 (PaaS)</li>
+        <li>反惡意軟體工具；針對分佈式拒絕服務 (DDoS) 攻擊的控制；物理/環境安全控制，包括防火</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ping 是指客戶遠程訪問其系統的能力。Power 是指為系統提供電力的電力設施。Pipe 是指支持伺服器連接到網際網路的網路連接。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> 以下哪個是在雲中構成的新風險，不會影響傳統的本地 IT 環境？</p>
+    <ol>
+        <li>內部威脅</li>
+        <li>多租戶</li>
+        <li>自然災害</li>
+        <li>分佈式拒絕服務 (DDoS) 攻擊</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 與其他未知客戶（其中一些可能是競爭對手甚至是敵對組織）共享資源是本地組織不會面臨的風險。所有其他答案都是存在於兩種環境中的威脅，因此是不正確的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> 軟體定義網路 (SDN) 允許網路管理員和架構師執行以下所有功能，*除了* ___________________。</p>
+    <ol>
+        <li>根據當前客戶需求重新路由流量</li>
+        <li>無需更改任何實際物理連接即可創建邏輯子網</li>
+        <li>根據特定規則或設置過濾對資源的訪問</li>
+        <li>通過將流媒體內容放置在離終端用戶更近的位置來有效地傳輸它</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體定義網路允許管理員執行各種自動化功能。這些包括根據當前客戶需求重新路由流量、無需更改任何實際物理連接即可創建邏輯子網以及根據特定規則或設置過濾對資源的訪問。通過將流媒體內容放置在離終端用戶更近的位置來有效地傳輸它是內容分發網路 (CDN) 的功能，而不是 SDN。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Mary 正在審查此處顯示的系統架構的可用性控制。顯示的哪種技術為資料庫伺服器提供了容錯能力？ (圖示：顯示帶有負載均衡器、Web 伺服器、資料庫伺服器和 RAID 陣列的網路架構圖)</p>
+    <ol>
+        <li>故障轉移集群</li>
+        <li>UPS</li>
+        <li>磁帶備份</li>
+        <li>冷站</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 該圖顯示了一個故障轉移集群的例子，其中 DB1 和 DB2 都配置為資料庫伺服器。在任何給定時間，只有一個將充當活動資料庫伺服器，而另一個則準備在第一個失敗時承擔責任。儘管該環境可能使用 UPS、磁帶備份和冷站作為災難恢復和業務連續性控制，但它們並未顯示在圖中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> 使用一個雲提供商進行您的運營環境，另一個進行您的 BC/DR 備份將為您帶來 ___________________ 的額外好處。</p>
+    <ol>
+        <li>允許您使用的任何自訂 VM 構建都能立即移植到另一個環境</li>
+        <li>避免廠商鎖定/鎖定</li>
+        <li>提高性能</li>
+        <li>降低成本</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 擁有另一個具有不同提供商的備份意味著，如果您的主要提供商因任何原因（包括破產或不利的合同條款）而無法使用，您的數據不會被挾持或丟失。自訂 VM 可能無法在新環境中工作；這實際上是在將數據移出生產環境時的一個風險；選項 A 不正確。如果將數據和備份保存在一起，性能可能不會提高；事實上，您可能會失去一些負載平衡能力。選項 C 不正確。擁有兩個提供商總是比單個提供商成本更高；選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> 雲客戶通常無法物理訪問雲數據中心。這通過 ___________________ 來增強安全性。</p>
+    <ol>
+        <li>減少對合格人員的需求</li>
+        <li>限制對敏感資訊的訪問</li>
+        <li>減少管轄權暴露</li>
+        <li>確保法定合規性</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在這種情況下，“敏感資訊”是指通過物理訪問數據中心可能收集到的關於數據中心安全控制和流程的任何知識。儘管雲客戶無法訪問該設施，但這也意味著其他雲客戶（其中一些可能對另一個客戶的利益懷有敵意）也無法訪問，因此沒有人會比其他人更有優勢。選項 A 不正確，因為無論雲環境是否對其數據中心有有限的訪問權限，都需要合格的人員。事實上，由不合格的人員而不是合格的人員在雲數據中心工作可能會降低安全性。選項 C 不正確，因為減少管轄權暴露並不能增強安全性。確保法定合規性與增強安全性之間可能存在關聯，因為它適用於限制對雲數據中心的訪問。然而，選項 B 是更好的答案，因為它肯定是正確的。因此，選項 D 不是問題的最佳答案。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> 以下哪個服務最不可能被描述為提供計算能力？</p>
+    <ol>
+        <li>虛擬伺服器實例</li>
+        <li>FaaS</li>
+        <li>對象儲存</li>
+        <li>容器</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 虛擬伺服器實例和容器向雲服務用戶提供直接的計算資源。功能即服務提供了一個可以在其上執行計算的平台。對象儲存不提供任何計算能力，因為它僅僅是一個儲存服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> 在雲中使用虛擬化的主要原因是什麼？</p>
+    <ol>
+        <li>虛擬機器 (VM) 更易於管理。</li>
+        <li>如果 VM 感染了惡意軟體，可以輕鬆替換它。</li>
+        <li>使用 VM，雲提供商不必為每個新客戶部署整個硬體設備。</li>
+        <li>VM 比實際設備更容易操作。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然選項 A 和 B 也都成立，但 C 是雲數據中心使用 VM 的最重要原因。如果雲提供商必須為每個用戶購買新設備，那麼雲服務的成本將與運行傳統環境一樣多（甚至可能成本更高），任何組織都沒有理由遷移到雲，特別是考慮到與向第三方披露數據相關的風險。選項 D 根本不成立。VM 不比實際設備更容易操作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> 以下哪種類型的測試最有可能對生產運營產生影響？</p>
+    <ol>
+        <li>完整測試</li>
+        <li>並行測試</li>
+        <li>演練測試</li>
+        <li>模擬測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 完整測試，也稱為完全中斷測試，會關閉主要運營設施並將運營轉移到備份設施。這些測試很可能對生產運營產生嚴重影響。並行測試會激活備份設施，但不會將生產責任轉移給它。演練和模擬不會以任何方式激活備份設施或影響生產運營。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> 哪個術語最能描述這種攻擊？（場景：Brendan 正在分析他的組織 IaaS 產品中發生的雲攻擊症狀。在此攻擊中，一個客戶能夠通過從自己的虛擬機器發起攻擊來訪問屬於另一個客戶的虛擬機器上的資源。）</p>
+    <ol>
+        <li>逃逸</li>
+        <li>溢出</li>
+        <li>注入</li>
+        <li>腳本</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個逃逸攻擊的例子，因為攻擊者能夠離開自己虛擬機的範圍並訪問屬於另一個客戶的資源。場景中沒有跡象表明攻擊使用了任何特定的溢出、注入或腳本漏洞。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> Brendan 服務產品的哪個組件最直接導致了這次攻擊？</p>
+    <ol>
+        <li>計算</li>
+        <li>Hypervisor</li>
+        <li>管理平面</li>
+        <li>儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 逃逸攻擊總是 hypervisor 中的漏洞或故障的結果，因為 hypervisor 負責執行阻止一個客戶訪問屬於另一個客戶的資源的分離。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Melissa 使用其雲服務提供商的快照功能來製作支持其虛擬機的磁碟卷的備份副本。最有可能使用哪種類型的儲存來儲存這些備份？</p>
+    <ol>
+        <li>專用磁碟</li>
+        <li>塊儲存</li>
+        <li>加密儲存</li>
+        <li>對象儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 支持虛擬機的磁碟卷通常儲存在塊儲存上。然而，當使用快照創建這些磁碟的備份時，備份通常儲存在成本較低的對象儲存中。雲環境中通常不使用專用磁碟。備份在對象儲存中時可能會被加密，但這不是技術要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> 如果您將雲用於 BC/DR 目的，即使您不在雲中運行生產環境，也可以通過消除您的 ___________________ 來削減成本。</p>
+    <ol>
+        <li>安全人員</li>
+        <li>BC/DR 策略</li>
+        <li>舊的訪問憑證</li>
+        <li>對物理熱站/暖站的需求</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 將您的數據備份並可在雲中訪問，無需與您的主要運營環境分開設置單獨的熱站/暖站；相反，您的人員可以從任何具有良好寬帶連接的地方恢復運營。雲 BC/DR 能力並不能消除對安全人員和適當策略的需求；選項 A 和 B 都不正確。選項 C 作為問題的答案沒有意義。不清楚如何通過消除舊的訪問憑證來削減成本。事實上，很難想像這是一個真實的陳述。因此，選項 C 是一個糟糕的選擇，選項 D 是最佳選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> 使用虛擬機基線映像對於以下哪個選項非常有用？</p>
+    <ol>
+        <li>物理安全</li>
+        <li>審計</li>
+        <li>培訓</li>
+        <li>自定義</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 構建到定義標準並具有受控流程的指定配置可用於證明環境中的所有 VM 都包含某些控制；這可以大大提高審計過程的效率。VM 的映像與物理安全或培訓關係不大；選項 A 和 C 不正確。基線映像與自定義相反；選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> 以下哪個審計機制能夠提供最準確的用戶活動重構？</p>
+    <ol>
+        <li>應用程式日誌</li>
+        <li>安全日誌</li>
+        <li>Netflow 記錄</li>
+        <li>數據包捕獲</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 日誌條目確實提供了一些用戶活動的洞察力，但它們通常不提供用戶通信的完整上下文。Netflow 記錄僅提供通信的“電話賬單”級別詳細信息，而不是內容。雖然這些來源會很有用，但完整的數據包捕獲提供了用戶活動的最準確重構，但由於數據儲存要求，實施成本很高。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> 您負責為您的組織創建業務連續性和災難恢復 (BC/DR) 計劃和程序。您的組織將其生產環境託管在雲環境中，並且不再運營安全的本地數據中心。您正在考慮也將雲備份服務用於您的 BC/DR 目的。就冗餘和彈性而言，這種方法的最佳策略可能是什麼？</p>
+    <ol>
+        <li>讓您的雲提供商也提供 BC/DR 備份。</li>
+        <li>在您公司總部的場所保留 BC/DR 備份。</li>
+        <li>使用另一個雲提供商進行 BC/DR 備份。</li>
+        <li>將您的生產環境移回您的公司場所，並使用您的雲提供商託管您的 BC/DR 備份。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 最好在另一個雲提供商處進行備份，以防任何導致服務中斷的原因發生在您的主要提供商的整個環境中；這將更加複雜和昂貴，但它提供了最佳的冗餘和彈性。使用相同的提供商進行生產和備份不是一個壞選擇，但它帶來了相同的應急情況影響數據兩個副本的風險。將備份或生產環境本地化都不能提供最佳保護，因為您不再運營安全的雲數據中心。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> BC/DR 計劃/策略應包括以下所有內容，*除了* ___________________。</p>
+    <ol>
+        <li>負責維護/執行計劃的辦公室的任務分配</li>
+        <li>基本實體的聯繫資訊，包括 BC/DR 人員和緊急服務機構</li>
+        <li>管理計劃特定元素的法律/法規/標準的副本</li>
+        <li>BC/DR 人員遵循的清單</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這不是一個簡單的問題，因為每個計劃/策略都應提及驅動計劃/策略形成的治理文件；然而，這些文件可以僅通過引用包含——您不需要包含這些治理文件的完整副本。所有其他選項都應包含在 BC/DR 計劃/策略中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> 安全斷言標記語言 (SAML) 身份斷言令牌使用 ___________________ 協議。</p>
+    <ol>
+        <li>可擴展標記語言 (XML)</li>
+        <li>超文本傳輸協議 (HTTP)</li>
+        <li>超文本標記語言 (HTML)</li>
+        <li>美國信息交換標準碼 (ASCII)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全斷言標記語言 (SAML) 基於 XML。HTTP 用於端口 80 Web 流量；HTML 用於呈現網頁。ASCII 是通用的字母數字字符集。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> Anita 的 IaaS 提供商允許她選擇她將在哪個世界區域運行其主要伺服器實例，以及她將在哪個不同區域運行其備份實例。Anita 應考慮的最重要問題是哪個？</p>
+    <ol>
+        <li>監管合規性。</li>
+        <li>物理安全。</li>
+        <li>環境因素，如濕度。</li>
+        <li>沒關係。數據可以隨意保存在任何地方。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 根據您的行業和數據性質，將資訊移動到另一個管轄區可能會影響或使您的監管合規性失效。無論雲提供商位於何處，都應補償環境和物理安全因素，因此這不應對您的潛在風險產生影響；選項 B 和 C 不正確。選項 D 不正確，因為它是一個籠統的陳述，並不總是正確的。事實上，對於某些組織來說，其數據儲存的物理位置可能具有嚴重的監管後果。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> 處理風險的方法有很多。然而，由於 ___________________，通常處理風險的方法並非在雲中都可行。</p>
+    <ol>
+        <li>雲數據風險無法緩解</li>
+        <li>遷移到雲環境必然意味著您接受所有風險</li>
+        <li>某些風險無法轉移給雲提供商</li>
+        <li>雲提供商無法規避風險</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 根據現行法律框架，某些風險（例如數據隱私洩露的法律責任）無法轉移給合同方，因此數據所有者（即雲客戶）仍將保留這些風險。需要注意的是，即使風險轉移給雲提供商，客戶仍然始終負責以某種方式管理風險。選項 A 不正確；風險可以並且應該在雲中得到緩解。選項 B 不正確；雲遷移將需要一些風險接受，但這對於除了規避風險之外的一切都是如此。選項 D 不正確；雲提供商可以選擇不提供服務或不接受某些客戶。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> 為了支持 CIA 三元組（機密性、完整性、可用性）的所有方面，雲數據中心的所有以下方面都需要進行冗餘設計，*除了* ___________________。</p>
+    <ol>
+        <li>電源</li>
+        <li>HVAC</li>
+        <li>行政辦公室</li>
+        <li>網際網路服務提供商 (ISP)/連接線路</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲數據中心的行政辦公室很少是運營的關鍵功能；數據中心很可能可以在沒有行政辦公室的情況下承受相當長一段時間的損失，因此在這裡的冗餘可能不是成本有效的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> 您正在與職能團隊的領導者一起審查新數據中心的要求。討論集中在如果發生停機可能丟失的數據量上。哪個指標與此討論最直接相關？</p>
+    <ol>
+        <li>恢復時間目標</li>
+        <li>恢復點目標</li>
+        <li>最大允許停機時間</li>
+        <li>平均故障時間</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 恢復點目標 (RPO) 是衡量在不對組織造成無法彌補的損害的情況下可能丟失的數據量。數據複製策略將對此指標影響最大，因為策略的選擇將決定有多少最近的數據可用於恢復目的。恢復時間目標 (RTO) 是衡量組織在不造成無法彌補的損害的情況下可以承受的中斷時間。這可能會受到複製策略的影響，但不如 RPO 受到的影響大。選項 A 不正確。最大允許停機時間 (MAD) 是組織在停止運營之前可以承受的中斷時間。這不依賴於 RPO，數據複製策略對其影響不大。選項 C 不正確。平均故障時間 (MTTF) 是衡量資產預期壽命（通常是硬體）的指標，由製造商/供應商確定。數據複製策略對此毫無影響。選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> 哪個術語描述了向用戶授予資源訪問權限的過程？</p>
+    <ol>
+        <li>識別</li>
+        <li>身份驗證</li>
+        <li>授權</li>
+        <li>聯合</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 授權是向用戶和其他安全主體授予資源訪問權限的過程。識別和身份驗證是整體身份和訪問管理 (IAM) 過程的一部分，授權也是如此，但它們不具體描述授予資源訪問權限。聯合是在組織之間進行 IAM 的一種手段；授權是一個更具體的答案，因此聯合不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> 當選擇使用一個雲提供商進行您的運營環境，另一個進行 BC/DR 備份/歸檔時，以下哪個風險可能是最顯著的？</p>
+    <ol>
+        <li>物理入侵</li>
+        <li>專有格式/缺乏互操作性</li>
+        <li>廠商鎖定/鎖定</li>
+        <li>自然災害</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當使用兩個不同的雲提供商時，雲客戶會面臨運營環境中使用的數據/軟體格式無法輕易適應另一個提供商服務的風險，從而導致實際故障期間的延遲。物理入侵的風險既不會因為選擇使用兩個雲提供商而消除也不會增強；選項 A 不正確。使用不同的雲提供商進行備份/歸檔實際上降低了因廠商鎖定/鎖定和自然災害導致的停機風險，因此選項 C 和 D 都不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> 在哪個雲服務模型中，客戶對服務的配置失去最多的控制權？</p>
+    <ol>
+        <li>基礎設施即服務 (IaaS)</li>
+        <li>平台即服務 (PaaS)</li>
+        <li>軟體即服務 (SaaS)</li>
+        <li>功能即服務 (FaaS)</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 隨著模型在抽象和服務水平上的提高，客戶對環境的控制權會減少。因此，客戶對 IaaS 服務的配置擁有最多的控制權，對 PaaS/FaaS 服務擁有適度的控制權，對 SaaS 服務的控制權最少。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> Warren 正在與一家雲服務提供商就一項新服務的條款進行合作，該服務將作為他組織的災難恢復能力。以下哪個行動將為 Warren 提供關於該服務將正常運行的最佳保證？</p>
+    <ol>
+        <li>審計所有性能功能。</li>
+        <li>審計所有安全功能。</li>
+        <li>執行全面測試。</li>
+        <li>在合同中強制規定此能力。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 如果不進行全面測試，Warren 無法確定 BC/DR 計劃/流程是否能按預期工作。審計是好的，但它們無法像測試那樣證明實際性能，因此選項 A 和 B 不正確。在合同中包含 BC/DR 能力和性能很重要，但這並不能真正確保功能存在；需要進行測試，因此選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> Charles 是雲服務提供商的 BC/DR 項目經理。他正在評估其項目面臨的風險。他認為組織已經進行了充分的 BC/DR 規劃，但他們從未實際啟動過該計劃。以下哪項最有可能對組織構成最重大的風險？</p>
+    <ol>
+        <li>在應急情況下沒有必要的 BC/DR 人員可用</li>
+        <li>未在雲合同中包含所有 BC/DR 元素</li>
+        <li>過早恢復正常運營</li>
+        <li>電信中斷</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 過早恢復正常運營不僅會危及生產，還會危及人員；如果導致 BC/DR 行動的應急情況未完全完成/解決，可能仍然存在危險。BC/DR 計劃/流程應考慮到基本人員和電信能力的缺失，因此選項 A 和 D 不正確。選項 B 確實給組織帶來了嚴重的問題，但選項 C 的風險仍然更大，因此 B 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> 如果發生故障，哪種類型的滅火系統對數據中心設備構成的風險最大？</p>
+    <ol>
+        <li>乾管</li>
+        <li>預作用</li>
+        <li>濕管</li>
+        <li>氣體</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用水的系統總是比使用氣體的系統對電子設備構成更大的故障風險，因為水會損壞設備。在列出的系統中，濕管系統構成的風險最大，因為管道中始終存在水。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> 隔離失敗在哪裡可能構成的重大風險最小？</p>
+    <ol>
+        <li>公有雲</li>
+        <li>私有雲</li>
+        <li>PaaS 環境</li>
+        <li>SaaS 環境</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 客戶逃逸（惡意用戶離開 VM 的範圍並能夠訪問同一台機器上的其他 VM）在為單個客戶配置和使用的環境中發生的可能性較小，並且影響也較小。在公有雲中，這種情況更有可能發生，並且影響會更大，因此選項 A 不正確。服務模型並不具體決定發生或影響的可能性（PaaS 和 IaaS 都可能在私有云或公有雲中，這是更重要的因素），因此選項 C 和 D 都不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> 在託管服務安排中，什麼會妨礙雲客戶保護其資產的能力？</p>
+    <ol>
+        <li>禁止端口掃描和滲透測試</li>
+        <li>地理分散</li>
+        <li>禁止培訓用戶的規則</li>
+        <li>阻止他們這樣做的法律</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 許多雲提供商限制通常用於管理和安全目的但也可被視為/用於黑客攻擊的活動；這包括端口掃描和滲透測試。這些限制會降低客戶執行基本安全功能的能力。客戶應與服務提供商審查這些做法，並確認他們被允許進行例行的安全活動。雖然雲資產的地理分散可能會使保護這些資產在名義上更加困難（客戶管理員無法物理訪問託管其數據的設備），但距離不一定會抑制可以在遠程執行的良好安全實踐。這不如禁止端口掃描/滲透測試的規則有害，因此選項 B 不正確。在雲或其他環境中，沒有禁止用戶培訓或法律禁止保護您自己的資產的規則；選項 C 和 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> 以下哪個術語描述了一種集中控制環境中所有網路節點邏輯控制的方法，該方法從每個節點的物理連接中抽象出來？</p>
+    <ol>
+        <li>虛擬專用網路 (VPN)</li>
+        <li>軟體定義網路 (SDN)</li>
+        <li>訪問控制列表 (ACL)</li>
+        <li>基於角色的訪問控制 (RBAC)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 問題描述的是軟體定義網路 (SDN)。VPN 用於在不受信任的介質上創建加密通信隧道，因此選項 A 不正確。ACL 用作識別、身份驗證和授權目的的集中存儲庫，因此選項 C 不正確。RBAC 是一種基於組織內工作職能分配權限的訪問控制模型，因此選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> 在以下選項中，哪個是雲數據中心審計通常比傳統審計更難驗證的原因？</p>
+    <ol>
+        <li>雲中的數據無法審計。</li>
+        <li>雲中的控制無法審計。</li>
+        <li>獲得物理訪問可能很困難。</li>
+        <li>雲運營沒有監管機構。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲提供商可能不願意授予物理訪問權限，即使是對其客戶，理由是允許訪問會洩露有關安全控制的信息。在某些情況下，雲客戶甚至不知道其數據儲存的數據中心的位置。其他選項都是不真實的。雲中的數據和控制當然可以審計。因此，選項 A 和 B 不正確。D 是不真實的；所有行業都有監管機構，包括那些在雲中運營的行業。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> 以下哪項最直接決定了 BC/DR 目的的關鍵資產、恢復服務級別 (RSL)、恢復時間目標 (RTO) 和恢復點目標 (RPO)？</p>
+    <ol>
+        <li>業務驅動因素</li>
+        <li>用戶輸入</li>
+        <li>監管機構授權</li>
+        <li>行業標準</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 業務要求將決定 BC/DR 的關鍵方面。所有其他選項可能構成一些影響 BC/DR 的輸入，但它們不是主要的驅動因素，因此是不正確的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> 在客戶進行滲透測試之前，雲提供商可能要求以下所有內容，*除了* ___________________。</p>
+    <ol>
+        <li>通知</li>
+        <li>測試範圍描述</li>
+        <li>啟動點的物理位置</li>
+        <li>測試時間範圍/持續時間</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於雲訪問是遠程訪問，滲透測試將是遠程測試；模擬攻擊的物理來源並不重要。雲提供商會希望在客戶啟動測試之前得到通知，該通知應包括測試範圍的描述、測試的時間範圍以及測試系統的邏輯（而非物理！）地址。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> Glenda 希望進行一次災難恢復測試，該測試允許審查計劃，對正常信息系統活動沒有干擾，並且時間投入盡可能少。她應該選擇哪種類型的測試？</p>
+    <ol>
+        <li>桌面演練</li>
+        <li>並行測試</li>
+        <li>完全中斷測試</li>
+        <li>清單審查</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 清單審查是干擾最小的災難恢復測試類型。在清單審查期間，團隊成員各自審查其災難恢復清單的內容，並提出任何必要的更改。在桌面演練期間，團隊成員聚集在一起，演練一個場景，而不對信息系統進行任何更改。在並行測試期間，團隊實際激活災難恢復站點進行測試，但主站點仍保持運行。在完全中斷測試期間，團隊關閉主站點並確認災難恢復站點能夠處理常規操作。完全中斷測試是最徹底的測試，但也是干擾最大的測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> DDoS 攻擊不會影響雲客戶的 ___________________。</p>
+    <ol>
+        <li>生產力</li>
+        <li>可用性</li>
+        <li>連接性</li>
+        <li>完整性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> DDoS 會阻止所有這些事情，除了數據完整性。DDoS 僅阻止通信；通常不會導致數據被修改。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> 應在何處包含多個緊急出口點？</p>
+    <ol>
+        <li>在配電變電站</li>
+        <li>在數據中心內</li>
+        <li>在園區的每棟建築中</li>
+        <li>在安全運營中心</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 健康和人類安全是安全的至高無上的目標；所有設施都必須有多個緊急出口點。所有其他選項都是選項 C 中包含的干擾項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> 以下哪個控制措施可用於構建到雲環境的虛擬機基線映像中？</p>
+    <ol>
+        <li>GPS 跟踪/定位器</li>
+        <li>系統啟動時自動進行漏洞掃描</li>
+        <li>授權人員的訪問控制列表 (ACL)</li>
+        <li>寫保護</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於 VM 在未使用時（快照並保存為映像文件）不會接收更新，並且更新可能會在 VM 保存時被推送，因此重要的是確保它們在下次實例化時接收更新。可以配置系統以執行自動更新。物理跟踪機制對虛擬設備沒有太大幫助，因為它們不像硬體盒子那樣會被物理盜竊，因此選項 A 不正確。在映像基線中包含 ACL 會造成一種情況，即每個雲客戶的每個用戶都可以訪問數據中心中的每個 VM；選項 C 不正確。寫保護用於機器的鑑識分析（虛擬或其他）；在操作基線中無用。選項 D 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> 雲提供商可能不允許 ___________________ 作為客戶滲透測試的一部分。</p>
+    <ol>
+        <li>網路映射</li>
+        <li>漏洞掃描</li>
+        <li>偵察</li>
+        <li>社會工程</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對雲提供商（或其供應商/供應商）的員工進行實時欺騙和詭計可能被視為不道德甚至可能非法，尤其是在未經他們知情和/或同意的情況下。社會工程可能不會涉及客戶運行的滲透測試。所有其他選項都是客戶在滲透測試期間可能執行的合法活動（經提供商許可）。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> 將您的 BC/DR 備份儲存在與您的生產環境相同的雲提供商處可以幫助您 ___________________。</p>
+    <ol>
+        <li>維持監管合規性</li>
+        <li>減少差旅預算</li>
+        <li>對用戶進行安全意識培訓</li>
+        <li>從輕微事件中快速恢復</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 將備份保存在同一環境中可以輕鬆回滾到最後一個已知良好狀態或在輕微事件（例如某些 VM 中的惡意軟體感染）後重新實例化乾淨的 VM 映像。合規性的易用性不會由備份的位置決定，因此選項 A 不正確。差旅不應成為雲使用的主要成本；選項 B 不正確。備份的位置對用戶培訓沒有影響；選項 C 不正確。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> 虛擬機 (VM) 配置管理 (CM) 工具應要求託管系統執行 ___________________。</p>
+    <ol>
+        <li>生物識別識別</li>
+        <li>反篡改機制</li>
+        <li>日誌文件生成</li>
+        <li>回溯能力</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 事件日誌記錄對於事件管理和解決至關重要；這可以設置為 CM 工具的自動化功能。並非所有系統都需要或可以使用生物識別；選項 A 不正確。通常，篡改是指對設備的物理入侵；由於問題是關於 VM 的，因此可能不適用。選項 B 不正確。回溯在許多司法管轄區是非法的；選項 D 不正確。</p>
+</div>
+
+</body>
+</html>

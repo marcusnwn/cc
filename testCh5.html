@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第五章 問題：雲安全運營（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第五章 問題：雲安全運營（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> 哪個術語用於描述 IT 服務提供商和客戶之間描述服務級別目標以及客戶和提供商責任的協議？</p>
+    <ol>
+        <li>OLA</li>
+        <li>SAC</li>
+        <li>SLA</li>
+        <li>SLR</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 服務級別協議 (SLA) 定義了服務級別目標以及 IT 服務提供商和客戶的責任。OLA（運營級別協議）是 IT 服務提供商與同一組織的另一部分之間的內部協議，支持服務提供商的服務交付。服務驗收標準 (SAC) 是用於確定服務是否滿足其質量和功能目標的標準。最後，服務級別要求 (SLR) 從客戶的角度定義了服務的要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> Sally 正在制定她組織的溝通計劃，並且知道客戶是該計劃中需要包含的重要群體。積極的客戶溝通有助於哪個關鍵功能？</p>
+    <ol>
+        <li>違規通知</li>
+        <li>監管合規性</li>
+        <li>管理期望</li>
+        <li>問題管理</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 積極的客戶溝通是管理期望的關鍵。被動溝通通常用於數據洩露通知、監管合規性和問題管理。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Juanita 在她新安裝的 Linux 系統上發現了意外運行的程序，該系統是使用她的雲提供商的自訂 Linux 發行版構建的，但尚未允許來自網際網路的連接。最可能的原因是什麼？</p>
+    <ol>
+        <li>Juanita 在安裝過程中無意中安裝了額外的工具。</li>
+        <li>安裝時，該版本的 Linux 會自動下載幫助代理。</li>
+        <li>雲供應商通常會在自己的發行版中安裝幫助程序。</li>
+        <li>攻擊者安裝了應用程式。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Juanita 知道主要的雲供應商會提供他們自己的 Linux 定制版本，其中通常包括額外的代理和工具，以幫助它們更好地與供應商的基礎設施協作。她應驗證情況是否如此，但這是對新構建系統描述的最可能情況。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> Ben 希望為託管在基礎設施即服務供應商雲中的數千台機器管理操作系統和應用程式補丁。他應該怎麼做？</p>
+    <ol>
+        <li>使用雲供應商的原生補丁管理工具。</li>
+        <li>使用操作系統供應商的補丁管理工具。</li>
+        <li>使用手動更新過程。</li>
+        <li>編寫自訂腳本來管理更新。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在雲中大規模管理系統時，Ben 知道最好的選擇通常是使用雲 IaaS 供應商的工具，特別是因為它們通常設計用於處理可能具有在供應商環境中工作的特殊功能的操作系統以及應用程式。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> Jason 的組織被要求向其行業的監管機構提供有關其雲運營環境的資訊，包括年度審計資訊。當監管機構要求對其託管環境進行安全審計時，他最有可能向監管機構提供什麼？</p>
+    <ol>
+        <li>Jason 組織的工作人員最近進行的一次審計</li>
+        <li>由 Jason 組織聘請的第三方審計師最近進行的一次審計</li>
+        <li>允許監管機構審計雲提供商的直接審計權限</li>
+        <li>雲提供商的第三方審計結果副本</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jason 知道雲服務提供商通常不允許對其系統和服務進行直接或第三方審計，但他們確實向客戶提供審計結果。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Tracy 已為她的組織在其雲託管環境中設置了雲硬體安全模塊 (HSM) 服務。她正在為哪個活動做準備？</p>
+    <ol>
+        <li>安全地儲存和管理秘密</li>
+        <li>確保雲和本地系統之間的端到端加密</li>
+        <li>管理環境中底層硬體的安全性</li>
+        <li>檢測針對託管系統的攻擊</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲硬體安全模塊 (HSM) 用於創建、儲存和管理秘密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> Charles 希望能夠根據需要使用變量和配置文件為其環境創建新伺服器，以配置系統以滿足不斷變化的需求。他應實施哪種類型的解決方案來幫助實現此類編排？</p>
+    <ol>
+        <li>CI/CD 管道</li>
+        <li>基礎設施即代碼</li>
+        <li>簽入/簽出設計</li>
+        <li>應用程式接口</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Charles 知道他的情況需要基礎設施即代碼設計，該設計使用代碼和配置文件或變量來允許使用腳本和自動化工具進行快速部署。CI/CD 管道通常會利用基礎設施即代碼和自動化工具，但它不能直接滿足此需求。API（應用程式編程接口）用於從服務訪問數據，簽入/簽出設計是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> James 希望為其基於 ITIL 的服務連續性管理實踐建立關鍵績效指標。以下哪個是服務連續性管理的有用 KPI？</p>
+    <ol>
+        <li>具有連續性協議的業務流程數量</li>
+        <li>每個時期在已安裝軟體中發現的漏洞數量</li>
+        <li>每個時期安裝的補丁數量</li>
+        <li>一年內當地發生的自然災害數量</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 從服務連續性管理的角度來看，此列表中唯一相關的答案是具有連續性協議的業務流程數量。了解有多少業務實踐具有連續性規劃並評估覆蓋範圍中的哪些差距至關重要，這是改進服務連續性的常見做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> Zoe 希望加快其傳統的發布管理流程。哪個現代方法最適合基於 ITIL v4 的快速發布導向組織？</p>
+    <ol>
+        <li>瀑布</li>
+        <li>敏捷/DevOps</li>
+        <li>螺旋</li>
+        <li>RAD</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 敏捷和 DevOps 非常適合快速發布週期，具有持續集成和持續交付流程。瀑布和螺旋都傾向於為每個發布花費更長的時間，而 RAD 沒有被廣泛採用，也不像以發布為中心。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> ITIL v4 包括一個七步持續改進模型。在流程再次開始之前，哪個項目發生在流程的末尾？</p>
+    <ol>
+        <li>確定願景</li>
+        <li>評估結果</li>
+        <li>採取行動</li>
+        <li>確定目標</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 評估結果發生在七步流程的末尾，有助於為下一個週期的願景確定階段提供反饋。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> Tim 將其虛擬化環境中的伺服器置於維護模式。以下哪個事件將發生？</p>
+    <ol>
+        <li>將正在運行的虛擬機器遷移到其他硬體</li>
+        <li>立即暫停所有正在運行的 VM</li>
+        <li>向用戶發送通知，然後暫停正在運行的 VM</li>
+        <li>將機器標記為不可用於新的 VM</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 維護模式會將虛擬機器遷移到其他主機，或者等待它們關閉以允許進行硬體或其他維護。Tim 知道他需要確保所有 VM 都已遷移或關閉，然後才能執行維護。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> Kathleen 希望集中化她的日誌捕獲和分析能力，並使用自動化工具來幫助她識別可能的安全問題。她應該尋找哪種類型的工具？</p>
+    <ol>
+        <li>SIEM</li>
+        <li>IPS</li>
+        <li>CASB</li>
+        <li>MITRE</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Kathleen 應尋找安全資訊和事件管理 (SIEM) 工具。它們用於集中式日誌收集、分析和檢測能力，並且通常具有查找問題並對其發出警報的自動化方法。IPS（入侵防禦系統）用於檢測和阻止攻擊，CASB（雲應用程式安全代理）用於控制和管理對雲服務的訪問，MITRE 是一個美國政府資助的研究組織，重點關注安全工作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Elaine 希望確保傳輸中的流量已加密。通常使用哪種技術來保護傳輸中的數據？</p>
+    <ol>
+        <li>VLAN</li>
+        <li>TLS</li>
+        <li>DNSSEC</li>
+        <li>DHCP</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> TLS（傳輸層安全）是用於保護傳輸中數據的加密協議。VLAN 用於邏輯上隔離網路段，DNSSEC 旨在為域名系統請求提供安全性，DHCP 自動為系統提供 IP 地址和其他網路配置資訊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Ujama 希望保護其環境中的系統免受通過 SSH 訪問。如果他需要為本地連接保留該服務，他應該怎麼做？</p>
+    <ol>
+        <li>在他的防火牆上阻止到 TCP 端口 3389 的入站連接。</li>
+        <li>在他的防火牆上阻止到 TCP 端口 3389 的出站連接。</li>
+        <li>在他的防火牆上阻止到 TCP 端口 22 的入站連接。</li>
+        <li>在他的防火牆上阻止到 TCP 端口 22 的出站連接。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 阻止到端口 22（默認 SSH 端口）的入站連接將阻止來自網路外部的攻擊者和第三方訪問 SSH，只要它未更改到另一個端口。TCP 3389 與 RDP 相關。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> Ron 希望使用一個中央系統來儲存有關系統和軟體配置及其關係的資訊。通常使用哪個工具來支持像 ITIL v4 中找到的基於標準的配置管理實踐？</p>
+    <ol>
+        <li>CRM</li>
+        <li>CMDB</li>
+        <li>配置項</li>
+        <li>變更目錄</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 配置管理資料庫 (CMDB) 經常用於成熟的基於標準的配置管理環境中，它既儲存配置管理，也儲存有關配置項 (CI) 之間關係的資訊。CRM 是客戶關係管理工具，不屬於 CCSP 考試範圍。變更目錄是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> Maria 的經理擔心她平台即服務 (PaaS) 供應商提供的底層雲環境的修補。Maria 應該告訴她的經理什麼？</p>
+    <ol>
+        <li>Maria 的組織負責修補，需要建立定期的修補週期。</li>
+        <li>供應商負責修補，PaaS 環境中客戶無需進行任何修補。</li>
+        <li>需要與供應商進行協商以確定哪個組織負責補丁管理。</li>
+        <li>合同將確定哪個組織負責補丁管理。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Maria 知道 PaaS 環境由供應商修補，她不需要對軟體或雲服務進行修補。然而，她可能需要決定何時採用補丁或版本——儘管她無法永遠推遲採用新版本！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> ITIL v4 描述了與可用性管理相關的三個子流程。這三個子流程是什麼？</p>
+    <ol>
+        <li>設計可用性服務、災難恢復測試、確定可用性目標</li>
+        <li>可用性管理、可用性指標和可用性改進</li>
+        <li>設計可用性服務、可用性測試以及可用性監控和報告</li>
+        <li>可用性規劃、可用性改進、可用性驗證</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL 可用性管理子流程是設計可用性服務、可用性測試以及可用性監控和報告。即使您不熟悉 ITIL，考慮基於標準的可用性方法也可能對您有所幫助——設計、測試和監控都是此類流程中的邏輯步驟。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> Naomi 的組織最近經歷了其雲託管環境的數據洩露。根據現有合同或法規，以下哪個方最不可能需要通知？</p>
+    <ol>
+        <li>客戶</li>
+        <li>供應商</li>
+        <li>監管機構</li>
+        <li>合作夥伴</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 供應商最不可能具有要求必須通知的合同或監管要求。供應商通常必須告知其客戶有關洩露的信息，但客戶通常不需要告知其供應商！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> Megan 正在啟動她組織的變更管理實踐。她已進行了資產清單。變更管理流程中通常的下一步是什麼？</p>
+    <ol>
+        <li>創建基線</li>
+        <li>部署新資產</li>
+        <li>建立 CMB</li>
+        <li>記錄與基線的偏差</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Megan 一旦有了清單，下一步就是創建基線。有了這個，她就可以建立一個 CMB，部署配置為滿足基線的新資產，並記錄 CMB 在需要時批准的偏差。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Dan 希望在其 Type 2 hypervisor 環境中的虛擬化桌面之間使用基於剪貼板的拖放功能。以下哪個步驟最有可能允許他訪問需要虛擬化環境集成才能工作的附加功能？</p>
+    <ol>
+        <li>將虛擬機器構建為容器</li>
+        <li>安裝客戶操作系統虛擬化工具</li>
+        <li>安裝虛擬化環境編排工具</li>
+        <li>將容器構建為虛擬機器</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 客戶操作系統虛擬化工具增加了額外的功能，例如使用 GPU、共享剪貼板以及在客戶操作系統之間拖放、共享文件夾以及需要在客戶操作系統與底層 hypervisor 和硬體之間進行額外集成的類似功能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> Geoff 知道 ITIL v4 側重於四種資訊安全管理實踐。這些流程中的哪個可能涉及 SOC 2 Type 2 審計？</p>
+    <ol>
+        <li>安全控制設計</li>
+        <li>安全測試</li>
+        <li>安全事件管理</li>
+        <li>安全審查</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全審查目標側重於安全實踐和程序是否符合組織的風險承受能力，並包括像 SOC 2 Type 2 審計這樣的驗證和測試。設計、測試和事件管理涉及它們所描述的主題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> Theresa 正在構建一個自動化的 CI/CD 管道。她希望確保通過管道的代碼在進入生產環境之前是安全的。如果她想測試正在運行的應用程式，她的最佳選擇是什麼？</p>
+    <ol>
+        <li>手動靜態代碼審查</li>
+        <li>自動化代碼審查</li>
+        <li>使用 Web 應用程式防火牆</li>
+        <li>使用 IPS</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在自動化流程中確保代碼本身是安全的需要一個可以作為流程一部分運行的工具。這意味著列表中唯一可行的選項是對代碼進行自動化審查。在大多數情況下，由於速度要求，手動靜態代碼審查不適合 CI/CD 管道。WAF 和 IPS 可以幫助保護應用程式，但同樣，它們不測試代碼或使應用程式本身更安全。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> 雲安全聯盟的雲事件響應 (CIR) 框架記錄了事件響應中客戶與雲提供商責任的典型劃分，包括指出在 SaaS 環境中，雲提供商幾乎對所有風險負責。在 IaaS 環境中，誰負責網路風險？</p>
+    <ol>
+        <li>客戶</li>
+        <li>客戶和服務提供商雙方</li>
+        <li>服務提供商</li>
+        <li>第三方事件響應者</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於 IaaS 為客戶提供了對部分網路的訪問和控制權，他們必須對基於網路的風險承擔責任。IaaS 提供商提供服務和基礎設施，因此也必須對某些基於網路的風險承擔責任。第三方事件響應者在此模型中不扮演風險責任角色。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> Eleanor 希望構建她組織的變更管理流程。變更管理工作的典型第一步是什麼？</p>
+    <ol>
+        <li>策略創建</li>
+        <li>基線化</li>
+        <li>文件創建</li>
+        <li>漏洞掃描</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 配置管理通常從基線化開始。雖然策略和文件很重要，但創建基線可以讓組織了解他們擁有什麼以及其狀態如何，這是變更管理實踐的關鍵部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> Juanita 負責一個在本地應用程式環境和雲託管資料庫之間拆分的 Web 應用程式。Juanita 知道該應用程式對某些事務執行數千個小型資料庫查詢。哪個性能監控選項對她的應用程式性能最重要？</p>
+    <ol>
+        <li>數據中心之間的網路路由</li>
+        <li>兩個數據中心之間的網路吞吐量</li>
+        <li>兩個數據中心之間的帶寬</li>
+        <li>兩個數據中心之間的網路響應時間（延遲）</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當事務量是關鍵時，網路延遲是關鍵因素。即使有數千個事務，帶寬對於小型事務來說也不那麼重要。路由可能會影響所有這些選項，但不如它們對流量的影響那麼關鍵。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Kolin 需要從 Azure 託管的 VM 收集鑑識數據。在捕獲 VM 的操作系統和數據磁碟的磁碟快照後，他應如何驗證其鑑識數據？</p>
+    <ol>
+        <li>比較 VM 的操作系統和數據磁碟的哈希值以及每個快照的哈希值。</li>
+        <li>製作快照的兩個副本並比較快照哈希值。</li>
+        <li>將 VM 導出為哈希值，然後驗證該哈希值。</li>
+        <li>將 VM 導出為磁碟映像並將磁碟映像的數字簽名與原始映像進行比較。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Azure 的最佳實踐建議為 VM 的操作系統和數據磁碟創建磁碟快照，安全地儲存快照，然後比較映像和原始映像之間的哈希值。比較快照副本的哈希值無法根據原始映像對其進行驗證，VM 無法導出為哈希值，磁碟映像未以對此類鑑識用途有意義的方式進行簽名。如果您想閱讀完整的實踐文件以獲取更多詳細資訊，可以在 https://docs.microsoft.com/en-us/azure/architecture/example-scenario/forensics 找到它。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> Ilya 希望使用基於 ITIL v4 的實踐進行容量和性能管理。以下哪項 *不是* ITIL 下容量和性能管理的典型子流程？</p>
+    <ol>
+        <li>客戶 KPI 監督</li>
+        <li>服務容量管理</li>
+        <li>組件容量管理</li>
+        <li>容量管理報告</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 企業通常不管理客戶容量。相反，他們會評估自己的容量，稱為業務容量管理。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> Nick 的組織經歷了其雲託管環境的數據洩露。根據法規，以下哪個方最有可能需要與之溝通？</p>
+    <ol>
+        <li>供應商</li>
+        <li>客戶</li>
+        <li>合作夥伴</li>
+        <li>執法部門</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 數據洩露法規通常側重於客戶通知。Nick 應與法律顧問合作，以確保其組織符合其行業和地點的任何通知要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> Valerie 已創建了其雲環境中運行的虛擬機的磁碟映像。如果她認為這些資訊將在未來的法律案件中使用，她應確保妥善處理哪個關鍵的數字鑑識要求？</p>
+    <ol>
+        <li>法律保留</li>
+        <li>保管鏈</li>
+        <li>扣押要求</li>
+        <li>處置要求</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Valerie 應仔細記錄磁碟映像的保管鏈，以便它們可以被視為有效的潛在法律行動。法律保留是為法律行動保存數據的過程，而不是記錄對磁碟映像和其他鑑識產物採取的操作。此處未提及扣押是一種採集類型，處置將在潛在法律案件之後發生。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Asha 希望利用其雲提供商的能力來安排實例以匹配其業務實踐。哪個實踐將幫助她處理具有不同調度要求的大量實例？</p>
+    <ol>
+        <li>使用第三方調度器</li>
+        <li>啟用自動調度</li>
+        <li>標記</li>
+        <li>禁用未使用的實例</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 標記是實例調度的關鍵部分，對於大量實例更是如此。它允許輕鬆地將計劃應用於具有適當標籤的所有實例。由於 Asha 希望使用其雲提供商的調度，第三方不符合她的要求。自動調度是為此問題編造的，禁用未使用的實例有助於支出，但不如標記有助於調度。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> 以下哪項 *不是* 主機強化的方面？</p>
+    <ol>
+        <li>移除所有不必要的軟體和服務</li>
+        <li>根據需要進行修補和更新</li>
+        <li>添加新硬體以提供更高的性能</li>
+        <li>安裝基於主機的防火牆和入侵檢測系統 (IDS)</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 添加新硬體以提高性能不是強化的一個元素。強化是針對攻擊對特定元素（在這種情況下是主機）進行配置的過程。審計無法防禦攻擊；它們僅檢測並指導對攻擊的響應。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> Isabella 被要求審查她組織的補丁管理方案。當前流程側重於在每周窗口內手動安裝補丁。Isabella 有興趣轉向更頻繁的自動化補丁部署流程。與自動化補丁系統最常相關的風險是什麼？</p>
+    <ol>
+        <li>由於補丁問題或壞補丁而可能中斷系統</li>
+        <li>無法報告安裝失敗的補丁</li>
+        <li>無法報告未安裝的補丁</li>
+        <li>提高補丁速度和準確性的潛力</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 如果發布了壞補丁或未檢測到安裝問題，自動化補丁系統可能會導致中斷。這意味著通常需要人工參與補丁過程，或者先在非生產環境中安裝補丁，以便在進一步安裝之前進行驗證。自動化系統通常能夠報告安裝失敗的補丁和未安裝補丁的系統，通過自動化提高補丁速度和補丁準確性是一個理想的功能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> 為了增強虛擬環境的隔離和安全性，最佳實踐是 ___________________。</p>
+    <ol>
+        <li>確保所有虛擬交換機未連接到物理網路</li>
+        <li>確保管理系統連接到與生產系統不同的物理網路</li>
+        <li>切勿將虛擬交換機連接到物理主機</li>
+        <li>僅將物理設備與虛擬交換機連接</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 管理系統控制著整個虛擬環境，因此非常有價值，需要相應地加以保護。在可能的情況下，將這些管理系統在物理和虛擬上都隔離是最佳選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> 部署管理是 ITIL v4 中哪個服務管理實踐的組成部分？</p>
+    <ol>
+        <li>問題管理</li>
+        <li>發布管理</li>
+        <li>變更管理</li>
+        <li>IT 資產管理</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL v4 將部署管理歸類為發布管理的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> Carlos 希望監控其虛擬機的 CPU 負載、溫度和電壓。Carlos 應該做些什麼來實現這一點？</p>
+    <ol>
+        <li>Carlos 無法跟踪其虛擬系統的溫度和電壓，但他可以使用底層硬體跟踪負載。</li>
+        <li>Carlos 無法跟踪負載，但他可以跟踪其虛擬系統的溫度和電壓，並且應使用 VM 的底層硬體。</li>
+        <li>Carlos 無法跟踪虛擬 CPU 的溫度和電壓，但他可以通過操作系統跟踪負載。</li>
+        <li>Carlos 無法跟踪負載和電壓，但他可以安裝熱傳感器來跟踪其虛擬機的溫度。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Carlos 知道虛擬機使用虛擬化處理器，溫度和電壓無法針對虛擬 CPU 進行跟踪。他可以跟踪負載，大多數操作系統都有內建的方法來執行此操作。如果電壓和溫度是一個持續的擔憂，他將需要在底層操作系統、硬體或 hypervisor 級別進行監控。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> Megan 負責確保其組織的持續服務改進工作達到其目標。根據 ITIL，Megan 擔任哪個正式角色？</p>
+    <ol>
+        <li>CSI 經理</li>
+        <li>流程架構師</li>
+        <li>流程所有者</li>
+        <li>客戶</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Megan 是流程所有者，負責持續服務改進工作的適用性。持續服務改進經理 (CSI 經理) 改進 ITSM 流程和服務。流程架構師確保流程協同工作並有效支持彼此，客戶消費或購買服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> Felicia 希望對她的 Amazon AWS VPC 應用規則，以限制可以聯繫其伺服器的 IP。她應該使用哪個功能來做到這一點？</p>
+    <ol>
+        <li>Honeypots</li>
+        <li>IDS</li>
+        <li>IPS</li>
+        <li>網路安全組</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Felicia 希望執行類似防火牆的基於規則的過濾，這是網路安全組的功能。Honeypots 用於捕獲和觀察攻擊者行為，IDS 和 IPS 用於檢測，在 IPS 的情況下，可能根據行為和簽名來阻止攻擊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> 在雲數據中心設計系統冗餘允許以下所有能力，*除了* ___________________。</p>
+    <ol>
+        <li>將額外硬體納入生產環境以支持增加的冗餘</li>
+        <li>防止任何服務中斷的機會</li>
+        <li>負載共享/平衡</li>
+        <li>應急操作期間計劃的、受控的故障轉移</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 風險無法完全避免，但可以大幅降低。硬體冗餘、本地共享和平衡以及故障模式設計都是在雲數據中心設計冗餘時的常見做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> Raj 被要求向其收單銀行提供 PCI 合規性證明。他應向其雲服務提供商索取什麼？</p>
+    <ol>
+        <li>合規性證明</li>
+        <li>SOC 1 Type 1 審計</li>
+        <li>SOC 2 Type 2 審計</li>
+        <li>允許他對供應商進行 PCI 審計</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 符合 PCI 標準的雲提供商通常會根據要求提供合規性證明。這種類型的文件對於監管機構作為合規性驗證的一部分非常重要。SOC 審計不專門測試 PCI 合規性，大多數供應商不允許客戶對其底層基礎設施進行 PCI 評估。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Naomi 希望對其雲環境進行漏洞掃描。對於 IaaS 環境，她可能需要滿足其雲服務供應商的哪個要求？</p>
+    <ol>
+        <li>她只能掃描自己的內部系統。</li>
+        <li>她將不得不使用服務提供商的掃描工具。</li>
+        <li>她只能掃描自己的外部系統。</li>
+        <li>她將需要安排掃描的時間和日期。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> IaaS 供應商通常允許客戶掃描自己的內部系統，但可能建議不要掃描資源較低的某些類型的實例，以避免中斷。雖然供應商可能提供掃描工具，但他們通常不要求客戶在 IaaS 環境中使用它們。由於外部掃描可能會無意中影響其他客戶，因此通常禁止或限制外部掃描，並且可能需要安排時間和日期以進行更高級或專門的測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> Naomi 已完成其漏洞掃描，並希望對她發現存在漏洞的系統進行補救。當存在對補丁潛在影響的擔憂時，IaaS 託管系統的典型補丁過程是什麼？</p>
+    <ol>
+        <li>使用腳本修補每個系統。</li>
+        <li>啟動新的、已修補的實例，然後使用負載均衡器替換未修補的系統。</li>
+        <li>創建已安裝補丁的新實例，關閉現有實例，並為新系統分配新的 IP 地址。</li>
+        <li>手動修補每個系統。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用負載均衡器從現有系統轉移負載，然後用新的、已修補的實例替換它們是雲託管服務環境補丁的常見最佳實踐。手動和腳本補丁可能會導致停機，重新分配 IP 地址也可能如此。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> 將系統置於維護模式時，重要的是執行以下所有操作，*除了* ___________________。</p>
+    <ol>
+        <li>將任何活動的虛擬客戶端轉移出主機</li>
+        <li>關閉日誌記錄</li>
+        <li>鎖定系統以阻止接受任何新的連接</li>
+        <li>如果存在任何中斷，則通知客戶</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 禁用日誌記錄會阻止管理員診斷問題。轉移用戶、阻止新連接以及通知客戶都是進入維護模式時的常見做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> Jack 希望安裝在其雲環境中的操作系統需要在啟動過程中包含一個密碼儲存庫，以確保硬體已通過驗證。以下哪個工具將允許他滿足此要求？</p>
+    <ol>
+        <li>硬體 HSM</li>
+        <li>雲 TPM</li>
+        <li>虛擬 TPM</li>
+        <li>雲 HSM</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 虛擬可信平台模塊 (vTPM) 是唯一能夠滿足 Jack 需求的解決方案。HSM（硬體安全模塊）用於創建、儲存和管理秘密，包括密碼密鑰和證書，但不用於啟動安全。雲 TPM 是為此問題編造的，但硬體和雲 HSM 確實存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> Yarif 運行一個操作系統，然後使用運行在該操作系統上的 hypervisor 來運行虛擬機器。他正在運行哪種類型的 hypervisor？</p>
+    <ol>
+        <li>經典 hypervisor</li>
+        <li>Type 1</li>
+        <li>高級 hypervisor</li>
+        <li>Type 2</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Yarif 正在運行 Type 2 hypervisor，它被定義為運行在操作系統之上而不是像 Type 1 hypervisor 那樣運行在裸機上的 hypervisor。經典和高級 hypervisor 不是常用的術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> ITIL 事件管理實踐描述了哪個關鍵功能？</p>
+    <ol>
+        <li>根據最佳實踐聘請第三方響應者</li>
+        <li>管理問題升級</li>
+        <li>在事件發生後盡快恢復服務</li>
+        <li>識別事件以允許響應</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然 ITIL 側重於識別、遏制、解決和維護，但總體目標是在事件發生後盡快恢復服務。它不側重於第三方響應者。問題升級到事件是識別的一部分，但不是主要目標，識別事件以允許響應也不是。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> Lucca 經歷了一次中斷其組織正常服務的事件。ITIL 將如何分類此事件？</p>
+    <ol>
+        <li>作為事件</li>
+        <li>作為 SLA 違規</li>
+        <li>作為問題</li>
+        <li>作為 MSA 違規</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 ITIL 中，事件被定義為正常服務的中斷，包括可能違反 SLA 的服務質量降低。問題管理解決問題的原因，而事件響應則恢復服務到正常水平。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> 哪個描述最能解釋問題和事件之間的關係？</p>
+    <ol>
+        <li>每個問題都是事件的結果，但並非所有事件都是問題。</li>
+        <li>問題和事件是不同的且無關的。</li>
+        <li>問題由支持台處理，事件由安全專業人員處理。</li>
+        <li>每個事件都是問題的結果，但並非所有問題都會導致事件。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 所有問題都是事件的潛在原因，但並非所有問題都會導致事件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> Olivia 希望為其可用性管理實踐建立與 ITIL 兼容的關鍵績效指標。以下哪個 *不是* 有用的可用性 KPI？</p>
+    <ol>
+        <li>服務相對於服務的 SLA 的可用性</li>
+        <li>服務中斷次數</li>
+        <li>服務中斷的持續時間</li>
+        <li>受服務中斷影響的個人數量</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 受影響的個人數量對客戶和管理層來說很重要，但不是可用性的有用 KPI。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> 根據 ITIL v4，什麼是資訊安全管理的基礎？</p>
+    <ol>
+        <li>事件過濾和關聯規則</li>
+        <li>安全建議</li>
+        <li>資訊安全策略</li>
+        <li>安全警報</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 資訊安全策略——特別是 ITIL 所稱的“支撐性資訊安全策略”——是 ITIL 安全管理的基礎。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> Emily 負責她組織作為 CI/CD 管道一部分的部署管理。要進行部署，通常需要執行哪個流程？</p>
+    <ol>
+        <li>必須批准變更請求。</li>
+        <li>變更諮詢委員會必須審查變更。</li>
+        <li>自動化測試和驗證必須成功完成。</li>
+        <li>下一個版本必須進入管道。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在持續集成/持續交付管道中，會進行自動化測試，代碼必須通過測試才能發布。通常不需要人工干預或批准進行 CI/CD 管道。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> Chris 希望在其雲環境中捕獲鑑識數據。在基礎設施即服務環境中，最有可能用於虛擬機的捕獲方法是哪種類型？</p>
+    <ol>
+        <li>使用像 DD 這樣的工具進行鑑識映像採集</li>
+        <li>使用提供商的快照工具</li>
+        <li>使用像 DBAN 這樣的工具進行鑑識映像採集</li>
+        <li>使用提供商的文件複製實用程序</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 快照是從 IaaS 環境中的虛擬機捕獲磁碟映像的最常用方法。由於缺乏對底層硬體的訪問權限，使用鑑識映像採集工具在雲環境中可能具有挑戰性。DBAN 是一個擦除工具，文件複製實用程序通常無法提供完整的鑑識級副本，儘管在某些情況下它們可能是唯一的選擇。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> 像 Terraform、CloudFormation、Ansible、Chef 和 Puppet 這樣的工具通常與哪種類型的策略相關聯？</p>
+    <ol>
+        <li>事件響應</li>
+        <li>敏捷 SDLC</li>
+        <li>基礎設施即代碼</li>
+        <li>法律保留</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這些都是基礎設施即代碼工具的例子。雖然敏捷管道可能會使用 Terraform，但它們會將其作為基礎設施即代碼策略的一部分來執行。它們不專門用於事件響應或法律保留策略，但兩者都可以利用它們，同樣是作為基礎設施即代碼解決方案的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> Alaina 希望將其組織的服務級別管理與 ISO 標準對齊。哪個 ISO 標準描述了服務管理？</p>
+    <ol>
+        <li>ISO 20000-1</li>
+        <li>ISO 27001</li>
+        <li>ITIL v4</li>
+        <li>COBIT</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO 20000-1 描述了服務管理。ISO 27001 描述了資訊安全管理系統。ITIL 不是 ISO 標準，COBIT 也不是——事實上，它們是它們自己的標準。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> Rene 是一位 SOC 經理，希望集中化事件和日誌資訊。她應獲取並實施哪種類型的工具？</p>
+    <ol>
+        <li>NOC</li>
+        <li>SIEM</li>
+        <li>IPS</li>
+        <li>DLP</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全資訊和事件管理 (SIEM) 是此目的的理想工具。網路運營中心 (NOC) 和 IPS（入侵防禦系統）無法集中化日誌和事件資訊，DLP（數據丟失預防）旨在阻止數據離開組織。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> IPS 相對於 IDS 存在哪個風險？</p>
+    <ol>
+        <li>IPS 無法使用基於簽名的檢測。</li>
+        <li>IPS 可能會阻止合法流量。</li>
+        <li>IPS 無法使用基於行為的檢測。</li>
+        <li>IPS 可能會失敗開放，而 IDS 不會。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 與 IDS 不同，IPS 需要內聯放置在流量中。這意味著如果 IPS 被錯誤識別或 IPS 在關閉狀態下失敗，IPS 可能會阻止合法流量。IDS 無法失敗開放或關閉，因為它不是內聯的。IDS 和 IPS 都可以使用基於簽名和基於行為的檢測。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> Amanda 希望使用來自其 IaaS 雲環境的日誌記錄來確定是否有外部用戶正在訪問她的某個伺服器。她應在其雲提供商的環境中啟用哪種類型的日誌記錄來執行此操作？</p>
+    <ol>
+        <li>系統日誌記錄</li>
+        <li>性能日誌記錄</li>
+        <li>流日誌記錄</li>
+        <li>儲存桶日誌記錄</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 打開流日誌記錄可以提供 Amanda 想要的可見性。流顯示哪個 IP 地址聯繫了另一個 IP 地址、源端口和目標端口以及數據量。此列表中列出的其他日誌記錄類型都不像此任務那樣有用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> Amanda 希望使用她的 SIEM 來檢測基於網路流量和行為基線的攻擊，這些基線會隨著時間的推移使用學習技術來適應變化。她最有可能使用哪個功能來達到此目的？</p>
+    <ol>
+        <li>AI</li>
+        <li>日誌關聯</li>
+        <li>威脅情報</li>
+        <li>報告</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> SIEM 設備中的 AI 功能通常用於分析和學習網路流量模式，然後使用日誌關聯和威脅情報功能來識別利用學習能力的意外和潛在惡意行為。僅靠日誌關聯和威脅情報無法做到這一點，之後需要報告。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> Kathleen 知道她的雲提供商為其 IaaS 環境中的系統提供 DHCP 服務。她知道她的系統將從 DHCP 伺服器接收到什麼？</p>
+    <ol>
+        <li>默認網關、子網掩碼、DNS 伺服器和 IP 地址</li>
+        <li>默認路由、子網掩碼、IP 地址和 MAC 地址</li>
+        <li>IP 地址和 MAC 地址</li>
+        <li>IP 地址、子網掩碼、DNS 伺服器和本地網路的防火牆規則定義</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 典型的 DHCP 響應將提供默認網關、子網掩碼、DNS 伺服器資訊和 IP 地址供主機使用。它不會將 MAC 地址分配給系統——這是一個硬體級別的設置，它不定義默認路由，只定義默認網關，也不提供防火牆規則定義。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> Ben 希望保護其虛擬化環境。以下哪項 *不是* 用於幫助保護虛擬化基礎設施和系統的常見安全實踐？</p>
+    <ol>
+        <li>啟用安全啟動。</li>
+        <li>禁用 VM 和控制台之間的剪切和粘貼。</li>
+        <li>移除不必要的硬體。</li>
+        <li>盡可能使用虛擬機器控制台。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用安全啟動、禁用 VM 和控制台之間的剪切和粘貼以及移除不必要的硬體都是常見的安全實踐。由於虛擬機器控制台相當於對系統的直接訪問，因此應僅限於關鍵操作，虛擬化管理平台應用於大多數操作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> Chelsea 希望阻止針對其雲託管系統的基於網路的攻擊。以下哪個 *不是* 阻止攻擊的適當解決方案？</p>
+    <ol>
+        <li>Honeypots</li>
+        <li>防火牆</li>
+        <li>安全組</li>
+        <li>入侵防禦系統</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Honeypots 用於捕獲攻擊流量以供研究，不用於阻止攻擊。防火牆、安全組和 IPS 都用於通過阻止惡意流量進入網路來阻止攻擊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> 實現高可用性雲環境的方法包括以下所有內容，*除了*</p>
+    <ol>
+        <li>使用運行在備用 CPU 架構上的實例</li>
+        <li>同一服務的多個系統供應商</li>
+        <li>在服務級別協議 (SLA) 或合同中明確記錄的業務連續性和災難恢復 (BC/DR) 功能</li>
+        <li>回退到客戶本地環境的故障轉移能力</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用備用 CPU 架構不是常見的高可用性技術。使用多個供應商、在 SLA 中包含語言以及使用自託管故障轉移能力都是實現此目標的方法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> 由於系統中斷，Susan 的網站無法被其客戶加載。Susan 應投資哪個 ITIL 實踐以確保這種情況不再發生？</p>
+    <ol>
+        <li>可用性管理</li>
+        <li>部署管理</li>
+        <li>變更管理</li>
+        <li>容量管理</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 的中斷指向需要可用性管理。Susan 可能會投資冗餘系統、額外監控或其他實踐和設計元素，以確保她組織的網站更具彈性，從而更可用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Li 的組織使用軟體即服務工具進行其生產力工作。在最近一次用戶憑證洩露後，Li 希望執行數字鑑識。在 SaaS 環境中，Li 可以獲得哪種類型的資訊進行鑑識分析？</p>
+    <ol>
+        <li>日誌</li>
+        <li>磁碟映像</li>
+        <li>VM 快照</li>
+        <li>網路數據包捕獲數據</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Li 最有可能獲得用於鑑識調查的唯一數據是日誌文件。磁碟映像、VM 快照和網路數據包捕獲數據需要對系統和網路進行較低級別的訪問，而 SaaS 提供商通常不會提供這些訪問。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> 哪個 ISO/IEC 20000-1 容量管理子流程與客戶的 SLA 最密切相關？</p>
+    <ol>
+        <li>業務容量管理</li>
+        <li>服務容量管理</li>
+        <li>合同容量管理</li>
+        <li>組件容量管理</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 服務容量管理衡量性能並根據 SLA 和服務級別要求對其進行檢查。業務容量管理涉及將業務需求解釋為服務和架構的要求。組件容量管理側重於基礎設施的實際組件。最後，合同容量管理不是 ISO/IEC 20000-1 配置管理子流程。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> Derek 希望建立一個 24x7 的團隊來監控和響應安全事件。他應該實施什麼？</p>
+    <ol>
+        <li>SIEM</li>
+        <li>NAS</li>
+        <li>SCCM</li>
+        <li>SOC</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> SOC 或安全運營中心可以是物理的也可以是虛擬的，通常由一個持續監控安全事件的團隊組成。SOC 團隊可能會使用 SIEM（安全資訊和事件管理）工具。NAS 是網路附加儲存，SCCM 是 Microsoft 現已過時的 Systems Center Configuration Manager 的名稱，現已更名為 Endpoint Configuration Manager。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> Hui 的組織使用一個工具來自動化構成其組織應用程式堆疊的數百個小型 IaaS 實例的配置、部署和協調。哪個術語最能描述這種類型的工具？</p>
+    <ol>
+        <li>調度</li>
+        <li>維護模式</li>
+        <li>編排</li>
+        <li>抽象化</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Hui 的組織正在使用雲編排技術來自動化其雲環境中的任務。這可能包括調度，但它涵蓋了比僅僅調度更廣泛的任務集。維護模式用於從 VM 集群中移除正在運行的系統以允許進行硬體或軟體升級。抽象化是一個術語，描述了隱藏系統細節的方法，通常是為了簡化管理或其他任務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> Megan 的組織使用一個工具捕獲系統和網路行為基線，然後監控該基線的變化，這些變化可能表明已發生入侵。該工具使用其捕獲的數據來更新其模型，並在其檢測中變得更加準確。Megan 使用的是哪種類型的工具？</p>
+    <ol>
+        <li>IPS</li>
+        <li>人工智能</li>
+        <li>日誌分析</li>
+        <li>鑑識數據捕獲</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Megan 正在使用基於人工智能 (AI) 的工具，該工具從其暴露的數據中學習並改進其能力。IPS 尋找惡意或不需要的網路流量並可以阻止它。日誌分析可能涉及 Megan 的任務，但問題描述的遠不止日誌分析，鑑識數據捕獲是作為調查的一部分完成的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> Jim 部署了一個看起來是網路上易受攻擊主機的系統。該系統配備了工具來捕獲攻擊者的命令和工具。Jim 部署了哪種類型的網路安全控制？</p>
+    <ol>
+        <li>honeypot</li>
+        <li>darknet</li>
+        <li>honeynet</li>
+        <li>bastion host</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jim 部署了一個 honeypot，這是一個旨在捕獲攻擊者工具和技術以供分析的系統。Honeynets 是以類似方式設置的網路，用於檢測網路攻擊和攻擊技術。Darknets 是未使用的 IP 範圍，配備工具以尋找表明潛在攻擊者探測的意外流量。Bastion hosts 用於提供從較低安全區域到較高安全區域的安全訪問。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> Olivia 已識別出她希望作為數字鑑識工作一部分捕獲的數據。在識別出鑑識產物後，通常下一步是什麼？</p>
+    <ol>
+        <li>分析</li>
+        <li>文件記錄</li>
+        <li>呈報</li>
+        <li>保存</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Olivia 知道一旦識別出數據或產物，下一步就是保存。即使您不熟悉數字鑑識技術，也可以考慮可能的鑑識捕獲流程。在捕獲數據之前，無法進行分析、文件記錄和呈報！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> Mike 的組織正在考慮採用基礎設施即代碼 (IaC) 策略。Mike 應將 IaC 環境中的哪個潛在風險識別出來？</p>
+    <ol>
+        <li>IaC 降低了一致性。</li>
+        <li>IaC 不易更新。</li>
+        <li>IaC 降低了速度。</li>
+        <li>IaC 可能導致錯誤迅速傳播。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> IaC 可能導致錯誤迅速傳播。它實際上通過消除人為錯誤的機會來幫助提高一致性，它易於更新，並且在大多數情況下可以提高速度。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Keith 準備為其組織實施儲存集群。以下哪項 *不是* 他可以期望從使用儲存集群中獲得的好處？</p>
+    <ol>
+        <li>降低成本</li>
+        <li>更高性能</li>
+        <li>更高可用性</li>
+        <li>增加容量</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 任何集群環境的好處都以更高的價格為代價。Keith 應該預期花費更多錢，但根據他的配置和設計選擇，可以獲得性能、可用性和可靠性以及容量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> Lisa 希望為其組織維護一個配置模型，該模型包含組織需要的所有關於其 CI（配置項）的資訊。她應遵循哪個 ITIL 流程？</p>
+    <ol>
+        <li>配置控制</li>
+        <li>配置識別</li>
+        <li>配置驗證</li>
+        <li>配置審計</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL 的配置識別子流程包括識別和指定每個配置項類型和子組件的屬性以及每個 CI 或子組件與組織中其他 CI 或子組件之間的關係。配置控制側重於管理配置管理系統中的更改。配置驗證和審計是一個單一子流程，用於驗證配置是否符合預期。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> Dan 正在考慮他應收集關於其 IaaS 環境中系統的哪些關鍵數據。他正從傳統的本地數據中心遷移，並且目前跟踪以下監控項目列表。在 IaaS 平台中，他仍然能夠跟踪以下哪個項目？</p>
+    <ol>
+        <li>CPU 利用率</li>
+        <li>風扇速度</li>
+        <li>系統溫度</li>
+        <li>CPU 電壓</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在此列表中，客戶通常能夠在其基礎設施即服務環境中訪問的唯一指標是 CPU 利用率，以幫助跟踪使用情況。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> 哪個術語用於描述需要作為組織配置管理工作一部分進行管理的組件或服務？</p>
+    <ol>
+        <li>配置模型</li>
+        <li>配置記錄</li>
+        <li>配置項</li>
+        <li>服務資產</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> CI（配置項）是作為配置管理工作一部分進行管理的組件或服務。配置模型用於評估更改和事件原因。配置記錄是描述配置項關係和設置的記錄。服務資產包括允許組織交付服務的一系列事物，包括第三方供應商服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> Henry 知道他的 IaaS 提供商的賬單是基於他實例的使用情況。以下哪個通常 *不是* IaaS 提供商對其典型實例的計費項目？</p>
+    <ol>
+        <li>計算使用量</li>
+        <li>網路帶寬使用量</li>
+        <li>儲存使用量</li>
+        <li>延遲</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然帶寬、計算和儲存使用量通常都會被測量和計費，但延遲通常不會直接收費。相反，提供商可能會提供明確的低延遲服務，如果他們收取與延遲相關的費用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> Charles 希望為其 IaaS 雲託管系統獲取鑑識產物。以下哪個通常 *不是* 為 IaaS 雲託管系統捕獲的產物？</p>
+    <ol>
+        <li>hypervisor 的內存狀態</li>
+        <li>磁碟卷</li>
+        <li>實例的內存狀態</li>
+        <li>來自雲環境的日誌</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 客戶通常無法從作為服務環境一部分的底層基礎設施獲取鑑識數據。實例的內存、磁碟卷和日誌都是常見的雲鑑識產物。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> Selah 希望對其 SaaS 提供商的服務進行漏洞掃描，作為其持續安全運營責任的一部分。她應該怎麼做？</p>
+    <ol>
+        <li>聯繫提供商並詢問適當的掃描窗口。</li>
+        <li>向供應商請求漏洞掃描數據。</li>
+        <li>隨時隨地對提供商進行掃描。</li>
+        <li>考慮詢問 SaaS 提供商關於他們自己的補丁和掃描實踐。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> SaaS 提供商不太可能允許第三方掃描其生產服務。雖然 Selah 可以隨時掃描她的提供商，但這通常在客戶與其提供商簽訂的合同中是被禁止的。相反，Selah 應詢問供應商關於其補丁和掃描實踐，以確定它們是否適合她組織的風險承受能力，並查看是否有文件或證明實踐（如 SOC 審計）可用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> 在確定業務連續性和災難恢復 (BC/DR) 工作是否有成功機會方面，以下哪個影響最大？</p>
+    <ol>
+        <li>對歸檔數據執行完整性檢查，以確保備份過程未損壞數據。</li>
+        <li>加密所有歸檔數據，以確保在長期靜態時不會暴露。</li>
+        <li>定期從備份中恢復。</li>
+        <li>培訓所有人員應採取的 BC/DR 行動以保護健康和人身安全。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 如果備份無法正常工作或無法恢復，檢查描述的所有其他操作都將無用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> Chris 希望使用 ISO 標準來收集、保存和識別電子證據。他應選擇哪個 ISO 標準？</p>
+    <ol>
+        <li>ISO/IEC 27001:2012</li>
+        <li>ISO/IEC 27037:2012</li>
+        <li>ISO/IEC 9000:2016</li>
+        <li>ISO/IEC 27002:2022</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 存在許多與鑑識相關的 ISO 標準，包括 27037、27041、27043 和 27050-1。ISO 27001 涵蓋了信息安全管理的最佳實踐標準，27002 描述了安全控制。ISO 9000 系列涵蓋了質量管理。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> Melissa 負責在其組織中建立 SOC。以下哪個服務通常 *不是* SOC 提供的？</p>
+    <ol>
+        <li>漏洞管理</li>
+        <li>威脅管理</li>
+        <li>事件響應</li>
+        <li>電子發現 (eDiscovery)</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全運營中心通常不提供電子發現服務。它們會承擔威脅和情報監控、事件響應和恢復、威脅和漏洞管理以及數據保護任務等。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> Ryan 希望對其 GitHub 託管的代碼存儲庫執行備份。他應選擇哪個選項以確保他擁有自己控制的備份？</p>
+    <ol>
+        <li>使用 GitHub 的內建備份功能。</li>
+        <li>使用 API 克隆存儲庫。</li>
+        <li>使用 GitHub 的快照工具將存儲庫克隆到另一個倉庫。</li>
+        <li>使用第三方 GitHub 存儲庫副本。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ryan 最好的選擇是使用 GitHub 的 API 下載存儲庫，然後將其儲存在安全的位置。依賴 GitHub 自己的備份實踐會讓 GitHub 控制代碼，Ryan 會容易受到停機的影響，依賴第三方站點也無法讓 Ryan 控制備份。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> ISO/IEC 20000-1 包括三個容量管理子流程。以下哪個列表與這三個子流程匹配？</p>
+    <ol>
+        <li>業務容量管理、服務容量管理、組件容量管理</li>
+        <li>人員容量管理、服務容量管理、組件容量管理</li>
+        <li>業務容量管理、服務容量管理、組織容量管理</li>
+        <li>人員容量管理、業務容量管理和組件容量管理</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO/IEC 20000-1 側重於業務容量管理、服務容量管理和組件容量管理。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> Maria 正在規劃其組織基於 ISO/IEC 20000-1 的發布管理計劃。以下哪個元素通常 *不是* RDM 計劃的一部分？</p>
+    <ol>
+        <li>風險評估</li>
+        <li>構建規劃</li>
+        <li>測試</li>
+        <li>退役</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 發布和部署計劃側重於創建和部署發布。生命週期管理在 ISO 標準的其他部分處理，不屬於 RDM 計劃。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> Hannah 希望將其資訊安全管理程序與 ISO/IEC 20000-1 對齊。根據該標準，必須對資訊安全策略做些什麼？</p>
+    <ol>
+        <li>建立、批准和溝通資訊安全策略。</li>
+        <li>創建並定期更新資訊安全策略。</li>
+        <li>採用基於 ISO/IEC 標準模板的資訊安全策略。</li>
+        <li>對組織的安全策略進行第三方審查。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO/IEC 20000-1 要求組織建立、批准和溝通其資訊安全策略。如果您不熟悉 ISO/IEC 20000-1 或類似標準，請審查答案列表以查找不太可能的答案——例如第三方審查的要求。使用標準化模板可以幫助縮小此類問題的答案範圍。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> Mike 的 VMWare 集群將虛擬機器從負載較重的主機移動到負載較輕的主機，以幫助平衡集群中的負載。Mike 使用的是哪種技術？</p>
+    <ol>
+        <li>自動實例管理</li>
+        <li>分佈式資源調度</li>
+        <li>輪詢負載均衡</li>
+        <li>實例隔離</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> VMWare 中的分佈式資源調度將虛擬機器從負載較重的主機移動到具有更多可用資源的主機，以幫助平衡集群中的負載。自動實例管理和實例隔離是為此問題編造的，輪詢負載均衡是一種負載均衡形式，其中請求根據列表分發到集群中的每個伺服器。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> 以下哪項通常 *不* 作為磁碟硬體監控的一部分進行測量？</p>
+    <ol>
+        <li>通電時間</li>
+        <li>硬碟溫度</li>
+        <li>硬碟健康狀況</li>
+        <li>已用容量</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 磁碟上儲存的數據量不被視為硬體監控項目。通電時間、溫度和硬碟健康狀況都是硬體監控的元素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> ITIL v4 定義了四個服務級別管理子流程。以下哪個 *不是* 這四個子流程之一？</p>
+    <ol>
+        <li>服務級別管理框架的維護</li>
+        <li>服務需求的識別</li>
+        <li>定價結構和罰款</li>
+        <li>服務級別監控和報告</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 缺失的第四個項目應為協議簽署和服務激活，包括服務級別協議和服務驗收標準。定價不是 ITIL v4 服務管理流程的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> Michelle 希望從低信任度設備運行應用程式。哪種類型的基於雲的解決方案可以幫助她以安全的方式運行應用程式？</p>
+    <ol>
+        <li>使用本地虛擬機器。</li>
+        <li>使用堡壘主機。</li>
+        <li>使用跳板箱。</li>
+        <li>使用虛擬客戶端。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Michelle 應選擇一個虛擬客戶端，允許她在雲託管環境中運行應用程式。這將允許應用程式在安全的位置運行，同時仍然允許她從信任度較低的設備訪問它。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> 由於大多數雲環境嚴重依賴虛擬化，因此鎖定或強化虛擬化軟體或任何涉及虛擬化的軟體非常重要。以下哪項 *不是* 強化軟體的元素？</p>
+    <ol>
+        <li>移除未使用的服務和庫</li>
+        <li>維護嚴格的許可證目錄</li>
+        <li>根據需要進行修補和更新</li>
+        <li>移除默認帳戶</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 維護軟體許可證庫雖然重要，但不是強化實踐的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> 業務連續性管理實踐中的哪個關鍵文件確保組織可以恢復到已知的、一致的狀態以及工作狀態？</p>
+    <ol>
+        <li>業務連續性策略</li>
+        <li>恢復計劃</li>
+        <li>IT 服務連續性報告</li>
+        <li>災難恢復調用指南</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 ITIL 中，恢復計劃包括將系統和服務恢復到工作狀態的詳細計劃，還可以包括將數據恢復到已知的一致狀態。業務連續性策略設定了業務功能的策略。IT 服務連續性計劃側重於如何在指定災難期間確保服務和系統的連續性。災難恢復調用指南解釋瞭如何以及何時調用 DR 程序。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> Jason 的公司在雲託管環境中運營其小型企業。在最近一次洩露後，Jason 希望進行鑑識。如果 Jason 不是鑑識從業人員，他應如何確保其組織在雲環境中進行適當的鑑識捕獲？</p>
+    <ol>
+        <li>遵循 ISO 標準來識別和保存數據。</li>
+        <li>聘請第三方鑑識專業人員。</li>
+        <li>遵循其雲提供商的最佳實踐來識別和保存數據。</li>
+        <li>請求其雲提供商執行鑑識工作。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對於許多組織來說，在面臨雲鑑識調查時的最佳選擇是聘請第三方。在這種情況下，如果沒有內部專家並且作為一家小公司，Jason 最好的選擇是第三方專家。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> 以下哪個因素最可能影響雲數據中心的設計？</p>
+    <ol>
+        <li>地理位置</li>
+        <li>靠近人口中心</li>
+        <li>成本</li>
+        <li>安全要求</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 設施的地理位置會影響 HVAC 等要求以及極端天氣等環境威脅。靠近人口中心可能會對水電或人員配置產生次要影響，成本和安全要求都可能影響設計，但更大的影響來自其地理位置。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> Rick 正在創建一個定義其組織變更管理流程的策略。以下哪個 *不是* 常見的變更管理策略元素？</p>
+    <ol>
+        <li>定義變更管理委員會的組成</li>
+        <li>變更管理流程本身</li>
+        <li>要求防止偏離策略中建立的基線</li>
+        <li>執行措施</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 變更管理實踐和基線需要包括在合理方式下處理偏差的方法。這意味著 Rick 應確保該策略包括任務分配，包括偏差通知和文件記錄。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> 哪個雲數據中心功能不需要在隔離網路上執行？</p>
+    <ol>
+        <li>客戶訪問配置</li>
+        <li>管理系統控制介面</li>
+        <li>儲存控制器訪問</li>
+        <li>客戶生產活動</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 生產活動將充分利用共享資源池，因此除非客戶支付該特定服務特性，否則它們不會被隔離。配置、管理和儲存訪問都應隔離以確保這些功能的安全性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> 當雲計算專業人員使用短語 ping, power, pipe 時，以下哪個特性 *未* 被描述？</p>
+    <ol>
+        <li>邏輯連接性</li>
+        <li>人機交互</li>
+        <li>電力</li>
+        <li>設施空間</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 此短語未描述用戶與雲的交互。Ping, power, 和 pipe 是指連接性、電力和帶有 HVAC 等服務的設施空間。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> 您是一家小型零售企業的安全經理，主要通過與個人客戶（公眾）的直接電子商務交易。您的主要市場在亞洲，但您在全球範圍內履行訂單。您的公司在香港總部大樓內擁有自己的數據中心，但也使用公有雲環境進行應急備份和歸檔。您的雲提供商將在您的合同期滿時更改其業務模式，您需要尋找新的提供商。在選擇提供商時，如果最小化成本是您的最終目標，您應尋找 Uptime Institute 評級系統的哪個級別？</p>
+    <ol>
+        <li>1</li>
+        <li>3</li>
+        <li>4</li>
+        <li>8</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對於問題中描述的目的，Tier 1 數據中心應已足夠；它是最便宜的，您只需要偶爾進行備份（而不是持續訪問）。地點和市場的細節是無關的，只是干擾項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> Isaac 是一家小型外科中心的 IT 經理。他的組織正在審查其當前本地數據中心的升級選項。該組織希望提高其災難恢復和業務連續性能力，而無需在人員或技術方面進行重大投資。Isaac 應推薦以下哪個選項？</p>
+    <ol>
+        <li>建造一個全新的數據中心</li>
+        <li>向現有數據中心添加額外的 DR/BC 能力</li>
+        <li>遷移到雲託管數據中心</li>
+        <li>保留當前的數據中心</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Isaac 獲取有意義的 BC/DR 能力的最有效方法是遷移到雲託管數據中心。這意味著他的組織不必在其數據中心進行重大投資來增加能力。當然，保留當前的數據中心無法滿足他的需求！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> 保管鏈文件記錄和跟踪有助於什麼？</p>
+    <ol>
+        <li>不可否認性</li>
+        <li>貌似可信的否認</li>
+        <li>調查人員篡改數據</li>
+        <li>與執法部門接觸</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 創建和維護適當的保管鏈文件記錄為流程提供了不可否認性，確保處理過程能夠經受住以後的審查。調查人員的數據篡改仍可能發生，但會在正確記錄的鏈中被識別出來。保管鏈可能由執法部門要求，但它無法幫助公司與他們接觸，貌似可信的否認不是一個鑑識概念。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> Ben 希望在兩個網路段之間提供邏輯隔離。通常使用哪種技術來定義此目的的網路？</p>
+    <ol>
+        <li>DHCP</li>
+        <li>VLAN</li>
+        <li>VPN</li>
+        <li>STP</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> VLAN（虛擬局域網）是用於隔離網路設備的邏輯覆蓋。DHCP（動態主機控制協議）提供了一種在請求時自動向系統提供 IP 地址和其他重要網路資訊的方法。VPN（虛擬專用網路）用於在通常通過不受信任網路的網路之間創建安全通道，STP（生成樹協議）用於防止網路中的環路。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> 設計雲數據中心時，以下哪個方面 *不是* 確保應急操作期間運營連續性所必需的？</p>
+    <ol>
+        <li>獲得清潔水</li>
+        <li>寬帶數據連接</li>
+        <li>延長電池備份</li>
+        <li>物理訪問數據中心</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 備用電源不必由電池提供；它可以通過冗餘的公用事業線路或發電機饋入數據中心。</p>
+</div>
+
+</body>
+</html>

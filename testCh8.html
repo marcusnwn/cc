@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第八章 練習測試 2（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第八章 練習測試 2（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> Juanita 已將她的虛擬化集群配置為高可用性模式。虛擬化管理平面檢測到她的一個伺服器已失敗且不再發送心跳信息。如果節點無法重新啟動，集群將做什麼？</p>
+    <ol>
+        <li>嘗試重新啟動失敗的系統。</li>
+        <li>關閉失敗的系統並發送警報。</li>
+        <li>在其他集群節點上重新啟動該系統上託管的 VM。</li>
+        <li>將主機從失敗的系統遷移到其備份鏡像。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> HA 或高可用性模式使用心跳來檢測系統何時失敗。如果心跳停止，則該節點上運行的虛擬機器將在其他主機上重新啟動。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> Will 希望在他的雲託管環境中使用容器化應用程式。在他構建它們時，他應該使用以下哪個最佳實踐？</p>
+    <ol>
+        <li>每個容器打包一個應用程式。</li>
+        <li>盡可能使用默認安裝。</li>
+        <li>保留所有正常的工具和實用程序。</li>
+        <li>避免標記以降低複雜性。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Will 知道容器應每個容器打包一個應用程式。安裝應配置為滿足應用程式的需求，如果不需要，則應移除默認工具。標記對於輕鬆控制容器至關重要。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Jason 希望採用雲服務安全標準。以下哪個標準是專門設計用於涵蓋雲服務提供商的？</p>
+    <ol>
+        <li>ISO/IEC 20000:1</li>
+        <li>ISO/IEC 27017</li>
+        <li>PCI DSS</li>
+        <li>GDPR</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO/IEC 27017 是一個專門設計用於雲服務提供商的安全標準。ISO/IEC:20000:1 和 PCI DSS 是更廣泛的標準，歐盟通用數據保護條例也不是特定於雲的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> Helen 的組織運營一個由雲服務提供商託管的電子商務網站。她可能需要遵守以下哪個合規標準？</p>
+    <ol>
+        <li>PCI DSS</li>
+        <li>FedRAMP</li>
+        <li>COBIT</li>
+        <li>ITIL</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於 Helen 運營電子商務網站，她很可能接受信用卡，因此需要確保符合 PCI 標準——這是一項由合同而非法規要求的標準。FedRAMP 是一個美國聯邦計劃，側重於與雲服務相關的安全評估、監控和其他元素。COBIT 是一個定義 IT 管理實踐的框架，與 ITIL 非常相似。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> Ilya 希望確保他的雲環境中的系統得到適當修補。如果他的組織非常強調使用預構建工具，以下哪個選項將給予他對補丁安裝時間和安裝內容的最大靈活性和控制權？</p>
+    <ol>
+        <li>使用內建的操作系統工具自動安裝補丁。</li>
+        <li>使用由組織開發的補丁腳本。</li>
+        <li>為所有應用程式和操作系統設置自動更新。</li>
+        <li>使用雲提供商的補丁工具和補丁基線。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 像 Amazon 的 Patch Manager 這樣的工具使用補丁基線來確定哪些補丁將被安裝或不安裝以及何時安裝，還可以掃描以確定補丁狀態。這既符合 Ilya 對靈活性的需求，也符合組織對購買與構建類型工具的偏好。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Yasmine 正在驗證她的軟體的負載性能，包括測試比她組織預期使用的用戶數量更高的用戶。她正在進行哪種類型的測試？</p>
+    <ol>
+        <li>功能測試</li>
+        <li>黑盒測試</li>
+        <li>非功能測試</li>
+        <li>白盒測試</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Yasmine 正在進行非功能測試。這可能有點令人困惑，記住功能測試側重於軟體的業務需求，而不是其性能或客戶期望的體驗，可能會有所幫助。沒有足夠的信息將此稱為黑盒（零知識）測試或白盒（全知識）測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> Adam 的組織使用 Google 雲服務，他希望確保其組織的日誌是安全的。他應向其組織推薦哪個最佳實踐以確保日誌在靜態時是安全的？</p>
+    <ol>
+        <li>確保雲提供商定期輪換日誌的金鑰。</li>
+        <li>對日誌使用客戶管理的加密金鑰。</li>
+        <li>對日誌使用提供商管理的加密金鑰。</li>
+        <li>避免加密日誌以確保它們保持可訪問性。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用客戶管理的金鑰加密日誌是確保日誌無法被第三方訪問的最佳實踐。Adam 應確保他的組織安全地控制和管理他們的金鑰。允許供應商控制金鑰意味著第三方，包括執法部門或侵入提供商安全的攻擊者，可能會訪問他組織的日誌，而不加密日誌意味著它們在靜態時不受保護。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> Charleen 希望為她的組織實施多因素身份驗證。以下哪個 MFA 選項被認為最不安全？</p>
+    <ol>
+        <li>基於應用程式的代碼生成</li>
+        <li>基於硬體令牌的代碼生成</li>
+        <li>基於 SMS 的代碼傳遞</li>
+        <li>USB 硬體令牌</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於針對 SMS 的攻擊，包括 SIM 卡交換和克隆攻擊以及基於 VoIP 電話的漏洞，基於 SMS 傳遞的代碼被認為是最不安全的。基於硬體和軟體的代碼生成被認為更安全，因此更可取。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> 電子郵件和網頁都是哪種類型數據的範例？</p>
+    <ol>
+        <li>非結構化數據</li>
+        <li>結構化數據</li>
+        <li>半結構化數據</li>
+        <li>部分結構化數據</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 電子郵件和網頁都具有結構元素，但未嚴格定義並且可以包含非結構化數據。這意味著它們是半結構化數據的例子。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> Felix 希望確保其組織的成員僅在批准的位置訪問管理控制台。以下哪個網路安全能力最能幫助他完成此任務？</p>
+    <ol>
+        <li>零信任</li>
+        <li>地理圍欄</li>
+        <li>流量檢查</li>
+        <li>網路安全組</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 地理圍欄允許組織指定特定位置以允許或拒絕操作。這將允許 Felix 將組織的設施設置為可接受的訪問位置，同時拒絕來自其他位置的訪問。零信任側重於持續授權和身份驗證，流量檢查著眼於流量以識別不需要或意外的流量，網路安全組的工作方式很像防火牆，根據規則允許或拒絕流量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> Valerie，一位 Amazon AWS 用戶，擔心可能影響她當前美東地區的潛在中斷。她應採取哪種風險緩解策略來確保其組織能夠應對區域範圍內的中斷？</p>
+    <ol>
+        <li>在另一個區域配置 DR。</li>
+        <li>在另一個可用區配置 DR。</li>
+        <li>在她當前的可用區部署冗餘系統。</li>
+        <li>在她當前的區域部署冗餘系統。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Valerie 知道區域範圍內的中斷可能需要在庫存恢復之前在另一個區域進行操作。雖然這可能是一項重大的工作，但在真正的災難場景中可能是必要的。雖然她可以考慮另一個雲提供商，但從一個提供商轉移到另一個提供商所需的新工作量很大。僅選擇另一個可用區或在同一區域或區域部署更多資源無法滿足她的需求，因為如果該區域關閉，它們都會受到影響。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> Casey 正在從本地數據中心過渡到雲數據中心。在她的新環境中，她仍然能夠訪問哪個硬體監控？</p>
+    <ol>
+        <li>CPU 利用率</li>
+        <li>風扇速度</li>
+        <li>系統溫度</li>
+        <li>系統電壓</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Casey 知道她將無法訪問其新環境的硬體級別監控。這意味著 CPU 和磁碟利用率都是她仍然能夠監控的，但風扇速度、系統溫度和系統電壓將不是她負責或能夠訪問的內容。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Kirk 正在為其組織採用平台即服務工具。在 PaaS 環境中，誰負責應用程式和數據安全？</p>
+    <ol>
+        <li>客戶</li>
+        <li>提供商</li>
+        <li>監管機構</li>
+        <li>客戶和提供商雙方</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 PaaS 環境中，客戶控制他們構建的應用程式和環境中的數據。其他一切都是平台供應商的責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Alaina 希望保護她的本地數據中心免受電力問題的影響。以下哪個選項最適合處理電壓驟降？</p>
+    <ol>
+        <li>發電機</li>
+        <li>從兩個不同的提供商處購買電力</li>
+        <li>UPS</li>
+        <li>PDU</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 不間斷電源 (UPS) 系統使用電池或其他機制在電壓驟降時提供電力。發電機需要時間才能啟動，無法輕鬆處理短暫的中斷。從兩個不同的提供商處購買電力可能會有所幫助，但如果仍然發生電壓驟降，UPS 是更好的解決方案。配電單元 (PDU) 用於將電力輸送到伺服器和系統並對其進行控制和監控，但它們對電壓驟降或電力損失沒有影響。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> 哪個術語用於描述允許客戶創建虛擬機器、使用虛擬網路定義自己的網路以及使用儲存和其他服務來創建和管理自己基礎設施的雲服務提供商？</p>
+    <ol>
+        <li>IaaS</li>
+        <li>PaaS</li>
+        <li>SaaS</li>
+        <li>CaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基礎設施即服務解決方案允許客戶使用服務提供商提供的資源構建和管理自己的基礎設施。PaaS 為客戶提供了一個可以在其上構建應用程式的平台，SaaS 提供軟體即服務。CaaS 有時代表容器即服務，但不是一個廣泛採用的雲術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> 當 Susan 登錄其組織的服務門戶時，她看到客戶數據已刪除姓名和地址。她的組織正在使用哪種數據混淆技術？</p>
+    <ol>
+        <li>隨機化</li>
+        <li>數據遮蔽</li>
+        <li>哈希</li>
+        <li>匿名化</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 的組織正在使用匿名化從客戶數據中移除可識別資訊。隨機化會隨機化數據，移除其與其他元素的聯繫，同時保留格式和內容以供測試。數據遮蔽會從數據視圖中移除數據元素，通常使用星號或其他字符替換資訊。哈希使用哈希創建仍然可以引用的數據元素，而無需訪問原始數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> Hui 希望進行一次涵蓋其組織安全實踐的時間點 SOC 審計。她應選擇哪種類型的 SOC 審計？</p>
+    <ol>
+        <li>SOC 1 Type 1</li>
+        <li>SOC 2 Type 1</li>
+        <li>SOC 1 Type 2</li>
+        <li>SOC 2 Type 2</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> SOC 2 審計涵蓋安全控制，Type 1 審計涵蓋一個時間點。SOC 1 審計涵蓋財務控制，Type 2 審計涵蓋一段時間。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> 雲安全聯盟指出，在進行鑑識調查時，特定的日誌類型可能僅對雲服務提供商可用。在 IaaS 環境中，以下哪個日誌類型通常 *不* 在服務提供商控制之下？</p>
+    <ol>
+        <li>來自 DNS 伺服器的日誌</li>
+        <li>計費記錄</li>
+        <li>API 日誌</li>
+        <li>Web 伺服器日誌</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 IaaS 環境中，客戶將負責 Web 伺服器和提供的其他服務。DNS 日誌、計費記錄和 API 日誌都可能在服務提供商的控制之下。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> ITIL v4 定義了一個主要的可用性責任。哪個角色是 ITIL 可用性工作的關鍵？</p>
+    <ol>
+        <li>系統架構師</li>
+        <li>可用性測試員</li>
+        <li>風險經理</li>
+        <li>可用性經理</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL 將可用性經理定義為負責定義、分析、規劃、衡量和改進 IT 服務可用性的個人。這個關鍵角色是 ITIL 可用性管理的流程所有者。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Wayne 的組織僱用雲架構師，他們對其雲環境的實施和監督負有廣泛責任。他希望在環境中為架構師提供適當的權限。他應如何為他們提供適當的權限？</p>
+    <ol>
+        <li>使用供應商對雲架構師權限的最佳實踐定義。</li>
+        <li>僅使用內建角色。</li>
+        <li>定義自訂角色。</li>
+        <li>使用多因素身份驗證根據需要映射角色。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Wayne 的架構師具有其組織定義的特定角色。這意味著具有適當權限的自訂角色是雲架構師的最佳選擇。雲供應商最佳實踐和內建角色可作為起點，但組織通常會超越這些角色來定義自己的需求。最後，MFA 不用於映射角色。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> Jack 正在考慮將雲服務策略作為其組織遷移到雲的一部分。以下哪個 *不是* 制定雲服務策略時應遵循的常見原則？</p>
+    <ol>
+        <li>從所有相關利益相關者處獲取意見。</li>
+        <li>改變雲的組織文化。</li>
+        <li>遵循指揮鏈。</li>
+        <li>滿足外部要求。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 策略需要與組織文化協同工作，否則它們很可能會失敗。這意味著制定策略並期望文化改變不是一個常見原則。事實上，這是一個糟糕的主意！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> Lucca 希望定義對其雲環境的技術風險。以下哪個 *不是* 其雲服務的技術風險？</p>
+    <ol>
+        <li>隱私問題</li>
+        <li>數據洩露</li>
+        <li>系統中斷</li>
+        <li>拒絕服務攻擊</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Lucca 知道隱私問題是法律問題，而不是技術問題。數據洩露、系統中斷和拒絕服務攻擊都針對系統和技術基礎設施。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> 什麼定義了 Type 2 hypervisor？</p>
+    <ol>
+        <li>它在雲中運行。</li>
+        <li>它運行在現有操作系統之上。</li>
+        <li>它安裝在裸機系統上。</li>
+        <li>它無法在虛擬化系統內部運行。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Type 2 hypervisor 運行在現有操作系統之上。Type 1 hypervisor 安裝在裸機系統上，本質上是它們自己的操作系統。兩者都不需要在雲中運行，Type 2 hypervisor 通常可以在其他 hypervisor 環境內部運行，儘管它可能不像預期的那樣工作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> Amazon 的 S3 依賴於儲存桶中的對象集合，並可通過 REST API 訪問。Amazon S3 是哪種常見的雲儲存類型？</p>
+    <ol>
+        <li>對象</li>
+        <li>塊</li>
+        <li>原生</li>
+        <li>網路文件</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Amazon 的 S3 是對象儲存的一個例子。塊儲存的工作方式類似於傳統的本地硬碟，儘管磁碟通常是虛擬的，而網路文件儲存允許您跨網路連接到硬碟。原生儲存不是常見的雲儲存類型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> 以下哪個 *不是* 隱私影響評估 (PIA) 的典型目標？</p>
+    <ol>
+        <li>識別隱私工作的成本</li>
+        <li>確保組織滿足基於法律和政策的隱私要求</li>
+        <li>識別隱私洩露的風險</li>
+        <li>識別隱私控制</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 隱私影響評估側重於個人身份資訊的內容、原因和方式，包括法律和政策要求、風險和控制。它不專門尋求識別隱私控制或工作的成本。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Mike 希望確保他的數據標籤隨著數據在其組織中使用而隨之移動。確保這一點的最有效和可行的選項是什麼？</p>
+    <ol>
+        <li>在文件元數據中包含數據標籤。</li>
+        <li>在文件名中包含數據標籤。</li>
+        <li>將數據標籤作為與第一個文件一起發送的第二個文件包含在內。</li>
+        <li>將數據標籤作為密碼包裝的一部分包含在內。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 以允許它們輕鬆跟隨文件的方式包含標籤是 Mike 的最有效選項。雖然標籤可能會被修改或移除，但正常使用不會導致它們丟失。文件名經常更改，第二個文件很容易被遺忘或移除，密碼包裝會引入開銷，並且也可能被解密和遺忘。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> 在發現洩露後，哪個群體最有可能有法律規定的通知時間框架？</p>
+    <ol>
+        <li>客戶</li>
+        <li>合作夥伴</li>
+        <li>監管機構</li>
+        <li>執法部門</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 法規通常具有內建的法律規定的通知時間框架。它可能設定一個時間段，或者僅標記為要求合理的時間框架，但法規最有可能要求這樣做。客戶和合作夥伴可能有合同通知要求，而不是法律要求，執法部門通知通常由組織自行決定。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> Google 的雲架構框架建議了許多常見的安全設計實踐。以下哪個 *不是* 常見的雲 IaaS 設計安全實踐？</p>
+    <ol>
+        <li>滿足您所在地區的合規要求。</li>
+        <li>使用分層安全方法。</li>
+        <li>強調手動監控。</li>
+        <li>自動化敏感任務的部署。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 現代設計原則要求盡可能自動化監控。雲部署的範圍和規模以及日誌和其他監控資訊的量意味著手動工作不太可能成功。相反，應盡可能保留手動工作用於升級和監督。滿足合規要求、使用分層安全以及自動化敏感任務的部署都在 Google 雲架構框架的安全原則中，網址為 https://cloud.google.com/architecture/framework/security/security-principles。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> Olivia 正在使用瀑布式 SLDC。以下哪個 *不是* 典型的基於瀑布的 SDLC 階段？</p>
+    <ol>
+        <li>需求收集</li>
+        <li>逆向工程</li>
+        <li>實施</li>
+        <li>維護</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基於瀑布的 SDLC 的常見階段包括需求收集、分析、設計、實施、測試、部署和維護。逆向工程不是典型的 SDLC 階段。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Michelle 希望為其雲環境儲存和管理密碼金鑰。如果她正在選擇新的提供商，她應要求其雲 IaaS 提供商擁有哪個解決方案？</p>
+    <ol>
+        <li>TPM</li>
+        <li>雲 HSM</li>
+        <li>PKI</li>
+        <li>SAS 70</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Michelle 應驗證她的雲提供商是否提供雲 HSM（硬體安全模塊）能力。雲 HSM 將允許她安全地生成、儲存和管理密碼金鑰和其他秘密。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> 在雲 IaaS 環境中，分配計算能力最常用的方法是什麼？</p>
+    <ol>
+        <li>每個客戶每個實例使用一個專用 CPU。</li>
+        <li>每個客戶每個實例使用一個專用核心。</li>
+        <li>計算時間被虛擬化並基於性能分配。</li>
+        <li>計算時間被虛擬化並基於時間分配。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在大多數 IaaS 環境中，計算時間被虛擬化並基於性能分配。該性能按時間計費，但分配不是基於時間。客戶可能能夠支付專用 CPU 或核心的費用；然而，這不是最常見的分配模型，並且會產生額外費用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> Gurvinder 希望確保他的雲環境可用且可靠。他應確保其組織從雲供應商處收到哪種類型的協議？</p>
+    <ol>
+        <li>QSA</li>
+        <li>NDA</li>
+        <li>MSA</li>
+        <li>SLA</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Gurvinder 應確保他的組織找到一個能夠保證滿足組織需求的服務級別協議 (SLA) 的供應商。QSA 是 PCI 評估專業人員，NDA（保密協議）用於保護在組織或個人之間共享的敏感數據，MSA（主服務協議）定義了組織將如何協同工作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> Ben 正在探索其組織的新安全選項，並希望了解機密計算。以下哪個最能描述機密計算的作用？</p>
+    <ol>
+        <li>它確保只有經過身份驗證的用戶才能訪問數據。</li>
+        <li>它保護傳輸中和靜態的數據。</li>
+        <li>它允許您在使用中（甚至在處理過程中）保護數據。</li>
+        <li>它在數據被未經授權方訪問之前銷毀數據。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 機密計算是一種借助受保護 CPU 飛地使用來保護使用中數據的技術，即使在處理過程中也是如此。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> Susan 希望檢測和警報潛在的惡意流量，但她不希望因誤報而導致服務中斷。她應該部署哪種技術？</p>
+    <ol>
+        <li>IDS</li>
+        <li>網路安全組</li>
+        <li>IPS</li>
+        <li>防火牆</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 應部署 IDS（入侵檢測系統）。IDS 部署旨在查看流量並識別問題而不阻止它。IPS 內聯放置以檢測和可能阻止攻擊。防火牆和網路安全組使用規則而不是檢測。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> 根據 ISO/IEC 20000-1 的定義，以下哪個元素通常 *不是* 典型的服務目錄組件？</p>
+    <ol>
+        <li>聯繫點</li>
+        <li>服務描述</li>
+        <li>對其他服務的依賴性</li>
+        <li>風險評級</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO/IEC 20000-1 指向服務目錄項目，包括服務描述、服務級別定義和目標、聯繫點、支持資訊、對其他服務的依賴性以及安全詳細信息。它不包括風險評級——這些通常作為組織風險管理紀律的一部分在服務目錄之外維護。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> 縮寫詞 STRIDE 代表什麼？</p>
+    <ol>
+        <li>欺騙、篡改、否認、信息洩露、拒絕服務、權限提升</li>
+        <li>安全、測試、偵察、調查、數據安全、升級</li>
+        <li>安全、測試、否認、信息洩露、數據安全、升級</li>
+        <li>欺騙、篡改、偵察、事件響應、刪除、證據</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> STRIDE 代表欺騙、篡改、否認、信息洩露、拒絕服務和權限提升。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> Brian 的組織使用 Google Workspace。他們正在使用哪種類型的雲服務？</p>
+    <ol>
+        <li>IaaS</li>
+        <li>PaaS</li>
+        <li>SaaS</li>
+        <li>DaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Google Workspace 是軟體即服務環境的一個例子，其中 Google 提供軟體，所有底層支持和基礎設施都由 Google 運行。Brian 的組織只是為用戶提供對工作區的訪問權限，不像平台即服務模型那樣需要在平台內部開發應用程式。基礎設施即服務模型將涉及運行系統和基礎設施，DaaS 通常意味著桌面即服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> 使用哪種安全測試模型來驗證構成開源軟體包的組件？</p>
+    <ol>
+        <li>靜態測試</li>
+        <li>軟體組成分析</li>
+        <li>交互式安全測試</li>
+        <li>模糊測試</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體組成分析是確定構成軟體包的開源組件的過程。靜態測試著眼於源代碼，交互式安全測試著眼於代碼在被人或自動化測試器交互時的漏洞，模糊測試則向軟體發送意外輸入以查看其可能在哪裡失敗或以意外方式響應。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> Chris 被合作夥伴告知其雲託管環境最近發生了洩露。Chris 應向合作夥伴組織索取什麼？</p>
+    <ol>
+        <li>受損系統和服務的完整列表</li>
+        <li>受影響客戶列表</li>
+        <li>基於其合作夥伴協議的任何相關資訊的披露</li>
+        <li>其他受影響合作夥伴的披露</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 合作夥伴協議通常內建有洩露通知條款。Chris 應使用其合作夥伴協議中的洩露通知語言來指導他與合作夥伴組織的溝通。該組織可能會選擇共享額外資訊，但除非協議要求，否則不太可能詳細說明客戶、系統、合作夥伴或服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Gary 正在評估風險，並希望描述供應商在實施其控制措施後剩餘的風險。他應使用哪個術語來描述供應商處理其風險後剩餘的風險？</p>
+    <ol>
+        <li>固有風險</li>
+        <li>機會風險</li>
+        <li>殘餘風險</li>
+        <li>已控制風險</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 殘餘風險是在實施控制措施後仍然存在的風險。固有風險是控制措施之前的原始風險水平。機會風險和已控制風險都是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> Jaime 希望解釋允許雲供應商以計算形式出售對其底層硬體部分訪問權限的技術。哪個構建塊技術為此提供了基礎？</p>
+    <ol>
+        <li>API</li>
+        <li>虛擬化</li>
+        <li>分段</li>
+        <li>SLA</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 虛擬化是允許在同一硬體上運行多個系統的關鍵構建塊技術。出售系統的一部分允許雲提供商有效地利用其資源作為雲業務模型的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> Yuri 希望避免 OWASP Top 10 應用程式安全風險。他應如何幫助防止傳輸中數據的密碼失敗？</p>
+    <ol>
+        <li>對所有通信使用 TLS。</li>
+        <li>對所有儲存的數據使用 AES-256 加密。</li>
+        <li>要求所有連接都通過 UDP 完成。</li>
+        <li>要求所有數據連接都進行三次握手。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對所有通信使用 TLS 有助於保護傳輸中的數據。AES 通常用於靜態數據。使用 UDP 或像 TCP 那樣要求三次握手不會為傳輸中的數據增加安全性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> Rick 希望確保如果他的 PaaS 提供商負責的事情出了問題，他的組織不會被追究責任。他應在其雲合同中要求什麼？</p>
+    <ol>
+        <li>OLA</li>
+        <li>服務級別管理</li>
+        <li>SLA</li>
+        <li>賠償</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Rick 應尋找適當的賠償語言，以確保供應商對他們引起的問題或問題承擔責任。運營級別協議 (OLA) 是內部服務級別協議，SLA 是服務級別協議，服務級別管理都無法滿足 Rick 的需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> Hillary 希望在其網站上發布一份 SSAE-18 SOC 報告供公眾使用。如果她希望提供有關其組織隨時間變化的控制措施的信息，她應提供哪種類型的 SOC 報告？</p>
+    <ol>
+        <li>SOC 1 Type 2</li>
+        <li>SOC 2 Type 2</li>
+        <li>SOC 3 Type 2</li>
+        <li>SOC 4 Type 2</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> SOC 3 報告旨在供一般受眾使用，Type 2 報告提供有關隨時間變化的控制措施的信息。SOC 1 涵蓋財務實踐，SOC 2 著眼於安全控制，但旨在供內部受眾使用，SOC 4 不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> Christina 希望確保她的供應商正在使用適當、強大的加密技術。她可以要求其供應商滿足哪個標準來確保這一點？</p>
+    <ol>
+        <li>EBCDIC</li>
+        <li>FIPS 140-2</li>
+        <li>SecureCERT</li>
+        <li>AESCert</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> FIPS 140-2 是一個美國政府加密標準，供應商通常確保其硬體和軟體通過 FIPS 140-2 認證。EBCDIC 是 IBM 大型機上使用的 8 位編碼方案，與 ASCII 爭奪字符編碼，其餘答案是編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> Jerome 希望為其組織實施 DevOps，並正在考慮應如何設計安全性。哪個實踐最適合 DevOps CI/CD 環境？</p>
+    <ol>
+        <li>安全流程自動化</li>
+        <li>每年創建主要版本</li>
+        <li>在生產中進行安全測試</li>
+        <li>靜態代碼審查</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> DevOps 在持續集成/持續交付環境中強調安全流程自動化以實現一致、快速的交付。每年發布主要版本、在生產中而不是發布前進行測試以及靜態代碼審查都可能減慢 CI/CD 管道。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> Michelle 希望考慮與其雲環境相關的法律風險。如果她擔心其組織將如何應對訴訟，她應強調哪個風險？</p>
+    <ol>
+        <li>網路安全風險</li>
+        <li>電子發現</li>
+        <li>數據安全</li>
+        <li>版權侵權</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Michelle 知道電子發現可能在雲環境中更複雜，她的組織可能需要在準備雲中的電子發現方面投入額外的時間和精力，如果他們預計訴訟將是一個持續的問題或事件。雖然網路安全風險、數據安全和版權侵權可能涉及其中，但電子發現是此處列出的主要風險。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> Amanda 希望確保她能夠識別在其雲環境中執行操作的系統。哪個資訊對於確保她能夠正確識別臨時系統最關鍵？</p>
+    <ol>
+        <li>其公共 IP 地址</li>
+        <li>其私有 IP 地址</li>
+        <li>標籤</li>
+        <li>用戶名</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在臨時環境中，IP 地址經常被重複使用，用戶名在大多數情況下不直接與系統相關聯。這意味著標籤是確保每個系統都能被適當記錄的最重要項目。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> Justin 的 IRM 系統部署使用標記來記錄數據敏感性。他以後如何使用標記來最有效地降低數據洩露的機會？</p>
+    <ol>
+        <li>實施 DLP 系統。</li>
+        <li>使用標籤來管理數據生命週期。</li>
+        <li>使用標籤來幫助 IDS 檢測。</li>
+        <li>實施 honeypot 來捕獲標籤。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Justin 知道在數據生命週期早期標記可以幫助數據丟失預防 (DLP) 系統，使其更容易檢測可能在傳輸中或面臨暴露風險的敏感數據。數據生命週期管理很有幫助，但對此特定目的不如 DLP 關鍵。IDS 檢測可以使用標籤來識別運動中的數據，但無法阻止它，這意味著它不如 DLP 有效地阻止數據洩露。Honeypots 不用於捕獲標籤；它們側重於獲取工具和技術資訊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> Ramon 希望為其組織使用雲身份提供商。以下哪個選項最有可能得到雲身份提供商的支持？</p>
+    <ol>
+        <li>SAML</li>
+        <li>RDP</li>
+        <li>LDAP</li>
+        <li>FedID</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲身份提供商通常支持 SAML 和 OpenID。LDAP 更常用於本地目錄目的。RDP（遠程桌面協議）是 Windows 遠程訪問協議，FedID 是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> Hyun 希望評估其組織正在考慮採用的雲提供商是否具有適當的、以安全為中心的風險管理方法。他應請求哪種類型的審計產物以獲取有關控制和實踐的最詳細資訊？</p>
+    <ol>
+        <li>SOC 2 Type 2</li>
+        <li>SOC 2 Type 1</li>
+        <li>SOC 1 Type 2</li>
+        <li>SOC 1 Type 1</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> SOC 2 Type 2 報告涵蓋了一段時間內的安全控制和實踐，而 Type 1 報告涵蓋了一個時間點。Hyun 知道 SOC 1 報告涵蓋財務實踐，不適合他的安全需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> Kayla 在其雲環境的前端部署了多個帶有負載均衡器的小型實例。她最有可能從中獲得哪個好處？</p>
+    <ol>
+        <li>更高機密性</li>
+        <li>更少漏洞</li>
+        <li>高可用性</li>
+        <li>更短的補丁窗口</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Kayla 知道帶有負載均衡器的多個系統可以更輕鬆地處理可用性問題。如果一個系統響應失敗，負載均衡器可以將其從池中移除並發出警報。她還知道這可以帶來更好的性能和更容易擴展以滿足更高需求的能力。機密性、漏洞數量和更短的補丁窗口都不是這種類型設計的結果。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> Rene 正在設計其雲環境以確保持續的業務連續性。以下哪個設計元素最適合確保持續的業務連續性？</p>
+    <ol>
+        <li>在另一個區域設置備份 VPC</li>
+        <li>將備份配置到另一個雲提供商</li>
+        <li>將實例部署到多個可用區</li>
+        <li>確保員工不在同一地點工作</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Rene 知道業務連續性側重於在災難期間繼續運營。這意味著將實例部署到多個可用區是一種合理的業務連續性選擇。規劃區域故障或提供商故障以及確保員工不在同一地點都是常見的災難恢復實踐。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> Henry 希望降低在發生洩露事件時秘密被暴露的風險。他應採用哪個實踐來幫助防止具有訪問應用程式源代碼或正在運行的應用程式權限的攻擊者使用他們可以恢復的秘密進行未來訪問？</p>
+    <ol>
+        <li>使用多因素身份驗證。</li>
+        <li>使用動態秘密。</li>
+        <li>使用強密碼。</li>
+        <li>使用證書和密碼短語。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> OWASP 建議使用動態秘密來限制暴露或受損應用程式和秘密的影響範圍。動態秘密在應用程式啟動時動態請求和生成，這意味著從正在運行的應用程式中恢復秘密然後使用它們或試圖從源代碼中獲取它們的攻擊者將無法成功。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> Jim 已將本地 C: 驅動器掛載到其雲服務提供商的 IaaS 環境中的 Windows 實例。他最有可能使用哪種類型的儲存？</p>
+    <ol>
+        <li>臨時塊儲存</li>
+        <li>長期</li>
+        <li>對象</li>
+        <li>容器</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jim 很可能正在使用像實際磁碟一樣處理的臨時塊儲存。臨時儲存僅在實例存在時存在。長期儲存用於備份和其他長期需求，對象儲存使用 API 並將每個文件視為唯一對象而不是傳統文件系統中的文件，容器儲存不是一種儲存類型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> Lisa 希望審計其雲環境中採取的行動。在處理雲服務管理後台時，通常不允許使用以下哪個機制？</p>
+    <ol>
+        <li>用戶訪問日誌</li>
+        <li>數據包捕獲</li>
+        <li>專門的雲服務日誌</li>
+        <li>配置審查</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Lisa 知道雲提供商不允許在共享管理後台上進行數據包捕獲。她將需要使用內建的日誌記錄機制和配置審查來了解其環境中發生的情況。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> Emily 需要識別現有客戶資料庫中與新收購客戶資料庫中客戶匹配的數據元素。Emily 需要執行哪個流程才能完成此任務？</p>
+    <ol>
+        <li>數據遷移</li>
+        <li>數據挖掘</li>
+        <li>數據合併</li>
+        <li>數據映射</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 將一個資料庫中的字段與另一個資料庫中的字段匹配的過程稱為數據映射。數據遷移可能涉及移動數據的許多過程之一，數據挖掘是用於從數據集中提取見解和信息的術語，數據合併可能涉及將數據移動到中央存儲庫或位置。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> Wayne 的組織認為其數據高度敏感，並希望確保雲提供商本身無法訪問儲存在提供商大型批量儲存中的數據。他應選擇哪種類型的加密才能以安全的方式完成此任務？</p>
+    <ol>
+        <li>AES-256</li>
+        <li>MD5</li>
+        <li>SHA-1</li>
+        <li>CRC</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Wayne 應尋找支持靜態 AES-256 加密以及客戶提供金鑰的系統，以確保他的數據在他雲提供商的基礎設施中駐留時保持安全。MD5 和 SHA-1 都是哈希算法，不是加密算法，CRC 是一種驗證數據完整性的方法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> 操作系統級沙盒最常用於什麼？</p>
+    <ol>
+        <li>構建冗餘基礎設施</li>
+        <li>快速應用程式開發</li>
+        <li>測試惡意軟體</li>
+        <li>執行 FIPS 140-2 測試</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 沙盒技術非常常用於測試惡意軟體。如果您想嘗試一下，Cuckoo Sandbox 是一個您可以試驗的自動化惡意軟體分析工具。沙盒不用於構建冗餘基礎設施、快速應用程式開發或 FIPS 測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> 北美電力可靠性公司關鍵基礎設施保護 (NERC/CIP) 指出其所謂的“相互管理的加密”是雲環境的一種有用模型，其中雲服務提供商和註冊實體（受 NERC/CIP 要求約束）共享加密金鑰的訪問和管理。這種共享責任類型提供了什麼優勢？</p>
+    <ol>
+        <li>靈活性和更容易的操作支持</li>
+        <li>降低未經授權披露的風險</li>
+        <li>更簡單的控制結構</li>
+        <li>保證的機密性</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 與雲提供商共享責任可以使註冊實體的工作更輕鬆——但也增加了未經授權披露的風險，使控制結構更複雜，並且更難確保加密數據的機密性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> Jason 希望在其軟體開發生命週期中檢測常見漏洞。哪種類型的評估最有可能識別業務邏輯問題？</p>
+    <ol>
+        <li>靜態代碼分析</li>
+        <li>漏洞掃描</li>
+        <li>動態測試</li>
+        <li>軟體組成分析</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 靜態代碼分析，即審查源代碼的過程，是 Jason 識別業務邏輯問題的最可能方式。漏洞掃描無法識別業務邏輯問題，動態測試識別它們的可能性遠低於靜態檢查。軟體組成分析側重於識別軟體中的開源組件，而不是業務邏輯。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> Stacey 希望從其雲環境中正在運行的實例中保存鑑識產物。她應採取哪兩個關鍵步驟以確保她可以執行鑑識分析？</p>
+    <ol>
+        <li>創建正在運行的實例的快照，並製作任何已掛載卷的逐位副本。</li>
+        <li>關閉實例並標記其以進行鑑識調查。</li>
+        <li>關閉實例，然後創建快照以進行鑑識調查。</li>
+        <li>使用雲提供商的鑑識響應團隊並驗證其流程。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 創建快照將保留與實例關聯的內存狀態和數據。製作任何已掛載卷的單獨副本將支持調查並捕獲實例本身之外的任何數據。關閉實例將丟失內存狀態，大多數雲提供商不為客戶提供鑑識響應團隊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Damian 知道配置錯誤是常見的雲威脅之一，並希望降低配置錯誤導致其組織出現重大問題的機會。哪個實踐最有可能幫助其整個組織避免配置錯誤問題？</p>
+    <ol>
+        <li>使用多因素身份驗證</li>
+        <li>進行定期漏洞掃描</li>
+        <li>創建和使用配置基線</li>
+        <li>使用默認設置以確保正確配置</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 創建和使用基線有助於確保系統和服務在部署時滿足組織期望的配置。多因素身份驗證和漏洞掃描都是有用的實踐，但在這種情況下沒有幫助。默認設置是最常見的配置錯誤之一——使用它們而不是有意選擇設置是配置錯誤問題的根本原因！</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> 通常在主服務協議 (MSA) 之後創建哪個文件以確定企業實際將執行哪些任務？</p>
+    <ol>
+        <li>SLA</li>
+        <li>SOW</li>
+        <li>NDA</li>
+        <li>SOP</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 工作說明書 (SOW) 描述了組織將根據主服務協議定義的關係執行的工作。SLA 是服務級別協議，NDA 是保密協議，SOP 是標準操作程序。這些都不定義組織將作為 MSA 的一部分執行的工作。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> Christina 希望使用 Google 作為身份提供商，允許其組織簡單地確定帳戶持有者將擁有哪些權限，同時允許 Google 為其執行身份驗證和身份管理。這種類型的關係稱為什麼？</p>
+    <ol>
+        <li>客戶端/伺服器基礎設施</li>
+        <li>協作</li>
+        <li>服務提供商</li>
+        <li>聯合</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Christina 正在使用聯合，其中身份提供商對其負責的身份進行身份驗證，而像 Christina 這樣的服務提供商則授權已通過身份驗證的用戶執行操作並在其服務中使用權限。這可能涉及客戶端/伺服器設計，但問題並未定義此，儘管 Christina 充當服務提供商，但關係本身是聯合關係。協作不用於描述此類身份架構。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> Naomi 希望了解哪些開源組件是她正在考慮採用的容器化工具的一部分。她應使用哪種測試過程來了解基於其組件的軟體的潛在風險？</p>
+    <ol>
+        <li>交互式應用程式安全測試</li>
+        <li>軟體組成分析</li>
+        <li>手動靜態測試</li>
+        <li>自動化靜態測試</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體組成分析是識別構成工具或產品的開源組件和包的過程。Naomi 應執行軟體組成分析以了解組件和包，她可能需要更新這些組件和包，或者這些組件和包可能會在其環境中產生額外的風險。靜態測試——無論是自動的還是手動的——都需要審查源代碼，這需要付出巨大的努力，而無法滿足了解組件風險的高級目標。IAST（交互式應用程式安全測試）對於驗證正在運行的軟體很有用，但無法滿足 Naomi 的需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> Selah 在其雲環境中部署了開源軟體，並希望驗證該軟體的許可證。開源軟體許可證中最常涉及哪個問題？</p>
+    <ol>
+        <li>許可證的成本</li>
+        <li>許可證類型</li>
+        <li>許可證期限的長短</li>
+        <li>對已部署軟體的許可證更改</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Selah 知道存在多種常見的開源許可證，包括 Apache 和 BSD 許可證、GNU 公共許可證 (GPL) 等。Selah 需要了解適用於她使用的軟體的許可證，特別是如果她想分發任何用於商業用途的軟體。許可證的成本、許可證期限的長短以及許可證的更改不是開源軟體的常見問題，因為開源許可證通常是這樣編寫的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> Eric 工作的公司使用一種身份驗證過程，允許 Eric 登錄一次，然後使用組織提供的各種系統和服務。該公司使用的是哪種技術？</p>
+    <ol>
+        <li>聯合</li>
+        <li>MFA</li>
+        <li>IAM</li>
+        <li>SSO</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 該公司正在使用單一登錄，這是一種允許用戶登錄一次然後在保持登錄狀態的同時使用多個服務和系統的技術。每個系統或服務可能提供對登錄用戶的自己的授權。聯合依賴於身份提供商，該身份提供商對用戶進行身份驗證，然後用戶可以使用來自服務提供商的服務；由於 Eric 在單個公司內部運營，並且沒有提到身份提供商，因此這不是聯合。未提及 MFA（多因素身份驗證），IAM 是身份和訪問管理的通用學科。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> ITIL v4 包括三個主要的配置管理任務。以下哪個列表正確識別了這些任務？</p>
+    <ol>
+        <li>配置設計、配置控制、配置刪除</li>
+        <li>配置識別、配置控制、配置驗證和審計</li>
+        <li>配置識別、配置管理、配置修改</li>
+        <li>配置設計、配置修改、配置文檔記錄</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL 定義了配置管理的三個子流程：配置識別、配置控制、配置驗證和審計。如果您遇到此類問題並且不熟悉 ITIL 或其他標準的詳細信息，請考慮哪些選項最不可能有意義。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> Chuck 希望對其雲環境中的安全控制進行差距分析。他首先需要哪個產物？</p>
+    <ol>
+        <li>OLA</li>
+        <li>配置基線</li>
+        <li>DR/BC 計劃</li>
+        <li>基於 ITIL 的配置項 (CI)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 進行差距分析需要一個基線或配置標準來進行對比。Chuck 知道他需要先建立基線，然後才能對其進行測試。OLA 是用於內部服務提供商指標服務的運營級別協議。災難恢復和業務連續性計劃通常不需要進行差距分析，儘管沒有計劃很可能被視為一個差距，基於 ITIL 的 CI 對於文檔記錄很有用，但在此處不是必需的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Annie 希望作為其質量保證工作的一部分測試軟體。哪種類型的質量保證測試將提供對正在生產的軟體質量的最大洞察力？</p>
+    <ol>
+        <li>自動化 QA 測試工具</li>
+        <li>模糊測試</li>
+        <li>手動 QA 測試</li>
+        <li>軟體組成分析</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Annie 知道雖然自動化測試很有用，但它有局限性，會遺漏人類可以識別的問題。這意味著如果她需要更多關於軟體的洞察力，她將專注於手動 QA 測試。模糊測試通過提供意外輸入來測試軟體，這無法滿足 Annie 的 QA 需求，軟體組成分析則確定構成軟體包的開源組件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> Dave 使用聯合身份登錄服務。身份提供商向其瀏覽器發送什麼以呈現給服務提供商？</p>
+    <ol>
+        <li>令牌</li>
+        <li>密碼</li>
+        <li>密碼和 URL</li>
+        <li>會話 ID</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在聯合環境中，身份提供商將向瀏覽器或其他客戶端提供一個令牌，以傳遞給支持用戶身份斷言的服務提供商。不會傳遞密碼或會話 ID，URL 可能會被傳遞，但沒有密碼。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> Theresa 的組織已確定，在發生重大災難事件時，最多可接受 30 分鐘的數據丟失。哪個術語用於描述此類定義？</p>
+    <ol>
+        <li>恢復時間目標</li>
+        <li>快照窗口</li>
+        <li>恢復點目標</li>
+        <li>快照持續時間</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Theresa 正在描述恢復點目標，即在災難後恢復時可接受的數據丟失量。恢復時間目標定義了系統可以離線多長時間。快照窗口和快照持續時間都不是常用的術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> Alaina 希望為其風險管理計劃建立指標。以下哪個 *不是* 有助於她有效管理其計劃的指標？</p>
+    <ol>
+        <li>風險管理計劃的成本</li>
+        <li>已識別的風險數量</li>
+        <li>已發生的風險數量</li>
+        <li>每天的風險發生率</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 每天的風險發生率不太可能為風險管理計劃提供有用的背景信息。已識別的風險數量和較長時間內發生的風險數量可能很有用，計劃本身的成本也是一個需要跟踪的重要指標。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> 在雲 IaaS 環境中，儲存容量監控的主要驅動因素是什麼？</p>
+    <ol>
+        <li>性能管理</li>
+        <li>成本管理</li>
+        <li>連續性管理</li>
+        <li>安全管理</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 儲存容量管理最常與管理 IaaS 環境中的成本相關。在 SaaS 和 PaaS 環境中，它也可能是一個問題，特別是如果使用情況與典型的客戶模型不匹配。性能、連續性和安全性不是容量跟踪工具的主要驅動因素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> Lisa 正在審計其客戶的雲託管服務。她被要求對所有正在使用的雲服務進行外部審計。她可能面臨的最大挑戰是什麼？</p>
+    <ol>
+        <li>訪問客戶管理環境中的審計跟踪</li>
+        <li>確定適當的審計目標</li>
+        <li>了解雲環境的範圍</li>
+        <li>從提供商審計產物中收集有關控制的信息</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Lisa 知道，在許多現代組織中，最困難的挑戰之一是確定組織雲使用和環境的全部範圍。即使在具有嚴格控制的組織中，通常在審計員評估實際使用情況時也會發現額外的服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> 以下哪個通常 *不* 儲存在雲秘密管理工具中？</p>
+    <ol>
+        <li>MFA 令牌</li>
+        <li>API 金鑰</li>
+        <li>密碼</li>
+        <li>證書</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> MFA 令牌是硬體設備，不儲存在雲秘密管理工具中。API 金鑰、密碼和證書都通常儲存在秘密存儲庫中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> Gary 的組織使用雲基礎設施和組織頒發的筆記本電腦的組合，允許其遠程員工隨處訪問組織數據。哪個 DLP 部署選項將幫助 Gary 保護員工使用的數據？</p>
+    <ol>
+        <li>在中央文件伺服器上</li>
+        <li>作為客戶端在端點設備上</li>
+        <li>在網路邊界</li>
+        <li>在網路核心</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Gary 的主要威脅模型是帶有遠程員工的筆記本電腦和移動設備。在這些設備上使用 DLP 客戶端將允許監控正在使用、訪問和可能共享的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> Lucca 希望對其組織的數據應用數據分類。他應確保在哪個數據生命週期階段應用標籤？</p>
+    <ol>
+        <li>創建</li>
+        <li>使用</li>
+        <li>分享</li>
+        <li>銷毀</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在創建時標記數據可確保在其生命週期開始時就對其進行標記。如果需要，可以在使用、分享和歸檔階段添加額外的標籤。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> Susan 知道無伺服器技術為其組織提供了許多安全好處。以下哪個 *不是* 無伺服器計算的常見好處？</p>
+    <ol>
+        <li>無需處理補丁</li>
+        <li>可通過 IAM 獲得廣泛權限</li>
+        <li>臨時基礎設施</li>
+        <li>高水平的儀器化</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 無伺服器環境圍繞微服務構建，這意味著身份和訪問管理 (IAM) 側重於每個角色或服務的非常具體和有針對性的權限。無伺服器允許組織忽略底層基礎設施的補丁，臨時基礎設施使攻擊者難以入侵和保留對無伺服器部署的訪問權限，無伺服器依賴於儀器化以實現可見性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> Nick 運營一個託管電子商務網站的服務。他的基礎設施運行在 AWS 上，每個客戶都分配有自己的 S3 儲存桶。Nick 使用的是哪種類型的邏輯設計？</p>
+    <ol>
+        <li>儲存聚合</li>
+        <li>虛擬化</li>
+        <li>容器化</li>
+        <li>租戶分區</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Nick 正在使用租戶分區將其客戶分隔到單獨的儲存桶中。這意味著他可以圍繞客戶永遠無法訪問共享儲存空間來設計，從而有望提高其設計的安全性。這不會聚合儲存——事實上，它會將其分開。使用多個儲存桶既不是虛擬化也不是容器化。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> Katie 的組織在其託管在 Azure 雲中的環境中創建其軟體。他們使用專注於自動化測試和部署的持續集成/持續交付 (CI/CD) 流程。哪個風險最有可能通過自動化安全測試流程？</p>
+    <ol>
+        <li>業務邏輯風險</li>
+        <li>SQL 注入缺陷</li>
+        <li>跨站點腳本缺陷</li>
+        <li>易受攻擊的組件</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 自動化測試通常可以識別 SQL 注入、跨站點腳本和組件問題，但業務邏輯風險更難識別，而無需了解業務流程以及代碼本身的工作方式。Katie 可能需要在流程中進行額外的人工審查，如果她經常遇到業務邏輯缺陷問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> Thulani 為其鑑識活動保留文件記錄，並寫下數據是如何獲取的，以及數據儲存在哪裡、誰有權訪問它以及數據或媒體的任何傳輸。Thulani 正在記錄什麼？</p>
+    <ol>
+        <li>保管鏈</li>
+        <li>鑑識證據</li>
+        <li>數據日誌記錄</li>
+        <li>調查筆記</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Thulani 正在記錄鑑識產物的保管鏈。保管鏈對於證明數據未被篡改極其重要，特別是在法律案件或警方調查中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> Derek 在美國和歐盟 (EU) 運營雲託管環境。他的組織在這兩個地點捕獲客戶數據，並希望將該數據用作其公司的中央共享資源。他應對這種潛在的數據使用提出什麼擔憂？</p>
+    <ol>
+        <li>美國和歐盟有不同的隱私法，造成合規性擔憂。</li>
+        <li>歐盟不允許將美國數據導入歐盟伺服器。</li>
+        <li>美國不允許將歐盟數據導入美國伺服器。</li>
+        <li>美國和歐盟的隱私法具有相同的處罰，但處罰很重且成本高昂。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 歐盟的 GDPR 包括廣泛的隱私要求。美國法律的一致性要差得多，並且不直接與歐盟要求保持一致。這意味著 Derek 知道不同司法管轄區的隱私法差異可能是一個重大的合規挑戰。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> Ibrahim 希望安全地配置 SSH。以下哪個 *不是* 現代 SSH 環境的常見最佳實踐？</p>
+    <ol>
+        <li>使用 SSH 金鑰</li>
+        <li>啟用密碼複雜性要求</li>
+        <li>更改默認 SSH 端口號</li>
+        <li>限制哪些用戶可以通過 SSH 登錄</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 啟用密碼複雜性要求在很大程度上已被使用 SSH 金鑰和多因素身份驗證所取代。更改 SSH 端口號和限制哪些用戶可以登錄也都是常見做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> 哪個 ISO/IEC 標準定義了業務連續性計劃、系統和流程？</p>
+    <ol>
+        <li>ISO/IEC 270001</li>
+        <li>ISO/IEC 853-1</li>
+        <li>ISC/IEC 28000:2022</li>
+        <li>ISO/IEC 22301:2019</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO/IEC 22301:2019 定義了業務連續性管理。ISO 27001 是一個關於如何管理資訊安全的標準，ISO 28000 規定了安全管理系統，ISO 853-1 不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> DHCP 在哪個端口和協議上運行？</p>
+    <ol>
+        <li>UDP 端口 21 和 22</li>
+        <li>TCP 端口 80 和 443</li>
+        <li>TCP 端口 3389 和 4780</li>
+        <li>UDP 端口 67 和 68</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> DHCP（動態主機配置協議）在伺服器的 UDP 端口 67 和客戶端的 UDP 端口 68 上運行。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> Sara 希望在其控制的數據中心運行部分基礎設施，部分在第三方雲託管環境中運行。哪個雲部署模型最能描述這種情況？</p>
+    <ol>
+        <li>私有雲</li>
+        <li>混合雲</li>
+        <li>多雲</li>
+        <li>社群雲</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Sara 的使用情況符合混合雲環境，她提供部分基礎設施，其餘部分由第三方雲提供商提供。私有雲由組織運行，多雲涉及多個供應商，社群雲由具有共同興趣或目標並希望運營雲的群體創建。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> Isabelle 希望從其雲提供商的原生記錄設施中檢索鑑識數據。哪種技術最有可能支持此類數據訪問？</p>
+    <ol>
+        <li>傳輸到可移動媒體</li>
+        <li>手動複製</li>
+        <li>基於 API</li>
+        <li>打印副本</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Isabelle 知道雲提供商通常會將 API 用於其記錄和其他設施的訪問。她可以利用 API 訪問來獲取所需的數據，但需要仔細記錄過程、查詢和其他詳細信息，以確保她的數據具有鑑識可靠性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> Wesley 希望確保其組織使用的敏感數據無法被第三方訪問或恢復。一旦其組織停止使用雲中儲存的數據，他應建議他們使用哪個刪除過程？</p>
+    <ol>
+        <li>密碼銷毀</li>
+        <li>零擦除</li>
+        <li>刪除</li>
+        <li>基於隨機數據的擦除</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲環境中的數據應在靜態時加密，然後在不再需要時進行密碼銷毀，以確保數據無法恢復。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> Mark 使用 Terraform 通過創建定義將部署什麼以及如何設置它的代碼和配置文件來設計和部署其基礎設施。這種策略稱為什麼？</p>
+    <ol>
+        <li>基礎設施即代碼</li>
+        <li>動態擴展架構</li>
+        <li>基於容器化</li>
+        <li>軟體即雲</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基礎設施即代碼策略利用代碼來設計、構建和部署基礎設施，允許快速、大規模更改以及輕鬆重新部署或執行其他維護。基於容器化的策略側重於容器。雖然它可能依賴代碼，但僅容器化本身並不符合 Mark 正在做的事情的描述。軟體即雲和動態擴展架構是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> Diana 希望為其儲存在雲環境中的秘密金鑰獲得盡可能高的安全級別。如果她的雲服務提供商提供，她應選擇哪個解決方案？</p>
+    <ol>
+        <li>專用 TPM</li>
+        <li>雲 HSM</li>
+        <li>雲 TPM</li>
+        <li>專用 HSM</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 專用硬體安全模塊 (HSM) 是具有支持它的資金和安全要求的組織最安全的選項。專用 HSM 提供專用於客戶的硬體，而不是由雲 HSM 提供的共享環境。TPM（可信平台模塊）用於儲存用於硬體和系統啟動時間安全的密碼金鑰，不用於儲存和管理通用秘密金鑰。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> Ashley 的測試過程涉及像攻擊者一樣對待軟體測試。她將嘗試入侵或濫用軟體，並報告其響應和她發現的任何問題。Ashely 正在進行哪種類型的測試？</p>
+    <ol>
+        <li>濫用案例測試</li>
+        <li>交互式應用程式安全測試</li>
+        <li>用戶驗收測試</li>
+        <li>靜態測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ashley 正在進行濫用案例測試，該測試側重於像攻擊者一樣測試軟體。IAST 涉及對應用程式進行儀器化以在運行時監控它們是否存在任何安全問題。用戶驗收測試與用戶合作以確定軟體是否滿足其需求和功能要求，靜態測試審查源代碼。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> Lisa 希望建議她的組織採用一個定義資訊安全控制的標準。她應推薦哪個被審計師廣泛接受的標準？</p>
+    <ol>
+        <li>ISO 27001</li>
+        <li>SOC 1</li>
+        <li>GDPR</li>
+        <li>HIPAA</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO 27001 定義了廣泛的安全控制，是一個廣泛接受的國際標準。SOC 1 是一個審計標準，用於財務運營，GDPR 是歐盟的數據保護法規，HIPAA 是涵蓋醫療保健和保險提供商的美國法律。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> 在基於 ITIL 的變更管理流程中，通常哪個步驟是第一步？</p>
+    <ol>
+        <li>CAB 審查。</li>
+        <li>創建 RFC。</li>
+        <li>變更授權。</li>
+        <li>部署。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基於 ITIL 的變更管理流程通常從創建 RFC 開始。然後對其進行審查，然後批准或拒絕，然後進行規劃和實施，以及部署後審查。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> Gina 資料庫中的特定客戶數據已被替換為備用值，這些值允許 Gina 從另一個資料庫中查找原始資訊，而無需暴露她正在使用的資料庫中的實際數據。每個唯一的數據元素都被賦予一個替換值，該值在每次使用該數據元素時都保持一致。Gina 的資料庫中正在使用哪種類型的技術？</p>
+    <ol>
+        <li>遮蔽</li>
+        <li>哈希</li>
+        <li>匿名化</li>
+        <li>標記化</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Gina 的組織正在使用標記化。他們可能為標記化過程使用某種形式的哈希，但問題中沒有足夠的資訊來確定這一點。遮蔽會用備用字符替換部分數據，從而避免暴露整個數據元素。匿名化尋求刪除任何可直接識別個人身份的數據，例如姓名、地址或類似資訊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> Amanda 的公司正在被起訴，並收到了對方律師的信函，要求他們保留與訴訟相關的資訊。這稱為什麼？</p>
+    <ol>
+        <li>基於法規的保留</li>
+        <li>法律保留</li>
+        <li>DR/BC 要求</li>
+        <li>立法保留</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 保留與訴訟、調查或其他法律原因相關的數據的要求稱為法律保留。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> Freya 希望撤銷其組織使用的證書。當她通過其證書頒發機構撤銷證書時會發生什麼？</p>
+    <ol>
+        <li>該證書將不再可用於加密數據。</li>
+        <li>該證書將被放置在證書撤銷列表中。</li>
+        <li>關於撤銷的消息將發送給所有證書用戶。</li>
+        <li>CA 將把證書的到期日期設置為撤銷日期。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當證書被撤銷時，它們會被放置在證書撤銷列表中。使用該證書的用戶和系統可以檢查該證書頒發機構的 CRL 以確定哪些證書已被撤銷。證書仍然可以加密數據，消息不會發送給所有用戶，證書上的到期日期不會更改，因為它包含在證書本身中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> Bart 希望對儲存在其公司用於客戶信息的 SQL 資料庫中的資訊執行數據發現。這是哪種類型的數據？</p>
+    <ol>
+        <li>結構化數據</li>
+        <li>半結構化數據</li>
+        <li>非結構化數據</li>
+        <li>合併數據</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 儲存在資料庫中的數據被視為結構化數據。由於存在定義的格式，結構化數據通常最容易執行數據發現。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> Patricia 希望分析來自其 IPS 的數據以查找意外行為。如果她想使用已知基線，然後以自動化方式分析 IPS 數據以查找潛在的惡意活動，並包括使用其收集的信息適應攻擊行為變化的能力，她應選擇哪個技術？</p>
+    <ol>
+        <li>WAF</li>
+        <li>SIEM</li>
+        <li>IDS</li>
+        <li>AI</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於 Patricia 希望系統學習基線，然後在整合學習能力的同時監視新的惡意行為，因此 AI 是她的最佳選擇。基於 AI 的系統可以隨時間從數據中學習。SIEM 可能包含 AI，但此處未指定，使得 AI 成為更好的答案。WAF（Web 應用程式防火牆）和 IDS（入侵檢測系統）無法滿足 Patricia 的需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>101.</strong> Kathleen 擔心特定國家的隱私法規，因為她的組織正在一個新的國家開設地點。她應建議其組織的領導層做些什麼？</p>
+    <ol>
+        <li>遵循 OWASP 定義的最佳實踐。</li>
+        <li>聘請具有適當專業知識的外部法律顧問。</li>
+        <li>確定一個合適的 NIST 標準來遵循。</li>
+        <li>仔細審查法律並基於它們設計新政策。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Kathleen 知道，聘請具有該國法律適當專業知識的外部法律顧問將獲得最佳答案。OWASP 和 NIST 不提供國際法律指導，在沒有專家法律顧問的情況下自行審查法律通常不太可能產生適當的決策。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>102.</strong> 以下哪個通常 *不是* 數據保留策略的典型驅動因素？</p>
+    <ol>
+        <li>業務要求</li>
+        <li>法律要求</li>
+        <li>監管要求</li>
+        <li>數據完整性要求</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 業務、法律和監管要求都是數據保留策略的常見驅動因素。數據完整性很重要，但通常不驅動數據保留策略。相反，數據完整性很可能驅動技術實施要求，以幫助確保數據在整個數據生命週期中保持完整性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>103.</strong> Parker 擔心客戶濫用其組織的 API，並希望控制他們被允許發送的請求量。以下哪個解決方案最適合滿足他的需求？</p>
+    <ol>
+        <li>API 網關</li>
+        <li>API 防火牆</li>
+        <li>API 負載均衡器</li>
+        <li>API 引擎</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Parker 應尋找一個 API 網關，它可以幫助其組織的客戶進行速率限制和控制 API 訪問。API 網關通常也充當負載均衡器和防火牆，API 引擎不是此上下文中常用的術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>104.</strong> Ron 使用基礎設施即代碼模型實施了他的 IaaS 設計。他的團隊利用了 IaaS 環境中的原生 API 和功能，並使用了許多供應商的專有能力。如果供應商開始大幅提高價格，Ron 可能會遇到什麼問題？</p>
+    <ol>
+        <li>互操作性</li>
+        <li>供應商鎖定</li>
+        <li>API 爭用</li>
+        <li>代碼託管</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ron 應擔心供應商鎖定，因為他的組織在其供應商環境中可用的特定工具上進行了投資。雖然這允許 Ron 的團隊更充分地利用 IaaS 環境的功能，但如果需要遷移到另一個雲供應商，則需要進行大量新的投資，因為需要重做大量工作。互操作性是在兩個或多個雲或服務之間工作時的一個擔憂。代碼託管將源代碼置於第三方手中，以防開發人員倒閉，API 爭用不是常用的術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>105.</strong> Rick 的公司將其數據分散到多個雲供應商處，以幫助確保單個提供商處的數據丟失事件或災難不會導致組織丟失數據。Rick 的公司正在使用哪種技術？</p>
+    <ol>
+        <li>數據映射</li>
+        <li>數據克隆</li>
+        <li>數據分散</li>
+        <li>數據建模</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Rick 的公司正在使用數據分散，即將數據儲存在多個位置以減少重大損失事件機會的概念。數據克隆不是此上下文中常用的術語。數據建模用於識別數據庫創建等工作的數據元素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>106.</strong> Jonah 希望解決其組織的 OWASP Top 10 易受攻擊和過時組件問題。他可以做些什麼來最有效地幫助識別其開源工具的這些問題？</p>
+    <ol>
+        <li>使用軟體組成分析工具。</li>
+        <li>聘請滲透測試人員。</li>
+        <li>執行靜態代碼審查。</li>
+        <li>設置自動更新。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用軟體組成分析是使用開源工具時的一個關鍵第一步，因為它允許組織了解構成其系統和服務的組件。之後，執行相關更新並跟踪哪些組件可能不再接收更新至關重要。滲透測試和靜態代碼審查可能有所幫助，但它們不是此場景中的典型解決方案。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>107.</strong> Megan 對其組織的財務數據負責，並將數據相關行動的責任委派給其組織中的其他人。她扮演什麼角色？</p>
+    <ol>
+        <li>數據所有者</li>
+        <li>數據保管人</li>
+        <li>數據處理者</li>
+        <li>數據管理員</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Megan 是數據所有者。數據保管人負責數據的傳輸、儲存和實施業務規則。數據處理者為業務工作使用數據，數據管理員負責基於業務規則的數據治理任務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>108.</strong> 什麼使得對開源軟體的供應商風險評估變得困難？</p>
+    <ol>
+        <li>許多開源軟體包沒有供應商。</li>
+        <li>開源軟體無法進行靜態代碼審查。</li>
+        <li>開源軟體供應商不提供軟體支持合同。</li>
+        <li>關於歷史問題的風險資訊不可用。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 許多開源軟體包沒有商業或付費支持或供應商可供評估。這使得從供應商風險角度評估開源軟體包和工具的風險更加困難。開源軟體實際上比許多商業產品更容易進行靜態代碼審查，因為代碼是可用的。開源軟體供應商確實出售支持合同，風險資訊可通過與其他漏洞資訊相同的來源獲得。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>109.</strong> 與 Henry 合作進行數字鑑識工作的執法官員要求 Henry 提供雲託管桌面即服務系統硬碟的鑑識副本。Henry 應向該官員解釋雲託管系統和物理系統之間的區別是什麼？</p>
+    <ol>
+        <li>鑑識複製過程將比正常情況花費更長的時間。</li>
+        <li>沒有 Henry 可以訪問的物理磁碟，快照是他可以提供的最接近鑑識副本的等效物。</li>
+        <li>由於磁碟在過程中會更改，因此無法驗證鑑識副本。</li>
+        <li>雲提供商不允許在其環境中進行系統的鑑識複製，只有日誌可用。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Henry 知道傳統的鑑識複製技術無法工作，但快照將提供官員習慣使用的相同資訊。因此，Henry 需要解釋可能的情況以及如何使用它。鑑識複製過程可能更快或更慢，具體取決於雲系統和過程；鑑識副本可以驗證，特別是如果系統已暫停；雲提供商確實允許對客戶擁有和管理的系統進行鑑識複製。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>110.</strong> ITIL v4 確定了與資訊安全管理相關的四個資訊管理子流程。哪個 ITIL v4 子流程包括審計？</p>
+    <ol>
+        <li>安全控制設計</li>
+        <li>安全測試</li>
+        <li>安全事件管理</li>
+        <li>安全審查</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 審計屬於安全審查，其中安全措施和流程經過驗證並定期測試。設計和事件管理不包括此，安全測試確保安全機制得到驗證。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>111.</strong> Diana 希望增加其雲基礎設施即服務託管系統可用的帶寬。她需要做些什麼來提高其實例連接到提供商網路的速度？</p>
+    <ol>
+        <li>更換網路接口卡。</li>
+        <li>請求雲提供商升級網路卡。</li>
+        <li>增加實例的網路帶寬。</li>
+        <li>更改實例操作系統內部的網路接口速度設置。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 IaaS 環境中，網路連接性由實例類型和大小決定，因此取決於客戶願意為這些能力支付多少費用。更改為更強大的實例類型是執行此操作的最常用方法，儘管提供商也可能提供將網路帶寬作為獨立設置增加的能力。更改網路接口卡或操作系統設置無法完成 Diana 的任務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>112.</strong> 在下圖中，作為雲安全數據生命週期的一部分，X 點發生哪個步驟？ (圖示：一個六邊形生命週期圖，階段為 X、創建、儲存、分享、使用、歸檔)</p>
+    <ol>
+        <li>重新分類</li>
+        <li>備份</li>
+        <li>管理</li>
+        <li>銷毀</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲安全數據生命週期的最後階段是銷毀數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>113.</strong> 薩班斯-奧克斯利法案對必須遵守該法案的組織提出了哪些數據洩露報告要求？</p>
+    <ol>
+        <li>必須通知所有受影響的客戶。</li>
+        <li>必須在年度和季度報告中報告數據洩露。</li>
+        <li>一旦發現洩露，必須立即通知執法部門。</li>
+        <li>需要在當地新聞媒體中披露洩露信息。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 薩班斯-奧克斯利法案要求報告欺詐，包括數據洩露，並且必須在季度和年度報告中包含報告。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>114.</strong> Renee 希望作為其敏捷 SDLC 的一部分收集需求。以下哪個 *不是* 敏捷團隊常用的需求收集過程？</p>
+    <ol>
+        <li>訪談</li>
+        <li>問卷調查</li>
+        <li>研討會</li>
+        <li>逆向工程</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 敏捷流程從用戶、客戶和文檔中收集信息。逆向工程軟體以獲取需求不是常見的需求收集過程。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>115.</strong> Christina 希望在其組織中培訓開發人員關於雲中 Web 應用程式開發的常見問題。她可以使用哪個工具作為其培訓的基礎？</p>
+    <ol>
+        <li>MITRE 的 ATT&CK</li>
+        <li>OWASP Top 10</li>
+        <li>SANS 藍皮書</li>
+        <li>NIST 的 CMDB</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> OWASP Top 10 提供了關於應用程式開發最常見陷阱和問題的定期更新列表，是許多組織培訓的常用基礎。MITRE 的 ATT&CK 框架用於記錄對手的戰術和技術，SANS 藍皮書和 NIST 的 CMBD 都是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>116.</strong> Emily 的公司為多個客戶匯總雲服務合同，以獲得更好的折扣率。他們還為其客戶提供集成服務。Emily 的公司扮演什麼角色？</p>
+    <ol>
+        <li>雲服務提供商</li>
+        <li>監管機構</li>
+        <li>雲服務經紀人</li>
+        <li>雲管理員</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲服務經紀人匯總服務、提供集成服務，並以其他方式幫助其客戶與雲服務提供商合作。監管機構執行法律，雲管理員是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>117.</strong> Mike 希望使用基於標準的評級系統來識別、定義和分類漏洞。他應選擇以下哪個選項？</p>
+    <ol>
+        <li>CVE</li>
+        <li>VulnRank</li>
+        <li>CPE</li>
+        <li>MITRE</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> CVE（通用漏洞和暴露）評級系統提供了一個行業標準來描述、排名和跟踪漏洞。列出的其他項目都不是漏洞排名系統。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>118.</strong> 當 Susan 的組織開始在法國運營時，哪個隱私法規將對其產生影響？</p>
+    <ol>
+        <li>ISO/IEC 27018</li>
+        <li>公認會計原則 (GAPP)</li>
+        <li>FERPA</li>
+        <li>GDPR</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 歐盟的通用數據保護條例 (GDPR) 將直接影響該組織在法國的數據收集和處理實踐。ISO/IEC 27018 和 GAPP 都是該組織可能選擇採用的標準，FERPA 是美國高等教育隱私法規。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>119.</strong> Fiona 希望備份託管在其本地數據中心中的虛擬機器。通常使用哪種技術來備份客戶操作系統？</p>
+    <ol>
+        <li>客戶操作系統上的備份客戶端</li>
+        <li>底層客戶操作系統磁碟的副本</li>
+        <li>通過 VM 主機進行快照</li>
+        <li>通過客戶操作系統進行快照</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Fiona 知道捕獲快照是創建客戶操作系統備份的最常用方法。複製底層客戶操作系統磁碟和使用備份客戶端都偶爾使用，但客戶操作系統本身的快照則不然。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>120.</strong> Olivia 的行業要求對其業務進行年度審計，她知道需要向審計師提供有關其雲託管服務的審計產物。Olivia 應如何滿足其審計要求？</p>
+    <ol>
+        <li>聘請外部審計師審計雲提供商。</li>
+        <li>聯繫雲服務提供商以獲取所需的審計產物。</li>
+        <li>聘請內部審計師審計雲提供商。</li>
+        <li>聯繫雲服務提供商並向他們提供所需的審計產物。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Olivia 知道雲提供商通常不允許客戶審計他們，但許多提供商會根據要求提供審計產物。她應請求所需的審計資訊，甚至可能會發現提供商已經將其作為審計產物服務的一部分提供。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>121.</strong> 根據 ITIL，發布管理流程流程結束時會發生什麼？</p>
+    <ol>
+        <li>發布結束</li>
+        <li>發布部署</li>
+        <li>發布構建</li>
+        <li>發布文檔記錄</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ITIL 將發布結束描述為在驗證日誌和管理系統已使用更新資訊更新後發生的情況。部署和構建在此之前發生，文檔記錄不是發布的 ITIL 子流程。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>122.</strong> 哪種類型的 hypervisor 最常用於託管雲 IaaS 服務？</p>
+    <ol>
+        <li>Type 1</li>
+        <li>Type 2</li>
+        <li>Type 3</li>
+        <li>Type 4</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Type 1 或裸機 hypervisor 用於託管大多數雲 IaaS 服務。在現有操作系統之上運行 Type 2 hypervisor 通常效率較低，並增加了運營和管理開銷。只有兩種類型的 hypervisor，這意味著 Type 3 和 4 不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>123.</strong> Sean 的公司已發展其 IT 基礎設施，不再認為其伺服器一直託管的改造壁櫥足以滿足組織的需求。如果 Sean 希望達到 Uptime Institute 3 級評級，哪個選項將最有效率且有效地滿足他的需求？</p>
+    <ol>
+        <li>購買數據中心。</li>
+        <li>建造數據中心。</li>
+        <li>在數據中心設施中租賃空間。</li>
+        <li>在現有建築物中建造數據中心。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Sean 應在現有的 Tier 3 數據中心設施中租賃空間。如果 Sean 的運營規模很大，而不是剛剛超出改造壁櫥的範圍，那麼建造或購買數據中心可能才有意義。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>124.</strong> 以下關於大多數雲服務提供商數據中心的陳述哪個是正確的？</p>
+    <ol>
+        <li>獲得廉價電力不是數據中心佈局的主要驅動因素。</li>
+        <li>數據中心的佈局不考慮基於天氣的威脅。</li>
+        <li>不允許客戶物理訪問機器。</li>
+        <li>由於數據中心的數量，冗餘設計並不關鍵。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 客戶通常不允許進入雲服務提供商的數據中心設施。這有助於降低因物理訪問而導致客戶數據風險。廉價電力、環境風險和冗餘設計都是雲數據中心設計的常見考慮因素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>125.</strong> Maria 登錄其公司的服務門戶並查看客戶的資訊。在信用卡字段中，她看到信用卡列出的格式如下：<br>XXXX-XXXX-XXXX-1980<br>正在使用哪種類型的數據安全技術？</p>
+    <ol>
+        <li>哈希</li>
+        <li>遮蔽</li>
+        <li>隨機化</li>
+        <li>去識別化</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Maria 的組織正在使用遮蔽技術來隱藏大部分信用卡號碼。保留最後四位數字是一種旨在允許驗證卡號的技術。哈希將導致一個固定長度的字母和數字字符串，作為單向函數的一部分。隨機化可能用於混合真實數據以用於示例數據集，去識別化則移除個人身份數據，例如地址、社會安全號碼或姓名。</p>
+</div>
+
+</body>
+</html>

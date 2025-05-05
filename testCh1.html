@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第一章 問題：雲概念、架構與設計（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第一章 問題：雲概念、架構與設計（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> Matthew 正在審查他的組織計劃採用的一項新的雲服務。在此服務中，雲提供商將在多租戶模型下創建虛擬伺服器實例。每個伺服器實例將僅對 Matthew 的公司可訪問。正在使用哪種雲部署模型？</p>
+    <ol>
+        <li>混合雲</li>
+        <li>公有雲</li>
+        <li>私有雲</li>
+        <li>社群雲</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 回答這個問題的關鍵是認識到多租戶模型涉及許多不同的客戶訪問託管在共享硬體上的雲資源。這使得它成為一個公有雲部署，無論對特定伺服器實例的訪問是否僅限於 Matthew 的公司。在私有雲部署中，只有 Matthew 的公司可以訪問託管在同一物理硬體上的任何資源。這不是多租戶。沒有跡象表明 Matthew 的組織正在結合公有雲和私有雲計算的資源，這將是混合雲，或者資源使用僅限於特定群組的成員，這將是社群雲。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> Zeke 負責對從他組織數據中心的伺服器中移除的一組固態硬碟 (SSD) 進行清理。這些硬碟將在不同的專案中重複使用。以下哪種清理技術最有效？</p>
+    <ol>
+        <li>加密擦除</li>
+        <li>物理銷毀</li>
+        <li>消磁</li>
+        <li>覆寫</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 加密擦除是一種強大的清理技術，涉及使用強加密引擎加密數據，然後獲取該過程中生成的金鑰，使用不同的加密引擎對其進行加密，並銷毀第二輪加密產生的金鑰。這種技術對磁性硬碟和固態硬碟都有效。消磁和覆寫對 SSD 無效。物理銷毀會有效地清理媒體，但會阻止 Zeke 重複使用硬碟。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Tina 希望使用一種技術，讓她能夠捆綁工作負載並輕鬆地在不同的操作系統之間移動它們。哪種技術最能滿足這個需求？</p>
+    <ol>
+        <li>虛擬機器</li>
+        <li>無伺服器計算</li>
+        <li>Hypervisors</li>
+        <li>容器</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 容器不提供簡單的可移植性，因為它們依賴於主機操作系統。Hypervisors 用於在設備上託管虛擬機器，所以這是另一個錯誤的答案。無伺服器計算是一種平台即服務模型，允許雲客戶在提供商的平台上運行自己的代碼而無需配置伺服器，所以這也是不正確的。虛擬機器是自包含的，並擁有自己的內部操作系統，因此可以在不同的主機操作系統之間移動它們。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> 在雲參考架構下，以下哪項活動通常不屬於客戶的責任？</p>
+    <ol>
+        <li>監控服務</li>
+        <li>準備系統</li>
+        <li>執行業務管理</li>
+        <li>處理問題報告</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在雲參考架構下，客戶的活動包括使用雲服務、執行服務試用、監控服務、管理服務安全、提供計費和使用報告、處理問題報告、管理租戶、執行業務管理、選擇和購買服務以及請求審計報告。準備系統是雲服務提供商的責任之一。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> Seth 正在幫助他的組織將其 Web 伺服器集群遷移到雲提供商。此舉的目標是讓集群能夠根據不斷變化的需求進行擴展和縮減。Seth 希望實現雲計算的哪個特性？</p>
+    <ol>
+        <li>可擴展性</li>
+        <li>按需自助服務</li>
+        <li>彈性</li>
+        <li>廣泛的網路訪問</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 實際上 Seth 很可能希望實現所有這些目標，但最相關的是彈性。彈性是指系統根據當前需求水平動態增長和縮減的能力。可擴展性是指系統隨著需求增加而增長的能力，但不需要縮減的能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Sherry 正在為她的組織部署零信任網路架構。在這種方法中，以下哪個特性在驗證登錄嘗試時最不重要？</p>
+    <ol>
+        <li>用戶身份</li>
+        <li>IP 地址</li>
+        <li>地理位置</li>
+        <li>請求訪問的性質</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 零信任網路架構的定義特徵是信任決策不基於網路位置，例如 IP 地址。使用其他特性是適當的，例如用戶的身份、請求訪問的性質以及用戶的地理（而非網路！）位置。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> 以下哪種 hypervisor 模型最能抵抗攻擊？</p>
+    <ol>
+        <li>Type 1</li>
+        <li>Type 2</li>
+        <li>Type 3</li>
+        <li>Type 4</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 如果雲提供商能夠在 hypervisor 類型之間進行選擇，則裸機 (Type 1) hypervisor 優於運行在 OS 之上 (Type 2) 的 hypervisor，因為它提供的攻擊面較小。Type 3 和 4 hypervisor 不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> Joe 正在使用一個運行在公有雲提供商上的虛擬伺服器實例，並希望限制從網際網路訪問該伺服器的端口。哪種安全控制最能幫助他滿足這個需求？</p>
+    <ol>
+        <li>地理圍欄</li>
+        <li>流量檢查</li>
+        <li>網路防火牆</li>
+        <li>網路安全組</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 網路安全組為雲託管的伺服器實例提供相當於網路防火牆的功能。它們允許限制可能到達伺服器實例的流量。Joe 將無法修改網路防火牆規則，因為這些規則僅對雲提供商可用。地理圍欄會限制用戶可以訪問伺服器的地理位置，這不是 Joe 的要求。流量檢查可用於檢查到達實例的流量，但通常不用於創建基於端口的限制。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> 以下哪種網路安全威脅最不可能直接影響對象儲存服務？</p>
+    <ol>
+        <li>磁碟故障</li>
+        <li>用戶錯誤</li>
+        <li>勒索軟體</li>
+        <li>病毒</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對象儲存服務容易受到可能無意中銷毀或修改數據的磁碟故障和用戶錯誤的影響。它們也容易受到勒索軟體攻擊，這些攻擊會感染有權訪問對象儲存的系統，然後加密儲存在服務上的數據。它們不太可能受到傳統病毒的影響，因為它們沒有運行時環境。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> Vince 希望在具有訪問敏感雲服務權限的用戶離開定義的物理區域時立即收到警報。他應該實施哪種類型的安全控制？</p>
+    <ol>
+        <li>入侵防禦系統</li>
+        <li>地理圍欄</li>
+        <li>防火牆規則</li>
+        <li>地理標記</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 地理圍欄可用於在用戶或設備離開定義的地理區域時觸發操作，例如警報。防火牆和入侵防禦系統可能會將地理資訊納入其決策過程，但不會提供 Vince 想要的即時通知。地理標記只是用執行操作的用戶的地理位置來註釋日誌記錄或其他數據，但不會直接根據地理位置提供警報。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> 以下哪個特性不是雲計算標準定義的組成部分？</p>
+    <ol>
+        <li>廣泛的網路訪問</li>
+        <li>快速配置</li>
+        <li>多租戶</li>
+        <li>按需自助服務</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲計算是一個模型，用於實現對可配置計算資源（例如，網路、伺服器、儲存、應用程式和服務）共享池的普遍、方便、按需的網路訪問，這些資源可以通過最少的管理工作或服務提供商互動來快速配置和釋放。此定義不包括多租戶，這是公有雲計算的一個特性，但不是所有雲計算模型的特性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> 以下哪個來源提供了一套用於雲安全的廠商中立設計模式？</p>
+    <ol>
+        <li>雲安全聯盟 (Cloud Security Alliance)</li>
+        <li>亞馬遜網路服務 (Amazon Web Services)</li>
+        <li>微軟 (Microsoft)</li>
+        <li>(ISC)²</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲安全聯盟 (CSA) 提供了一個企業架構參考指南，為雲安全提供廠商中立的設計模式。亞馬遜網路服務 (AWS) 和微軟確實提供雲設計模式，但它們是特定於這些供應商的服務產品。(ISC)² 不提供雲設計模式。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Lori 正在使用 API 訪問儲存在雲服務中的敏感資訊。Lori 正在進行哪個雲安全數據生命週期活動？</p>
+    <ol>
+        <li>儲存 (Store)</li>
+        <li>使用 (Use)</li>
+        <li>銷毀 (Destroy)</li>
+        <li>創建 (Create)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用 API 是在生命週期的「使用」階段以編程方式訪問數據的一個例子。如果 Lori 只是將數據放入雲服務或在那裡維護數據，那將是「儲存」階段的一個例子。Lori 沒有創建或銷毀數據；她只是在使用已儲存在雲服務中的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Helen 希望在雲中配置一個可以從伺服器掛載的磁碟卷。她想要什麼雲能力？</p>
+    <ol>
+        <li>虛擬化伺服器</li>
+        <li>對象儲存</li>
+        <li>網路容量</li>
+        <li>塊儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個塊儲存的例子，即作為磁碟卷可用的儲存。對象儲存將文件保存在儲存桶中。虛擬化伺服器是計算能力，而不是儲存能力。網路容量用於將伺服器相互連接以及連接到網際網路，不用於儲存數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> Ben 正在使用 sudo 命令在 Linux 伺服器上執行操作。他正在使用哪種類型的訪問？</p>
+    <ol>
+        <li>服務訪問</li>
+        <li>未經授權的訪問</li>
+        <li>用戶訪問</li>
+        <li>特權訪問</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> sudo 命令允許普通用戶帳戶執行管理命令，是特權訪問的一個例子，而不是標準用戶訪問。在場景中沒有跡象表明 Ben 缺乏對此訪問的適當授權。服務訪問是指系統服務對資源的訪問，而不是個人。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> 當設備丟失或被盜時，以下哪個密碼學目標可以防範由此帶來的風險？</p>
+    <ol>
+        <li>不可否認性</li>
+        <li>身份驗證</li>
+        <li>完整性</li>
+        <li>機密性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當設備丟失或被盜時，最大的風險是設備上包含的敏感數據落入壞人之手。機密性可以防範這種風險。不可否認性是指消息的接收者可以向第三方證明發送者的身份。身份驗證是證明身份的一種手段。完整性表明資訊自傳輸以來未被修改。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> 在嘗試評估故障對客戶信心的影響時，哪種類型的業務影響分析工具最合適？</p>
+    <ol>
+        <li>定量分析</li>
+        <li>定性分析</li>
+        <li>年度損失預期</li>
+        <li>單次損失預期</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 定性工具通常用於業務影響評估中，以捕捉對無形因素（如客戶信心、員工士氣和聲譽）的影響。定量工具（例如計算年度損失預期和單次損失預期）僅適用於易於量化的風險。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> Robert 正在審查一個已根據通用準則 (Common Criteria) 分配了 EAL2 評估保證等級的系統。他對該系統可能擁有的最高保證等級是什麼？</p>
+    <ol>
+        <li>它已經過功能測試。</li>
+        <li>它已經過結構化測試。</li>
+        <li>它已經過正式驗證、設計和測試。</li>
+        <li>它已經過半形式化設計和測試。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> EAL2 保證適用於系統經過結構化測試的情況。它是通用準則下的第二低保證等級。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> Jake 希望使用第三方平台自動在雲服務提供商之間移動工作負載。哪種類型的工具最能滿足這個需求？</p>
+    <ol>
+        <li>雲訪問安全代理 (Cloud access service broker)</li>
+        <li>資料庫</li>
+        <li>虛擬化</li>
+        <li>編排 (Orchestration)</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 編排工具旨在管理工作負載並在雲服務提供商之間無縫地移動它們。虛擬化平台允許雲提供商託管虛擬伺服器實例，但它們不提供在不同提供商之間遷移工作負載的能力。資料庫是一種雲服務產品，允許有組織地儲存關係數據。雲訪問安全代理 (CASB) 允許在雲提供商之間一致地執行安全策略。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Robert 負責保護用於處理信用卡資訊的系統。哪個安全控制框架應該指導他的行動？</p>
+    <ol>
+        <li>HIPAA</li>
+        <li>PCI DSS</li>
+        <li>SOX</li>
+        <li>GLBA</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 支付卡行業數據安全標準 (PCI DSS) 管轄信用卡資訊的儲存、處理和傳輸。健康保險可攜性與責任法案 (HIPAA) 管轄受保護的健康資訊。薩班斯-奧克斯利法案 (SOX Act) 規範上市公司財務報告。格雷姆-里奇-比利勒法案 (GLBA) 保護個人財務資訊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> 哪種類型的努力試圖將組織的所有雲活動置於更集中的控制之下？</p>
+    <ol>
+        <li>雲訪問安全代理</li>
+        <li>雲編排</li>
+        <li>雲治理</li>
+        <li>雲遷移</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲治理計劃試圖將組織的所有雲活動置於更集中的控制之下。它們作為一個篩選機構，幫助確保組織使用的雲服務滿足技術、功能和安全要求。它們還提供了一個集中的監控點，用於監控重複服務，防止不同的業務部門在可以通過整合降低成本和操作環境複雜性的情況下花錢購買類似的服務。雲編排工具旨在管理工作負載並在雲服務提供商之間無縫地移動它們。雲訪問安全代理 (CASB) 允許在雲提供商之間一致地執行安全策略。雲遷移是從本地環境到雲環境或在兩個雲環境之間的過渡。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> Chris 正在為他的公司設計一個內部使用的密碼系統。該公司有 1000 名員工，他們計劃使用非對稱加密系統。他們希望設置該系統，以便任何一對任意用戶都可以私密通信。他們總共需要多少個金鑰？</p>
+    <ol>
+        <li>500</li>
+        <li>1,000</li>
+        <li>2,000</li>
+        <li>4,950</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 非對稱密碼系統為每個用戶使用一對金鑰。在這種情況下，有 1000 個用戶，系統將需要 2000 個金鑰。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> Erin 擔心她的組織使用的雲提供商會失敗，因此她正在制定一個策略，該策略將結合來自多個公有雲提供商的資源。哪個術語最能描述這個策略？</p>
+    <ol>
+        <li>社群雲</li>
+        <li>多雲</li>
+        <li>私有雲</li>
+        <li>混合雲</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用多個公有雲提供商以實現多樣性被稱為多雲策略。這就是 Erin 正在創建的場景。社群雲是共享的雲資源，對親和群組的成員開放。私有雲資源僅限單個組織使用。混合雲策略結合了公有雲和私有雲資源，而不是來自多個公有雲提供商的資源。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> 以下哪項通常被認為是雲服務提供商的應用能力？</p>
+    <ol>
+        <li>網路容量</li>
+        <li>託管電子郵件</li>
+        <li>塊儲存</li>
+        <li>無伺服器計算</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 電子郵件是一種應用程式級服務，由雲提供商作為軟體即服務 (SaaS) 能力提供。塊儲存和網路容量是基礎設施即服務 (IaaS) 產品，是基礎設施能力。無伺服器計算是平台即服務 (PaaS) 產品，是平台能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> 由於並非所有用戶都會同時訪問其服務產品的全部容量，雲提供商能夠進行什麼活動？</p>
+    <ol>
+        <li>超額訂閱 (Oversubscription)</li>
+        <li>過度配置 (Overprovisioning)</li>
+        <li>配置不足 (Underprovisioning)</li>
+        <li>訂閱不足 (Undersubscription)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 超額訂閱意味著雲提供商可以向客戶出售總容量超過其基礎設施實際物理容量的容量，因為從宏觀角度來看，客戶永遠不會同時使用所有容量。訂閱不足是指雲提供商不出售其所有可用容量，這不需要用戶不同時訪問服務。過度配置是指客戶（而非服務提供商）購買了超出其需求的容量。類似地，配置不足是指客戶未購買足夠的容量來滿足其需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Brian 最近加入了一個組織，該組織的大部分服務運行在其自有數據中心的虛擬化平台上，但也利用 IaaS 提供商託管其 Web 服務和 SaaS 電子郵件系統。哪個術語最能描述該組織使用的雲環境類型？</p>
+    <ol>
+        <li>公有雲</li>
+        <li>專用雲</li>
+        <li>私有雲</li>
+        <li>混合雲</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這個場景描述了公有雲和私有雲服務的混合。這是一個混合雲環境的例子。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> 在基礎設施即服務 (IaaS) 環境中，供應商向客戶提供儲存服務的訪問權限，通常由誰負責從停用的硬碟中移除敏感數據？</p>
+    <ol>
+        <li>客戶的安全團隊</li>
+        <li>客戶的儲存團隊</li>
+        <li>客戶的供應商管理團隊</li>
+        <li>供應商</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在基礎設施即服務環境中，安全職責遵循共享責任模型。由於供應商負責管理儲存硬體，供應商將保留銷毀或擦除停用硬碟的責任。然而，客戶仍有責任在利用供應商的儲存服務之前驗證供應商的清理程序是否滿足其要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> Lucca 正在審查他組織的災難恢復流程數據，並注意到該企業主要網站的最大容忍停機時間 (MTD) 為兩小時。當他進行測試和驗證時，他對該網站的恢復時間目標 (RTO) 有何了解？</p>
+    <ol>
+        <li>它需要少於兩小時。</li>
+        <li>它需要至少兩小時。</li>
+        <li>MTD 太短，需要更長。</li>
+        <li>RTO 太短，需要更長。</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當 Lucca 審查恢復時間目標 (RTO) 數據時，他需要確保組織能夠在基於兩小時最大容忍停機時間 (MTD) 的中斷後不到兩小時內恢復。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> Alice 和 Bob 希望使用非對稱密碼系統相互通信。他們位於國家的不同地區，但已通過使用由相互信任的證書頒發機構簽名的數字證書交換了加密金鑰。<br>當 Bob 收到來自 Alice 的加密消息時，他使用哪個金鑰來解密明文消息的內容？</p>
+    <ol>
+        <li>Alice 的公鑰</li>
+        <li>Alice 的私鑰</li>
+        <li>Bob 的公鑰</li>
+        <li>Bob 的私鑰</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用非對稱密碼加密的消息的接收者始終使用自己的私鑰解密該消息。消息的發送者之前會使用接收者的公鑰對其進行加密。發送者的公鑰和私鑰在此過程中不使用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Jen 為一家協助其他公司將其運營從本地數據中心遷移到雲端的組織工作。Jen 的公司不運營自己的雲服務，而是協助使用其他組織提供的服務。哪個術語最能描述 Jen 公司的角色？</p>
+    <ol>
+        <li>雲服務客戶</li>
+        <li>雲服務合作夥伴</li>
+        <li>雲服務提供商</li>
+        <li>雲服務經紀人</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jen 的組織是雲服務合作夥伴——一個幫助雲服務客戶使用雲服務提供商提供的服務的組織。在這種情況下，Jen 的客戶是雲服務客戶，他們正在遷移到由雲服務提供商提供的服務。雲服務經紀人是提供託管身份和訪問管理服務的雲服務提供商，該服務將安全要求整合到跨雲服務中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> Carla 正在為她的組織選擇一個硬體安全模塊 (HSM)。她受僱於美國聯邦政府機構，必須確保她選擇的技術符合適用的聯邦密碼系統標準。哪個出版物最能幫助她確定這些要求？</p>
+    <ol>
+        <li>NIST 800-53</li>
+        <li>NIST 800-171</li>
+        <li>通用準則 (Common Criteria)</li>
+        <li>FIPS 140-2</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個棘手的問題，因為所有這些出版物都可能與 Carla 的工作有些相關。NIST 800-53 為聯邦機構提供通用的網路安全標準，而 NIST 800-171 則特別適用於受控非機密資訊 (CUI) 的使用。通用準則 (CC) 為硬體和軟體產品提供認證過程。然而，最相關的標準是 FIPS 140-2，《密碼模塊的安全要求》。該指南專門針對 HSM 等系統的密碼要求，因此具有最直接相關的指導意義。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> Ryan 正在審查一項新服務的設計，該服務將使用來自某雲服務提供商的多個產品。該設計依賴於該提供商獨家提供的一些獨特功能。Ryan 最應該擔心這些服務功能無法從其他提供商獲得的事實是什麼？</p>
+    <ol>
+        <li>廠商鎖定 (Vendor lock-in)</li>
+        <li>互操作性 (Interoperability)</li>
+        <li>可審計性 (Auditability)</li>
+        <li>機密性 (Confidentiality)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在這種情況下最大的風險是服務產品將依賴於僅由單一供應商提供的功能，從而阻止 Ryan 的組織轉移到不同的供應商並將他們鎖定在當前的供應商那裡。互操作性是服務應該能夠整合並良好協作的擔憂。沒有跡象表明此場景中互操作性存在風險。也沒有跡象表明使用此供應商會產生任何特殊的可審計性或機密性擔憂。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> Colin 正在審查一個已根據通用準則 (Common Criteria) 分配了 EAL7 評估保證等級的系統。他對該系統可能擁有的最高保證等級是什麼？</p>
+    <ol>
+        <li>它已經過功能測試。</li>
+        <li>它已經過方法性測試和檢查。</li>
+        <li>它已經過方法性設計、測試和審查。</li>
+        <li>它已經過正式驗證、設計和測試。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> EAL7 是通用準則下的最高保證等級。它適用於系統已經過正式驗證、設計和測試的情況。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> 以下哪種技術提供了創建分佈式、不可變賬本的能力？</p>
+    <ol>
+        <li>量子計算</li>
+        <li>區塊鏈</li>
+        <li>邊緣計算</li>
+        <li>機密計算</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 區塊鏈是使用密碼學創建分佈式不可變賬本的技術。它是加密貨幣和許多其他應用的技術基礎。量子計算是一種利用粒子物理學原理進行計算的新興技術。邊緣計算將計算能力轉移到位於網路“邊緣”的物聯網 (IoT) 設備。機密計算是一個研究領域，旨在通過可信執行環境 (TEE) 提供的保護來保護使用中的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> 以下哪個系統保證流程提供了對系統控制的獨立第三方評估，該評估可能被許多不同組織所信任？</p>
+    <ol>
+        <li>規劃</li>
+        <li>定義</li>
+        <li>驗證</li>
+        <li>認證 (Accreditation)</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 驗證過程與認證過程類似，因為它驗證安全控制。驗證可以更進一步，涉及第三方測試服務並彙編可能被許多不同組織信任的結果。認證是管理層正式接受評估系統的行為，而不是評估系統本身。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> 以下哪項可被視為基礎設施即服務 (IaaS) 雲計算的範例？</p>
+    <ol>
+        <li>由供應商管理並通過 Web 交付的薪資系統</li>
+        <li>由供應商管理且運行客戶代碼的應用平台</li>
+        <li>由客戶在供應商管理的虛擬化平台上配置的伺服器</li>
+        <li>由供應商提供的基於 Web 的電子郵件服務</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基礎設施即服務的核心能力之一是在供應商管理的虛擬化平台上提供伺服器。基於 Web 的薪資和電子郵件系統是軟體即服務的例子。由供應商管理且運行客戶代碼的應用平台是平台即服務的例子。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> 以下哪項 *不是* 組織在決定是否遷移到雲環境時可能在成本效益分析中使用的因素？</p>
+    <ol>
+        <li>雲中的共享資源池</li>
+        <li>將 IT 投資從資本支出轉變為運營支出</li>
+        <li>雲服務提供的時間節省和效率</li>
+        <li>與可能選擇的雲提供商相關的品牌</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 與雲提供商相關的品牌不應影響成本效益分析；雲提供商的品牌（甚至組織使用的雲提供商）很可能對與該組織有業務關係的消費者來說都是未知的。提供商不會在客戶請求修改 SLA 時承擔成本。儘管客戶和提供商之間平分成本可能看起來公平，但客戶需要支付與修改 SLA 相關的所有費用。最後，客戶對其 SLA 的修改是可收費的費用，幾乎肯定由客戶支付。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> Barry 有臨時性的巨大計算能力需求，並計劃在短時間內使用來自雲提供商的虛擬伺服器實例。哪個術語最能描述 Barry 工作負載的特性？</p>
+    <ol>
+        <li>量子計算</li>
+        <li>機密計算</li>
+        <li>臨時計算 (Ephemeral computing)</li>
+        <li>並行計算</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 臨時計算意味著您可以創建計算資源，例如伺服器和儲存空間，以解決特定問題，然後在不再需要時將其丟棄。在這個場景中沒有跡象表明 Barry 將使用機密計算、量子計算或並行計算。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> 您正在審查一份服務級別協議 (SLA)，發現其中一條規定保證您計劃使用的服務具有 99.99% 的正常運行時間。哪個術語最能描述這種類型的規定？</p>
+    <ol>
+        <li>可用性</li>
+        <li>安全性</li>
+        <li>隱私性</li>
+        <li>彈性 (Resiliency)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這種類型的規定最好描述為可用性承諾，因為服務提供商保證服務將在 99.9% 的時間內可用。它也可以被描述為安全規定，因為可用性是安全的一個子集，但可用性是一個更具體的術語，因此是更好的答案。彈性是系統承受故障的能力，雖然與可用性相關，但不是此協議中保證的內容。這裡沒有討論與隱私相關的問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Carlton 正在為他的組織運行的應用程式選擇雲環境。他需要一個能讓他對應用程式性能擁有最大控制權的環境。哪種服務類別最適合他的需求？</p>
+    <ol>
+        <li>SaaS</li>
+        <li>FaaS</li>
+        <li>IaaS</li>
+        <li>PaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 用戶對託管在 IaaS 平台上的環境擁有最大的控制權，因為他們能夠手動調整分配給應用程式的資源。用戶在 SaaS、FaaS 或 PaaS 環境中不具有此配置能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> Gavin 正在尋求關於他的組織應如何評估雲服務提供商的指導。哪個 ISO 文件可以幫助他完成這項工作？</p>
+    <ol>
+        <li>ISO 27001</li>
+        <li>ISO 27701</li>
+        <li>ISO 27017</li>
+        <li>ISO 17789</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO 27017 提供了關於雲服務提供商應實施的安全控制的指導，對 Gavin 評估此類提供商將很有用。ISO 27001 是對適用於網路安全計劃的控制措施的一般描述，而 ISO 27701 則為隱私計劃提供控制指導。ISO 17789 提供了雲參考架構，不提供具體的安全指導。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> Ed 對於 PCI DSS 要求對其組織的信用卡處理環境的適用性有疑問。在這種情況下，哪個組織是監管者？</p>
+    <ol>
+        <li>SEC</li>
+        <li>FDA</li>
+        <li>FTC</li>
+        <li>PCI SSC</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 支付卡行業數據安全標準 (PCI DSS) 由支付卡行業安全標準委員會 (PCI SSC) 監督。這不是美國證券交易委員會 (SEC)、食品藥品監督管理局 (FDA) 或聯邦貿易委員會 (FTC) 的責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> Rick 是一位主要使用 Python 的應用程式開發人員。他最近決定評估一項新服務，他將自己的 Python 代碼提供給供應商，然後供應商在其伺服器環境中執行該代碼。哪個雲服務類別包含此服務？</p>
+    <ol>
+        <li>SaaS</li>
+        <li>PaaS</li>
+        <li>IaaS</li>
+        <li>CaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 客戶僅在供應商提供的計算平台上提供應用程式代碼以供執行的雲計算系統是平台即服務 (PaaS) 計算的例子。軟體即服務 (SaaS) 產品作為雲服務向客戶提供功能齊全的應用程式。基礎設施即服務 (IaaS) 產品向客戶提供基本的基礎設施構建塊。CaaS 是 IaaS 的一個子類別，用於作為服務提供的計算資源。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> Gordon 正在為一家製造公司的 IT 運營制定業務連續性計劃。該公司位於北達科他州，目前正在評估地震風險。他們選擇採取風險接受策略。以下哪個行動與該策略一致？</p>
+    <ol>
+        <li>購買地震保險</li>
+        <li>將數據中心搬遷到更安全的地區</li>
+        <li>記錄決策過程</li>
+        <li>重新設計設施以承受地震衝擊</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在風險接受策略中，組織選擇不採取任何行動，只記錄風險。購買保險是風險轉移的一個例子。搬遷數據中心是風險規避。重新設計設施是風險緩解的一個例子。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> Matthew 是一位數據科學家，希望在他的組織中應用機器學習和人工智能技術。他正在開發一個應用程式，該程式將分析潛在客戶並估計他們購買的可能性。他正在使用哪種類型的分析技術？</p>
+    <ol>
+        <li>優化分析</li>
+        <li>描述性分析</li>
+        <li>規範性分析</li>
+        <li>預測性分析</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 預測性分析試圖使用我們現有的數據來預測未來事件。在這種情況下，Matthew 試圖預測客戶下訂單的可能性，因此他正在執行預測性分析。描述性分析只是試圖描述我們的數據。規範性分析試圖通過模擬許多場景來優化我們的行為。在此場景中既未使用規範性分析也未使用描述性分析。優化分析不是一種分析技術類別。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> 以下哪個陳述正確描述了資源池？</p>
+    <ol>
+        <li>資源池允許客戶根據需要添加計算資源。</li>
+        <li>資源池允許雲提供商實現規模經濟。</li>
+        <li>資源池允許客戶根據需要移除計算資源。</li>
+        <li>資源池允許客戶在沒有服務提供商互動的情況下配置資源。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 資源池是允許雲提供商在保持財務可行性的同時滿足來自客戶的各種需求的特性。雲提供商可以進行遠超任何單個客戶自身能力的資本投資，並根據需要分配這些資源，以便資源不會被閒置（這意味著浪費投資）或過載（這意味著服務水平下降）。彈性和可擴展性允許客戶根據需要增長或縮減 IT 足跡（用戶數量、機器數量、儲存大小等），以滿足運營需求而無需過剩容量。按需自助服務是指允許客戶在很少或沒有提供商干預或事先溝通的情況下擴展其計算和/或儲存需求的模型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> Domer Industries 風險評估團隊最近進行了一次定性風險評估，並制定了一個類似於此處所示的矩陣。哪個象限包含需要最立即關注的風險？（圖示：一個 2x2 矩陣，Y 軸為機率，X 軸為影響。左上角為 II，右上角為 I，左下角為 III，右下角為 IV。）</p>
+    <ol>
+        <li>I</li>
+        <li>II</li>
+        <li>III</li>
+        <li>IV</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 風險評估團隊應最立即關注出現在象限 I 中的風險。這些是發生概率高且對組織影響大的風險。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> 以下哪種類型的協議是服務提供商和客戶之間關於可用性及其他性能參數預期的最正式文件？</p>
+    <ol>
+        <li>服務級別協議 (SLA)</li>
+        <li>運營級別協議 (OLA)</li>
+        <li>諒解備忘錄 (MOU)</li>
+        <li>工作說明書 (SOW)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 服務級別協議 (SLA) 是服務提供商和客戶之間的協議，以正式方式記錄可用性、性能和其他參數的預期。MOU 可能涵蓋相同的項目，但不是那麼正式的文件。OLA 是內部服務組織之間的協議，不涉及客戶。SOW 是描述待完成工作的合同附錄。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> Bianca 正在為她的組織遷移到雲計算環境做準備。她擔心在變更過程中可能會出現問題，並希望確保在出現問題時可以恢復到他們的本地環境。Bianca 關心的是哪個考量因素？</p>
+    <ol>
+        <li>可逆性 (Reversibility)</li>
+        <li>可移植性 (Portability)</li>
+        <li>監管性 (Regulatory)</li>
+        <li>彈性 (Resiliency)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Bianca 在這種情況下的擔憂是可逆性——如果變更進展不順利，能夠回滾變更的能力。可移植性是在環境之間輕鬆移動工作負載的能力，但只有在服務啟動並運行後才適用。類似地，彈性是環境承受中斷的能力，在遷移過程中不是主要問題。此場景中沒有提出監管方面的擔憂。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> 以下哪個組織不以產生雲安全指南而聞名？</p>
+    <ol>
+        <li>SANS Institute</li>
+        <li>FBI</li>
+        <li>Cloud Security Alliance</li>
+        <li>Microsoft</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> FBI 不產生雲安全指導文件。SANS Institute、Cloud Security Alliance 以及 Microsoft 等供應商都產生雲安全指導文件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> Vince 正在使用一家新的雲服務提供商，他使用的每個 CPU、通過網路傳輸的每位元數據以及分配的每 GB 磁碟空間都會被收費。這描述了雲服務的哪個特性？</p>
+    <ol>
+        <li>彈性</li>
+        <li>按需自助服務</li>
+        <li>可擴展性</li>
+        <li>計量服務</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 計量服務意味著您在雲端所做的幾乎所有事情都會被計量。雲提供商會測量您使用虛擬伺服器的秒數、您消耗的磁碟空間量、您進行的函數調用次數以及許多其他指標。這使他們能夠精確地向您收取您使用的服務費用——不多也不少。彈性和可擴展性允許客戶根據需要增長或縮減 IT 足跡（用戶數量、機器數量、儲存大小等），以滿足運營需求而無需過剩容量。按需自助服務是指允許客戶在很少或沒有提供商干預或事先溝通的情況下擴展其計算和/或儲存需求的模型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> 在 PaaS 環境中，誰負責執行伺服器操作系統的計劃性維護？</p>
+    <ol>
+        <li>客戶。</li>
+        <li>客戶和服務提供商雙方。</li>
+        <li>在 PaaS 環境中不需要操作系統維護。</li>
+        <li>服務提供商。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 操作系統確實存在於 PaaS 環境中，它們由服務提供商維護。客戶在 PaaS 環境中無法訪問或維護操作系統。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> 在考慮從傳統本地環境遷移到雲端時，組織通常會計算投資回報。您預計以下哪個因素對此計算的貢獻最大？</p>
+    <ol>
+        <li>水電費</li>
+        <li>許可證費用</li>
+        <li>安全費用</li>
+        <li>高管薪酬</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 從本地數據中心遷移到雲端的組織應預期由於本地設備減少而導致的水電費減少。軟體許可證費用不太可能改變。安全費用可能會根據遷移的性質增加或減少。沒有理由相信高管薪酬會改變。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> Devon 正在使用 IaaS 環境，並希望配置將用作附加到伺服器實例的磁碟的儲存。他應該使用哪種類型的儲存？</p>
+    <ol>
+        <li>歸檔儲存</li>
+        <li>塊儲存</li>
+        <li>對象儲存</li>
+        <li>資料庫儲存</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在這種情況下，塊儲存用於提供磁碟卷，是合適的選擇。對象儲存用於儲存單個文件，但不能作為磁碟掛載。沒有跡象表明 Devon 在此場景中需要使用資料庫。歸檔儲存僅應用於不需要頻繁訪問且不適合附加到伺服器實例的磁碟的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> 在一次系統審計中，Casey 注意到她組織的 Web 伺服器的私鑰已在一個公共的 Amazon S3 儲存桶中儲存了一年多。她應該怎麼做？</p>
+    <ol>
+        <li>從儲存桶中移除金鑰。</li>
+        <li>通知所有客戶他們的數據可能已遭洩露。</li>
+        <li>使用新金鑰請求新證書。</li>
+        <li>什麼都不做，因為私鑰應該是可訪問的以供驗證。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Casey 首先應該通知她的管理層，但在那之後，更換證書並使用新證書的金鑰進行適當的金鑰管理應該是她清單上的首要任務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> Glenda 希望進行一次災難恢復測試，該測試允許審查計劃，對正常信息系統活動沒有干擾，並且時間投入盡可能少。她應該選擇哪種類型的測試？</p>
+    <ol>
+        <li>桌面演練</li>
+        <li>並行測試</li>
+        <li>完全中斷測試</li>
+        <li>清單審查</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 清單審查是干擾最小的災難恢復測試類型。在清單審查期間，團隊成員各自審查其災難恢復清單的內容，並提出任何必要的更改。在桌面演練期間，團隊成員聚集在一起，演練一個場景，而不對信息系統進行任何更改。在並行測試期間，團隊實際激活災難恢復站點進行測試，但主站點仍保持運行。在完全中斷測試期間，團隊關閉主站點並確認災難恢復站點能夠處理常規操作。完全中斷測試是最徹底的測試，但也是干擾最大的測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> Mark 正在考慮用一個在雲端可用的新產品替換他組織的客戶關係管理 (CRM) 解決方案。這個新解決方案完全由供應商管理，Mark 的公司將不需要編寫任何代碼或管理任何物理資源。Mark 正在考慮哪種類型的雲解決方案？</p>
+    <ol>
+        <li>IaaS</li>
+        <li>CaaS</li>
+        <li>PaaS</li>
+        <li>SaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在軟體即服務解決方案中，供應商管理物理基礎設施和完整的應用程式堆疊，為客戶提供對完全託管應用程式的訪問。基礎設施即服務 (IaaS) 產品為客戶提供基本的技術構建塊。平台即服務 (PaaS) 產品為客戶提供一個環境，他們可以在其中執行自己的代碼。CaaS 是 IaaS 的一個子類別，用於作為服務提供的計算資源。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> Ben 受命為其組織信息分類系統所涵蓋的系統確定安全控制。為什麼 Ben 可能選擇使用安全基線？</p>
+    <ol>
+        <li>它們適用於所有情況，允許一致的安全控制。</li>
+        <li>它們得到行業標準機構的批准，可防止責任。</li>
+        <li>它們提供了一個可以根據組織需求進行調整的良好起點。</li>
+        <li>它們確保系統始終處於安全狀態。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全基線提供了一個起點，用於確定和調整適合您組織需求的控制措施。它們並不總是適用於特定的組織需求，它們不能確保系統始終處於安全狀態，也不能防止責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> 哪種技術管理方法整合了此圖中所示的技術管理的三個組成部分？(圖示：一個文氏圖，顯示軟體開發、品質保證和運營三個圓圈重疊)</p>
+    <ol>
+        <li>敏捷 (Agile)</li>
+        <li>精益 (Lean)</li>
+        <li>DevOps</li>
+        <li>ITIL</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> DevOps 技術管理方法旨在整合軟體開發、運營和品質保證，形成一個無縫的方法，在三個學科之間建立協作。敏捷是一種通常用於 DevOps 環境的開發方法。精益是一種流程改進策略。IT 基礎設施庫 (ITIL) 是管理 IT 組織的最佳實踐集合。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> Stacey 正在為她的組織配置一個 PaaS 服務。她希望獲得對將執行其代碼的伺服器的 SSH 訪問權限，並聯繫供應商請求此訪問。她應該預期得到什麼回應？</p>
+    <ol>
+        <li>立即批准請求。</li>
+        <li>立即拒絕請求。</li>
+        <li>供應商可能會在批准請求前要求更多資訊。</li>
+        <li>供應商可能會要求執行級別的批准。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 供應商很可能會立即拒絕此請求，因為客戶不應有權訪問 PaaS 環境中的底層基礎設施。如果 Stacey 確實需要此訪問權限，她應該考慮 IaaS 產品而不是 PaaS 產品。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> Tom 啟用了由他的雲基礎設施即服務提供商提供的應用程式防火牆，該防火牆旨在阻止多種類型的應用程式攻擊。從風險管理的角度來看，Tom 實施此對策試圖降低哪個指標？</p>
+    <ol>
+        <li>影響 (Impact)</li>
+        <li>RPO</li>
+        <li>MTO</li>
+        <li>可能性 (Likelihood)</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安裝旨在阻止攻擊的設備是試圖通過降低成功應用程式攻擊的可能性來降低風險。旨在降低風險影響的控制措施試圖減少風險發生時造成的損害量。恢復點目標 (RPO) 解決了因事件可接受的數據丟失量。最大容忍中斷時間 (MTO) 是企業可以安全承受的停機時間。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> Lisa 希望與使用 OAuth 2.0 的雲身份提供商整合，並且她希望選擇一個合適的身份驗證框架。以下哪個最適合她的需求？</p>
+    <ol>
+        <li>OpenID Connect</li>
+        <li>SAML</li>
+        <li>RADIUS</li>
+        <li>Kerberos</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> OpenID Connect 是一個身份驗證層，它與 OAuth 2.0 作為其底層授權框架一起工作。它已被雲服務提供商廣泛採用並得到廣泛支持。SAML、RADIUS 和 Kerberos 是替代的身份驗證技術，但與 OAuth 沒有相同級別的無縫整合。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Elise 正在幫助她的組織準備評估和採用一個新的基於雲的人力資源管理 (HRM) 系統供應商。她應該要求潛在供應商達到的最合適的最低安全標準是什麼？</p>
+    <ol>
+        <li>遵守所有法律法規</li>
+        <li>以組織處理信息相同的方式處理信息</li>
+        <li>消除所有已識別的安全風險</li>
+        <li>遵守供應商自己的政策</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在評估供應商時，用作基線的最合適標準是確定供應商的安全控制是否滿足組織自己的標準。遵守法律法規應包含在該要求中，是必要但不足以與供應商合作的條件。供應商遵守其自己的政策也屬於必要但不足的控制措施類別，因為供應商的政策可能比組織自己的要求弱。消除所有已識別的安全風險是對潛在供應商不可能的要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> Fran 的公司正在考慮從供應商處購買基於 Web 的電子郵件服務，並淘汰其自己的電子郵件伺服器環境以節省成本。Fran 的公司正在考慮哪種類型的雲計算環境？</p>
+    <ol>
+        <li>SaaS</li>
+        <li>IaaS</li>
+        <li>CaaS</li>
+        <li>PaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個供應商提供功能齊全的基於 Web 的應用程式的例子。因此，它屬於軟體即服務 (SaaS) 的定義。在基礎設施即服務 (IaaS)、計算即服務 (CaaS) 和平台即服務 (PaaS) 方法中，客戶提供自己的軟體。在此示例中，供應商提供電子郵件軟體，因此這些選項都不合適。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> Carl 正在部署一組將作為研究項目一部分放置在遠程位置的視頻傳感器。由於連接限制，他希望在將結果發送回雲端進行進一步分析之前，盡可能多地在設備本身上執行圖像處理和計算。哪種計算模型最能滿足他的需求？</p>
+    <ol>
+        <li>無伺服器計算</li>
+        <li>邊緣計算</li>
+        <li>IaaS 計算</li>
+        <li>SaaS 計算</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在這種情況下，大多數雲服務模型（包括 IaaS、SaaS 和無伺服器/FaaS）都需要將大部分資訊傳輸回雲端。邊緣計算服務模型將是更合適的，因為它將計算能力置於傳感器上，最大限度地減少必須通過有限的連接網路鏈路發送回雲端的數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> Ben 正在整合一個聯合身份管理系統，並且需要為基於瀏覽器的單一登錄交換身份驗證和授權資訊。哪個技術是他的最佳選擇？</p>
+    <ol>
+        <li>HTML</li>
+        <li>XACML</li>
+        <li>SAML</li>
+        <li>SPML</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全斷言標記語言 (SAML) 是提供身份驗證和授權資訊（特別是針對基於瀏覽器的 SSO）的最佳選擇。HTML 主要用於網頁，SPML 用於為 SSO 交換用戶資訊，而 XACML 用於訪問控制策略標記。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> Bert 正在考慮使用基礎設施即服務雲計算合作夥伴來提供虛擬伺服器。在這種情況下，以下哪項將是供應商的責任？</p>
+    <ol>
+        <li>維護 hypervisor</li>
+        <li>管理操作系統安全設置</li>
+        <li>維護主機防火牆</li>
+        <li>配置伺服器訪問控制</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 IaaS 伺服器環境中，客戶根據共享責任模型保留對大多數伺服器安全操作的責任。這包括管理 OS 安全設置、維護主機防火牆和配置伺服器訪問控制。供應商將負責 hypervisor 層及以下的所有安全機制。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> Nuno 的公司將其電子郵件系統外包給一家雲服務提供商，該提供商將為 Nuno 公司的員工提供基於 Web 的電子郵件訪問。正在使用哪個雲服務類別？</p>
+    <ol>
+        <li>PaaS</li>
+        <li>IaaS</li>
+        <li>SaaS</li>
+        <li>FaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是一個提供完全開發和託管的應用程式給客戶的例子，因此它是一個軟體即服務 (SaaS) 計算的例子。在平台即服務 (PaaS) 產品中，客戶提供應用程式代碼以在供應商提供的計算平台上執行。基礎設施即服務 (IaaS) 產品提供基本的基礎設施構建塊給客戶。功能即服務 (FaaS) 產品是 PaaS 的一個子類別，用於無伺服器計算應用程式。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> 哪種軟體開發方法論與 DevSecOps 方法最密切相關？</p>
+    <ol>
+        <li>瀑布模型 (Waterfall)</li>
+        <li>螺旋模型 (Spiral)</li>
+        <li>敏捷模型 (Agile)</li>
+        <li>改良瀑布模型 (Modified waterfall)</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> DevOps 和 DevSecOps 理念與敏捷軟體開發方法密切相關。瀑布、改良瀑布和螺旋模型是更傳統的方法，通常不與 DevOps 和 DevSecOps 一起使用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> Bailey 擔心她組織周圍的用戶正在使用各種雲服務，並希望在這些服務中一致地執行安全策略。哪種安全控制最適合她的需求？</p>
+    <ol>
+        <li>DRM</li>
+        <li>IPS</li>
+        <li>CASB</li>
+        <li>DLP</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲訪問安全代理 (CASB) 旨在跨雲服務一致地執行安全策略，最適合滿足 Bailey 的需求。數據丟失預防 (DLP) 和數字版權管理 (DRM) 解決方案可能能夠檢測、阻止和控制雲中的某些信息使用，但它們無法一致地跨雲平台執行安全策略。入侵防禦系統 (IPS) 旨在檢測和阻止惡意活動，在此場景中不相關。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Roger 最近在一家公司接受了一個新的安全專業人員職位，該公司在 IaaS 環境中運行其整個 IT 基礎設施。以下哪項最可能是 Roger 公司的責任？</p>
+    <ol>
+        <li>配置可訪問的網路端口</li>
+        <li>應用 hypervisor 更新</li>
+        <li>修補操作系統</li>
+        <li>在處置前擦除硬碟</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在基礎設施即服務環境中，供應商負責硬體和網路相關的責任。這些包括配置網路防火牆、維護 hypervisor 和管理物理設備。客戶保留對其虛擬機實例上操作系統的修補責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> 在哪個雲計算模型中，客戶與雲供應商的其他客戶共享計算基礎設施，而一個客戶可能不知道其他客戶的身份？</p>
+    <ol>
+        <li>公有雲</li>
+        <li>私有雲</li>
+        <li>社群雲</li>
+        <li>共享雲</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在公有雲計算模型中，供應商構建一個單一平台，供許多不同客戶共享。這也稱為多租戶模型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> Kristen 希望為她的數據使用多個處理站點，但不想支付一個完整的數據中心的費用。如果她希望能夠快速將其自訂應用程式環境的部分內容遷移到多個國家的設施中，而無需等待運送或獲取硬體，以下哪個選項是她最好的選擇？</p>
+    <ol>
+        <li>雲 PaaS 供應商</li>
+        <li>託管數據中心提供商</li>
+        <li>雲 IaaS 供應商</li>
+        <li>提供機架、電源和遠程操作服務的數據中心供應商</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲 IaaS 供應商將允許 Kristen 根據需要快速部署和支付基礎設施。PaaS 供應商提供一個平台，這需要她遷移她的自訂應用程式，可能比託管數據中心提供商花費更長的時間。提供機架、電源和遠程操作協助的數據中心供應商未能滿足 Kristen 不想獲取或運送硬體的要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> 以下關於雲網路的陳述哪個 *不* 正確？</p>
+    <ol>
+        <li>安全組相當於網路防火牆規則。</li>
+        <li>IaaS 網路不可配置。</li>
+        <li>PaaS 和 SaaS 網路由雲服務提供商管理。</li>
+        <li>客戶可以使用 VPN 連接到雲服務提供商網路。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> IaaS 網路通常可由最終客戶通過使用網路安全組、帶寬配置和類似機制進行配置。安全組相當於 IaaS 網路的防火牆規則。PaaS 和 SaaS 網路由雲服務提供商管理。客戶可以使用 VPN 連接到雲服務提供商網路。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> Darcy 的組織正在部署無伺服器計算技術，以更好地滿足開發人員和用戶的需求。在無伺服器模型中，通常由誰負責配置操作系統安全控制？</p>
+    <ol>
+        <li>軟體開發人員</li>
+        <li>網路安全專業人員</li>
+        <li>雲架構師</li>
+        <li>供應商</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在無伺服器計算模型中，供應商不向客戶公開操作系統的詳細信息。因此，根據雲計算的共享責任模型，供應商保留對其進行安全配置的全部責任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> 哪個國際標準為創建組織信息安全管理系統 (ISMS) 提供指導？</p>
+    <ol>
+        <li>NIST SP 800-53</li>
+        <li>PCI DSS</li>
+        <li>ISO 27001</li>
+        <li>NIST SP 800-37</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> ISO 27001 是創建信息安全管理系統 (ISMS) 的國際標準。NIST SP 800-37 是美國政府創建的用於評估系統安全的風險管理框架。NIST SP 800-53 是美國政府批准使用的安全控制列表，也是將它們映射到風險管理框架的一種方法。支付卡行業數據安全標準 (PCI DSS) 是支付卡行業的合規框架，適用於所有接受或處理信用卡支付的實體。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> 您是一家組織的安全主題專家 (SME)，該組織正考慮從傳統 IT 企業環境轉變為託管雲提供商的數據中心。您面臨的挑戰之一是，您當前的本地環境中的應用程式是否能在提供商的託管系統和工具中正常運行。這是一個 _______________ 問題。</p>
+    <ol>
+        <li>互操作性</li>
+        <li>可移植性</li>
+        <li>穩定性</li>
+        <li>安全性</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 這是雲遷移互操作性挑戰的定義。可移植性是衡量將組織的系統/數據從給定雲主機移動到另一個雲主機的難易程度。穩定性在這裡沒有具體含義，只是一個干擾項。安全性可能是此挑戰的一個要素，但不是最佳答案；問題提出的是功能性問題，而不是披露或篡改資訊的問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> Mike 正在對其組織可能遷移到雲端進行業務影響評估。他擔心隨著需求變化在雲供應商之間轉移工作負載的能力。哪個術語最能描述 Mike 的擔憂？</p>
+    <ol>
+        <li>彈性</li>
+        <li>監管性</li>
+        <li>可逆性</li>
+        <li>可移植性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Mike 在這種情況下的擔憂是可移植性——在環境之間輕鬆移動工作負載的能力。可逆性是如果變更進展不順利，能夠回滾變更的能力。彈性是環境承受中斷的能力，在遷移過程中不是主要問題。此場景中沒有提出監管方面的擔憂。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> 以下哪個陳述是正確的？</p>
+    <ol>
+        <li>可擴展的服務也是彈性的。</li>
+        <li>彈性與可擴展性之間沒有關係。</li>
+        <li>彈性的服務也是可擴展的。</li>
+        <li>彈性或可擴展的服務既是彈性的也是可擴展的。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 彈性是指系統根據當前需求水平動態增長和縮減的能力。可擴展性是指系統隨著需求增加而增長的能力，但不需要縮減的能力。彈性的服務必須也是可擴展的，但可擴展的服務不一定具有彈性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> 從客戶的角度來看，以下所有都是基礎設施即服務 (IaaS) 雲服務的好處，*除了* ____________。</p>
+    <ol>
+        <li>降低擁有成本</li>
+        <li>降低能源成本</li>
+        <li>計量使用</li>
+        <li>減少管理雲環境中操作系統 (OS) 的開銷</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 IaaS 配置中，客戶仍然需要維護 OS，因此選項 D 是唯一不是雲客戶直接好處的答案。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> 加密是保障雲端操作安全的重要工具。雖然可以加密雲端中的每個系統、數據片段和事務，但為什麼這對組織來說可能不是最佳選擇？</p>
+    <ol>
+        <li>金鑰長度差異不提供任何實際的額外安全性。</li>
+        <li>它會導致額外的處理開銷和時間延遲。</li>
+        <li>它可能導致廠商鎖定。</li>
+        <li>數據主體可能會對此感到不滿。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 加密會消耗處理能力和時間；與所有安全控制一樣，額外的安全性意味著可衡量的運營能力降低——安全性和生產力之間總是有權衡。選項 A 是胡言亂語，只是一個干擾項。選項 C 是不正確的，因為廠商鎖定不是由加密引起的；如果雲提供商在持有您的數據時倒閉，可能會發生這種情況。數據主體是組織持有其個人身份資訊 (PII) 的個人；通常，他們不會知道或關心某些內容是否已加密（除非該 PII 發生洩露，然後調查人員會想確定該 PII 如何受到保護），並且可能歡迎完全加密，即使這可能意味著運營能力下降。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> __________ 是盡職調查 (due care) 的範例，而 ___________ 是審慎查核 (due diligence) 的範例。</p>
+    <ol>
+        <li>隱私數據安全策略；審計隱私數據安全策略規定的控制措施</li>
+        <li>歐盟通用數據保護條例 (GDPR)；格雷姆-里奇-比利勒法案 (GLBA)</li>
+        <li>門鎖；旋轉柵門</li>
+        <li>周界防禦；內部防禦</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 盡職調查是履行職責所需的最低努力水平；在雲安全中，這通常是雲客戶為了保護其擁有的數據而必須展示的謹慎程度。審慎查核是在支持或促進盡職調查方面採取的任何活動。這個答案因此是最佳的：盡職調查由策略規定，而支持該策略的活動（此處為審計策略要求的控制措施）是審慎查核的證明。通用數據保護條例 (GDPR) 和 GLBA 都是立法授權；這些可能規定了盡職調查的標準，但它們本身不是盡職調查或審慎查核。門鎖和旋轉柵門是物理安全控制；它們都可能是盡職調查努力的例子，但都不能證明審慎查核。盡職調查和審慎查核可以通過內部或外部控制/流程來證明；在控制位於何處方面沒有區別。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> 以下哪項是機密計算環境的關鍵組件？</p>
+    <ol>
+        <li>TEE</li>
+        <li>TPM</li>
+        <li>HSM</li>
+        <li>PKI</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 機密計算通過使用可信執行環境 (TEE) 來保護使用中的數據。機密計算環境也可能利用其他安全技術，包括可信平台模塊 (TPM)、硬體安全模塊 (HSM) 和公鑰基礎設施 (PKI)，但這些技術不保護使用中的數據，因此不是機密計算環境所必需的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> 以下哪個計劃為可能在政府環境中使用的計算硬體提供通用認證過程？</p>
+    <ol>
+        <li>FedRAMP</li>
+        <li>NIST 800-53</li>
+        <li>通用準則 (Common Criteria)</li>
+        <li>FIPS 140-2</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 通用準則為可能在政府應用中使用的計算硬體提供通用認證過程。FIPS 140-2 提供類似的指導，但特定於密碼模塊，不用於通用硬體。NIST 800-53 提供安全控制指導，但不是認證過程。FedRAMP 為雲計算服務提供認證過程，但不適用於硬體。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> 在輕量級目錄訪問協議 (LDAP) 環境中，目錄伺服器中的每個條目都由一個 ______________ 標識。</p>
+    <ol>
+        <li>域名 (DN)</li>
+        <li>區分名稱 (DN)</li>
+        <li>目錄名 (DN)</li>
+        <li>默認名 (DN)</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 區分名稱 (DN) 是 LDAP 環境中所有條目的命名法。域名用於標識一個或多個 IP 地址。例如，Microsoft.com 和 google.com 是域名。選項 A 不正確。目錄名通常與文件系統結構相關，與 LDAP 無關。選項 C 不正確。“默認名”不是常用術語，是編造的。選項 D 不是正確答案。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> 以下哪種雲構建塊技術最適合儲存結構化為相關表格的數據？</p>
+    <ol>
+        <li>儲存</li>
+        <li>網路</li>
+        <li>資料庫</li>
+        <li>虛擬化</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 資料庫用於儲存收集到相關表格中的資訊。儲存也可以用於此目的，但不提供資料庫的表格結構，因此不是最佳解決方案。網路和虛擬化技術不用於儲存數據。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> 您擔心在伺服器內存中儲存敏感數據時如何保護它。哪種新興技術旨在協助這項工作？</p>
+    <ol>
+        <li>量子計算</li>
+        <li>機密計算</li>
+        <li>邊緣計算</li>
+        <li>霧計算</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 機密計算是一種旨在支持保護主動儲存在內存中的數據的新興技術。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> 您的組織已遷移到平台即服務 (PaaS) 配置。雲提供商內部的網路管理員訪問了您的數據並將您的用戶列表出售給了競爭對手。根據所有適用法律，誰有義務進行數據洩露通知？</p>
+    <ol>
+        <li>負責的網路管理員</li>
+        <li>雲提供商</li>
+        <li>監督您部署的監管機構</li>
+        <li>您的組織</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雲客戶最終對涉及數據安全和隱私的所有法律後果負責；雲提供商可能對與這些責任相關的財務成本負責，但這些損害賠償只能在雲客戶發出通知很久之後才能追回。所有其他選項都不正確，因為它們沒有正確識別根據所有適用法律有義務發出數據洩露通知的人。該責任落在雲客戶身上。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> 如果一個組織希望在雲端中最大程度地保留對其資產的控制權，他們應該選擇哪種服務和部署模型組合？</p>
+    <ol>
+        <li>平台即服務 (PaaS)，社群雲</li>
+        <li>基礎設施即服務 (IaaS)，混合雲</li>
+        <li>軟體即服務 (SaaS)，公有雲</li>
+        <li>基礎設施即服務 (IaaS)，私有雲</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> IaaS 服務模型允許組織最大程度地控制其在雲端的 IT 資產；雲客戶負責操作系統、應用程式和雲端中的數據。私有雲模型允許組織在雲端中保留最大的治理控制權；所有其他部署模型都需要在共享資源池環境中放棄治理控制權。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> Henry 的公司部署了一個廣泛的物聯網 (IoT) 基礎設施用於建築監控，其中包括環境控制、佔用傳感器以及各種其他有助於管理建築的傳感器和控制器。在對物聯網部署的分析中，Henry 應將以下哪個安全問題報告為最關鍵？</p>
+    <ol>
+        <li>IoT 設備缺乏本地儲存空間來存放安全日誌，這在 IoT 設備中很常見。</li>
+        <li>IoT 設備可能沒有單獨的管理介面，允許同一網路上的任何人嘗試登錄它們，從而使暴力攻擊成為可能。</li>
+        <li>IoT 設備可能不支持強加密通信，從而使日誌和傳感器數據在網路上被攔截。</li>
+        <li>IoT 設備的長期支持和修補模型可能帶來安全和運營風險。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Henry 最關心的應該是 IoT 設備的長期安全性和可支持性。隨著這些設備越來越多地嵌入建築物和基礎設施中，了解支持模型和安全模型非常重要。缺乏單獨的管理訪問權限和缺乏強加密都可以通過將 IoT 設備放置在專用子網或網路上來解決，從而阻止其他用戶直接訪問這些設備。這將有助於在不產生過多費用或複雜性的情況下限制風險，並且是一種常見的做法。最後，缺乏儲存空間可能是一個問題，但在查看 IoT 設備可能產生的風險時，這不是最重要的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> 在哪個雲計算模型中，客戶在自己的數據中心構建雲計算環境，或者在另一個僅供客戶專用的數據中心構建環境？</p>
+    <ol>
+        <li>公有雲</li>
+        <li>私有雲</li>
+        <li>混合雲</li>
+        <li>共享雲</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在私有雲計算模型中，雲計算環境專用於單個組織，不遵循共享租戶模型。該環境可以由公司在自己的數據中心構建，也可以由供應商在協同定位站點構建。公有雲計算利用供應商數據中心。混合雲計算結合了公有雲和私有雲資源的使用。共享雲計算不是一種雲服務模型。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> 哪個雲計算組件最容易受到逃逸攻擊？</p>
+    <ol>
+        <li>Hypervisor</li>
+        <li>硬體安全模塊</li>
+        <li>可信平台模塊</li>
+        <li>資料庫</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Hypervisors 在虛擬機器之間強制隔離，因此最容易受到逃逸攻擊。硬體安全模塊和可信平台模塊儲存和管理密碼金鑰，不易受到逃逸攻擊。資料庫可能託管在易受逃逸攻擊的虛擬平台上，但資料庫本身不易受到該攻擊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> Steve 擔心他組織的雲環境用戶可能通過 HTTPS 連接發送敏感資訊。哪種技術最能幫助他檢測此活動？</p>
+    <ol>
+        <li>流量檢查</li>
+        <li>端口阻止</li>
+        <li>修補</li>
+        <li>地理圍欄</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 流量檢查技術將允許 Steve 檢查加密的 HTTPS 流量的內容並檢測敏感資訊。端口阻止可能用於完全停止 HTTPS 流量，但無法檢測安全違規。修補和地理圍欄技術在此場景中不起作用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> 對於一個組織來說，以下哪種災難恢復方法通常最具成本效益？</p>
+    <ol>
+        <li>熱站</li>
+        <li>雲站點</li>
+        <li>冷站</li>
+        <li>暖站</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 熱站、冷站和暖站都需要對物理設施進行大量投資。熱站和暖站還需要對硬體和/或軟體進行投資。使用雲可以通過配置但不實際激活資源直到真正需要時來最小化成本。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> 作為訪問管理的一個基本要素，____________ 是確認個人身份聲稱的實踐。</p>
+    <ol>
+        <li>身份驗證</li>
+        <li>授權</li>
+        <li>不可否認性</li>
+        <li>回歸</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 身份驗證是驗證用戶聲稱的身份並根據該身份為其分配身份斷言（通常是用戶 ID）的過程。授權是根據分配給特定用戶/有效身份斷言的權限授予訪問權限。不可否認性是不允許交易參與者否認其參與的安全概念。回歸是一個與問題無關的統計概念。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> 以下哪個雲服務類別將最多的安全責任置於雲服務提供商身上？</p>
+    <ol>
+        <li>SaaS</li>
+        <li>PaaS</li>
+        <li>FaaS</li>
+        <li>IaaS</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體即服務 (SaaS) 模型將主要的安全性（和其他管理）負擔置於服務提供商身上。平台即服務 (PaaS) 和基礎設施即服務 (IaaS) 根據共享責任模型將部分責任從提供商轉移給客戶。功能即服務 (FaaS) 是 PaaS 的一個子類別。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> Alice 和 Bob 正在使用對稱加密算法交換敏感資訊。此通信總共需要多少個加密金鑰？</p>
+    <ol>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在對稱加密算法中，所有數據都使用相同的共享密鑰進行加密和解密。此密鑰是通信所需的唯一密鑰。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> Mike 和 Renee 希望使用非對稱密碼系統相互通信。他們位於國家的不同地區，但已通過使用由相互信任的證書頒發機構簽名的數字證書交換了加密金鑰。<br>當 Mike 收到 Renee 的數字證書時，他使用哪個金鑰來驗證證書的真實性？</p>
+    <ol>
+        <li>Renee 的公鑰</li>
+        <li>Renee 的私鑰</li>
+        <li>CA 的公鑰</li>
+        <li>CA 的私鑰</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當個人收到數字證書副本時，該個人使用 CA 的公鑰驗證證書中包含的數字簽名來驗證該證書的真實性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> 如果完全開發，哪種計算技術有可能破壞現代加密算法的安全性？</p>
+    <ol>
+        <li>機密計算</li>
+        <li>臨時計算</li>
+        <li>量子計算</li>
+        <li>並行計算</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 量子計算使用先進的粒子物理學以革命性的方式執行計算任務，這可能使現代加密算法變得不安全。臨時計算是指臨時使用計算資產。機密計算使用可信執行環境 (TEE) 來保護使用中的數據。並行計算使用多個處理器來執行計算的不同部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> 通常認為業務連續性 (BC) 工作與災難恢復 (DR) 工作之間有何區別？</p>
+    <ol>
+        <li>BC 涉及恢復時間目標 (RTO)，而 DR 涉及恢復點目標 (RPO)。</li>
+        <li>BC 適用於人為事件（如縱火或盜竊），而 DR 適用於自然災害。</li>
+        <li>BC 旨在在正常運營中斷期間維持關鍵功能，而 DR 旨在在中斷後恢復正常運營。</li>
+        <li>BC 涉及保護人力資產（人員、員工、用戶），而 DR 涉及保護財產（資產、數據）。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 從技術上講，BC 工作旨在確保關鍵業務功能在破壞性事件期間能夠繼續運行，而 DR 工作則旨在支持在事件後恢復正常運營。然而，在實踐中，這些努力通常會重合，使用相同的計劃/人員，並有許多相同的程序。選項 A 不正確；BC 和 DR 都使用 RTO 和 RPO 作為衡量成功的指標。選項 B 不正確；BC 和 DR 工作不特定於破壞性事件的原因。選項 D 不正確；健康和人類安全在所有安全工作中都應至關重要，只有極少數例外。</p>
+</div>
+
+</body>
+</html>

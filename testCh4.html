@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>第四章 問題：雲應用程式安全（含答案與說明）</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; }
+        .question { margin-bottom: 25px; border-bottom: 1px solid #ccc; padding-bottom: 20px; }
+        .question p.q-text { margin-bottom: 10px; font-weight: bold;}
+        ol { list-style-type: upper-alpha; padding-left: 40px; margin-top: 5px; margin-bottom: 10px; }
+        li { margin-bottom: 5px; }
+        .answer { color: #007bff; font-weight: bold; margin-top: 10px; }
+        .explanation { margin-top: 5px; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1>第四章 問題：雲應用程式安全（含答案與說明）</h1>
+
+<div class="question">
+    <p class="q-text"><strong>1.</strong> Mikayla 希望驗證她從 GitHub 下載的軟體組件。當該組件作為其整合過程的一部分下載並包含在她的環境中時，她如何驗證底層軟體沒有安全缺陷？</p>
+    <ol>
+        <li>驗證文件的校驗和。</li>
+        <li>驗證文件的簽名。</li>
+        <li>驗證文件的哈希值。</li>
+        <li>Mikayla 無法通過所述選項確保沒有安全缺陷。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Mikayla 無法僅通過驗證軟體是否已簽名、其哈希是否與官方發布的哈希匹配，或校驗和是否匹配來驗證第三方軟體沒有漏洞或其他安全問題。她需要自己測試該軟體，或確定一個她可以信賴的第三方進行適當的軟體測試。即便如此，該軟體仍可能包含缺陷。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>2.</strong> Lin 希望允許她的用戶在訪問她的服務時使用由第三方身份提供商提供的現有憑證。她需要從以下列表中提供哪個元素？</p>
+    <ol>
+        <li>用戶 ID</li>
+        <li>身份驗證</li>
+        <li>授權</li>
+        <li>身份證明</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Lin 需要提供使用其組織服務的授權。第三方身份提供商將提供用戶 ID 並進行身份驗證，然後向 Lin 提供令牌或驗證，證明用戶是他們聲稱的人。身份證明不一定由任何一方在此場景中提供，如果驗證某人是他們聲稱的人比僅僅允許訪問服務更重要，這可能會使接受第三方憑證變得具有挑戰性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>3.</strong> Joanna 的軟體供應商不向其客戶提供源代碼。在以下列表中，測試供應商軟體包安全的最佳選擇是什麼？</p>
+    <ol>
+        <li>對軟體執行靜態分析。</li>
+        <li>實施配對編程技術。</li>
+        <li>審查軟體中是否存在硬編碼的秘密。</li>
+        <li>執行動態測試。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Joanna 知道她無法訪問源代碼，這意味著靜態分析不是一個選項，識別秘密可能會很困難。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>4.</strong> 哪種 SDLC 模型最常與雲開發流程相關聯？</p>
+    <ol>
+        <li>敏捷 (Agile)</li>
+        <li>RAD</li>
+        <li>螺旋 (Spiral)</li>
+        <li>瀑布 (Waterfall)</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 敏捷開發模型最常與雲服務和開發相關聯。快速應用開發、螺旋和瀑布方法更常與傳統開發環境相關聯，但可用於雲服務和系統。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>5.</strong> Susan 希望避免雲應用程式開發中的常見陷阱。以下哪個陷阱經常與雲環境相關聯？</p>
+    <ol>
+        <li>在雲中構建的應用程式的可靠性</li>
+        <li>在雲中構建的應用程式的可擴展性</li>
+        <li>在雲中構建的應用程式的冗餘性</li>
+        <li>在雲中構建的應用程式的安全性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 知道雲服務將允許她在可靠、可擴展的基礎設施上構建她的應用程式，該基礎設施可以利用多種方式的冗餘。她還知道，無論代碼構建或運行的環境如何，保護代碼仍然是一個問題。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>6.</strong> Susan 希望避免數據整合問題。她知道 OWASP 雲 Top 10 包括服務和數據整合安全問題，並且正在部署一個基於 REST 的 API 供其客戶在訪問其服務時使用。她正在使用 API 金鑰，但擔心第三方攔截和訪問數據。她應在其實現中包含什麼來解決這個問題？</p>
+    <ol>
+        <li>數據標記化</li>
+        <li>確保靜態加密</li>
+        <li>確保傳輸中加密</li>
+        <li>數據遮蔽</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Susan 知道傳輸中加密（通常通過 TLS）是防止第三方攔截和訪問通過 API 調用發送給其客戶的數據的正確解決方案。標記化和遮蔽用於保護應用程式中的數據，但它們不滿足防止攔截的需求，並且數據在場景描述中是在傳輸中而不是靜態的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>7.</strong> Ben 希望為他的軟體開發工作收集業務需求，並且正在使用敏捷方法。以下哪項 *不是* 敏捷流程中收集用戶需求的常用方法？</p>
+    <ol>
+        <li>頭腦風暴</li>
+        <li>文件審查</li>
+        <li>用戶觀察</li>
+        <li>調查</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 頭腦風暴、調查、研討會、用戶觀察和許多其他技術通常用於收集業務需求。然而，文件審查不涉及用戶需求或反饋。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>8.</strong> 靜態加密是雲環境 SDLC 中包含的保護性設計元素，這是由於哪個常見的雲設計主題？</p>
+    <ol>
+        <li>快速彈性</li>
+        <li>多租戶</li>
+        <li>計量服務</li>
+        <li>可擴展性</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於多個租戶共享相同的底層基礎設施，靜態加密可防止無意中的數據暴露或重用基礎設施上的殘留數據。彈性、計量服務和可擴展性不需要靜態加密，實際上由於加密開銷，可能會導致成本略高。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>9.</strong> Nick 希望避免他的 CI/CD 管道中的常見陷阱。以下哪個是可能損害雲開發工作的常見 CI/CD 陷阱？</p>
+    <ol>
+        <li>流程自動化</li>
+        <li>使用指標</li>
+        <li>使用多個部署路徑</li>
+        <li>依賴版本控制系統</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 擁有多個部署路徑意味著可以避免 CI/CD 系統中的元素或流程。單一路徑以及備份它的應急流程有助於避免此問題。自動化、使用指標和使用版本控制都是 CI/CD 管道的推薦最佳實踐。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>10.</strong> Maria 希望將她現有的身份提供商與她的雲提供商的服務整合。大多數雲身份提供商整合使用哪個通用標準？</p>
+    <ol>
+        <li>IDPL</li>
+        <li>OpenLDAP</li>
+        <li>SAML</li>
+        <li>ConnectID</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Maria 知道 IdP 通常與 OpenID Connect 或 SAML 整合。OpenLDAP 是 LDAP 的開源實現，但由於它是目錄服務，因此不用於此類整合。ConnectID 和 IDPL 是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>11.</strong> Jack 希望使他的團隊能夠開發雲原生應用程式。以下哪項 *不是* 雲原生應用程式設計的常見元素？</p>
+    <ol>
+        <li>優化的彙編代碼</li>
+        <li>自動化發布管道</li>
+        <li>容器</li>
+        <li>微服務</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jack 知道最適合雲應用程式的語言才有意義，彙編語言不太可能適合他的 CI/CD 環境。使用自動化發布管道、容器和微服務都是雲應用程式開發和設計的常見元素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>12.</strong> 在軟體開發生命週期 (SDLC) 的哪個階段，用戶參與 *最* 關鍵？</p>
+    <ol>
+        <li>定義</li>
+        <li>設計</li>
+        <li>開發</li>
+        <li>測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 雖然某些開發模型允許用戶參與整個過程，但用戶輸入在定義階段最為必要，開發人員可以在此階段了解業務/用戶需求——系統/軟體實際應該在功能和性能方面產生什麼。在整個過程中進行參與是有幫助的，但如果沒有在定義階段的用戶輸入，整個過程將沒有正確的起點。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>13.</strong> Brian 希望確保他在其開發過程中考慮到 OWASP Top 10 雲風險。他知道監管合規性在列表上，並希望將其包含在 SDLC 中。在 SDLC 的哪個階段考慮監管合規性最有意義？</p>
+    <ol>
+        <li>分析和需求定義</li>
+        <li>設計</li>
+        <li>實施</li>
+        <li>測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Brian 需要在 SDLC 的需求收集階段提出監管合規性問題。如果它不是一個要求，它就不會進入設計和實施階段。測試監管合規性可能具有挑戰性，因為並非所有合規性都可以通過技術手段進行測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>14.</strong> Angie 組織的測試過程包括訪問設計規範、源代碼和正在運行的應用程式。她正在使用哪種類型的安全測試方法？</p>
+    <ol>
+        <li>白盒</li>
+        <li>灰盒</li>
+        <li>紅盒</li>
+        <li>黑盒</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Angie 正在使用白盒或全知測試方法。灰盒或部分知識測試提供對環境或系統的部分但非全部訪問權限。黑盒或零知識測試要求測試人員像沒有內部系統知識的攻擊者一樣行事。紅盒是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>15.</strong> CWE/SANS Top 25 最危險軟體錯誤包括使用硬編碼憑證。可以使用哪個常見的雲服務組件來避免雲託管軟體和應用程式的這個問題？</p>
+    <ol>
+        <li>MFA 令牌</li>
+        <li>TPM</li>
+        <li>KMS</li>
+        <li>API 金鑰</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> KMS 或金鑰管理服務用於安全地儲存和訪問秘密，允許在需要時使用它們而無需硬編碼。TPM 用於儲存硬體的秘密，MFA 令牌用於多因素身份驗證，API 金鑰用於安全地向 API 進行身份驗證和訪問 API，但它們都不提供避免雲應用程式中硬編碼憑證所需的功能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>16.</strong> Dana 的組織要求其部署的每個應用程式都有一個 SBOM。哪個 OWASP Top 10 項目有助於通過 SBOM 避免？</p>
+    <ol>
+        <li>易受攻擊和過時的組件</li>
+        <li>損壞的訪問控制</li>
+        <li>注入</li>
+        <li>安全配置錯誤</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體物料清單 (SBOM) 用於識別軟體包中的每個組件。Dana 知道擁有 SBOM 將有助於她跟踪其軟體堆疊中每個組件的版本和可用更新。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>17.</strong> Yun 工作的公司向客戶提供 API 訪問。Yun 希望對 API 訪問進行速率限制並收集計費資訊，同時使用中央授權和訪問管理系統。Yun 應部署哪種類型的工具來滿足這些要求？</p>
+    <ol>
+        <li>API 網關</li>
+        <li>API 代理</li>
+        <li>API 防火牆</li>
+        <li>下一代 API 管理器</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> API 網關旨在聚合 API 訪問、為 API 使用提供身份驗證、速率限制以及收集有關 API 使用情況的統計信息和數據。API 代理用於解耦軟體組件，API 防火牆是為保護特定 API 的 API 而構建的專用防火牆，下一代 API 管理器是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>18.</strong> IAST 通常與 SDLC 的哪個階段相關聯？</p>
+    <ol>
+        <li>設計</li>
+        <li>測試</li>
+        <li>實施</li>
+        <li>部署</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 交互式應用程式安全測試 (IAST) 使用軟體工具監控應用程式運行情況並收集有關發生情況和軟體執行方式的信息。它通常在 SDLC 的 QA 或測試階段實施。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>19.</strong> Gary 的雲服務向客戶提供對 API 的訪問。以下哪個是 API 中常見的安全缺陷？</p>
+    <ol>
+        <li>使用非結構化數據</li>
+        <li>缺乏身份驗證</li>
+        <li>使用半結構化數據</li>
+        <li>缺乏加密</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 未受保護的 API 是一個常見問題，缺乏身份驗證是一個主要問題。數據提供方式——結構化、非結構化或半結構化——不是安全問題。加密通常不由 API 提供，而是由 Web 伺服器或底層服務提供。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>20.</strong> Dan 希望在其雲環境中加密靜態數據。在加密靜態數據時，他應尋找哪個加密標準？</p>
+    <ol>
+        <li>TLS</li>
+        <li>AES-256</li>
+        <li>SSL</li>
+        <li>Blowfish</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> AES-256 是一個廣泛接受和使用的靜態數據加密標準。TLS 用於傳輸中加密。SSL 已過時，Blowfish 具有已知的漏洞，包括生日攻擊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>21.</strong> Mark 希望確保他的軟體供應商在其軟體驗證過程中使用了行業最佳實踐。他知道 NIST 為開發人員驗證代碼定義了許多推薦的最低標準。以下哪項 *不是* NIST 推薦的供應商或開發人員代碼驗證的最低標準？</p>
+    <ol>
+        <li>使用自動化測試。</li>
+        <li>執行基於代碼的（靜態）分析。</li>
+        <li>僅檢查內部開發的軟體。</li>
+        <li>進行威脅建模。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 檢查包含的軟體是否是內部或外部開發的是最佳實踐，僅檢查您自己的組件通常會留下大量未經檢查的軟體包。您可以在 www.nist.gov/itl/executive-order-improving-nations-cybersecurity/recommended-minimum-standard-vendor-or-developer 找到完整列表。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>22.</strong> Lori 希望確保其供應商提供的包含的軟體組件是安全的。她應使用哪種類型的過程來對這些軟體包進行評估？</p>
+    <ol>
+        <li>Web 應用程式漏洞掃描</li>
+        <li>軟體組成分析</li>
+        <li>漏洞掃描</li>
+        <li>版本號驗證過程</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Lori 的最佳選擇是使用 SCA 工具執行軟體組成分析 (SCA) 過程，該工具可以識別開源庫和其他組件。漏洞掃描無法識別與軟體相關的所有組件，版本號驗證過程是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>23.</strong> Christine 記錄了一個軟體測試用戶故事，內容如下：“作為攻擊者，我將上傳惡意軟體作為我的表單提交的一部分，這將利用解析用戶提交內容的解析軟體。” Christine 準備進行哪種類型的測試？</p>
+    <ol>
+        <li>濫用案例測試</li>
+        <li>靜態測試</li>
+        <li>QA 測試</li>
+        <li>SCA 測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Christine 正在準備進行濫用案例測試，該測試記錄了對軟體功能的濫用。靜態測試審查源代碼，QA 測試驗證軟體質量，SCA 是軟體組成分析，它著眼於軟體的底層組件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>24.</strong> OWASP 的應用程式安全驗證標準 (ASVS) 具有三個主要使用模型。以下哪個 *不是* 基於其設計目標的預期使用模型？</p>
+    <ol>
+        <li>用作指標</li>
+        <li>用於審計</li>
+        <li>用作指導</li>
+        <li>在採購期間使用</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> ASVS 旨在用作評估 Web 應用程式中可信賴程度的指標，為開發人員提供如何內建安全控制的指導，以及在採購過程中指定應用程式安全驗證要求。它不是設計為審計標準。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>25.</strong> Ian 希望使用特定於雲的應用程式問題列表。他應該選擇以下哪個選項？</p>
+    <ol>
+        <li>OWASP Top 10</li>
+        <li>NIST Dirty Dozen</li>
+        <li>SANS Top 25</li>
+        <li>MITRE ATT&CK-RS</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> OWASP Top 10 是特定於雲的列表，而 SANS Top 25 則描述了一般的軟體錯誤。NIST Dirty Dozen 和 MITRE ATT&CK-RS 是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>26.</strong> Nick 希望為其團隊的軟體版本控制使用通用格式。如果他想使用通用行業慣例，他應該使用哪種版本控制格式？</p>
+    <ol>
+        <li>Codename.version</li>
+        <li>Major.build.minor.patch</li>
+        <li>RFC number.version.patch</li>
+        <li>Major.minor.patch</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Major.minor.patch 是一種常見的版本控制格式。雖然沒有行業標準，但按比例順序排列版本號是一種常見做法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>27.</strong> 哪個術語用於描述產品所有軟體組件的列表？</p>
+    <ol>
+        <li>組件索引</li>
+        <li>SBOM</li>
+        <li>版本目錄</li>
+        <li>SCCM</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 軟體物料清單 (SBOM) 是軟體包或程序所有組件的列表，作為軟體安全程序的一部分，它被認為越來越重要。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>28.</strong> Valerie 的公司最近遭受了針對他們使用的第三方應用程式的成功 SQL 注入攻擊。供應商尚未提供針對 SQL 注入漏洞的補丁，但 Valerie 由於業務需求需要保持該應用程式的生產狀態。Valerie 可以部署哪種類型的工具來防範對其 Web 應用程式的 SQL 注入攻擊？</p>
+    <ol>
+        <li>DAM</li>
+        <li>WAF</li>
+        <li>XML 防火牆</li>
+        <li>API 網關</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Web 應用程式防火牆 (WAF) 通常具有針對 SQL 注入等常見攻擊的內建保護。Valerie 應選擇一個 WAF 來防範她已知的 SQL 注入以及針對 Web 應用程式的其他常見攻擊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>29.</strong> Jackie 希望允許應用程式使用其所需的庫和其他依賴項運行，而無需為每個應用程式設置獨立的操作系統。她應該使用哪種技術來讓她輕鬆地在不同操作系統之間移動應用程式包？</p>
+    <ol>
+        <li>包</li>
+        <li>容器</li>
+        <li>虛擬機器</li>
+        <li>Hypervisors</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 容器允許輕鬆移動應用程式，因為它們包含應用程式所需的依賴項和組件，而無需打包完整的操作系統。包是軟體組件，虛擬機器運行在 hypervisor 上。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>30.</strong> Charles 使用他組織的憑證登錄，並且能夠在各種系統和應用程式中使用該登錄。Charles 使用的是哪種技術？</p>
+    <ol>
+        <li>SAML</li>
+        <li>SSO</li>
+        <li>OpenID Connect</li>
+        <li>OTP</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Charles 正在使用單一登錄 (SSO) 技術，允許他一次登錄即可使用許多服務和系統。SAML 和 OpenID Connect 用於聯合，而 OTP 是一次性密碼。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>31.</strong> Henry 希望確保只有授權客戶才能使用其組織面向公眾的 API。此目的常用的安全技術是什麼？</p>
+    <ol>
+        <li>API 金鑰</li>
+        <li>單一登錄</li>
+        <li>API 聯合</li>
+        <li>複雜的 API 密碼</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Henry 的組織應使用 API 金鑰來確保只有授權用戶才能使用他們向客戶公開的 API。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>32.</strong> Nancy 希望確保她的組織不會因其軟體的許可問題而遇到麻煩，並且她知道供應商使用許可證伺服器控制訪問，每個安裝都會與之聯繫。為了確保她將來不會在某個時候遇到服務中斷，她應特別注意以下哪個方面？</p>
+    <ol>
+        <li>許可證期限</li>
+        <li>許可證條款是否可以披露</li>
+        <li>許可證成本</li>
+        <li>合同中包含的第三方子許可證</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Nancy 知道她應該跟踪許可證期限，即許可證的有效期限，這樣軟體在許可證或合同到期時不會自行禁用。成本、條款是否可以披露以及是否涉及第三方軟體都不太可能導致服務中斷。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>33.</strong> Isaac 希望確保他的雲服務提供商使用的密碼系統符合廣泛接受的標準。他應期望其提供商遵守哪個美國政府標準來滿足其密碼系統要求？</p>
+    <ol>
+        <li>GDPR</li>
+        <li>FIPS 140-2</li>
+        <li>SSL</li>
+        <li>SHA-2</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> FIPS 140-2 是聯邦資訊處理標準，定義了密碼模塊的要求，是評估密碼系統常用的標準，也是此處列出的唯一當前有效的密碼標準。SSL 已過時並已被 TLS 取代，SHA-2 是一種哈希算法，GDPR 是歐盟數據保護法規。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>34.</strong> Megan 希望提高其基礎設施中特權使用的可審計性。以下哪個解決方案將對可審計性產生最大的積極影響？</p>
+    <ol>
+        <li>使用共享服務帳戶。</li>
+        <li>使用多因素身份驗證。</li>
+        <li>使用動態秘密。</li>
+        <li>使用 API 金鑰。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用動態秘密——根據需要生成和使用的秘密——允許對使用情況進行細粒度審計，因為每個秘密都是根據需要創建的，因此可以審查其具體用途。共享帳戶不允許審計，因為操作無法可靠地鏈接到個人用戶。多因素身份驗證有助於防止被盜憑證和暴力攻擊，但不會增加使用的可審計性，API 金鑰允許 API 身份驗證，但與多因素身份驗證一樣，不會像動態秘密那樣增加使用的個人可審計性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>35.</strong> 在軟體開發生命週期 (SDLC) 的測試階段，應同時審查軟體性能和 _______________。</p>
+    <ol>
+        <li>版本</li>
+        <li>複雜性</li>
+        <li>大小</li>
+        <li>安全性</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 SDLC 的測試階段，應審查軟體的性能和安全性。代碼的版本、複雜性和大小不是通常測試的元素。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>36.</strong> Chris 希望使用雲提供商託管的機制來儲存和管理其組織的秘密。他應該尋找哪種類型的解決方案？</p>
+    <ol>
+        <li>KMS</li>
+        <li>PKI</li>
+        <li>CA</li>
+        <li>KCS</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Chris 應尋找金鑰管理服務 (KMS)。KMS 允許創建、儲存、管理和審計金鑰。PKI 是公鑰基礎設施，CA 是證書頒發機構，KCS 是為此問題編造的——它們都無法提供 Chris 正在尋找的服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>37.</strong> 在聯合中，哪個實體提供身份驗證服務？</p>
+    <ol>
+        <li>IdP</li>
+        <li>RP</li>
+        <li>SP</li>
+        <li>SSO</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 身份提供商 (IdP) 提供身份驗證以及創建、管理和維護身份和身份資訊。依賴方和服務提供商都信任 IdP 來處理身份驗證，SSO 是單一登錄。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>38.</strong> Docker 是哪種類型的工具的例子？</p>
+    <ol>
+        <li>微服務啟動器</li>
+        <li>雲應用程式安全代理</li>
+        <li>容器化平台</li>
+        <li>Web 應用程式防火牆</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Docker 是一個容器化工具。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>39.</strong> Yasmine 正在與一家軟體即服務供應商合作。Yasmine 的公司對環境的哪個部分負責？</p>
+    <ol>
+        <li>應用程式和數據儲存。</li>
+        <li>操作系統、中間件和運行時。</li>
+        <li>儲存和網路。</li>
+        <li>供應商負責環境。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Yasmine 知道在 SaaS 環境中，供應商負責應用程式、數據儲存、運行時和中間件、操作系統和伺服器、儲存和網路。Yasmine 的公司將負責他們如何操作軟體、他們向誰提供訪問權限、他們向其用戶提供哪些權限，以及確保她的數據安全。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>40.</strong> Jason 希望使用多因素身份驗證。以下哪個列表是有效的多因素集？</p>
+    <ol>
+        <li>用戶名、密碼和 PIN</li>
+        <li>用戶名、密碼和手機上的應用程式生成代碼</li>
+        <li>用戶名、語音印記和指紋</li>
+        <li>用戶名、應用程式生成代碼和令牌生成代碼</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 多因素身份驗證依賴於使用兩種不同類型的因素：您知道的東西，如密碼或 PIN；您擁有的東西，如硬體令牌或應用程式生成的 PIN；或者您是的東西，如生物識別標識符。Jason 知道密碼和應用程式生成的 PIN 符合使用多個因素的要求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>41.</strong> Kim 希望為她的軟體使用版本控制。她的組織可以使用哪個常見工具來執行此功能？</p>
+    <ol>
+        <li>Jenkins</li>
+        <li>Chef</li>
+        <li>Git</li>
+        <li>Puppet</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Git 作為其功能的一部分提供版本管理。Jenkins 是一個用於持續集成工具的 CI/CD 工具。Puppet 和 Chef 都是基礎設施自動化工具。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>42.</strong> Ramon 的組織使用 Office 365，但依賴其自己的 Active Directory 憑證登錄 O365。這種類型的配置稱為什麼？</p>
+    <ol>
+        <li>聯合身份</li>
+        <li>結構化身份</li>
+        <li>共享身份</li>
+        <li>受限身份</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ramon 的組織正在使用 Azure 的聯合功能來利用他們現有的本地憑證在雲中。結構化、共享和受限身份是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>43.</strong> Gretchen 希望確保她的組織符合其軟體許可證。對於大多數組織來說，確保許可證合規性最重要的步驟是什麼？</p>
+    <ol>
+        <li>僅使用開源軟體</li>
+        <li>跟踪所有軟體版本</li>
+        <li>僅使用商業軟體</li>
+        <li>軟體清單</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 擁有完整的軟體清單可以讓像 Gretchen 這樣的組織確保他們了解其軟體許可證合規性、條款和條件以及許可證到期日期。雖然僅使用開源軟體可能看起來是一個簡單的解決方案，但有多個具有不同要求的開源軟體許可證，這使得軟體清單變得必要。僅使用商業軟體並不能簡化要求，版本控制很重要，但將是完整清單的一部分。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>44.</strong> Laura 希望使用威脅建模工具來評估其環境中的威脅。以下哪個模型已被 Microsoft 放棄並替換為新模型？</p>
+    <ol>
+        <li>DREAD</li>
+        <li>PASTA</li>
+        <li>STRIDE</li>
+        <li>ATASM</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> DREAD 已被 Microsoft 替換為 STRIDE。PASTA 和 ATASM 正在積極使用中。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>45.</strong> Aisha 的組織部署了一個雲應用程式安全代理。以下哪項 *不是* 部署 CASB 的典型目的？</p>
+    <ol>
+        <li>控制基於使用的成本</li>
+        <li>根據服務類別限制訪問</li>
+        <li>幫助限制敏感數據丟失的可能性</li>
+        <li>檢測異常使用模式</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> CASB 通常用於根據角色和權限控制使用，但它們不用於監控雲服務本身的成本——相反，成本限制規則通常用於雲服務本身。它們還用於限制敏感數據丟失的可能性並檢測異常使用模式。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>46.</strong> Kathleen 希望以安全的方式測試潛在的惡意軟體。她可以應用哪個雲應用程式架構概念來幫助她做到這一點？</p>
+    <ol>
+        <li>IPS</li>
+        <li>SIEM</li>
+        <li>沙盒 (Sandboxing)</li>
+        <li>防病毒</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Kathleen 知道沙盒或創建安全隔離的環境通常用於惡意軟體測試。IPS 或防病毒可用於檢測惡意活動，並可能作為儀器部署在沙盒中。SIEM 解決方案用於集中和關聯安全事件和信息。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>47.</strong> Kieran 的團隊部署了一個 CASB，並希望專注於數據保護。以下哪個功能將最有效地幫助防止第三方在數據在 Kieran 的本地位置與其雲供應商之間傳輸時訪問數據？</p>
+    <ol>
+        <li>加密</li>
+        <li>標記化</li>
+        <li>遮蔽</li>
+        <li>上傳預防</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用 CASB 在本地位置和雲提供商之間強制加密將提供最有效的保護，防止第三方在傳輸過程中看到數據。標記化和遮蔽有助於保護正在訪問的數據，但無法阻止其在傳輸過程中暴露。上傳預防無法阻止下載被訪問。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>48.</strong> Selah 準備一個容器以部署到雲服務提供商的容器化服務。以下哪個組件將 *不* 包含在容器中？</p>
+    <ol>
+        <li>操作系統的主機內核</li>
+        <li>應用程式所需的庫</li>
+        <li>應用程式的配置文件</li>
+        <li>屬於應用程式的二進制文件</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 容器包含操作系統的元素，但共享主機的內核。它們還包含庫、配置文件以及應用程式文件或二進制文件本身。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>49.</strong> Olivia 準備生成 API 金鑰，並且知道它們需要具有某些特性才能安全。以下哪個最能描述將被視為安全的 API 金鑰？</p>
+    <ol>
+        <li>唯一、隨機且不可猜測</li>
+        <li>唯一、順序且可追踪</li>
+        <li>可重複、順序且可追踪</li>
+        <li>可重複、已記錄且可追踪</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> API 金鑰應唯一、隨機且不可猜測，以確保攻擊者無法猜測或以其他方式識別它們。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>50.</strong> Ian 正在使用 CASB 來控制雲服務的使用。他希望確保其組織中的用戶僅使用為其角色批准的雲服務。他應在其規則中定義哪兩個元素才能最有效地完成此任務？</p>
+    <ol>
+        <li>身份和活動</li>
+        <li>活動和數據</li>
+        <li>身份和服務</li>
+        <li>服務和數據</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Ian 可以根據用戶身份和用戶嘗試使用的服務進行過濾，以最有效地按角色過濾服務使用。活動和數據無法識別用戶，活動也不一定唯一標識服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>51.</strong> Jack 希望使用 ATASM 模型。以下哪項 *不是* ATASM 評估的關鍵元素之一？</p>
+    <ol>
+        <li>攻擊</li>
+        <li>威脅</li>
+        <li>架構</li>
+        <li>緩解措施</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ATASM 考慮架構、威脅、攻擊面（而非攻擊）和緩解措施。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>52.</strong> 對正在運行的代碼進行的測試被稱為什麼類型的測試？</p>
+    <ol>
+        <li>動態</li>
+        <li>自動</li>
+        <li>結構化</li>
+        <li>靜態</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 對正在運行的代碼進行的測試稱為動態測試。靜態測試審查源代碼。自動測試和結構化測試不是常用的測試術語。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>53.</strong> Web 應用程式防火牆 (WAF) 可以理解並對哪種類型的流量採取行動？</p>
+    <ol>
+        <li>邊界網關協議 (BGP)</li>
+        <li>簡單郵件傳輸協議 (SMTP)</li>
+        <li>網際網路控制消息協議 (ICMP)</li>
+        <li>超文本傳輸協議 (HTTP)</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> WAF 側重於 Web 流量，因此通常會掃描 HTTP 流量，而不是 BGP、ICMP 或 SMTP 流量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>54.</strong> Henry 希望設計他的 SDLC 以幫助防止最常見的應用程式安全問題。他應在 SDLC 的哪個環節插入控制措施以確保其應用程式架構安全？</p>
+    <ol>
+        <li>分析和需求定義</li>
+        <li>設計</li>
+        <li>部署</li>
+        <li>運營和維護</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 設計階段允許 Henry 包含有助於確保其應用程式安全的安全性設計元素。需求階段應包括對安全性的需求，但不指定如何實現，部署和維護則為時已晚，因為架構已經設計和實施。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>55.</strong> Jacinda 的經理要求她設置一個沙盒環境，以幫助在運行第三方軟體之前對其進行驗證。Jacinda 應準備一個什麼樣的環境來處理？</p>
+    <ol>
+        <li>通過將不常用的流程移動到沙盒來優化生產環境</li>
+        <li>允許需要雲環境中資源的用戶進行安全遠程訪問</li>
+        <li>運行惡意軟體以進行分析</li>
+        <li>創建生產環境的安全子網</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 沙盒可用於運行惡意軟體以進行分析，因為它不會影響（或感染）生產環境；但值得注意的是，某些惡意軟體具有沙盒感知能力，因此建議採取額外的反惡意軟體措施。通過移動任務優化生產不是沙盒的典型用途，遠程安全訪問系統稱為跳板箱，子網是使用網路配置創建的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>56.</strong> Valerie 希望將她的應用程式基礎設施與其底層操作系統平台解耦，以便她可以更輕鬆地在雲服務提供商之間遷移。哪種類型的解決方案最適合她的需求？</p>
+    <ol>
+        <li>使用自訂配置的 Linux 虛擬機器託管應用程式。</li>
+        <li>使用為應用程式配置的容器託管應用程式。</li>
+        <li>使用雲提供商的原生無伺服器基礎設施託管應用程式。</li>
+        <li>使用具有默認配置的默認 Linux 系統託管應用程式。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 容器化最符合匹配 Valerie 需求的平台無關方法。雖然無伺服器功能強大，但在原生無伺服器平台之間移動通常需要針對每個提供商的要求進行構建。虛擬機器比 Valerie 需要的開銷更大，並且不為應用程式配置它們只會使它們不太適合該任務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>57.</strong> Gary 希望監控其託管在 IaaS 提供商處的 Microsoft SQL Server 環境中的特權憑證使用。Gary 應選擇哪種類型的工具來幫助滿足此需求？</p>
+    <ol>
+        <li>WAF</li>
+        <li>資料庫 SIEM</li>
+        <li>DB-IPS</li>
+        <li>DAM</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 資料庫活動監控 (DAM) 解決方案提供資料庫活動監控，除了其他安全和監控功能外，還包括特權帳戶使用日誌記錄和監控。WAF 有助於解決 Web 應用程式安全問題，但無法滿足此處描述的需求。DB-IPS 和資料庫 SIEM 是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>58.</strong> Paula 希望避免針對其 API 的拒絕服務攻擊。她應選擇哪些控制措施來最有效地提供此類安全性？</p>
+    <ol>
+        <li>使用 IPS 和可擴展的架構。</li>
+        <li>使用可擴展的架構並設置節流限制和配額。</li>
+        <li>要求身份驗證並使用 IPS。</li>
+        <li>要求身份驗證並設置節流限制和配額。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 要求身份驗證和設置節流限制和配額有助於防止對 API 的拒絕服務攻擊。可擴展的架構可以幫助處理負載，但無法阻止攻擊的發生，使用 IPS 可能有助於阻止攻擊，但 API 網關更可能理解 API 流量。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>59.</strong> 沙盒通常可用於 ___________________。</p>
+    <ol>
+        <li>測試用戶意識和培訓</li>
+        <li>測試 API 安全性</li>
+        <li>在投入生產前測試軟體</li>
+        <li>測試軟體以驗證其是否符合監管要求</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 已從供應商處購買或內部開發的軟體可以在模擬生產環境的沙盒環境中進行測試，以確定在將其安裝到實際生產環境中時是否存在任何互操作性問題。在大多數情況下，它不用於用戶意識或監管要求評估或 API 安全測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>60.</strong> Jen 希望確保她在其應用程式設計中使用的加密模塊是安全的。她應尋找哪種類型的驗證或認證？</p>
+    <ol>
+        <li>PCI 兼容</li>
+        <li>AES-cert</li>
+        <li>FIPS 140-2</li>
+        <li>GLBA 驗證</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> FIPS 140-2 是一個美國政府標準，規定了密碼模塊的安全要求。如果 Jen 使用的模塊已通過 FIPS 140-2 認證，她將達到她的目標。PCI 合規性用於信用卡，AES 不是認證，GLBA 是一項要求金融機構保護其客戶私人信息的美國法律。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>61.</strong> Kwame 希望限制其環境中潛在受損秘密的影響。他應做些什麼來最有效地限制受損秘密可能引起的問題？</p>
+    <ol>
+        <li>延長秘密生命週期。</li>
+        <li>輪換秘密。</li>
+        <li>用令牌替換秘密。</li>
+        <li>實施秘密過期列表。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 輪換秘密限制了暴露或受損秘密的影響範圍。延長其生命週期則相反，意味著它們在攻擊者手中可能具有更長的生命週期。用令牌替換秘密無法滿足大多數服務環境的需求。雖然存在證書撤銷列表 (CRL)，但秘密過期列表不存在。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>62.</strong> 作為其組織 SDLC 的一部分，Olivia 正在測試新應用程式中的業務邏輯是否生成正確的輸出。Olivia 正在進行哪種類型的測試？</p>
+    <ol>
+        <li>壓力測試</li>
+        <li>功能測試</li>
+        <li>負載測試</li>
+        <li>非功能測試</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Olivia 正在進行功能測試，旨在測試軟體是否滿足業務要求。這沒有指定負載或壓力測試場景。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>63.</strong> Olivia 的組織希望採用多因素身份驗證。以下哪個 MFA 模型被認為安全性較低？</p>
+    <ol>
+        <li>硬體令牌</li>
+        <li>移動應用程式</li>
+        <li>SMS 因素</li>
+        <li>USB 令牌</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於針對 SMS 的 SIM 卡交換和基於 VoIP 的攻擊，SMS 因素被認為是這些選項中最不安全的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>64.</strong> Ben 希望驗證其環境中使用的開源軟體包。以下哪個 *不是* 有效的動態測試選項？</p>
+    <ol>
+        <li>對實時應用程式進行手動安全測試。</li>
+        <li>使用應用程式漏洞掃描器。</li>
+        <li>對源代碼進行手動安全測試。</li>
+        <li>對應用程式進行單元和集成測試。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 源代碼審查是靜態測試，不符合 Ben 的需求。其他答案都包括動態測試選項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>65.</strong> Yariv 的濫用案例測試發現其 Web 應用程式存在問題，允許機器人執行自動化攻擊。他可以實施哪種類型的保護來限制執行此類操作的機器人的影響？</p>
+    <ol>
+        <li>從 Web 查詢中過濾已知的 SQL 注入攻擊。</li>
+        <li>在允許用戶操作之前使用 CAPTCHA。</li>
+        <li>要求用戶在執行操作之前登錄。</li>
+        <li>通過限制表單提交中的特殊字符來防止 XSS。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 基於 CAPTCHA 的安全系統通過要求人類交互來幫助減少機器人的影響。雖然有辦法繞過 CAPTCHA，但 Yariv 知道它們需要攻擊者付出額外的工作，並有助於減少來自機器人的總體負載。問題中未提及 SQL 注入和 XSS，僅要求登錄而沒有額外保護也無濟於事。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>66.</strong> Emily 使用她的 Google 憑證登錄第三方網站。Google 在身份驗證過程中扮演什麼角色？</p>
+    <ol>
+        <li>Google 是服務提供商。</li>
+        <li>Google 是儲存提供商。</li>
+        <li>Google 是授權提供商。</li>
+        <li>Google 是身份提供商。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 當 Emily 使用她的 Google 憑證登錄時，Google 充當身份提供商，並告知第三方服務提供商她已使用她的用戶 ID 和密碼成功登錄。然後，服務提供商必須授權她使用服務。問題中沒有跡象表明服務提供商可能是儲存提供商。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>67.</strong> 設計允許訪問受保護客戶信息的雲應用程式的軟體開發人員應期望包含選項以確保以下所有能力，*除了* ___________________。</p>
+    <ol>
+        <li>靜態數據加密</li>
+        <li>傳輸中數據加密</li>
+        <li>數據遮蔽</li>
+        <li>隨機化客戶數據</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 並非所有程序（或組織）都需要資料庫訪問，甚至使用資料庫，哈希也不是常見要求，因為數據將無法讀取。靜態和傳輸中加密以及數據遮蔽都是保護敏感資訊的常用方法。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>68.</strong> Kristen 希望過濾她的 SAML 流量以查找潛在攻擊，包括速率限制請求和驗證內容。以下哪個解決方案是專為此類安全設計而構建的？</p>
+    <ol>
+        <li>支持 OpenID 的 DAM</li>
+        <li>符合 SAML 的 IDS</li>
+        <li>XML 防火牆</li>
+        <li>WAF</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> SAML 是一種基於 XML 的協議，Kristen 知道具有適當基於身份保護規則的 SAML 感知 XML 防火牆將是她的最佳選擇。IDS 系統即使具有 SAML 感知能力也無法進行速率限制。WAF 設計用於 Web 應用程式而不是專門用於 XML 和基於 SAML 的過濾，DAM 是特定於資料庫的工具。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>69.</strong> 以下關於單一登錄 (SSO) 的陳述哪個 *不* 正確？</p>
+    <ol>
+        <li>減少密碼疲勞</li>
+        <li>減少密碼重用</li>
+        <li>阻止使用多因素身份驗證</li>
+        <li>使終端用戶憑證管理更容易</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用 SSO 並不阻止使用多因素身份驗證。事實上，由於組織可以集中使用 MFA，因此通常更容易實現。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>70.</strong> 靜態應用程式安全測試 (SAST) 檢查什麼？</p>
+    <ol>
+        <li>軟體結果</li>
+        <li>用戶性能</li>
+        <li>系統持久性</li>
+        <li>源代碼</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 靜態測試審查源代碼。動態測試將測試結果和性能。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>71.</strong> Angela 希望為她的組織部署多因素身份驗證 (MFA)，並希望與她的雲提供商整合。以下哪個 MFA 選項最不可能輕易地得到雲提供商的支持？</p>
+    <ol>
+        <li>硬體令牌</li>
+        <li>生物識別讀取器</li>
+        <li>移動應用程式</li>
+        <li>SMS 因素</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 生物識別讀取器是最不可能得到雲供應商支持的次要因素。硬體和軟體令牌以及 SMS 因素通常得到雲提供商的支持。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>72.</strong> Christina 正在遵循一個典型的 SDLC 流程，並已完成規劃階段。在大多數 SDLC 中，哪個階段通常緊隨規劃階段之後？</p>
+    <ol>
+        <li>設計</li>
+        <li>部署</li>
+        <li>維護</li>
+        <li>需求收集</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 規劃完成後，組織通常會進入需求收集階段，以確保他們知道將要構建的軟體將做什麼。設計、構建、測試、部署和維護是常見的後續階段。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>73.</strong> Annie 的組織為其 SDLC 使用瀑布方法。哪個描述最符合瀑布方法？</p>
+    <ol>
+        <li>開發工作可以輕鬆地在階段之間移動以滿足組織需求。</li>
+        <li>每個階段的結果作為下一個階段的輸入。</li>
+        <li>開發工作在週期中重複進行，直到開發完成。</li>
+        <li>每個階段的結果決定了流程在 SDLC 中是向前推進還是向後回退。</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 瀑布階段每個都作為下一個階段的輸入，並且僅向一個方向移動。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>74.</strong> 在 SDLC 的哪個階段，業務需求最有可能映射到軟體的構建方式？</p>
+    <ol>
+        <li>需求定義</li>
+        <li>設計</li>
+        <li>測試</li>
+        <li>安全運營</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 需求通常在設計階段映射到軟體。需求將在定義階段創建，在測試階段驗證，當然軟體將在運營階段投入生產運行。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>75.</strong> 壓力測試是哪種類型的測試形式？</p>
+    <ol>
+        <li>黑盒</li>
+        <li>功能測試</li>
+        <li>白盒</li>
+        <li>非功能測試</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 非功能測試旨在測試以滿足客戶期望和性能要求，包括軟體在異常條件下的行為方式。黑盒或零知識測試試圖複製攻擊者的體驗；白盒或全知測試提供對環境或工具的完整洞察，包括訪問源代碼和文件記錄，功能測試基於業務需求進行。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>76.</strong> Gabriel 的組織希望確保他們的開源軟體獲得適當許可。他們應該怎麼做？</p>
+    <ol>
+        <li>聯繫每個組件的作者請求使用許可。</li>
+        <li>聘請第三方許可證管理供應商以確保合規性。</li>
+        <li>為每個軟體組件向許可組織支付適當的許可費用。</li>
+        <li>審查每個組件的許可證以確保它們符合要求。</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 由於存在多種不同的開源許可證，Gabriel 最好的辦法是確保他的組織審查適用於他們使用的每個軟體包或組件的許可證。這可能很複雜且耗時，組織通常會限制他們願意接受的許可證以減輕這種負擔。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>77.</strong> Sofia 正在準備一份針對其 API 的可能攻擊列表。以下哪項 *不是* 針對 API 的常見攻擊？</p>
+    <ol>
+        <li>注入</li>
+        <li>惡意軟體</li>
+        <li>分佈式拒絕服務</li>
+        <li>憑證填充</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 注入、分佈式拒絕服務、跨站點腳本、路徑穿越和憑證填充攻擊都通常針對 API。然而，惡意軟體攻擊不是常見的 API 威脅。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>78.</strong> SAFECode 安全軟體開發基本實踐包括一個關於處理錯誤的部分。它引用了哪個常見的開發最佳實踐？</p>
+    <ol>
+        <li>在錯誤中提供過多資訊</li>
+        <li>以安全和優雅的方式處理錯誤</li>
+        <li>確保意外錯誤僅提供給管理員</li>
+        <li>確保意外錯誤僅提供給用戶</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> SAFECode 基本實踐指出，錯誤應以安全和優雅的方式處理。它建議不要在錯誤中提供過多資訊，意外錯誤應標記給用戶和管理員，但向每個群組提供適合其級別的資訊。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>79.</strong> Jason 希望使用 TLS 來保護其組織的生產 Web 流量。誰應該為他的網站生成 x.509 證書？</p>
+    <ol>
+        <li>Jason 應在 Web 伺服器上生成它。</li>
+        <li>Jason 應使用其公司的內部證書頒發機構。</li>
+        <li>Jason 應使用商業證書頒發機構。</li>
+        <li>Jason 應在僅用於此目的的單獨管理工作站上生成證書。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jason 應對任何用於生產的證書使用商業證書頒發機構。這允許用戶驗證證書和證書鏈以確保信任。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>80.</strong> Lisa 希望確保她下載的開源軟體包是合法的。軟體下載站點提供了 SHA2 哈希、密碼簽名、文件大小和版本號。這些選項中哪個提供了最高級別的確定性？</p>
+    <ol>
+        <li>SHA2 哈希</li>
+        <li>密碼簽名</li>
+        <li>文件大小</li>
+        <li>版本號</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> 簽名確保文件既是正確的文件又未被更改，並驗證它是由簽名者提供的。SHA2 哈希是次優選擇，儘管攻擊者可能修改站點上的哈希或在哈希之前修改文件。文件大小和版本號是最不有用的選項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>81.</strong> James 為他的應用程式創建了監控工具，並使用該工具在其 SDLC 的 QA 階段評估性能和功能。他正在使用哪種類型的軟體驗證方法？</p>
+    <ol>
+        <li>IAST</li>
+        <li>交互式 DST</li>
+        <li>SCA</li>
+        <li>結構化 DST</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 交互式應用程式安全測試 (IAST) 使用軟體工具來驗證性能和功能，通常在 SDLC 的 QA/測試階段進行。SCA 或軟體組成分析審查構成應用程式的組件。交互式和結構化 DST 是為此問題編造的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>82.</strong> Michelle 正在使用 SAFECode 安全軟體開發基本實踐作為其組織開發實踐的基礎。她希望制定一個加密策略，並且知道 SAFECode 描述了如何做到這一點。根據 SAFECode，以下哪項 *不是* 開發應用程式加密策略的最佳實踐？</p>
+    <ol>
+        <li>確保加密算法不能輕易更改</li>
+        <li>定義要保護的內容</li>
+        <li>評估哪些加密機制滿足組織的要求</li>
+        <li>決定金鑰管理解決方案</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 如果發現當前使用的加密算法存在問題，能夠更改加密算法實際上是 SAFECode 推薦的最佳實踐。他們稱之為“密碼敏捷性”，並指出您需要能夠在需要時過渡到新的機制、庫和金鑰。定義要保護的內容、哪些機制將被使用以及如何管理金鑰和證書都是常見的最佳實踐，也是 SAFECode 推薦的。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>83.</strong> 在平台即服務 (PaaS) 模型中，誰最有可能負責生產環境中應用程式的安全性？</p>
+    <ol>
+        <li>雲客戶</li>
+        <li>雲提供商</li>
+        <li>監管機構</li>
+        <li>程序員</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在 PaaS 環境中，客戶負責生產環境中應用程式的安全性。服務提供商將負責底層硬體和平台本身。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>84.</strong> James 希望測試他的軟體是否存在知識淵博的用戶可能利用的業務邏輯問題。他應該投資哪種類型的測試？</p>
+    <ol>
+        <li>濫用案例測試</li>
+        <li>黑盒測試</li>
+        <li>用例測試</li>
+        <li>白盒測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 濫用案例測試將測試用戶如何濫用軟體，包括 James 擔心的那種類型的問題。白盒或全知測試以及黑盒或零知識測試都描述了測試人員對環境擁有的資訊量，用例測試驗證軟體應如何使用，而不是如何被濫用。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>85.</strong> Frankie 希望為她的組織實施單一登錄。以下哪個選項在雲環境中通常不被支持用於 SSO？</p>
+    <ol>
+        <li>雲提供商原生 SSO</li>
+        <li>Active Directory</li>
+        <li>SAML</li>
+        <li>LDAP</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> Active Directory、SAML 和供應商原生 SSO 選項都得到普遍支持，但 LDAP 不是大多數雲供應商普遍支持的 SSO 選項。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>86.</strong> 無論組織使用哪種模型進行系統開發，在軟體開發生命週期 (SDLC) 的哪個階段將請求並考慮用戶輸入？</p>
+    <ol>
+        <li>定義</li>
+        <li>設計</li>
+        <li>開發</li>
+        <li>檢測</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在定義階段，組織努力確定軟體的目的以及滿足用戶需求所需的功能。設計和開發階段然後致力於構建滿足這些需求的軟體。檢測不是 SDLC 階段。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>87.</strong> Pete 正在根據 OWASP 雲原生應用程式安全 Top 10 審查其環境。他知道容器配置是一個首要問題，並已識別出他當前的容器以 root 身份運行。他如何補救這個問題？</p>
+    <ol>
+        <li>設置操作系統以阻止 root 登錄。</li>
+        <li>將非特權用戶設置為容器所有者。</li>
+        <li>將非特權用戶設置為進程所有者。</li>
+        <li>對 root 用戶使用多因素身份驗證。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 在許多情況下，將非特權用戶設置為進程所有者即可。將容器所有者設置為非特權用戶無法阻止 root 在配置不當的情況下運行它。限制 root 登錄或要求多因素身份驗證也無法阻止進程以 root 身份運行。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>88.</strong> Jessica 的質量保證測試過程涉及識別軟體缺陷，包括業務邏輯缺陷和其他編碼錯誤。她應執行哪種類型的測試才能最有效地識別潛在的代碼質量問題？</p>
+    <ol>
+        <li>靜態測試</li>
+        <li>黑盒測試</li>
+        <li>動態測試</li>
+        <li>軟體組成分析</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Jessica 應執行靜態測試，以幫助她的組織通過審查應用程式的源代碼來識別代碼質量問題。動態測試可以識別功能問題，但可能無法識別代碼質量或業務邏輯缺陷。黑盒測試無法讓她訪問所需的代碼，軟體組成分析則著眼於構成應用程式的組件。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>89.</strong> 使用 STRIDE 威脅模型時，以下哪項 *未* 被檢查？</p>
+    <ol>
+        <li>用戶未經適當許可獲得管理訪問權限的能力</li>
+        <li>內部人員觸發業務連續性/災難恢復活動的能力</li>
+        <li>交易參與者否認其參與交易的能力</li>
+        <li>未經授權的用戶冒充授權用戶的能力</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> STRIDE 威脅模型不涉及業務連續性和災難恢復 (BC/DR) 行動。所有其他選項都是 STRIDE 的元素：權限提升、否認和欺騙。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>90.</strong> Kathleen 的組織使用微服務架構來交付其主要應用程式。哪種類型的安全工具最適合為依賴 API 和服務發現的微服務提供安全性？</p>
+    <ol>
+        <li>CASB</li>
+        <li>XML 防火牆</li>
+        <li>RPC 網關</li>
+        <li>API 網關</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> API 網關非常適合此類架構，因為它們側重於服務發現和 API 安全性以及速率限制和身份驗證等其他安全控制。XML 防火牆和雲應用程式安全代理 (CASB) 都用於其他目的，RPC 網關允許遠程過程調用其他網路和服務。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>91.</strong> 在軟體開發生命週期 (SDLC) 的哪個階段應首先涉及安全人員？</p>
+    <ol>
+        <li>定義</li>
+        <li>設計</li>
+        <li>開發</li>
+        <li>測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 安全輸入包含得越早，安全控制的效率和成本效益就越高。定義階段是 SDLC 最早的部分，因此是安全人員應參與的時候。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>92.</strong> Tahir 配置其組織的 QA 環境以模擬比其主要 Web 應用程式最大使用量通常登錄的用戶多 25% 的登錄。Tahir 正在進行哪種類型的測試，最能描述這種情況？</p>
+    <ol>
+        <li>動態、非功能測試</li>
+        <li>動態、功能測試</li>
+        <li>靜態、功能測試</li>
+        <li>靜態、非功能測試</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> Tahir 正在進行一項非功能測試，該測試檢查負載下的行為，並且由於程序實際在運行，因此是動態測試而不是源代碼的靜態測試。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>93.</strong> 當 Joanna 登錄到其組織合作的服務提供商時，該服務提供商會向其組織的身份提供商發送請求，以確定她是否已通過身份驗證。如果是，身份提供商會向服務提供商發送一個令牌，確認她已通過身份驗證，她的瀏覽器將向服務提供商傳遞一個令牌，該令牌基於服務提供商與身份提供商之間的信任關係進行驗證。Joanna 使用的是哪種類型的基礎設施？</p>
+    <ol>
+        <li>RDP</li>
+        <li>SSO</li>
+        <li>OTP</li>
+        <li>MFA</li>
+    </ol>
+    <p class="answer"><strong>答案： B</strong></p>
+    <p class="explanation"><strong>說明：</strong> Joanna 正在使用單一登錄 (SSO) 基礎設施，允許她一次登錄即可使用與各種服務提供商建立信任關係的多個位置。RDP（遠程桌面協議）用於對 Windows 系統進行圖形訪問，OTP 是一次性密碼，MFA 是多因素身份驗證。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>94.</strong> Ben 的團隊使用 STRIDE 模型來識別安全威脅。哪個安全屬性會因篡改而受到影響？</p>
+    <ol>
+        <li>完整性</li>
+        <li>機密性</li>
+        <li>可用性</li>
+        <li>授權</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> 篡改通過修改數據來影響數據的完整性。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>95.</strong> Carmen 的組織希望使用基於社群的 Web 應用程式安全指南提供意識培訓。哪個社群標準最適合此類培訓？</p>
+    <ol>
+        <li>ASVS</li>
+        <li>CVE</li>
+        <li>OWASP</li>
+        <li>NIST</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> OWASP，即開放 Web 應用程式安全項目，提供雲和 Web 應用程式安全 Top 10 列表，這些列表來源於社群，非常適合用於意識培訓。ASVS 設定了應用程式驗證和安全測試的標準。CVE 和 NIST 不是基於社群的 Web 應用程式安全指南。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>96.</strong> Henry 將 IAST 過程作為其 SLDC 的一部分。IAST 最有可能在哪個 SDLC 階段發生？</p>
+    <ol>
+        <li>規劃</li>
+        <li>構建</li>
+        <li>部署</li>
+        <li>測試</li>
+    </ol>
+    <p class="answer"><strong>答案： D</strong></p>
+    <p class="explanation"><strong>說明：</strong> 交互式應用程式安全測試 (IAST) 最有可能發生在 SDLC 的測試階段。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>97.</strong> Malika 希望確保人為錯誤不會影響其組織秘密的安全性。以下哪個做法將最有效地防止與人相關的問題影響其秘密安全？</p>
+    <ol>
+        <li>在自動化 CI/CD 管道中使用常用密碼短語詞彙表。</li>
+        <li>要求密碼複雜性。</li>
+        <li>隨機生成密碼短語。</li>
+        <li>僅使用共享密碼短語。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 使用自動化創建工具生成密碼短語將防止工作人員重複使用密碼或陷入導致易於猜測的密碼短語和密碼的習慣。使用詞彙表、共享密碼短語或僅僅增加複雜性都無法滿足 Malika 的需求。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>98.</strong> Frank 知道他的組織打算將聯合身份作為其雲服務環境的一部分。他應確保其現有的本地身份管理系統支持哪個標準來提供幫助？</p>
+    <ol>
+        <li>SAML</li>
+        <li>FIPS 140-2</li>
+        <li>XML</li>
+        <li>FIM</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> SAML（安全斷言標記語言）通常用於啟用身份聯合。FIPS 140-2 是一個美國政府加密機制標準，XML 可能需要但它是一個非常廣泛的可擴展標記語言標準，FIM 是聯合身份管理，描述總體概念的通用術語，而不是技術或技術能力。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>99.</strong> James 在其開發過程的核心使用 CI/CD 管道。他應使用哪個設計模式來確保其 QA 過程不影響生產？</p>
+    <ol>
+        <li>將正在進行 QA 的軟體添加到其生產環境以允許實時測試。</li>
+        <li>為 QA 測試創建新環境，然後在測試後提升到生產環境。</li>
+        <li>為 QA 測試複製生產環境，然後在測試後提升到生產環境。</li>
+        <li>將軟體添加到 QA 環境進行測試，然後允許生產用戶訪問帶有工具的 QA 環境。</li>
+    </ol>
+    <p class="answer"><strong>答案： C</strong></p>
+    <p class="explanation"><strong>說明：</strong> 為 QA 測試複製生產環境，然後在測試完成後從 QA 提升到生產環境是應用程式開發環境中的常見設計實踐。將正在進行 QA 的軟體添加到生產環境或允許用戶使用 QA 系統而不是生產環境可能會導致負面的用戶體驗，創建與生產不匹配的 QA 環境可能會使測試失效。</p>
+</div>
+
+<div class="question">
+    <p class="q-text"><strong>100.</strong> Tara 的組織使用三級應用程式安全驗證標準，並要求其最安全的應用程式達到級別 3，具有深入的驗證和測試。他們正在使用哪個應用程式安全標準？</p>
+    <ol>
+        <li>ASVS</li>
+        <li>SAFECode</li>
+        <li>OWASP</li>
+        <li>SANS/CWE</li>
+    </ol>
+    <p class="answer"><strong>答案： A</strong></p>
+    <p class="explanation"><strong>說明：</strong> ASVS 使用三級代碼驗證保證級別模型，級別 3 要求關鍵應用程式滿足深入的驗證和測試要求。</p>
+</div>
+
+</body>
+</html>
